@@ -37,7 +37,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             _spriteBatch.Begin();
 
-            _spriteBatch.Draw(_texture, new Rectangle(X, Y, Width, Height), Color.White);
+            _spriteBatch.Draw(_texture, new Rectangle(X - (Width / 2), Y - (Height / 2), Width, Height), Color.White);
 
             _spriteBatch.End();
             base.Draw(gameTime);

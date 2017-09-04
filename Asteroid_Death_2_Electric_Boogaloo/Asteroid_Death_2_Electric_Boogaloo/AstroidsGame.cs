@@ -1,13 +1,17 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using ButtonState = Microsoft.Xna.Framework.Input.ButtonState;
+using Keys = Microsoft.Xna.Framework.Input.Keys;
 
 namespace Asteroid_Death_2_Electric_Boogaloo
 {
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Astroids : Game
+    public class AstroidsGame : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -16,7 +20,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         private Player player;
         private Enemy enemy;
 
-        public Astroids()
+        public AstroidsGame()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -32,10 +36,21 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         /// </summary>
         protected override void Initialize()
         {
+            // center window
+            /*Window.Position = new Point((GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / 2) - (graphics.PreferredBackBufferWidth / 2), 
+                                        (GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height / 2) - (graphics.PreferredBackBufferHeight / 2));
+                                        
+            // allow resizing
+            Window.AllowUserResizing = true;*/
+
             player = new Player(this);
             enemy = new Enemy(this);
 
-            enemy.X = 100;
+            enemy.X = 200;
+            player.X = 100;
+
+            enemy.Y = 200;
+            player.Y = 100;
 
             Components.Add(player);
             Components.Add(enemy);
