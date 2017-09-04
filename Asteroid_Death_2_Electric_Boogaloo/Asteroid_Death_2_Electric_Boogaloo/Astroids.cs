@@ -7,12 +7,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Game1 : Game
+    public class Astroids : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        public Game1()
+        private Player player;
+
+        public Astroids()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -26,7 +28,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            player = new Player(this);
+
+            this.Components.Add(player);
 
             base.Initialize();
         }
