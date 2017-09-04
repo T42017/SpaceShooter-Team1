@@ -14,11 +14,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         private Texture2D backgroundTexture;
 
         private Player player;
+        private Enemy enemy;
 
         public Astroids()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            Window.Position = new Point(300, 300);
+            Window.Title = "Astroid Death 2 Electric Boogaloo";
         }
 
         /// <summary>
@@ -30,8 +33,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         protected override void Initialize()
         {
             player = new Player(this);
+            enemy = new Enemy(this);
 
-            this.Components.Add(player);
+            enemy.X = 100;
+
+            Components.Add(player);
+            Components.Add(enemy);
 
             base.Initialize();
         }
