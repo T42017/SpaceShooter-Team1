@@ -9,6 +9,15 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     /// </summary>
     public class Astroids : Game
     {
+        enum ScreenStates
+        {
+            InGame,
+            MainMenu,
+            PauseMenu,
+            Loading
+        }
+
+        const int NumberOfButtons = 3;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
@@ -19,6 +28,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
+
+
+        
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
