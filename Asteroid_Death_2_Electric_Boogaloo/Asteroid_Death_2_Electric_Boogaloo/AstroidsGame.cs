@@ -43,17 +43,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             // allow resizing
             Window.AllowUserResizing = true;*/
 
-            player = new Player(this);
-            enemy = new Enemy(this);
-
-            enemy.X = 200;
-            player.X = 100;
-
-            enemy.Y = 200;
-            player.Y = 100;
-
-            Components.Add(player);
-            Components.Add(enemy);
+            AddGameObjects();
 
             base.Initialize();
         }
@@ -90,8 +80,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
-
             base.Update(gameTime);
         }
 
@@ -102,8 +90,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // TODO: Add your drawing code here
+            
             spriteBatch.Begin();
 
             for (int y = 0; y < graphics.PreferredBackBufferHeight; y += backgroundTexture.Height)
@@ -112,6 +99,24 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
             spriteBatch.End();
             base.Draw(gameTime);
+        }
+
+        public void AddGameObjects()
+        {
+            player = new Player(this)
+            {
+                X = graphics.PreferredBackBufferWidth / 2,
+                Y = graphics.PreferredBackBufferHeight / 2
+            };
+
+            enemy = new Enemy(this)
+            {
+                X = 200,
+                Y = 200
+            };
+
+            Components.Add(player);
+            Components.Add(enemy);
         }
     }
 }
