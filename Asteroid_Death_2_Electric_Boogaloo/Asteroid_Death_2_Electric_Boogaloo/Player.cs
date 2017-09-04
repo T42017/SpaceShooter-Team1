@@ -10,13 +10,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     class Player : Ship  
     {
+        GraphicsDeviceManager graphics;
         //public bool IsDead { get; set; }
         //public Vector2 Position { get; set; }
         //public float Radius { get; set; }
         //public Vector2 Speed { get; set; }
         //public float Rotation { get; set; }
 
-         public Player(Game game) : base(game)
+        public Player(Game game) : base(game)
         {
             Position = new Vector2();
         }

@@ -12,12 +12,15 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         private Texture2D backgroundTexture;
-
         private Player player;
 
+        
         public Astroids()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferHeight = Globals.Screenheight;
+            graphics.PreferredBackBufferWidth = Globals.ScreenWidth;
+
             Content.RootDirectory = "Content";
         }
 
@@ -83,13 +86,16 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
-
-            for (int y = 0; y < graphics.PreferredBackBufferHeight; y += backgroundTexture.Height)
-                for (int x = 0; x < graphics.PreferredBackBufferWidth; x += backgroundTexture.Width)
+            for (int y = 0; y < Globals.Screenheight; y += backgroundTexture.Width)
+            {
+                for (int x = 0; x < Globals.ScreenWidth; x += backgroundTexture.Width)
+                {
                     spriteBatch.Draw(backgroundTexture, new Vector2(x, y), Color.White);
-
-            spriteBatch.End();
-            base.Draw(gameTime);
+                }
+            }
+                spriteBatch.End();
+                base.Draw(gameTime);
+            
         }
     }
 }
