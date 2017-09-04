@@ -1,20 +1,21 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Drawing;
 
 namespace Asteroid_Death_2_Electric_Boogaloo
 {
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Astroids : Game
+    public class AstroidsGame : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
         private Player player;
 
-        public Astroids()
+        public AstroidsGame()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -30,7 +31,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             player = new Player(this);
 
-            this.Components.Add(player);
+            player.X = 100;
+            player.Y = 100;
+
+            Components.Add(player);
 
             base.Initialize();
         }
@@ -41,10 +45,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            // TODO: use this.Content to load your game content here
         }
 
         /// <summary>

@@ -41,8 +41,9 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Astroids.cs" />
+    <Compile Include="AstroidsGame.cs" />
     <Compile Include="GameObject.cs" />
+    <Compile Include="LaserRed.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
