@@ -48,7 +48,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public string GetRandomizedTexture()
         {
-            int randomNumber = Random.Next(Enum.GetNames(typeof(Type)).Length - 1);
+            int randomNumber = Globals.RNG.Next(Enum.GetNames(typeof(Type)).Length - 1);
 
             return Enum.GetName(typeof(Type), randomNumber);
         }

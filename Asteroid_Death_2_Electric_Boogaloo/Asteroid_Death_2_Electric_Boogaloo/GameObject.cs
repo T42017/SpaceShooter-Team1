@@ -22,7 +22,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         protected Texture2D Texture;
         protected Game _game;
         protected readonly SpriteBatch SpriteBatch;
-        protected static readonly Random Random = new Random();
 
         protected GameObject(Game game) : base(game)
         {
@@ -60,10 +59,29 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             base.Draw(gameTime);
         }
 
-        public void Accelerate(float acceleration)
+        public void Move()
         {
-            Speed += new Vector2((float)Math.Cos(Rotation),
-                         (float)Math.Sin(Rotation)) * acceleration;
+            Position += Speed;
+        }
+
+        public Vector2 Forward()
+        {
+            return new Vector2((float) Math.Cos(Rotation),
+                (float) Math.Sin(Rotation));
+        }
+
+        public void Retardation()
+        {
+            Speed -= Forward() * 0.09f;
+            if (Speed.LengthSquared() > 25)
+            {
+                Speed = Vector2.Normalize(Speed) * 5;
+            }
+        }
+
+        public void Accelerate(float speed)
+        {
+            Speed += Forward() * speed;
 
             if (Speed.LengthSquared() > Math.Pow(MaxSpeed, 2))
             {
