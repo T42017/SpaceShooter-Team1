@@ -80,9 +80,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             }
         }
 
-        public void Accelerate()
+        public void Accelerate(float speed)
         {
-            Speed += Forward() * 0.09f;
+            Speed += Forward() * speed;
 
             if (Speed.LengthSquared() > Math.Pow(MaxSpeed, 2))
             {
