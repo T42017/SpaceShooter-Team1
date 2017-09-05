@@ -14,11 +14,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         private Texture2D backgroundTexture;
 
         private Player player;
+        private Meteor meteor;
 
         public Astroids()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            Window.Position = new Point(300, 300); // Delete this
         }
 
         /// <summary>
@@ -30,8 +32,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         protected override void Initialize()
         {
             player = new Player(this);
+            meteor = new Meteor(this, MeteorSize.Medium, MeteorColour.Brown);
 
             this.Components.Add(player);
+            this.Components.Add(meteor);
 
             base.Initialize();
         }
