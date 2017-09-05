@@ -13,13 +13,18 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
+        private Texture2D backgroundTexture;
+        Player player;
+        KeyboardState lastKeyboardState;
         private Texture2D backgroundTexture;
         private Player player;
 
         public AsteroidsGame()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferHeight = Globals.Screenheight;
+            graphics.PreferredBackBufferWidth = Globals.ScreenWidth;
+
             Content.RootDirectory = "Content";
             Window.Position = new Point(300, 300);
             Window.Title = "Asteroid Death 2 Electric Boogaloo";
@@ -31,7 +36,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             /*
             Window.Position = new Point((GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / 2) - (graphics.PreferredBackBufferWidth / 2), 
                                         (GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height / 2) - (graphics.PreferredBackBufferHeight / 2));
-                                        
+
             // allow resizing
             Window.AllowUserResizing = true;
             //*/
@@ -57,7 +62,20 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            KeyboardState state = Keyboard.GetState();
 
+            if (state.IsKeyDown(Keys.Up))
+                player.Accelerate();
+            if (state.IsKeyDown(Keys.Down))
+                player.Retardation();
+            if (state.IsKeyDown(Keys.Left))
+                player.Rotation -= 0.05f; 
+            else if (state.IsKeyDown(Keys.Right))
+                player.Rotation += 0.05f;
+
+            
+            player.Update(gameTime);
+            lastKeyboardState = state;
             base.Update(gameTime);
         }
         
@@ -66,14 +84,18 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             GraphicsDevice.Clear(Color.CornflowerBlue);
             
             spriteBatch.Begin();
-
-            for (int y = 0; y < graphics.PreferredBackBufferHeight; y += backgroundTexture.Height)
-                for (int x = 0; x < graphics.PreferredBackBufferWidth; x += backgroundTexture.Width)
+            for (int y = 0; y < Globals.Screenheight; y += backgroundTexture.Width)
+            {
+                for (int x = 0; x < Globals.ScreenWidth; x += backgroundTexture.Width)
+                {
                     spriteBatch.Draw(backgroundTexture, new Vector2(x, y), Color.White);
+                }
+            }
+                //player.Draw(spriteBatch);
 
-            spriteBatch.End();
+                spriteBatch.End();
 
-            base.Draw(gameTime);
+                base.Draw(gameTime);
         }
 
         public void AddGameObjects()

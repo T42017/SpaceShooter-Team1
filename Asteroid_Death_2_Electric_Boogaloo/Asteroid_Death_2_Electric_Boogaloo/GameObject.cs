@@ -11,7 +11,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     public abstract class GameObject : DrawableGameComponent
     {
         public Vector2 Position;
-        public int Width { get; set; }
+        public bool IsDead { get; set; }
+        public float Radius { get; set; }
+        public Vector2 Speed { get; set; }
+        public float Rotation { get; set; } 
+        public Vector2 Position { get; set; }
+        
+        public int Width { get; set; } 
         public int Height { get; set; }
 
         protected Texture2D Texture;
