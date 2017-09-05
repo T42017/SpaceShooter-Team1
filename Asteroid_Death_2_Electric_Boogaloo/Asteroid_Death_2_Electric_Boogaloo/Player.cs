@@ -11,6 +11,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     {
         public Player(Game game) : base(game)
         {
+
         }
 
         protected override void LoadContent()

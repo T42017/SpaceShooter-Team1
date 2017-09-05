@@ -15,9 +15,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public int Width { get; set; }
         public int Height { get; set; }
 
-        private Texture2D _texture;
-        private readonly SpriteBatch _spriteBatch;
-        private readonly Game _game;
+        protected Texture2D _texture;
+        protected readonly SpriteBatch _spriteBatch;
+        protected readonly Game _game;
+        protected static readonly Random Random = new Random();
 
         protected GameObject(Game game) : base(game)
         {

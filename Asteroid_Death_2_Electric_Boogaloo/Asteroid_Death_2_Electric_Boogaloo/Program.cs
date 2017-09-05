@@ -14,7 +14,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         [STAThread]
         static void Main()
         {
-            using (var game = new AstroidsGame())
+            using (var game = new AsteroidsGame())
                 game.Run();
         }
     }

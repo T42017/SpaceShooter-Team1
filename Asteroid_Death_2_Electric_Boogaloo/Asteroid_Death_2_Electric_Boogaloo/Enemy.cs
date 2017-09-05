@@ -2,13 +2,38 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 
 namespace Asteroid_Death_2_Electric_Boogaloo
 {
-    class Enemy : Ship
+    internal class Enemy : Ship
     {
+
+        public enum Type
+        {
+            enemyRed1,
+            enemyRed2,
+            enemyRed3,
+            enemyRed4,
+            enemyRed5,
+            enemyBlue1,
+            enemyBlue2,
+            enemyBlue3,
+            enemyBlue4,
+            enemyBlue5,
+            enemyGreen1,
+            enemyGreen2,
+            enemyGreen3,
+            enemyGreen4,
+            enemyGreen5,
+            enemyBlack1,
+            enemyBlack2,
+            enemyBlack3,
+            enemyBlack4,
+            enemyBlack5
+        }
 
         public Enemy(Game game) : base(game)
         {
@@ -17,22 +42,15 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         protected override void LoadContent()
         {
-            LoadTexture(GetRandomizeTexture());
+            LoadTexture(GetRandomizedTexture());
             base.LoadContent();
         }
 
-        public string GetRandomizeTexture()
+        public string GetRandomizedTexture()
         {
-            string type = "enemy";
+            int randomNumber = Random.Next(Enum.GetNames(typeof(Type)).Length - 1);
 
-            string[] types = { "Red", "Green", "Black", "Blue" };
-
-            int randomNumber1 = new Random().Next(types.Length - 1);
-            int randomNumber2 = new Random().Next(4) + 1;
-
-            type += types[randomNumber1] + randomNumber2;
-
-            return type;
+            return Enum.GetName(typeof(Type), randomNumber);
         }
 
         public override void Update(GameTime gameTime)

@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -8,32 +9,22 @@ using Keys = Microsoft.Xna.Framework.Input.Keys;
 
 namespace Asteroid_Death_2_Electric_Boogaloo
 {
-    /// <summary>
-    /// This is the main type for your game.
-    /// </summary>
-    public class AstroidsGame : Game
+    public class AsteroidsGame : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
         private Texture2D backgroundTexture;
-
         private Player player;
-        private Enemy enemy;
 
-        public AstroidsGame()
+        public AsteroidsGame()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             Window.Position = new Point(300, 300);
-            Window.Title = "Astroid Death 2 Electric Boogaloo";
+            Window.Title = "Asteroid Death 2 Electric Boogaloo";
         }
-
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
-        /// </summary>
+        
         protected override void Initialize()
         {
             // center window
@@ -47,34 +38,19 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
             base.Initialize();
         }
-
-        /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
-        /// </summary>
+        
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             backgroundTexture = Content.Load<Texture2D>("background");
-
-            // TODO: use this.Content to load your game content here
+            
         }
-
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// game-specific content.
-        /// </summary>
+        
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
         }
-
-        /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -82,11 +58,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
             base.Update(gameTime);
         }
-
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
@@ -98,6 +70,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                     spriteBatch.Draw(backgroundTexture, new Vector2(x, y), Color.White);
 
             spriteBatch.End();
+
             base.Draw(gameTime);
         }
 
@@ -109,14 +82,19 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 Y = graphics.PreferredBackBufferHeight / 2
             };
 
-            enemy = new Enemy(this)
+            /*
+            for (int i = 0; i < 5; i++)
             {
-                X = 200,
-                Y = 200
-            };
+                Enemy e = new Enemy(this)
+                {
+                    X = i * 140 + 100,
+                    Y = 100
+                };
+                Components.Add(e);
+            }
+            //*/
 
             Components.Add(player);
-            Components.Add(enemy);
         }
     }
 }
