@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -33,7 +34,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             player = new Player(this);
             meteor = new Meteor(this, MeteorSize.Medium, MeteorColour.Brown);
-
             this.Components.Add(player);
             this.Components.Add(meteor);
 
@@ -83,9 +83,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // TODO: Add your drawing code here
             spriteBatch.Begin();
 
             for (int y = 0; y < graphics.PreferredBackBufferHeight; y += backgroundTexture.Height)
