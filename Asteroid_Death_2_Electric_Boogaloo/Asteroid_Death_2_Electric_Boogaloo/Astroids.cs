@@ -12,7 +12,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         private Texture2D backgroundTexture;
-        private Player player;
+        Player player;
 
         
         public Astroids()
