@@ -42,12 +42,25 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             if ((this is Player && otherGameObject is LaserRed) || (this is LaserRed && otherGameObject is Player))
                 return false;
-            var fullWidth = Width + otherGameObject.Width;
-            var fullHeight = Height + otherGameObject.Height;
-            var distanceX = Math.Abs(Position.X - otherGameObject.Position.X);
-            var distanceY = Math.Abs(Position.Y - otherGameObject.Position.Y);
+            //var fullWidth = Width + otherGameObject.Width;
+            //var fullHeight = Height + otherGameObject.Height;
+            //var distanceX = Math.Abs(Position.X - otherGameObject.Position.X);
+            //var distanceY = Math.Abs(Position.Y - otherGameObject.Position.Y);
 
-            return distanceX < fullWidth && distanceY < fullHeight;
+            //return distanceX < fullWidth && distanceY < fullHeight;
+
+            var theseBounds = new Rectangle((int) Position.X - Texture.Width, 
+                (int) Position.Y - Texture.Height, 
+                Texture.Width, 
+                Texture.Height
+            );
+
+            var otherBounds = new Rectangle((int) otherGameObject.Position.X - otherGameObject.Texture.Width,
+                (int) otherGameObject.Position.Y - otherGameObject.Texture.Height,
+                otherGameObject.Texture.Width,
+                otherGameObject.Texture.Height);
+
+            return theseBounds.Intersects(otherBounds); //|| otherBounds.Intersects(theseBounds);
         }
 
         public override void Draw(GameTime gameTime)
