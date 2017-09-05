@@ -37,7 +37,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         protected override void Initialize()
         {
             player = new Player(this);
-            meteor = new Meteor(this, MeteorSize.Medium, MeteorColour.Brown)
+            meteor = new Meteor(this, MeteorSize.Big, MeteorColour.Gray)
             {
                 X = Globals.RNG.Next(Globals.ScreenWidth),
                 Y = Globals.RNG.Next(Globals.ScreenHeight),

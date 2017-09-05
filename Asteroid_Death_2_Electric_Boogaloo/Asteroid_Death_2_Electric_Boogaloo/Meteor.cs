@@ -13,15 +13,17 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     {
         public MeteorSize   MeteorSize   { get; }
         public MeteorColour MeteorColour { get; }
+        public bool IsShot { get; private set; }
 
         public Meteor(Game game, MeteorSize meteorSize, MeteorColour meteorColour) : base(game)
         {
             MeteorSize = meteorSize;
             MeteorColour = meteorColour;
-            X = 200;
-            Y = 200;
         }
 
+        /// <summary>
+        /// Calls LoadTexture from parent with a filename according to meteor's size and colour.
+        /// </summary>
         private void SetAppropriateTexture()
         {
             string colour = string.Empty;
@@ -54,6 +56,21 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             LoadTexture(fileName);
         }
 
+        private List<Meteor> SpawnChildren()
+        {
+            if (!IsShot || MeteorSize == MeteorSize.Small)
+                return null;
+
+            var children = new List<Meteor>();
+            int amountOfChildren = MeteorColour == MeteorColour.Brown ? 5 : 3;
+
+            for (int i = 0; i < amountOfChildren; i++)
+            {
+                children.Add(new Meteor(_game, MeteorSize + 1, MeteorColour));
+            }
+            return children;
+        }
+
         protected override void LoadContent()
         {
             SetAppropriateTexture();
@@ -62,7 +79,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public override void Update(GameTime gameTime)
         {
-            Rotation += 0.05f; // Change to property later
+            Rotation += 0.05f; // Change fixed float to property later
             base.Update(gameTime);
         }
 
