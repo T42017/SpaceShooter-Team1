@@ -9,10 +9,10 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Asteroid_Death_2_Electric_Boogaloo
 {
-    public class Ship : GameObject
+    public abstract class Ship : GameObject
     {
         private bool ShootLefCannon = false;
-
+        
         public Ship(Game game) : base(game)
         {
             
