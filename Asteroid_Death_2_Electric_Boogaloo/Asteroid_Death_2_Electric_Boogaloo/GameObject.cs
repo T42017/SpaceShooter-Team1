@@ -10,37 +10,36 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     public abstract class GameObject : DrawableGameComponent
     {
-        public int X { get; set; }
-        public int Y { get; set; }
+        public Vector2 Position;
         public int Width { get; set; }
         public int Height { get; set; }
 
-        protected Texture2D _texture;
-        protected readonly SpriteBatch _spriteBatch;
-        protected readonly Game _game;
+        protected Texture2D Texture;
+        protected Game _game;
+        protected readonly SpriteBatch SpriteBatch;
         protected static readonly Random Random = new Random();
 
         protected GameObject(Game game) : base(game)
         {
             _game = game;
-            _spriteBatch = new SpriteBatch(game.GraphicsDevice);
+            SpriteBatch = new SpriteBatch(game.GraphicsDevice);
         }
 
         public void LoadTexture(string name)
         {
-            _texture = _game.Content.Load<Texture2D>(name);
+            Texture = _game.Content.Load<Texture2D>(name);
 
-            Width = _texture.Width;
-            Height = _texture.Height;
+            Width = Texture.Width;
+            Height = Texture.Height;
         }
 
         public override void Draw(GameTime gameTime)
         {
-            _spriteBatch.Begin();
+            SpriteBatch.Begin();
 
-            _spriteBatch.Draw(_texture, new Rectangle(X - (Width / 2), Y - (Height / 2), Width, Height), Color.White);
+            SpriteBatch.Draw(Texture, new Rectangle((int) (Position.X - (Width / 2)), (int) (Position.Y - (Height / 2)), Width, Height), Color.White);
 
-            _spriteBatch.End();
+            SpriteBatch.End();
             base.Draw(gameTime);
         }
     }

@@ -28,11 +28,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         protected override void Initialize()
         {
             // center window
-            /*Window.Position = new Point((GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / 2) - (graphics.PreferredBackBufferWidth / 2), 
+            /*
+            Window.Position = new Point((GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / 2) - (graphics.PreferredBackBufferWidth / 2), 
                                         (GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height / 2) - (graphics.PreferredBackBufferHeight / 2));
                                         
             // allow resizing
-            Window.AllowUserResizing = true;*/
+            Window.AllowUserResizing = true;
+            //*/
 
             AddGameObjects();
 
@@ -78,8 +80,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             player = new Player(this)
             {
-                X = graphics.PreferredBackBufferWidth / 2,
-                Y = graphics.PreferredBackBufferHeight / 2
+                Position = new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2)
             };
 
             /*
