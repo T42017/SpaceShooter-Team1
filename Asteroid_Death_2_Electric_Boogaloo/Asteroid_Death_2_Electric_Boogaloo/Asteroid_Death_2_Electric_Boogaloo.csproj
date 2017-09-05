@@ -41,9 +41,10 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Astroids.cs" />
+    <Compile Include="AstroidsGame.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="Globals.cs" />
+    <Compile Include="LaserRed.cs" />
     <Compile Include="Meteor.cs" />
     <Compile Include="Enums\MeteorColour.cs" />
     <Compile Include="Enums\MeteorSize.cs" />

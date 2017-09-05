@@ -11,7 +11,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     public class Ship : GameObject
     {
-        
+        private bool ShootLefCannon = false;
+
         public Ship(Game game) : base(game)
         {
             
@@ -21,6 +22,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             LoadTexture("shipPlayer");
             base.LoadContent();
+        }
+
+        public void Shoot()
+        {
+            _game.Components.Add(new LaserRed(_game, new Vector2(X + ((Width / 4) * (ShootLefCannon ? -1 : 1)), Y + (Height / 2)), Vector2.Zero));
+            ShootLefCannon = !ShootLefCannon;
         }
     }
 }

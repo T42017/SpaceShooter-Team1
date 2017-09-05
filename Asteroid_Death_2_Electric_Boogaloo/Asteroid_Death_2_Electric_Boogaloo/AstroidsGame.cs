@@ -3,13 +3,14 @@ using System.Security.Cryptography;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Drawing;
 
 namespace Asteroid_Death_2_Electric_Boogaloo
 {
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Astroids : Game
+    public class AstroidsGame : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -18,7 +19,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         private Meteor meteor;
         
-        public Astroids()
+        public AstroidsGame()
         {
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferHeight = Globals.ScreenHeight;
@@ -43,6 +44,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 Y = Globals.RNG.Next(Globals.ScreenHeight),
                 Rotation = (float) Globals.RNG.NextDouble()
             };
+            player.X = 100;
+            player.Y = 100;
+
+            
             this.Components.Add(player);
             this.Components.Add(meteor);
 
@@ -58,8 +63,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             backgroundTexture = Content.Load<Texture2D>("background");
-
-            // TODO: use this.Content to load your game content here
         }
 
         /// <summary>
