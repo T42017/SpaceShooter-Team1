@@ -1,4 +1,8 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Linq;
+using System.Runtime.CompilerServices;
+using Asteroid_Death_2_Electric_Boogaloo.Components;
+using Asteroid_Death_2_Electric_Boogaloo.Content;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -9,19 +13,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     /// </summary>
     public class Astroids : Game
     {
-        enum ScreenStates
-        {
-            InGame,
-            MainMenu,
-            PauseMenu,
-            Loading
-        }
+       
 
-        const int NumberOfButtons = 3;
+        
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         private Texture2D backgroundTexture;
-
+        private GameState _state;
         private Player player;
 
         public Astroids()
@@ -30,7 +28,17 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Content.RootDirectory = "Content";
         }
 
+        public void ChangeGameStates(GameState desiredState)
+        {
+            _state = desiredState;
 
+            foreach (var component in Components.Cast<AstroidsComponent>())
+            {
+                component.Visible = component.DrawableStates.HasFlag(_state);
+                component.Enabled = component.UpdatableStates.HasFlag(_state);
+            }
+
+        }
         
 
         /// <summary>
@@ -41,6 +49,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         /// </summary>
         protected override void Initialize()
         {
+            Components.Add(new MenuComponent(this));
+
             player = new Player(this);
 
             this.Components.Add(player);

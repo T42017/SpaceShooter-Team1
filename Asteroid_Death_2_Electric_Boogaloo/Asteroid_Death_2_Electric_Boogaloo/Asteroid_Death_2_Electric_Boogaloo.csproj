@@ -42,7 +42,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Astroids.cs" />
+    <Compile Include="Components\AstroidsComponent.cs" />
+    <Compile Include="Components\MenuComponent.cs" />
     <Compile Include="GameObject.cs" />
+    <Compile Include="GameState.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
