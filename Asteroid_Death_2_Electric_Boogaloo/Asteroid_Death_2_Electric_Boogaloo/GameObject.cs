@@ -11,20 +11,16 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     public abstract class GameObject : DrawableGameComponent
     {
         public bool IsDead { get; set; }
-        public Vector2 Position { get; set; }
         public float Radius { get; set; }
         public Vector2 Speed { get; set; }
         public float Rotation { get; set; } 
+        public Vector2 Position { get; set; }
         
-
-
-        public int X { get; set; }
-        public int Y { get; set; }
         public int Width { get; set; } 
         public int Height { get; set; }
 
         private Texture2D _texture;
-        private readonly SpriteBatch _spriteBatch;
+        protected SpriteBatch _spriteBatch;
         private readonly Game _game;
 
         protected GameObject(Game game) : base(game)
@@ -45,7 +41,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             _spriteBatch.Begin();
 
-            _spriteBatch.Draw(_texture, new Rectangle(X, Y, Width, Height), Color.White);
+            _spriteBatch.Draw(_texture, new Rectangle((int)Position.X, (int)Position.Y, Width, Height), Color.White);
 
             _spriteBatch.End();
             base.Draw(gameTime);
