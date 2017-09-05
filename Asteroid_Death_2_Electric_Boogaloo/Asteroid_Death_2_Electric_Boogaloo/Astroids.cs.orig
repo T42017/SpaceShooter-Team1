@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Security.Cryptography;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -16,12 +15,17 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         private Texture2D backgroundTexture;
         Player player;
 
+<<<<<<< HEAD
+        private Player player;
         private Meteor meteor;
+
+=======
         
+>>>>>>> origin/Feature_MovementOfPlayer
         public Astroids()
         {
             graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferHeight = Globals.ScreenHeight;
+            graphics.PreferredBackBufferHeight = Globals.Screenheight;
             graphics.PreferredBackBufferWidth = Globals.ScreenWidth;
 
             Content.RootDirectory = "Content";
@@ -37,12 +41,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         protected override void Initialize()
         {
             player = new Player(this);
-            meteor = new Meteor(this, MeteorSize.Medium, MeteorColour.Brown)
-            {
-                X = Globals.RNG.Next(Globals.ScreenWidth),
-                Y = Globals.RNG.Next(Globals.ScreenHeight),
-                Rotation = (float) Globals.RNG.NextDouble()
-            };
+            meteor = new Meteor(this, MeteorSize.Medium, MeteorColour.Brown);
             this.Components.Add(player);
             this.Components.Add(meteor);
 
@@ -93,15 +92,16 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         protected override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
-            for (int y = 0; y < Globals.ScreenHeight; y += backgroundTexture.Width)
+            for (int y = 0; y < Globals.Screenheight; y += backgroundTexture.Width)
             {
                 for (int x = 0; x < Globals.ScreenWidth; x += backgroundTexture.Width)
                 {
                     spriteBatch.Draw(backgroundTexture, new Vector2(x, y), Color.White);
                 }
             }
-            spriteBatch.End();
-            base.Draw(gameTime);
+                spriteBatch.End();
+                base.Draw(gameTime);
+            
         }
     }
 }

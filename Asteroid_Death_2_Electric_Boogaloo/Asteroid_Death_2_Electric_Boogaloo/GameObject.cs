@@ -15,7 +15,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public float Radius { get; set; }
         public Vector2 Speed { get; set; }
         public float Rotation { get; set; } 
-        
 
 
         public int X { get; set; }
@@ -46,7 +45,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             _spriteBatch.Begin();
 
             _spriteBatch.Draw(_texture, new Rectangle(X, Y, Width, Height), Color.White);
-
+            
             _spriteBatch.End();
             base.Draw(gameTime);
         }
