@@ -29,6 +29,33 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Window.Position = new Point(300, 300); // Delete this
         }
 
+        private void CheckForCollision() // Maybe fix this godforsakenly ugly piece of code
+        {
+            Loop();
+            void Loop()
+            {
+                for (int i = Components.Count - 1; i >= 0; i--)
+                {
+                    if (Components[i] == null || !(Components[i] is GameObject gameObject))
+                        continue;
+
+                    for (int j = Components.Count - 1; j >= 0; j--)
+                    {
+                        if (Components[j] == null || !(Components[j] is GameObject otherGameObject) ||
+                            gameObject == otherGameObject)
+                            continue;
+
+                        if (gameObject.CollidesWith(otherGameObject))
+                        {
+                            Components.Remove(gameObject);
+                            Components.Remove(otherGameObject);
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
         /// This is where it can query for any required services and load any non-graphic
@@ -40,14 +67,15 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             player = new Player(this);
             meteor = new Meteor(this, MeteorSize.Big, MeteorColour.Gray)
             {
-                X = Globals.RNG.Next(Globals.ScreenWidth),
-                Y = Globals.RNG.Next(Globals.ScreenHeight),
+                //X = Globals.RNG.Next(Globals.ScreenWidth),
+                //Y = Globals.RNG.Next(Globals.ScreenHeight),
+                X = 125,
+                Y = Globals.ScreenHeight - 300,
                 Rotation = (float) Globals.RNG.NextDouble()
             };
             player.X = 100;
             player.Y = 100;
 
-            
             this.Components.Add(player);
             this.Components.Add(meteor);
 
@@ -83,9 +111,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
-            // TODO: Add your update logic here
-
+            CheckForCollision();
             base.Update(gameTime);
         }
 

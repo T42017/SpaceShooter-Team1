@@ -40,6 +40,18 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Height = _texture.Height;
         }
 
+        public bool CollidesWith(GameObject otherGameObject)
+        {
+            if ((this is Player && otherGameObject is LaserRed) || (this is LaserRed && otherGameObject is Player))
+                return false;
+            var fullWidth = Width + otherGameObject.Width;
+            var fullHeight = Height + otherGameObject.Height;
+            var distanceX = Math.Abs(X - otherGameObject.X);
+            var distanceY = Math.Abs(Y - otherGameObject.Y);
+
+            return distanceX < fullWidth && distanceY < fullHeight;
+        }
+
         public override void Draw(GameTime gameTime)
         {
             _spriteBatch.Begin();

@@ -56,7 +56,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             LoadTexture(fileName);
         }
 
-        private List<Meteor> SpawnChildren()
+        public List<Meteor> SpawnChildren()
         {
             if (!IsShot || MeteorSize == MeteorSize.Small)
                 return null;
