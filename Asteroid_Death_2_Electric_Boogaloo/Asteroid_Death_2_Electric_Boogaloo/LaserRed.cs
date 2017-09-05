@@ -11,8 +11,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     {
         public LaserRed(Game game, Vector2 position, Vector2 direction) : base(game)
         {
-            X = (int) position.X;
-            Y = (int) position.Y;
+            this.Position = position;
         }
 
         protected override void LoadContent()
@@ -23,7 +22,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public override void Update(GameTime gameTime)
         {
-            Y += 10;
             base.Update(gameTime);
         }
     }

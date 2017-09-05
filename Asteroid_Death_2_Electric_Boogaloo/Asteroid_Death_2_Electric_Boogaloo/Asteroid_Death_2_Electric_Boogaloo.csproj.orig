@@ -41,16 +41,18 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AstroidsGame.cs" />
-    <Compile Include="GameObject.cs" />
 <<<<<<< HEAD
+    <Compile Include="AstroidsGame.cs" />
+=======
+    <Compile Include="AsteroidsGame.cs" />
+    <Compile Include="Enemy.cs" />
+>>>>>>> feature-enemy
+    <Compile Include="GameObject.cs" />
     <Compile Include="Globals.cs" />
+    <Compile Include="LaserRed.cs" />
     <Compile Include="Meteor.cs" />
     <Compile Include="Enums\MeteorColour.cs" />
     <Compile Include="Enums\MeteorSize.cs" />
-=======
-    <Compile Include="LaserRed.cs" />
->>>>>>> origin/feature-player
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -61,6 +63,8 @@
       <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>

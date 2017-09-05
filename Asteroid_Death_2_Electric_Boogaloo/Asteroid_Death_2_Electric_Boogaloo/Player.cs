@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace Asteroid_Death_2_Electric_Boogaloo
 {
@@ -34,12 +35,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 Shoot();
                 _timeSenceLastShot = DateTime.Now;
             }
-            
-            base.Update(gameTime);
-        }
-            Position += Speed; 
+
+            Position += Speed;
+
             if(Position.X < Globals.GameArea.Left)
-                Position =new Vector2(Globals.GameArea.Right, Position.Y);
+                Position = new Vector2(Globals.GameArea.Right, Position.Y);
             if (Position.X > Globals.GameArea.Right)
                 Position = new Vector2(Globals.GameArea.Left, Position.Y);
             if (Position.Y <Globals.GameArea.Top)

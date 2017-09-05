@@ -1,0 +1,26 @@
+﻿using System;
+
+namespace Asteroid_Death_2_Electric_Boogaloo
+{
+#if WINDOWS || LINUX
+    /// <summary>
+    /// The main class.
+    /// </summary>
+    public static class Program
+    {
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        static void Main()
+        {
+<<<<<<< HEAD
+            using (var game = new AstroidsGame())
+=======
+            using (var game = new AsteroidsGame())
+>>>>>>> feature-enemy
+                game.Run();
+        }
+    }
+#endif
+}

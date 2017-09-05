@@ -85,17 +85,16 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public override void Draw(GameTime gameTime)
         {
-            _spriteBatch.Begin();
-            _spriteBatch.Draw(_texture,
-                new Vector2(X, Y),
+            SpriteBatch.Begin();
+            SpriteBatch.Draw(Texture, Position,
                 null,
                 Color.White,
                 Rotation,
-                new Vector2(_texture.Width * .5f, _texture.Height * .5f),
+                new Vector2(Texture.Width * .5f, Texture.Height * .5f),
                 1.0f,
                 SpriteEffects.None,
                 0f);
-            _spriteBatch.End();
+            SpriteBatch.End();
             // Check if base.Draw() should be called
         }
     }

@@ -11,8 +11,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     public abstract class Ship : GameObject
     {
+<<<<<<< HEAD
         private bool ShootLefCannon = false;
-        
+
         public Ship(Game game) : base(game)
         {
             
@@ -26,8 +27,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public void Shoot()
         {
-            _game.Components.Add(new LaserRed(_game, new Vector2(Position.X + ((Width / 4) * (ShootLefCannon ? -1 : 1)), Position.Y + (Height / 2)), Vector2.Zero));
+            _game.Components.Add(new LaserRed(_game, new Vector2(X + ((Width / 4) * (ShootLefCannon ? -1 : 1)), Y + (Height / 2)), Vector2.Zero));
             ShootLefCannon = !ShootLefCannon;
         }
+=======
+        protected Ship(Game game) : base(game)
+        {
+            
+        }
+>>>>>>> feature-enemy
     }
 }
