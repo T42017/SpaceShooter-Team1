@@ -20,6 +20,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         const int NumberOfButtons = 3;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        private Texture2D backgroundTexture;
 
         private Player player;
 
@@ -55,6 +56,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            backgroundTexture = Content.Load<Texture2D>("background");
 
             // TODO: use this.Content to load your game content here
         }
@@ -92,7 +94,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+            spriteBatch.Begin();
 
+            for (int y = 0; y < graphics.PreferredBackBufferHeight; y += backgroundTexture.Height)
+                for (int x = 0; x < graphics.PreferredBackBufferWidth; x += backgroundTexture.Width)
+                    spriteBatch.Draw(backgroundTexture, new Vector2(x, y), Color.White);
+
+            spriteBatch.End();
             base.Draw(gameTime);
         }
     }
