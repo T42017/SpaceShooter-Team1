@@ -13,6 +13,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public enum Type
         {
+            none,
             enemyRed1,
             enemyRed2,
             enemyRed3,
@@ -35,14 +36,22 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             enemyBlack5
         }
 
+        public Type type = Type.none;
+
         public Enemy(Game game) : base(game)
         {
-
+        }
+        public Enemy(Game game, Type type) : base(game)
+        {
+            this.type = type;
         }
 
         protected override void LoadContent()
         {
-            LoadTexture(GetRandomizedTexture());
+            if (type == Type.none)
+                LoadTexture(GetRandomizedTexture());
+            else
+                LoadTexture(Enum.GetName(typeof(Type), type));
         }
 
         public string GetRandomizedTexture()
