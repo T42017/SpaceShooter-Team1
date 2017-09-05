@@ -14,8 +14,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public Vector2 Position { get; set; }
         public float Radius { get; set; }
         public Vector2 Speed { get; set; }
-        public float Rotation { get; set; } 
-
+        public float Rotation { get; set; }
+        public int MaxSpeed = 9;
         public int Width { get; set; } 
         public int Height { get; set; }
 
@@ -65,9 +65,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Speed += new Vector2((float)Math.Cos(Rotation),
                          (float)Math.Sin(Rotation)) * acceleration;
 
-            if (Speed.LengthSquared() > 81)
+            if (Speed.LengthSquared() > Math.Pow(MaxSpeed, 2))
             {
-                Speed = Vector2.Normalize(Speed) * 9;
+                Speed = Vector2.Normalize(Speed) * MaxSpeed;
             }
         }
     }
