@@ -67,10 +67,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             player = new Player(this);
             meteor = new Meteor(this, MeteorSize.Big, MeteorColour.Gray)
             {
-                //X = Globals.RNG.Next(Globals.ScreenWidth),
-                //Y = Globals.RNG.Next(Globals.ScreenHeight),
-                X = 125,
-                Y = Globals.ScreenHeight - 300,
+                X = Globals.RNG.Next(Globals.ScreenWidth),
+                Y = Globals.RNG.Next(Globals.ScreenHeight),
                 Rotation = (float) Globals.RNG.NextDouble()
             };
             player.X = 100;

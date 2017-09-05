@@ -13,10 +13,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     {
         public MeteorSize   MeteorSize   { get; }
         public MeteorColour MeteorColour { get; }
-        public bool IsShot { get; private set; }
-
-        public Meteor(Game game, MeteorSize meteorSize, MeteorColour meteorColour) : base(game)
+        
+        public Meteor(Game game, Vector2 position, MeteorSize meteorSize, MeteorColour meteorColour) : base(game)
         {
+            Position = position;
             MeteorSize = meteorSize;
             MeteorColour = meteorColour;
         }
@@ -58,7 +58,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public List<Meteor> SpawnChildren()
         {
-            if (!IsShot || MeteorSize == MeteorSize.Small)
+            if (!IsDead || MeteorSize == MeteorSize.Small)
                 return null;
 
             var children = new List<Meteor>();
@@ -66,7 +66,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
             for (int i = 0; i < amountOfChildren; i++)
             {
-                children.Add(new Meteor(_game, MeteorSize + 1, MeteorColour));
+                children.Add(new Meteor(_game, Position, MeteorSize + 1, MeteorColour));
             }
             return children;
         }
