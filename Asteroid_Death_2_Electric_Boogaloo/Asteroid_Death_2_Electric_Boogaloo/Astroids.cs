@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Runtime.CompilerServices;
 using Asteroid_Death_2_Electric_Boogaloo.Components;
-using Asteroid_Death_2_Electric_Boogaloo.Content;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -16,7 +16,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
        
 
         
-        GraphicsDeviceManager graphics;
+        public GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         private Texture2D backgroundTexture;
         private GameState _state;
@@ -50,6 +50,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         protected override void Initialize()
         {
             Components.Add(new MenuComponent(this));
+            ChangeGameStates(GameState.Menu);
+
 
             player = new Player(this);
 

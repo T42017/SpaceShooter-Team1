@@ -9,12 +9,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     [Flags]
     public enum GameState
     {
-        none = 0,
-        Menu = 1,
-        loading = 2,
-        ingame = 4,
-        paused = 8,
+        
+        Menu = 0,
+        loading = 1,
+        ingame = 2,
+        paused = 4,
+        gameover= 8,
 
-        All = loading | ingame | Menu | paused
+        All = loading | ingame | Menu | paused | gameover
     }
 }

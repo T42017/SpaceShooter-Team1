@@ -1407,3 +1407,9 @@
 /processorParam:TextureFormat=Color
 /build:pixelExplosion02.png
 
+#begin Best.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Best.mp3
+
