@@ -22,7 +22,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         protected Texture2D Texture;
         protected Game _game;
         protected readonly SpriteBatch SpriteBatch;
-        protected static readonly Random Random = new Random();
 
         protected GameObject(Game game) : base(game)
         {
