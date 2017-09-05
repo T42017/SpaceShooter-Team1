@@ -19,6 +19,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public Meteor(Game game, Vector2 position, MeteorSize meteorSize, MeteorColour meteorColour) : base(game)
         {
             Position = position;
+            Speed = new Vector2(
+                (float) Globals.RNG.NextDouble(),
+                (float) Globals.RNG.NextDouble()
+            );
             MeteorSize = meteorSize;
             MeteorColour = meteorColour;
         }
@@ -81,32 +85,17 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public override void Update(GameTime gameTime)
         {
-            Rotation += 0.05f; // Change fixed float to property later
-            Accelerate(0.10f);
+            Rotation += 0.04f;
+            Position += Speed;
 
-            //KeyboardState state = Keyboard.GetState();
-
-            //if (state.IsKeyDown(Keys.Up))
-            //    Accelerate(0.25f);
-            //if (state.IsKeyDown(Keys.Down))
-            //    Accelerate(-0.07f);
-            //if (state.IsKeyDown(Keys.Left))
-            //    Rotation -= 0.07f;
-            //else if (state.IsKeyDown(Keys.Right))
-            //    Rotation += 0.07f;
-            //lastKeyboardState = state;
-
-            //Speed += new Vector2(-Speed.X * 0.015f, -Speed.Y * 0.015f);
-            //Position += Speed;
-
-            //if (Position.X < Globals.GameArea.Left)
-            //    Position = new Vector2(Globals.GameArea.Right, Position.Y);
-            //if (Position.X > Globals.GameArea.Right)
-            //    Position = new Vector2(Globals.GameArea.Left, Position.Y);
-            //if (Position.Y < Globals.GameArea.Top)
-            //    Position = new Vector2(Position.X, Globals.GameArea.Bottom);
-            //if (Position.Y > Globals.GameArea.Bottom)
-            //    Position = new Vector2(Position.X, Globals.GameArea.Top);
+            if (Position.X < Globals.GameArea.Left)
+                Position = new Vector2(Globals.GameArea.Right, Position.Y);
+            if (Position.X > Globals.GameArea.Right)
+                Position = new Vector2(Globals.GameArea.Left, Position.Y);
+            if (Position.Y < Globals.GameArea.Top)
+                Position = new Vector2(Position.X, Globals.GameArea.Bottom);
+            if (Position.Y > Globals.GameArea.Bottom)
+                Position = new Vector2(Position.X, Globals.GameArea.Top);
 
             base.Update(gameTime);
         }
