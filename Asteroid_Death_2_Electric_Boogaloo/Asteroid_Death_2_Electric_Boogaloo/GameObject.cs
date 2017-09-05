@@ -60,24 +60,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             base.Draw(gameTime);
         }
 
-        public void Retardation()
-        {
-            Speed -= new Vector2((float)Math.Cos(Rotation),
-                         (float)Math.Sin(Rotation)) * 0.09f;
-            if (Speed.LengthSquared() > 25)
-            {
-                Speed = Vector2.Normalize(Speed) * 5;
-            }
-        }
-
-        public void Accelerate()
+        public void Accelerate(float acceleration)
         {
             Speed += new Vector2((float)Math.Cos(Rotation),
-                         (float)Math.Sin(Rotation)) * 0.09f;
+                         (float)Math.Sin(Rotation)) * acceleration;
 
-            if (Speed.LengthSquared() > 25)
+            if (Speed.LengthSquared() > 81)
             {
-                Speed = Vector2.Normalize(Speed) * 5;
+                Speed = Vector2.Normalize(Speed) * 9;
             }
         }
     }

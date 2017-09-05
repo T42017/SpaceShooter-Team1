@@ -13,7 +13,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     {
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
-        private KeyboardState lastKeyboardState;
         private Texture2D backgroundTexture;
         private Player player;
 
@@ -60,18 +59,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            KeyboardState state = Keyboard.GetState();
-
-            if (state.IsKeyDown(Keys.Up))
-                player.Accelerate();
-            if (state.IsKeyDown(Keys.Down))
-                player.Retardation();
-            if (state.IsKeyDown(Keys.Left))
-                player.Rotation -= 0.05f; 
-            else if (state.IsKeyDown(Keys.Right))
-                player.Rotation += 0.05f;
             
-            lastKeyboardState = state;
             base.Update(gameTime);
         }
         
