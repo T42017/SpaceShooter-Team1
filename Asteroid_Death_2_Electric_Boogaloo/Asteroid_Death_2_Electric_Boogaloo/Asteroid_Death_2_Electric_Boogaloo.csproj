@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Astroids.cs" />
     <Compile Include="GameObject.cs" />
+    <Compile Include="Globals.cs" />
     <Compile Include="Meteor.cs" />
     <Compile Include="Enums\MeteorColour.cs" />
     <Compile Include="Enums\MeteorSize.cs" />

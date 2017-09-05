@@ -13,13 +13,16 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         private Texture2D backgroundTexture;
+        Player player;
 
-        private Player player;
         private Meteor meteor;
-
+        
         public Astroids()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferHeight = Globals.Screenheight;
+            graphics.PreferredBackBufferWidth = Globals.ScreenWidth;
+
             Content.RootDirectory = "Content";
             Window.Position = new Point(300, 300); // Delete this
         }
@@ -84,13 +87,16 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         protected override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
-
-            for (int y = 0; y < graphics.PreferredBackBufferHeight; y += backgroundTexture.Height)
-                for (int x = 0; x < graphics.PreferredBackBufferWidth; x += backgroundTexture.Width)
+            for (int y = 0; y < Globals.Screenheight; y += backgroundTexture.Width)
+            {
+                for (int x = 0; x < Globals.ScreenWidth; x += backgroundTexture.Width)
+                {
                     spriteBatch.Draw(backgroundTexture, new Vector2(x, y), Color.White);
-
-            spriteBatch.End();
-            base.Draw(gameTime);
+                }
+            }
+                spriteBatch.End();
+                base.Draw(gameTime);
+            
         }
     }
 }
