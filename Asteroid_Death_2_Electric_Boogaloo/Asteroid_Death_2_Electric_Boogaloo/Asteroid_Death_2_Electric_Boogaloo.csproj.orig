@@ -41,15 +41,16 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Astroids.cs" />
+    <Compile Include="AstroidsGame.cs" />
     <Compile Include="GameObject.cs" />
 <<<<<<< HEAD
+    <Compile Include="Globals.cs" />
     <Compile Include="Meteor.cs" />
     <Compile Include="Enums\MeteorColour.cs" />
     <Compile Include="Enums\MeteorSize.cs" />
 =======
-    <Compile Include="Globals.cs" />
->>>>>>> origin/Feature_MovementOfPlayer
+    <Compile Include="LaserRed.cs" />
+>>>>>>> origin/feature-player
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
