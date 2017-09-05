@@ -9,9 +9,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     class LaserRed : GameObject
     {
-        public LaserRed(Game game, Vector2 position, Vector2 direction) : base(game)
+        public LaserRed(Game game, Vector2 position, Vector2 direction, float rotation) : base(game)
         {
             this.Position = position;
+            this.Rotation = rotation;
         }
 
         protected override void LoadContent()
@@ -22,6 +23,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public override void Update(GameTime gameTime)
         {
+            Speed = Forward() * 10;
+            Accelerate();
+            Move();
             base.Update(gameTime);
         }
     }

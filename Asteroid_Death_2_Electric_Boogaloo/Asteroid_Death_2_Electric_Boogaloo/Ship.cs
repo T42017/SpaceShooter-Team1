@@ -26,7 +26,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public void Shoot()
         {
-            _game.Components.Add(new LaserRed(_game, new Vector2(Position.X + ((Width / 4) * (ShootLefCannon ? -1 : 1)), Position.Y + (Height / 2)), Vector2.Zero));
+            Game.Components.Add(new LaserRed(Game, new Vector2(Position.X + ((Width / 4) * (ShootLefCannon ? -1 : 1)), Position.Y + (Height / 2)), Vector2.Zero, Rotation));
             ShootLefCannon = !ShootLefCannon;
         }
     }
