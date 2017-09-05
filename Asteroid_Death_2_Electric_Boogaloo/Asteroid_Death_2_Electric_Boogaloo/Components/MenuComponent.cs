@@ -22,6 +22,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
 
             DrawableStates = GameState.Menu;
             UpdatableStates = GameState.Menu;
+
         }
 
 
@@ -38,13 +39,16 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
 
         public override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            pGame.GraphicsDevice.Reset();
+            GraphicsDevice.Clear(Color.Gold);
+           
+           
             SpriteBatch.Begin();
 
             String Name = "Asteroid Death 2 Electric Boogaloo";
             
 
-            SpriteBatch.DrawString(menuFont, Name, new Vector2(pGame.graphics.PreferredBackBufferWidth/10,pGame.graphics.PreferredBackBufferHeight/4),Color.HotPink );
+            SpriteBatch.DrawString(menuFont, Name, new Vector2(pGame.graphics.PreferredBackBufferWidth/2,pGame.graphics.PreferredBackBufferHeight/4),Color.Fuchsia);
 
 
 
