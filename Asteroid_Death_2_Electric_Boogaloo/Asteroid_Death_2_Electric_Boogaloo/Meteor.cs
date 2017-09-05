@@ -85,6 +85,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public override void Update(GameTime gameTime)
         {
+            //requires further work to add a randomly generated speed of the meteors instead of a static speed
             Rotation += 0.04f;
             Position += Speed;
 
