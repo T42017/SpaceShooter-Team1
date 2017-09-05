@@ -10,6 +10,16 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     public abstract class GameObject : DrawableGameComponent
     {
+<<<<<<< HEAD
+        public Vector2 Position;
+        public int Width { get; set; }
+        public int Height { get; set; }
+
+        protected Texture2D Texture;
+        protected Game _game;
+        protected readonly SpriteBatch SpriteBatch;
+        protected static readonly Random Random = new Random();
+=======
         public bool IsDead { get; set; }
         public float Radius { get; set; }
         public Vector2 Speed { get; set; }
@@ -19,10 +29,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public int Width { get; set; } 
         public int Height { get; set; }
 
-        protected Texture2D Texture;
-        protected Game _game;
-        protected readonly SpriteBatch SpriteBatch;
-        protected static readonly Random Random = new Random();
+        private Texture2D _texture;
+        protected SpriteBatch _spriteBatch;
+        private readonly Game _game;
+>>>>>>> origin/Feature_MovementOfPlayer
 
         protected GameObject(Game game) : base(game)
         {
@@ -42,31 +52,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             SpriteBatch.Begin();
 
-            SpriteBatch.Draw(Texture, Position, null, Color.White, Rotation - MathHelper.PiOver2, new Vector2(Texture.Width / 2, Texture.Height / 2), 1.0f, SpriteEffects.None, 0f);
+<<<<<<< HEAD
+            SpriteBatch.Draw(Texture, new Rectangle((int) (Position.X - (Width / 2)), (int) (Position.Y - (Height / 2)), Width, Height), Color.White);
+=======
+            _spriteBatch.Draw(_texture, new Rectangle((int)Position.X, (int)Position.Y, Width, Height), Color.White);
+>>>>>>> origin/Feature_MovementOfPlayer
 
             SpriteBatch.End();
             base.Draw(gameTime);
-        }
-
-        public void Retardation()
-        {
-            Speed -= new Vector2((float)Math.Cos(Rotation),
-                         (float)Math.Sin(Rotation)) * 0.09f;
-            if (Speed.LengthSquared() > 25)
-            {
-                Speed = Vector2.Normalize(Speed) * 5;
-            }
-        }
-
-        public void Accelerate()
-        {
-            Speed += new Vector2((float)Math.Cos(Rotation),
-                         (float)Math.Sin(Rotation)) * 0.09f;
-
-            if (Speed.LengthSquared() > 25)
-            {
-                Speed = Vector2.Normalize(Speed) * 5;
-            }
         }
     }
 }

@@ -11,13 +11,21 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     public class AsteroidsGame : Game
     {
-        private GraphicsDeviceManager graphics;
-        private SpriteBatch spriteBatch;
-        private KeyboardState lastKeyboardState;
+        GraphicsDeviceManager graphics;
+        SpriteBatch spriteBatch;
+<<<<<<< HEAD:Asteroid_Death_2_Electric_Boogaloo/Asteroid_Death_2_Electric_Boogaloo/AsteroidsGame.cs
+
         private Texture2D backgroundTexture;
         private Player player;
 
         public AsteroidsGame()
+=======
+        private Texture2D backgroundTexture;
+        Player player;
+        KeyboardState lastKeyboardState;
+        
+        public Astroids()
+>>>>>>> origin/Feature_MovementOfPlayer:Asteroid_Death_2_Electric_Boogaloo/Asteroid_Death_2_Electric_Boogaloo/Astroids.cs
         {
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferHeight = Globals.Screenheight;
@@ -30,16 +38,21 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         
         protected override void Initialize()
         {
+<<<<<<< HEAD:Asteroid_Death_2_Electric_Boogaloo/Asteroid_Death_2_Electric_Boogaloo/AsteroidsGame.cs
             // center window
             /*
             Window.Position = new Point((GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / 2) - (graphics.PreferredBackBufferWidth / 2), 
                                         (GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height / 2) - (graphics.PreferredBackBufferHeight / 2));
-
+                                        
             // allow resizing
             Window.AllowUserResizing = true;
             //*/
 
             AddGameObjects();
+=======
+            player = new Player(this);
+            Components.Add(player);
+>>>>>>> origin/Feature_MovementOfPlayer:Asteroid_Death_2_Electric_Boogaloo/Asteroid_Death_2_Electric_Boogaloo/Astroids.cs
 
             base.Initialize();
         }
@@ -60,6 +73,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+<<<<<<< HEAD:Asteroid_Death_2_Electric_Boogaloo/Asteroid_Death_2_Electric_Boogaloo/AsteroidsGame.cs
+
+=======
             KeyboardState state = Keyboard.GetState();
 
             if (state.IsKeyDown(Keys.Up))
@@ -74,6 +90,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             
             player.Update(gameTime);
             lastKeyboardState = state;
+>>>>>>> origin/Feature_MovementOfPlayer:Asteroid_Death_2_Electric_Boogaloo/Asteroid_Death_2_Electric_Boogaloo/Astroids.cs
             base.Update(gameTime);
         }
         
@@ -91,9 +108,15 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             }
                 //player.Draw(spriteBatch);
 
-                spriteBatch.End();
+<<<<<<< HEAD:Asteroid_Death_2_Electric_Boogaloo/Asteroid_Death_2_Electric_Boogaloo/AsteroidsGame.cs
+            spriteBatch.End();
 
+            base.Draw(gameTime);
+=======
+                spriteBatch.End();
                 base.Draw(gameTime);
+            
+>>>>>>> origin/Feature_MovementOfPlayer:Asteroid_Death_2_Electric_Boogaloo/Asteroid_Death_2_Electric_Boogaloo/Astroids.cs
         }
 
         public void AddGameObjects()
