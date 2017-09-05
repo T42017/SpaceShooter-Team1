@@ -49,6 +49,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         /// </summary>
         protected override void Initialize()
         {
+            
+
             Components.Add(new MenuComponent(this));
             ChangeGameStates(GameState.Menu);
 
