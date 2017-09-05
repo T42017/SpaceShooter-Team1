@@ -9,7 +9,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     class LaserRed : GameObject
     {
-        public LaserRed(Game game, Vector2 position, Vector2 direction, float rotation) : base(game)
+        public LaserRed(Game game, Vector2 position, float rotation) : base(game)
         {
             this.Position = position;
             this.Rotation = rotation;
@@ -18,7 +18,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         protected override void LoadContent()
         {
             LoadTexture("laserRed");
-            base.LoadContent();
         }
 
         public override void Update(GameTime gameTime)
@@ -26,7 +25,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Speed = Forward() * 10;
             Accelerate(3);
             Move();
-            base.Update(gameTime);
         }
     }
 }

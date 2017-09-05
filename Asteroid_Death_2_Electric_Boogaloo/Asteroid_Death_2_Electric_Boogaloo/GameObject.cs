@@ -20,18 +20,18 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public int Height { get; set; }
 
         protected Texture2D Texture;
-        protected Game _game;
+        protected Game Game;
         protected readonly SpriteBatch SpriteBatch;
 
         protected GameObject(Game game) : base(game)
         {
-            _game = game;
+            Game = game;
             SpriteBatch = new SpriteBatch(game.GraphicsDevice);
         }
 
         public void LoadTexture(string name)
         {
-            Texture = _game.Content.Load<Texture2D>(name);
+            Texture = Game.Content.Load<Texture2D>(name);
 
             Width = Texture.Width;
             Height = Texture.Height;
@@ -68,15 +68,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             return new Vector2((float) Math.Cos(Rotation),
                 (float) Math.Sin(Rotation));
-        }
-
-        public void Retardation()
-        {
-            Speed -= Forward() * 0.09f;
-            if (Speed.LengthSquared() > 25)
-            {
-                Speed = Vector2.Normalize(Speed) * 5;
-            }
         }
 
         public void Accelerate(float speed)

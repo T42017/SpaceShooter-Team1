@@ -43,7 +43,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         protected override void LoadContent()
         {
             LoadTexture(GetRandomizedTexture());
-            base.LoadContent();
         }
 
         public string GetRandomizedTexture()

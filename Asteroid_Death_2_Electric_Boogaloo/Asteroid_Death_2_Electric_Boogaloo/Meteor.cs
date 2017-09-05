@@ -66,7 +66,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
             for (int i = 0; i < amountOfChildren; i++)
             {
-                children.Add(new Meteor(Game, MeteorSize + 1, MeteorColour));
+                children.Add(new Meteor(((GameComponent) this).Game, MeteorSize + 1, MeteorColour));
             }
             return children;
         }

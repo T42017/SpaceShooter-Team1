@@ -88,13 +88,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 Position = new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2)
             };
 
-            /*
+            //*
             for (int i = 0; i < 5; i++)
             {
                 Enemy e = new Enemy(this)
                 {
-                    X = i * 140 + 100,
-                    Y = 100
+                    Position = new Vector2(i * 140 + 100, 100)
                 };
                 Components.Add(e);
             }

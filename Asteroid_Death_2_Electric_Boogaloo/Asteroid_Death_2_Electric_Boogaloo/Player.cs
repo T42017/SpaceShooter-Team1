@@ -23,7 +23,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         protected override void LoadContent()
         {
             LoadTexture("shipPlayer");
-            base.LoadContent();
         }
         
         public override void Update(GameTime gameTime)
@@ -61,10 +60,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 Position = new Vector2(Position.X, Globals.GameArea.Bottom);
             if (Position.Y > Globals.GameArea.Bottom)
                 Position = new Vector2(Position.X, Globals.GameArea.Top);
-
-
-
-            base.Update(gameTime);
         }
 
         
