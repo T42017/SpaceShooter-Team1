@@ -15,7 +15,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         ingame = 2,
         paused = 4,
         gameover= 8,
+        highscoremenu= 16,
 
-        All = loading | ingame | Menu | paused | gameover
+        All = loading | ingame | Menu | paused | gameover | highscoremenu
     }
 }

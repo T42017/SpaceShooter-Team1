@@ -55,10 +55,22 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
                     y >= (pGame.graphics.PreferredBackBufferHeight / 4) + (pGame.graphics.PreferredBackBufferHeight / 8) && y<= ((pGame.graphics.PreferredBackBufferHeight / 4) + (pGame.graphics.PreferredBackBufferHeight / 8)) +39)
                 pGame.ChangeGameStates(GameState.loading);
                 
+                else if (x >= pGame.graphics.PreferredBackBufferWidth / 3 &&
+                         x <= (pGame.graphics.PreferredBackBufferWidth / 3) + 222 &&
+                         y >= ((pGame.graphics.PreferredBackBufferHeight / 4) + (pGame.graphics.PreferredBackBufferHeight / 8) +50)&& y <= ((pGame.graphics.PreferredBackBufferHeight / 4) + (pGame.graphics.PreferredBackBufferHeight / 8)) + 89)
+                    pGame.ChangeGameStates(GameState.highscoremenu);
+
+                else if (x >= pGame.graphics.PreferredBackBufferWidth / 3 &&
+                         x <= (pGame.graphics.PreferredBackBufferWidth / 3) + 222 &&
+                         y >= ((pGame.graphics.PreferredBackBufferHeight / 4) + (pGame.graphics.PreferredBackBufferHeight / 8) + 100) && y <= ((pGame.graphics.PreferredBackBufferHeight / 4) + (pGame.graphics.PreferredBackBufferHeight / 8)) + 139)
+                    pGame.Exit();
 
 
-                
             }
+
+
+
+
 
             oldState = newState;
             base.Update(gameTime);
