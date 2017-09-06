@@ -34,7 +34,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             }
 
             KeyboardState state = Keyboard.GetState();
-
+            
             if (state.IsKeyDown(Keys.Up))
                 Accelerate(0.25f);
            if (state.IsKeyDown(Keys.Down))

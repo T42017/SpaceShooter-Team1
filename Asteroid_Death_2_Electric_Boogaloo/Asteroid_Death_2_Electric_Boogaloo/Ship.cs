@@ -25,7 +25,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
             shootPoint = RotatePoint(shootPoint, shipCenterPoint, Rotation);
 
-            Game.Components.Add(new LaserRed(Game, new Vector2(shootPoint.X, shootPoint.Y), Rotation));
+            Game.Components.Add(new Laser(Game, new Vector2(shootPoint.X, shootPoint.Y), Rotation, Laser.Color.Red));
             ShootLefCannon = !ShootLefCannon;
         }
 
