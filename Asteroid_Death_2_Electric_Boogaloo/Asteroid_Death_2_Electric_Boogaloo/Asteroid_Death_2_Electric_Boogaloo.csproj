@@ -42,6 +42,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AsteroidsGame.cs" />
+    <Compile Include="Components\HighscoreMenuComponent.cs" />
+    <Compile Include="Components\IngameComponent.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="PixelExplosion.cs" />
     <Compile Include="Components\AstroidsComponent.cs" />
