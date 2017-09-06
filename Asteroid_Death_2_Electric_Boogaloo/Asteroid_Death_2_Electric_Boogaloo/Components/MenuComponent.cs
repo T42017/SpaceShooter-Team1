@@ -94,7 +94,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
 
                 String 
                 Name = "Asteroid Death 2 Electric Boogaloo",
-                button1 = "start",
+                button1 = "Start",
                 button2 = "Highscore",
                 button3 = "Quit";
             

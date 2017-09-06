@@ -11,7 +11,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
     {
         public YouAreDead(Game game) : base(game)
         {
-
+            
 
             DrawableStates = GameState.gameover;
             UpdatableStates = GameState.gameover;

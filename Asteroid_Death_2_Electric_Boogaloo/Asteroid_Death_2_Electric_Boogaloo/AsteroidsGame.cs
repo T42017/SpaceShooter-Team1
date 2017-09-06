@@ -31,16 +31,16 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Window.Title = "Asteroid Death 2 Electric Boogaloo";
         }
 
-        //public void ChangeGameState(GameState desiredState)
-        //{
-        //    _gameState = desiredState;
+        public void ChangeGameState(GameState desiredState)
+        {
+           _gameState = desiredState;
 
-        //    foreach (var component in Components.Cast<AstroidsComponent>())
-        //    {
-        //        component.Visible = component.DrawableStates.HasFlag(_gameState);
-        //        component.Enabled = component.UpdatableStates.HasFlag(_gameState);
-        //    }
-        //}
+           foreach (var component in Components.Cast<AstroidsComponent>())
+            {
+               component.Visible = component.DrawableStates.HasFlag(_gameState);
+               component.Enabled = component.UpdatableStates.HasFlag(_gameState);
+           }
+        }
         private void CheckForCollision(GameObject thisObject)
         {
             // -- Removed temporarily to try other approaches
