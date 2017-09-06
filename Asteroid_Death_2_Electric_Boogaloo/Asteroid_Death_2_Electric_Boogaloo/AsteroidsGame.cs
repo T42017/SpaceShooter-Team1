@@ -28,9 +28,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Window.Title = "Asteroid Death 2 Electric Boogaloo";
         }
 
-        private void CheckForCollision(GameObject thisObject)
+        private void CheckForCollisionWith(GameObject thisObject)
         {
             // -- Removed temporarily to try other approaches
+
             //for (int i = Components.Count - 1; i >= 0; i--)
             //{
             //    var outerCurrent = Components[i];
@@ -53,7 +54,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
             for (int i = Components.Count - 1; i >= 0; i--)
             {
-                if (Components[i] == null || !(Components[i] is GameObject otherGameObject) || otherGameObject == thisObject)
+                if (Components[i] == null || 
+                    !(Components[i] is GameObject otherGameObject) || 
+                    otherGameObject == thisObject)
                     continue;
 
                 if (thisObject.CollidesWith(otherGameObject))
@@ -97,7 +100,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            CheckForCollision(player);
+            CheckForCollisionWith(player);
 
             base.Update(gameTime);
         }
@@ -128,7 +131,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             };
 
             meteors = new Meteor[10];
-
             for (int i = 0; i < meteors.Length; i++)
             {
                 var position = new Vector2(
