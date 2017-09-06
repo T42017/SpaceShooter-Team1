@@ -23,7 +23,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
         public MenuComponent(Game game) : base(game)
         {
             pGame = (AsteroidsGame) game;
-
             
             DrawableStates = GameState.Menu;
             UpdatableStates = GameState.Menu;
