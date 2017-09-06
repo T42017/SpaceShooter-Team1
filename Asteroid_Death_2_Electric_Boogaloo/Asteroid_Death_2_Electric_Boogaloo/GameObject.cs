@@ -82,7 +82,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 (float) Math.Sin(Rotation));
         }
 
-        public void Accelerate(float speed)
+        public void AccelerateForward(float speed)
         {
             Speed += Forward() * speed;
 

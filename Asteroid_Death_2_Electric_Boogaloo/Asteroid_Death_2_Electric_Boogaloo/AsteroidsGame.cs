@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 using Asteroid_Death_2_Electric_Boogaloo.Components;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ButtonState = Microsoft.Xna.Framework.Input.ButtonState;
@@ -13,13 +14,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     public class AsteroidsGame : Game
     {
-        private GameState _gameState;
         public GraphicsDeviceManager graphics;
+
+        private GameState _gameState;
         SpriteBatch spriteBatch;
         private Texture2D backgroundTexture;
         private Player player;
-        private Meteor[] meteors;
-
+        
         public AsteroidsGame()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -27,7 +28,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             graphics.PreferredBackBufferWidth = Globals.ScreenWidth;
 
             Content.RootDirectory = "Content";
-            Window.Position = new Point(300, 300);
             Window.Title = "Asteroid Death 2 Electric Boogaloo";
         }
 
@@ -76,18 +76,15 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 }
             }
         }
-
         
         protected override void Initialize()
         {
             // center window
-            /*
             Window.Position = new Point((GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / 2) - (graphics.PreferredBackBufferWidth / 2), 
                                         (GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height / 2) - (graphics.PreferredBackBufferHeight / 2));
 
             // allow resizing
-            Window.AllowUserResizing = true;
-            //*/
+            //Window.AllowUserResizing = true;
 
             AddGameObjects();
 
@@ -99,7 +96,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             backgroundTexture = Content.Load<Texture2D>("background");
-            
         }
         
         protected override void UnloadContent()
@@ -141,34 +137,31 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 Position = new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2)
             };
 
-            meteors = new Meteor[10];
-
-            for (int i = 0; i < meteors.Length; i++)
+            //*
+            for (int i = 0; i < 10; i++)
             {
                 var position = new Vector2(
                     Globals.RNG.Next(Globals.ScreenWidth),
                     Globals.RNG.Next(Globals.ScreenHeight)
                 );
-                meteors[i] = new Meteor(this, position, MeteorSize.Big, MeteorColour.Gray)
+                Meteor meteor = new Meteor(this, position, MeteorSize.Big, MeteorColour.Gray)
                 {
                     Rotation = (float) Globals.RNG.NextDouble()
                 };
+                Components.Add(meteor);
             }
+            //*/
 
-            /*
-            for (int i = 0; i < 5; i++)
+            //*
+            EnemyFactory enemyFactory = new EnemyFactory(this);
+
+            for (int i = 0; i < 4; i++)
             {
-                Enemy e = new Enemy(this)
-                {
-                    Position = new Vector2(i * 140 + 100, 100)
-                };
-                Components.Add(e);
+                Components.Add(enemyFactory.GetRandomEnemy());
             }
             //*/
 
             Components.Add(player);
-            foreach (var meteor in meteors)
-                Components.Add(meteor);
         }
     }
 }

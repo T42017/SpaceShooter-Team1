@@ -36,9 +36,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             KeyboardState state = Keyboard.GetState();
             
             if (state.IsKeyDown(Keys.Up))
-                Accelerate(0.25f);
-           if (state.IsKeyDown(Keys.Down))
-                Accelerate(-0.07f);
+                AccelerateForward(0.25f);
+            if (state.IsKeyDown(Keys.Down))
+                AccelerateForward(-0.07f);
             if (state.IsKeyDown(Keys.Left))
                 Rotation -= 0.07f;
             else if (state.IsKeyDown(Keys.Right))
@@ -46,7 +46,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             lastKeyboardState = state;
             
             Speed += new Vector2(-Speed.X * 0.015f, -Speed.Y * 0.015f);
-            Position += Speed;
+            Move();
 
             if(Position.X < Globals.GameArea.Left)
                 Position = new Vector2(Globals.GameArea.Right, Position.Y);

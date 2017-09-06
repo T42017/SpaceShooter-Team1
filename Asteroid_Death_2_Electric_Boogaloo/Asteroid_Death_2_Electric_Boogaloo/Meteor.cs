@@ -12,7 +12,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     // TODO: make brown and gray meteors have different health
     public class Meteor : GameObject
     {
-        private KeyboardState lastKeyboardState;
         public MeteorSize   MeteorSize   { get; }
         public MeteorColour MeteorColour { get; }
         public float RotationSpeed;

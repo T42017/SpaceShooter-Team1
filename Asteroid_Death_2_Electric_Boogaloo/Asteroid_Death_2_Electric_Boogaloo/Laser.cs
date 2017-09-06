@@ -34,7 +34,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public override void Update(GameTime gameTime)
         {
             Speed = Forward() * 10;
-            Accelerate(3);
+            AccelerateForward(3);
             Move();
         }
     }
