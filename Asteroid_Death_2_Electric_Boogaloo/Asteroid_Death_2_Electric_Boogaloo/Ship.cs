@@ -12,22 +12,37 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     public abstract class Ship : GameObject
     {
         private bool ShootLefCannon = false;
-        
-        public Ship(Game game) : base(game)
+
+        protected Ship(Game game) : base(game)
         {
             
         }
-
-        protected override void LoadContent()
-        {
-            LoadTexture("shipPlayer");
-            base.LoadContent();
-        }
-
+        
         public void Shoot()
         {
-            _game.Components.Add(new LaserRed(_game, new Vector2(Position.X + ((Width / 4) * (ShootLefCannon ? -1 : 1)), Position.Y + (Height / 2)), Vector2.Zero));
+            Point shipCenterPoint = new Point((int)(Position.X), (int)(Position.Y));
+            Point shootPoint = new Point((int) (Position.X + Width / 2), (int) (Position.Y + (Height / 4 * (ShootLefCannon ? 1 : -1))));
+
+            shootPoint = RotatePoint(shootPoint, shipCenterPoint, Rotation);
+
+            Game.Components.Add(new LaserRed(Game, new Vector2(shootPoint.X, shootPoint.Y), Rotation));
             ShootLefCannon = !ShootLefCannon;
+        }
+
+        public Point RotatePoint(Point pointToRotate, Point centerPoint, double angleInRadians)
+        {
+            double cosTheta = Math.Cos(angleInRadians);
+            double sinTheta = Math.Sin(angleInRadians);
+
+            return new Point
+            {
+                X = (int)
+                (cosTheta * (pointToRotate.X - centerPoint.X) -
+                 sinTheta * (pointToRotate.Y - centerPoint.Y) + centerPoint.X),
+                Y = (int)
+                (sinTheta * (pointToRotate.X - centerPoint.X) +
+                 cosTheta * (pointToRotate.Y - centerPoint.Y) + centerPoint.Y)
+            };
         }
     }
 }

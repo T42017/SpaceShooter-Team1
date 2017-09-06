@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using Asteroid_Death_2_Electric_Boogaloo.Components;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -10,18 +14,22 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     /// </summary>
     public class Astroids : Game
     {
-        GraphicsDeviceManager graphics;
+       
+
+        
+        public GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         private Texture2D backgroundTexture;
+        private GameState _state;
         Player player;
 
-<<<<<<< HEAD
+
         private Player player;
         private Meteor meteor;
 
-=======
+
         
->>>>>>> origin/Feature_MovementOfPlayer
+
         public Astroids()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -32,6 +40,19 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Window.Position = new Point(300, 300); // Delete this
         }
 
+        public void ChangeGameStates(GameState desiredState)
+        {
+            _state = desiredState;
+
+            foreach (var component in Components.Cast<AstroidsComponent>())
+            {
+                component.Visible = component.DrawableStates.HasFlag(_state);
+                component.Enabled = component.UpdatableStates.HasFlag(_state);
+            }
+
+        }
+        
+
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
         /// This is where it can query for any required services and load any non-graphic
@@ -40,6 +61,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         /// </summary>
         protected override void Initialize()
         {
+            
+
+            Components.Add(new MenuComponent(this));
+            ChangeGameStates(GameState.Menu);
+
+
             player = new Player(this);
             meteor = new Meteor(this, MeteorSize.Medium, MeteorColour.Brown);
             this.Components.Add(player);
@@ -91,6 +118,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
+            GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            // TODO: Add your drawing code here
             spriteBatch.Begin();
             for (int y = 0; y < Globals.Screenheight; y += backgroundTexture.Width)
             {

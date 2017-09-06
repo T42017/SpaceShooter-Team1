@@ -16,14 +16,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         private DateTime _timeSenceLastShot = DateTime.Today;
         private int _timeForLaserCooldownInMs = 100;
 
-        public Player(Game game) : base(game)
-        {
-        }
-        
+        public Player(Game game) : base(game) { }
+      
         protected override void LoadContent()
         {
             LoadTexture("shipPlayer");
-            base.LoadContent();
         }
         
         public override void Update(GameTime gameTime)
@@ -49,8 +46,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             lastKeyboardState = state;
             
             Speed += new Vector2(-Speed.X * 0.015f, -Speed.Y * 0.015f);
-
-
             Position += Speed;
 
             if(Position.X < Globals.GameArea.Left)
@@ -61,12 +56,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 Position = new Vector2(Position.X, Globals.GameArea.Bottom);
             if (Position.Y > Globals.GameArea.Bottom)
                 Position = new Vector2(Position.X, Globals.GameArea.Top);
-
-
-
-            base.Update(gameTime);
-        }
-
-        
+        }      
     }
 }

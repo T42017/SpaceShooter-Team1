@@ -14,25 +14,24 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public Vector2 Position { get; set; }
         public float Radius { get; set; }
         public Vector2 Speed { get; set; }
-        public float Rotation { get; set; } 
-
+        public float Rotation { get; set; }
+        public int MaxSpeed = 9;
         public int Width { get; set; } 
         public int Height { get; set; }
 
         protected Texture2D Texture;
-        protected Game _game;
+        protected Game Game;
         protected readonly SpriteBatch SpriteBatch;
-        protected static readonly Random Random = new Random();
 
         protected GameObject(Game game) : base(game)
         {
-            _game = game;
+            Game = game;
             SpriteBatch = new SpriteBatch(game.GraphicsDevice);
         }
 
         public void LoadTexture(string name)
         {
-            Texture = _game.Content.Load<Texture2D>(name);
+            Texture = Game.Content.Load<Texture2D>(name);
 
             Width = Texture.Width;
             Height = Texture.Height;
@@ -73,14 +72,24 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             base.Draw(gameTime);
         }
 
-        public void Accelerate(float acceleration)
+        public void Move()
         {
-            Speed += new Vector2((float)Math.Cos(Rotation),
-                         (float)Math.Sin(Rotation)) * acceleration;
+            Position += Speed;
+        }
 
-            if (Speed.LengthSquared() > 81)
+        public Vector2 Forward()
+        {
+            return new Vector2((float) Math.Cos(Rotation),
+                (float) Math.Sin(Rotation));
+        }
+
+        public void Accelerate(float speed)
+        {
+            Speed += Forward() * speed;
+
+            if (Speed.LengthSquared() > Math.Pow(MaxSpeed, 2))
             {
-                Speed = Vector2.Normalize(Speed) * 9;
+                Speed = Vector2.Normalize(Speed) * MaxSpeed;
             }
         }
     }
