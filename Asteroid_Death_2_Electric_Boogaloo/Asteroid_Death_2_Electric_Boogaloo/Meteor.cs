@@ -35,6 +35,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         private void SetAppropriateTexture()
         {
             string colour = string.Empty;
+            string fileSuffix = string.Empty;
 
             switch (MeteorColour)
             {
@@ -45,8 +46,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                     colour = "Brown";
                     break;
             }
-
-            string fileSuffix = string.Empty;
 
             switch (MeteorSize)
             {
@@ -60,6 +59,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                     fileSuffix = "big1";
                     break;
             }
+
             string fileName = $"meteor{colour}_{fileSuffix}";
             LoadTexture(fileName);
         }
@@ -82,7 +82,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         protected override void LoadContent()
         {
             SetAppropriateTexture();
-            Position += new Vector2();
             base.LoadContent();
         }
 

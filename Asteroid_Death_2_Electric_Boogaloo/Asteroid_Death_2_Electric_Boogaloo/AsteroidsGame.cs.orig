@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
+using Asteroid_Death_2_Electric_Boogaloo.Components;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -11,48 +13,90 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     public class AsteroidsGame : Game
     {
-        GraphicsDeviceManager graphics;
+        private GameState _gameState;
+        public GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-<<<<<<< HEAD:Asteroid_Death_2_Electric_Boogaloo/Asteroid_Death_2_Electric_Boogaloo/AsteroidsGame.cs
-
         private Texture2D backgroundTexture;
         private Player player;
+        private Meteor[] meteors;
 
         public AsteroidsGame()
-=======
-        private Texture2D backgroundTexture;
-        Player player;
-        KeyboardState lastKeyboardState;
-        
-        public Astroids()
->>>>>>> origin/Feature_MovementOfPlayer:Asteroid_Death_2_Electric_Boogaloo/Asteroid_Death_2_Electric_Boogaloo/Astroids.cs
         {
             graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferHeight = Globals.Screenheight;
+            graphics.PreferredBackBufferHeight = Globals.ScreenHeight;
             graphics.PreferredBackBufferWidth = Globals.ScreenWidth;
 
             Content.RootDirectory = "Content";
             Window.Position = new Point(300, 300);
             Window.Title = "Asteroid Death 2 Electric Boogaloo";
         }
+
+<<<<<<< HEAD
+        private void CheckForCollisionWith(GameObject thisObject)
+=======
+        public void ChangeGameState(GameState desiredState)
+        {
+            _gameState = desiredState;
+
+            foreach (var component in Components.Cast<AstroidsComponent>())
+            {
+                component.Visible = component.DrawableStates.HasFlag(_gameState);
+                component.Enabled = component.UpdatableStates.HasFlag(_gameState);
+            }
+        }
+        private void CheckForCollision(GameObject thisObject)
+>>>>>>> origin/develop
+        {
+            // -- Removed temporarily to try other approaches
+
+            //for (int i = Components.Count - 1; i >= 0; i--)
+            //{
+            //    var outerCurrent = Components[i];
+            //    if (outerCurrent == null || !(outerCurrent is GameObject gameObject))
+            //        continue;
+            //    for (int j = Components.Count - 1; j >= 0; j--)
+            //    {
+            //        var innerCurrent = Components[j];
+            //        if (innerCurrent == null || !(innerCurrent is GameObject otherGameObject))
+            //            continue;
+
+            //        if (gameObject.CollidesWith(otherGameObject))
+            //        {
+            //            Components.Remove(gameObject);
+            //            Components.Remove(otherGameObject);
+            //            return;
+            //        }
+            //    }
+            //}
+
+            for (int i = Components.Count - 1; i >= 0; i--)
+            {
+                if (Components[i] == null || 
+                    !(Components[i] is GameObject otherGameObject) || 
+                    otherGameObject == thisObject)
+                    continue;
+
+                if (thisObject.CollidesWith(otherGameObject))
+                {
+                    Components.Remove(otherGameObject);
+                    return;
+                }
+            }
+        }
+
         
         protected override void Initialize()
         {
-<<<<<<< HEAD:Asteroid_Death_2_Electric_Boogaloo/Asteroid_Death_2_Electric_Boogaloo/AsteroidsGame.cs
             // center window
             /*
             Window.Position = new Point((GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / 2) - (graphics.PreferredBackBufferWidth / 2), 
                                         (GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height / 2) - (graphics.PreferredBackBufferHeight / 2));
-                                        
+
             // allow resizing
             Window.AllowUserResizing = true;
             //*/
 
             AddGameObjects();
-=======
-            player = new Player(this);
-            Components.Add(player);
->>>>>>> origin/Feature_MovementOfPlayer:Asteroid_Death_2_Electric_Boogaloo/Asteroid_Death_2_Electric_Boogaloo/Astroids.cs
 
             base.Initialize();
         }
@@ -73,24 +117,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-<<<<<<< HEAD:Asteroid_Death_2_Electric_Boogaloo/Asteroid_Death_2_Electric_Boogaloo/AsteroidsGame.cs
 
-=======
-            KeyboardState state = Keyboard.GetState();
+            CheckForCollisionWith(player);
 
-            if (state.IsKeyDown(Keys.Up))
-                player.Accelerate();
-            if (state.IsKeyDown(Keys.Down))
-                player.Retardation();
-            if (state.IsKeyDown(Keys.Left))
-                player.Rotation -= 0.05f; 
-            else if (state.IsKeyDown(Keys.Right))
-                player.Rotation += 0.05f;
-
-            
-            player.Update(gameTime);
-            lastKeyboardState = state;
->>>>>>> origin/Feature_MovementOfPlayer:Asteroid_Death_2_Electric_Boogaloo/Asteroid_Death_2_Electric_Boogaloo/Astroids.cs
             base.Update(gameTime);
         }
         
@@ -99,24 +128,17 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             GraphicsDevice.Clear(Color.CornflowerBlue);
             
             spriteBatch.Begin();
-            for (int y = 0; y < Globals.Screenheight; y += backgroundTexture.Width)
+            for (int y = 0; y < Globals.ScreenHeight; y += backgroundTexture.Width)
             {
                 for (int x = 0; x < Globals.ScreenWidth; x += backgroundTexture.Width)
                 {
                     spriteBatch.Draw(backgroundTexture, new Vector2(x, y), Color.White);
                 }
             }
-                //player.Draw(spriteBatch);
 
-<<<<<<< HEAD:Asteroid_Death_2_Electric_Boogaloo/Asteroid_Death_2_Electric_Boogaloo/AsteroidsGame.cs
             spriteBatch.End();
 
             base.Draw(gameTime);
-=======
-                spriteBatch.End();
-                base.Draw(gameTime);
-            
->>>>>>> origin/Feature_MovementOfPlayer:Asteroid_Death_2_Electric_Boogaloo/Asteroid_Death_2_Electric_Boogaloo/Astroids.cs
         }
 
         public void AddGameObjects()
@@ -126,19 +148,33 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 Position = new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2)
             };
 
+            meteors = new Meteor[10];
+            for (int i = 0; i < meteors.Length; i++)
+            {
+                var position = new Vector2(
+                    Globals.RNG.Next(Globals.ScreenWidth),
+                    Globals.RNG.Next(Globals.ScreenHeight)
+                );
+                meteors[i] = new Meteor(this, position, MeteorSize.Big, MeteorColour.Gray)
+                {
+                    Rotation = (float) Globals.RNG.NextDouble()
+                };
+            }
+
             /*
             for (int i = 0; i < 5; i++)
             {
                 Enemy e = new Enemy(this)
                 {
-                    X = i * 140 + 100,
-                    Y = 100
+                    Position = new Vector2(i * 140 + 100, 100)
                 };
                 Components.Add(e);
             }
             //*/
 
             Components.Add(player);
+            foreach (var meteor in meteors)
+                Components.Add(meteor);
         }
     }
 }
