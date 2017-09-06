@@ -79,14 +79,16 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
             base.Update(gameTime);
         }
 
+        protected override void UnloadContent()
+        {
+
+
+            base.UnloadContent();
+        }
 
         public override void Draw(GameTime gameTime)
         {
-            pGame.GraphicsDevice.Reset();
-            GraphicsDevice.Clear(Color.Gold);
             
-
-
             SpriteBatch.Begin();
 
                 String 

@@ -88,6 +88,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             // allow resizing
             Window.AllowUserResizing = true;
             //*/
+            Components.Add(new MenuComponent(this));
+            Components.Add(new HighscoreMenuComponent(this));
+            Components.Add(new IngameComponent(this));
+            ChangeGameState(GameState.Menu);
 
             AddGameObjects();
 
