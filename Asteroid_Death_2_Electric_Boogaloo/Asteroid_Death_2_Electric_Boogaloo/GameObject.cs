@@ -46,7 +46,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public bool CollidesWith(GameObject otherGameObject)
         {
             if ((this is Player && otherGameObject is Laser) || (this is Laser && otherGameObject is Player))
-            if ((this is Player && otherGameObject is LaserRed) || (this is LaserRed && otherGameObject is Player))
+            if ((this is Player && otherGameObject is Laser) || (this is Laser && otherGameObject is Player))
                 return false; // Check this when enemies shoot lasers
 
             int aLittleToMakeCollisionSeemMoreCorrect = 0;
