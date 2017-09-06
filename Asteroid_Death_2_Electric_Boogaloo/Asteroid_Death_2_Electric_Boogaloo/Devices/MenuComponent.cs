@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
-namespace Asteroid_Death_2_Electric_Boogaloo.Components
+namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 {
     class MenuComponent : AstroidsComponent
     {
@@ -28,6 +28,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
             UpdatableStates = GameState.Menu;
 
             pGame.IsMouseVisible = true;
+
+
         }
         
         
@@ -55,7 +57,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
                 if (x >= pGame.graphics.PreferredBackBufferWidth / 3 &&
                     x <= (pGame.graphics.PreferredBackBufferWidth / 3) + 222 &&
                     y >= (pGame.graphics.PreferredBackBufferHeight / 4) + (pGame.graphics.PreferredBackBufferHeight / 8) && y<= ((pGame.graphics.PreferredBackBufferHeight / 4) + (pGame.graphics.PreferredBackBufferHeight / 8)) +39)
-                pGame.ChangeGameState(GameState.loading);
+                pGame.ChangeGameState(GameState.ingame);
                 
                 else if (x >= pGame.graphics.PreferredBackBufferWidth / 3 &&
                          x <= (pGame.graphics.PreferredBackBufferWidth / 3) + 222 &&
@@ -78,19 +80,21 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
             base.Update(gameTime);
         }
 
+        protected override void UnloadContent()
+        {
+
+
+            base.UnloadContent();
+        }
 
         public override void Draw(GameTime gameTime)
         {
-            pGame.GraphicsDevice.Reset();
-            GraphicsDevice.Clear(Color.Gold);
             
-
-
             SpriteBatch.Begin();
 
                 String 
                 Name = "Asteroid Death 2 Electric Boogaloo",
-                button1 = "start",
+                button1 = "Start",
                 button2 = "Highscore",
                 button3 = "Quit";
             

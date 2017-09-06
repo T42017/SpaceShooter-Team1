@@ -18,6 +18,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public int MaxSpeed = 9;
         public int Width { get; set; } 
         public int Height { get; set; }
+        public Rectangle Bounds => new Rectangle(
+            (int) Position.X - Width / 2,
+            (int) Position.Y - Height / 2,
+            Width,
+            Height
+        );
+
         protected Texture2D Texture;
         protected Game Game;
         protected readonly SpriteBatch SpriteBatch;
@@ -39,26 +46,24 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public bool CollidesWith(GameObject otherGameObject)
         {
             if ((this is Player && otherGameObject is Laser) || (this is Laser && otherGameObject is Player))
-                return false;
-            //var fullWidth = Width + otherGameObject.Width;
-            //var fullHeight = Height + otherGameObject.Height;
-            //var distanceX = Math.Abs(Position.X - otherGameObject.Position.X);
-            //var distanceY = Math.Abs(Position.Y - otherGameObject.Position.Y);
+            if ((this is Player && otherGameObject is LaserRed) || (this is LaserRed && otherGameObject is Player))
+                return false; // Check this when enemies shoot lasers
 
-            //return distanceX < fullWidth && distanceY < fullHeight;
-
-            var theseBounds = new Rectangle((int) Position.X - Texture.Width, 
-                (int) Position.Y - Texture.Height, 
-                Texture.Width, 
-                Texture.Height
+            int aLittleToMakeCollisionSeemMoreCorrect = 0;
+            var theseBounds = new Rectangle(
+                (int) Position.X - Texture.Width / 2 + aLittleToMakeCollisionSeemMoreCorrect,
+                (int) Position.Y - Texture.Height / 2 + aLittleToMakeCollisionSeemMoreCorrect,
+                Texture.Width - 2 * aLittleToMakeCollisionSeemMoreCorrect,
+                Texture.Height - 2 * aLittleToMakeCollisionSeemMoreCorrect
             );
 
-            var otherBounds = new Rectangle((int) otherGameObject.Position.X - otherGameObject.Texture.Width,
-                (int) otherGameObject.Position.Y - otherGameObject.Texture.Height,
-                otherGameObject.Texture.Width,
-                otherGameObject.Texture.Height);
-
-            return theseBounds.Intersects(otherBounds); //|| otherBounds.Intersects(theseBounds);
+            var otherBounds = new Rectangle(
+                (int) otherGameObject.Position.X - otherGameObject.Texture.Width / 2 + aLittleToMakeCollisionSeemMoreCorrect,
+                (int) otherGameObject.Position.Y - otherGameObject.Texture.Height / 2 + aLittleToMakeCollisionSeemMoreCorrect,
+                otherGameObject.Texture.Width - 2 * aLittleToMakeCollisionSeemMoreCorrect,
+                otherGameObject.Texture.Height - 2 * aLittleToMakeCollisionSeemMoreCorrect
+            );
+            return theseBounds.Intersects(otherBounds) || otherBounds.Intersects(theseBounds);
         }
 
         public override void Draw(GameTime gameTime)

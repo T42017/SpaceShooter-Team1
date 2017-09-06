@@ -42,10 +42,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AsteroidsGame.cs" />
+    <Compile Include="Devices\HighscoreMenuComponent.cs" />
+    <Compile Include="Devices\IngameComponent.cs" />
+    <Compile Include="Devices\YouAreDead.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="PixelExplosion.cs" />
-    <Compile Include="Components\AstroidsComponent.cs" />
-    <Compile Include="Components\MenuComponent.cs" />
+    <Compile Include="Devices\AstroidsComponent.cs" />
+    <Compile Include="Devices\MenuComponent.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="GameState.cs" />
