@@ -15,7 +15,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public MeteorSize   MeteorSize   { get; }
         public MeteorColour MeteorColour { get; }
         public float RotationSpeed;
-        public Meteor(Game game, Vector2 position, MeteorSize meteorSize, MeteorColour meteorColour) : base(game)
+        public Meteor(AsteroidsGame game, Vector2 position, MeteorSize meteorSize, MeteorColour meteorColour) : base(game, 1)
         {
             Position = position;
             Speed = new Vector2(
@@ -78,14 +78,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             return children;
         }
 
-        protected override void LoadContent()
+        public override void LoadContent()
         {
             SetAppropriateTexture();
             Position += new Vector2();
-            base.LoadContent();
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update()
         {
             //requires further work to add a randomly generated speed of the meteors instead of a static speed
             Rotation += RotationSpeed; // Change fixed float to property later
@@ -99,23 +98,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 Position = new Vector2(Position.X, Globals.GameArea.Bottom);
             if (Position.Y > Globals.GameArea.Bottom)
                 Position = new Vector2(Position.X, Globals.GameArea.Top);
-
-            base.Update(gameTime);
-        }
-
-        public override void Draw(GameTime gameTime)
-        {
-            SpriteBatch.Begin();
-            SpriteBatch.Draw(Texture, Position,
-                null,
-                Color.White,
-                Rotation,
-                new Vector2(Texture.Width * .5f, Texture.Height * .5f),
-                1.0f,
-                SpriteEffects.None,
-                0f);
-            SpriteBatch.End();
-            // Check if base.Draw() should be called
         }
     }
 }

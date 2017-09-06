@@ -11,9 +11,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     {
 
         private Random random = new Random();
-        private Game _game;
+        private AsteroidsGame _game;
 
-        public EnemyFactory(Game game)
+        public EnemyFactory(AsteroidsGame game)
         {
             _game = game;
         }

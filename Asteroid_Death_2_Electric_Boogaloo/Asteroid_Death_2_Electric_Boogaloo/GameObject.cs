@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Asteroid_Death_2_Electric_Boogaloo
 {
-    public abstract class GameObject : DrawableGameComponent
+    public abstract class GameObject
     {
         public bool IsDead { get; set; }
         public Vector2 Position { get; set; }
@@ -19,13 +19,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public int Width { get; set; } 
         public int Height { get; set; }
         protected Texture2D Texture;
-        protected Game Game;
-        protected readonly SpriteBatch SpriteBatch;
+        protected AsteroidsGame Game;
+        private int DrawOrder = 0;
 
-        protected GameObject(Game game) : base(game)
+        protected GameObject(AsteroidsGame game, int drawOrder)
         {
             Game = game;
-            SpriteBatch = new SpriteBatch(game.GraphicsDevice);
+            DrawOrder = drawOrder;
         }
 
         public void LoadTexture(string name)
@@ -61,14 +61,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             return theseBounds.Intersects(otherBounds); //|| otherBounds.Intersects(theseBounds);
         }
 
-        public override void Draw(GameTime gameTime)
-        {
-            SpriteBatch.Begin();
+        public abstract void LoadContent();
+        public abstract void Update();
 
-            SpriteBatch.Draw(Texture, Position, null, Color.White, Rotation - MathHelper.PiOver2, new Vector2(Texture.Width / 2, Texture.Height / 2), 1.0f, SpriteEffects.None, 0f);
-            
-            SpriteBatch.End();
-            base.Draw(gameTime);
+        public virtual void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(Texture, Position, null, Color.White, Rotation - MathHelper.PiOver2, new Vector2(Texture.Width / 2, Texture.Height / 2), 1.0f, SpriteEffects.None, 0f);
         }
 
         public void Move()

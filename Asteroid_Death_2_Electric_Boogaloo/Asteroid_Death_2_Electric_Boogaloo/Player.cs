@@ -16,14 +16,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         private DateTime _timeSenceLastShot = DateTime.Today;
         private int _timeForLaserCooldownInMs = 100;
 
-        public Player(Game game) : base(game) { }
+        public Player(AsteroidsGame game) : base(game) { }
       
-        protected override void LoadContent()
+        public override void LoadContent()
         {
             LoadTexture("shipPlayer");
         }
         
-        public override void Update(GameTime gameTime)
+        public override void Update()
         {
             if ((GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed ||
                  Keyboard.GetState().IsKeyDown(Keys.Space)) && 

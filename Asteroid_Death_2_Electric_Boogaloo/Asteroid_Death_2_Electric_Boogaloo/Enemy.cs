@@ -38,23 +38,21 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public Type type;
         private AI _ai;
         
-        public Enemy(Game game, Type type) : base(game)
+        public Enemy(AsteroidsGame game, Type type) : base(game)
         {
             this.type = type;
-            _ai = new AI(game);
+            _ai = new AI((AsteroidsGame) game, this);
             this.type = type;
         }
 
-        protected override void LoadContent()
+        public override void LoadContent()
         {
             LoadTexture(Enum.GetName(typeof(Type), type));
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update()
         {
-            _ai.Update(this);
-
-            base.Update(gameTime);
+            _ai.Update();
         }
 
     }

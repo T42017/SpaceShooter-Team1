@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Asteroid_Death_2_Electric_Boogaloo
 {
-    class PixelExplosion : GameObject
+    public class PixelExplosion : GameObject
     {
         private string name = "pixelExplosion";
         private Texture2D[] _textures;
@@ -17,12 +17,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         private DateTime _timeLastFrame = DateTime.Now;
         private int currenTexture = 0;
 
-        public PixelExplosion(Game game) : base(game)
+        public PixelExplosion(AsteroidsGame game) : base(game, 1)
         {
             
         }
 
-        protected override void LoadContent()
+        public override void LoadContent()
         {
             _textures = new Texture2D[_amountOfPictures];
 
@@ -31,24 +31,20 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 LoadTexture(name + (i <= 9 ? "0" + i : "" + i));
                 _textures[i] = Texture;
             }
-
-            base.LoadContent();
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update()
         {
             if ((DateTime.Now - _timeLastFrame).TotalMilliseconds > _timeBetweenFramesMs)
             {
                 currenTexture++;
                 if (currenTexture > _amountOfPictures - 1)
-                    Game.Components.Remove(this);
+                    Game._gameObjects.Add(this);
                 else
                 Texture = _textures[currenTexture];
 
                 _timeLastFrame = DateTime.Now;
             }
-            
-            base.Update(gameTime);
         }
     }
 }

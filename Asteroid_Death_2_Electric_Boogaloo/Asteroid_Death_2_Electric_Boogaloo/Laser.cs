@@ -18,20 +18,20 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         private Color color;
 
-        public Laser(Game game, Vector2 position, float rotation, Color color) : base(game)
+        public Laser(AsteroidsGame game, Vector2 position, float rotation, Color color) : base(game, 1)
         {
             this.Position = position;
             this.Rotation = rotation;
             this.color = color;
         }
 
-        protected override void LoadContent()
+        public override void LoadContent()
         {
             LoadTexture("laser" + Enum.GetName(typeof(Color), color));
             MaxSpeed = 200;
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update()
         {
             Speed = Forward() * 10;
             AccelerateForward(3);
