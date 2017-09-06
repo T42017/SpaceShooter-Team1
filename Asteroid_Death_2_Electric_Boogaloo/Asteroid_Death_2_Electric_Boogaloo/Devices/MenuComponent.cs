@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
-namespace Asteroid_Death_2_Electric_Boogaloo.Components
+namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 {
     class MenuComponent : AstroidsComponent
     {

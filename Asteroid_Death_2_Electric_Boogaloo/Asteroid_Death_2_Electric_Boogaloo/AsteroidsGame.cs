@@ -2,7 +2,8 @@
 using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
-using Asteroid_Death_2_Electric_Boogaloo.Components;
+
+using Asteroid_Death_2_Electric_Boogaloo.Devices;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -34,15 +35,19 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
            _gameState = desiredState;
 
-           foreach (var component in Components.Cast<AstroidsComponent>())
+           foreach (var component in Components)
             {
-               component.Visible = component.DrawableStates.HasFlag(_gameState);
-               component.Enabled = component.UpdatableStates.HasFlag(_gameState);
+                if(!(component is AstroidsComponent astroidsComponent))
+
+               continue;
+               astroidsComponent.Visible = astroidsComponent.DrawableStates.HasFlag(_gameState);
+               astroidsComponent.Enabled = astroidsComponent.UpdatableStates.HasFlag(_gameState);
            }
         }
 
-	    private void CheckForCollisionWith(GameObject thisObject)	
+	    public void CheckForCollisionWith(GameObject thisObject)	
         {
+            for (int i = Components.Count - 1; i >= 0; i--)
             {
                 if (Components[i] == null ||
                     !(Components[i] is GameObject otherGameObject) ||
@@ -58,18 +63,18 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                     //    Components.Remove(laser);
                     return;
                 }
-            }*/
+            }
         }
 
-        private void GenerateRandomNewMeteor(GameTime gameTime, int intervalInSeconds)
+        public void GenerateRandomNewMeteor(GameTime gameTime, int intervalInSeconds)
         {
             var currentGameTimeModInterval = gameTime.TotalGameTime.TotalSeconds % intervalInSeconds;
-            var respawnArea = new Rectangle(
-                (int) player.Position.X - player.Width / 2 - 100,
-                (int) player.Position.Y - player.Height / 2 - 100,
-                player.Width + 100,
-                player.Height + 100
-            );
+            //var respawnArea = new Rectangle(
+            //    (int) player.Position.X - player.Width / 2 - 100,
+            //    (int) player.Position.Y - player.Height / 2 - 100,
+            //    player.Width + 100,
+            //    player.Height + 100
+            //);
             
             if ((int) currentGameTimeModInterval == 0)
             {
@@ -126,14 +131,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            for (int i = Components.Count - 1; i >= 0; i--)
+           /* for (int i = Components.Count - 1; i >= 0; i--)
             {
                 if (!(Components[i] is GameObject gameObject))
                     continue;
                 CheckForCollisionWith(gameObject);
             }
 
-            GenerateRandomNewMeteor(gameTime, 5);
+            GenerateRandomNewMeteor(gameTime, 5);*/
 
             base.Update(gameTime);
         }

@@ -103,19 +103,19 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             base.Update(gameTime);
         }
 
-        public override void Draw(GameTime gameTime)
-        {
-            SpriteBatch.Begin();
-            SpriteBatch.Draw(Texture, Position,
-                null,
-                Color.White,
-                Rotation,
-                new Vector2(Texture.Width * .5f, Texture.Height * .5f),
-                1.0f,
-                SpriteEffects.None,
-                0f);
-            SpriteBatch.End();
-            // Check if base.Draw() should be called
-        }
+        //public override void Draw(GameTime gameTime)
+        //{
+        //    SpriteBatch.Begin();
+        //    SpriteBatch.Draw(Texture, Position,
+        //        null,
+        //        Color.White,
+        //        Rotation,
+        //        new Vector2(Texture.Width * .5f, Texture.Height * .5f),
+        //        1.0f,
+        //        SpriteEffects.None,
+        //        0f);
+        //    SpriteBatch.End();
+        //    //Check if base.Draw() should be called
+        //}
     }
 }
