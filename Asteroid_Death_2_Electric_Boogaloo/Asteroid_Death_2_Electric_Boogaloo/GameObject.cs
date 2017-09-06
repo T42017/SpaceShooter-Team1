@@ -18,7 +18,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public int MaxSpeed = 9;
         public int Width { get; set; } 
         public int Height { get; set; }
-
         protected Texture2D Texture;
         protected Game Game;
         protected readonly SpriteBatch SpriteBatch;
