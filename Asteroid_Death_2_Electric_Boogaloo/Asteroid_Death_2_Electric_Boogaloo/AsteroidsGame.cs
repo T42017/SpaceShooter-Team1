@@ -18,7 +18,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         SpriteBatch spriteBatch;
         private Texture2D backgroundTexture;
         private Player player;
-        private Meteor[] meteors;
 
         public AsteroidsGame()
         {
@@ -41,42 +40,50 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 component.Enabled = component.UpdatableStates.HasFlag(_gameState);
             }
         }
-	private void CheckForCollisionWith(GameObject thisObject)	
+
+	    private void CheckForCollisionWith(GameObject thisObject)	
         {
-            // -- Removed temporarily to try other approaches
-
-            //for (int i = Components.Count - 1; i >= 0; i--)
-            //{
-            //    var outerCurrent = Components[i];
-            //    if (outerCurrent == null || !(outerCurrent is GameObject gameObject))
-            //        continue;
-            //    for (int j = Components.Count - 1; j >= 0; j--)
-            //    {
-            //        var innerCurrent = Components[j];
-            //        if (innerCurrent == null || !(innerCurrent is GameObject otherGameObject))
-            //            continue;
-
-            //        if (gameObject.CollidesWith(otherGameObject))
-            //        {
-            //            Components.Remove(gameObject);
-            //            Components.Remove(otherGameObject);
-            //            return;
-            //        }
-            //    }
-            //}
-
             for (int i = Components.Count - 1; i >= 0; i--)
             {
-                if (Components[i] == null || 
-                    !(Components[i] is GameObject otherGameObject) || 
+                if (Components[i] == null ||
+                    !(Components[i] is GameObject otherGameObject) ||
                     otherGameObject == thisObject)
                     continue;
 
                 if (thisObject.CollidesWith(otherGameObject))
                 {
+                    if (thisObject is Meteor && otherGameObject is Meteor)
+                        continue;
                     Components.Remove(otherGameObject);
+                    //if (thisObject is LaserRed laser)
+                    //    Components.Remove(laser);
                     return;
                 }
+            }
+        }
+
+        private void GenerateRandomNewMeteor(GameTime gameTime, int intervalInSeconds)
+        {
+            var currentGameTimeModInterval = gameTime.TotalGameTime.TotalSeconds % intervalInSeconds;
+            var respawnArea = new Rectangle(
+                (int) player.Position.X - player.Width / 2 - 100,
+                (int) player.Position.Y - player.Height / 2 - 100,
+                player.Width + 100,
+                player.Height + 100
+            );
+            
+            if ((int) currentGameTimeModInterval == 0)
+            {
+                var meteor = new Meteor(
+                    this,
+                    new Vector2(
+                        Globals.RNG.Next(0, 200),
+                        Globals.RNG.Next(0, 200)
+                    ),
+                    (MeteorSize)Globals.RNG.Next(0, 3),
+                    (MeteorColour)Globals.RNG.Next(0, 2)
+                );
+                Components.Add(meteor);
             }
         }
 
@@ -114,7 +121,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            CheckForCollisionWith(player);
+            for (int i = Components.Count - 1; i >= 0; i--)
+            {
+                if (!(Components[i] is GameObject gameObject))
+                    continue;
+                CheckForCollisionWith(gameObject);
+            }
+
+            GenerateRandomNewMeteor(gameTime, 5);
 
             base.Update(gameTime);
         }
@@ -131,7 +145,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                     spriteBatch.Draw(backgroundTexture, new Vector2(x, y), Color.White);
                 }
             }
-
             spriteBatch.End();
 
             base.Draw(gameTime);
@@ -143,19 +156,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             {
                 Position = new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2)
             };
-
-            meteors = new Meteor[10];
-            for (int i = 0; i < meteors.Length; i++)
-            {
-                var position = new Vector2(
-                    Globals.RNG.Next(Globals.ScreenWidth),
-                    Globals.RNG.Next(Globals.ScreenHeight)
-                );
-                meteors[i] = new Meteor(this, position, MeteorSize.Big, MeteorColour.Gray)
-                {
-                    Rotation = (float) Globals.RNG.NextDouble()
-                };
-            }
 
             /*
             for (int i = 0; i < 5; i++)
@@ -169,8 +169,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             //*/
 
             Components.Add(player);
-            foreach (var meteor in meteors)
-                Components.Add(meteor);
         }
     }
 }
