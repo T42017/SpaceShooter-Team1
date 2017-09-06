@@ -37,7 +37,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
             if (state.IsKeyDown(Keys.Up))
                 Accelerate(0.25f);
-           if (state.IsKeyDown(Keys.Down))
+            if (state.IsKeyDown(Keys.Down))
                 Accelerate(-0.07f);
             if (state.IsKeyDown(Keys.Left))
                 Rotation -= 0.07f;
@@ -47,6 +47,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             
             Speed += new Vector2(-Speed.X * 0.015f, -Speed.Y * 0.015f);
             Position += Speed;
+            
 
             if(Position.X < Globals.GameArea.Left)
                 Position = new Vector2(Globals.GameArea.Right, Position.Y);
@@ -56,6 +57,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 Position = new Vector2(Position.X, Globals.GameArea.Bottom);
             if (Position.Y > Globals.GameArea.Bottom)
                 Position = new Vector2(Position.X, Globals.GameArea.Top);
-        }      
+        }
+
+        public override bool CollidesWith(GameObject otherGameObject)
+        {
+            var collides = base.CollidesWith(otherGameObject);
+            if (collides) Game.Exit();
+            return collides;
+        }
     }
 }

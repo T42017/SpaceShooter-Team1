@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
@@ -20,10 +21,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public int Height { get; set; }
 
         public Rectangle Bounds => new Rectangle(
-            (int) Position.X - Width / 2,
-            (int) Position.Y - Height / 2,
-            Width,
-            Height
+            (int)Position.X - Width / 2,
+            (int)Position.Y - Height / 2,
+            Width - 50,
+            Height - 50
         );
 
         protected Texture2D Texture;
@@ -44,11 +45,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Height = Texture.Height;
         }
 
-        public bool CollidesWith(GameObject otherGameObject)
+        public virtual bool CollidesWith(GameObject otherGameObject)
         {
             if ((this is Player && otherGameObject is LaserRed) || (this is LaserRed && otherGameObject is Player))
                 return false; // Check this when enemies shoot lasers
-
+            if (GetType() == otherGameObject.GetType())
+                return false;
             int aLittleToMakeCollisionSeemMoreCorrect = 0;
             var theseBounds = new Rectangle(
                 (int) Position.X - Texture.Width / 2 + aLittleToMakeCollisionSeemMoreCorrect,
@@ -66,12 +68,20 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             return theseBounds.Intersects(otherBounds) || otherBounds.Intersects(theseBounds);
         }
 
+        private void DrawBounds()
+        {
+            var rectangle = new Texture2D(GraphicsDevice, Width, Height);
+            var data = new Color[Width * Height];
+            for (int i = 0; i < data.Length; i++) data[i] = Color.Red;
+            rectangle.SetData(data);
+            SpriteBatch.Draw(rectangle, Position - new Vector2(Width / 2f, Height / 2f), Color.Red);
+        }
+
         public override void Draw(GameTime gameTime)
         {
             SpriteBatch.Begin();
-
+            DrawBounds();
             SpriteBatch.Draw(Texture, Position, null, Color.White, Rotation - MathHelper.PiOver2, new Vector2(Texture.Width / 2, Texture.Height / 2), 1.0f, SpriteEffects.None, 0f);
-            
             SpriteBatch.End();
             base.Draw(gameTime);
         }

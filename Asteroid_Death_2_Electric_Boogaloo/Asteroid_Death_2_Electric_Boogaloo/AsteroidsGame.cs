@@ -62,29 +62,34 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             }
         }
 
-        private void GenerateRandomNewMeteor(GameTime gameTime, int intervalInSeconds)
+        private void GenerateRandomNewMeteor(GameTime gameTime, int intervalInMilliseconds)
         {
-            var currentGameTimeModInterval = gameTime.TotalGameTime.TotalSeconds % intervalInSeconds;
+            var currentGameTimeModInterval = (int)gameTime.TotalGameTime.TotalMilliseconds % intervalInMilliseconds;
+            if (currentGameTimeModInterval != 0) return;
+
+            const int a = 100;
             var respawnArea = new Rectangle(
-                (int) player.Position.X - player.Width / 2 - 100,
-                (int) player.Position.Y - player.Height / 2 - 100,
-                player.Width + 100,
-                player.Height + 100
+                (int) player.Position.X - player.Width / 2 - a,
+                (int) player.Position.Y - player.Height / 2 - a,
+                player.Width + 2 * a,
+                player.Height + 2 * a
             );
-            
-            if ((int) currentGameTimeModInterval == 0)
-            {
-                var meteor = new Meteor(
+
+            Meteor meteor;
+            do
+            { 
+                meteor = new Meteor(
                     this,
                     new Vector2(
-                        Globals.RNG.Next(0, 200),
-                        Globals.RNG.Next(0, 200)
+                        Globals.RNG.Next(0, Globals.ScreenWidth),
+                        Globals.RNG.Next(0, Globals.ScreenHeight)
                     ),
-                    (MeteorSize)Globals.RNG.Next(0, 3),
-                    (MeteorColour)Globals.RNG.Next(0, 2)
+                    (MeteorSize) Globals.RNG.Next(0, 3),
+                    (MeteorColour) Globals.RNG.Next(0, 2)
                 );
-                Components.Add(meteor);
             }
+            while (respawnArea.Contains(meteor.Bounds)) ;
+            Components.Add(meteor);
         }
 
         
@@ -121,14 +126,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            for (int i = Components.Count - 1; i >= 0; i--)
+            for (int i = Components.Count - 2; i >= 0; i--) // htf does this work??
             {
                 if (!(Components[i] is GameObject gameObject))
                     continue;
                 CheckForCollisionWith(gameObject);
             }
 
-            GenerateRandomNewMeteor(gameTime, 5);
+            GenerateRandomNewMeteor(gameTime, 1000);
 
             base.Update(gameTime);
         }

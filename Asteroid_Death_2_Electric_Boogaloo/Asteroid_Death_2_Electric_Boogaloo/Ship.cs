@@ -12,10 +12,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     public abstract class Ship : GameObject
     {
         private bool ShootLefCannon = false;
-
+        
         protected Ship(Game game) : base(game)
         {
-            
         }
         
         public void Shoot()
@@ -43,6 +42,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 (sinTheta * (pointToRotate.X - centerPoint.X) +
                  cosTheta * (pointToRotate.Y - centerPoint.Y) + centerPoint.Y)
             };
+        }
+
+        public override bool CollidesWith(GameObject otherGameObject)
+        {
+            bool collides = base.CollidesWith(otherGameObject);
+            if (collides) Game.Components.Remove(this);
+            return collides;
         }
     }
 }
