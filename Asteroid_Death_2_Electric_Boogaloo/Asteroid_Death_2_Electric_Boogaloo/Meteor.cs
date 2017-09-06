@@ -15,7 +15,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         private KeyboardState lastKeyboardState;
         public MeteorSize   MeteorSize   { get; }
         public MeteorColour MeteorColour { get; }
-        
+        public float RotationSpeed;
         public Meteor(Game game, Vector2 position, MeteorSize meteorSize, MeteorColour meteorColour) : base(game)
         {
             Position = position;
@@ -23,6 +23,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 (float) Globals.RNG.NextDouble(),
                 (float) Globals.RNG.NextDouble()
             );
+            RotationSpeed =(float) Globals.RNG.Next(12)/100;
+            MaxSpeed = Globals.RNG.Next(250);
             MeteorSize = meteorSize;
             MeteorColour = meteorColour;
         }
@@ -87,7 +89,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public override void Update(GameTime gameTime)
         {
             //requires further work to add a randomly generated speed of the meteors instead of a static speed
-            Rotation += 0.04f; // Change fixed float to property later
+            Rotation += RotationSpeed; // Change fixed float to property later
             Position += Speed;
 
             if (Position.X < Globals.GameArea.Left)
