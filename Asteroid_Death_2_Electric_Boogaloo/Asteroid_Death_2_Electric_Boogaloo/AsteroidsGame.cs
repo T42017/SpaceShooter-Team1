@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
+using Asteroid_Death_2_Electric_Boogaloo.Components;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -11,8 +13,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     public class AsteroidsGame : Game
     {
-        private GraphicsDeviceManager graphics;
-        private SpriteBatch spriteBatch;
+        private GameState _gameState;
+        public GraphicsDeviceManager graphics;
+        SpriteBatch spriteBatch;
         private Texture2D backgroundTexture;
         private Player player;
         private Meteor[] meteors;
@@ -28,6 +31,16 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Window.Title = "Asteroid Death 2 Electric Boogaloo";
         }
 
+        public void ChangeGameState(GameState desiredState)
+        {
+            _gameState = desiredState;
+
+            foreach (var component in Components.Cast<AstroidsComponent>())
+            {
+                component.Visible = component.DrawableStates.HasFlag(_gameState);
+                component.Enabled = component.UpdatableStates.HasFlag(_gameState);
+            }
+        }
         private void CheckForCollision(GameObject thisObject)
         {
             // -- Removed temporarily to try other approaches
@@ -63,6 +76,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 }
             }
         }
+
         
         protected override void Initialize()
         {

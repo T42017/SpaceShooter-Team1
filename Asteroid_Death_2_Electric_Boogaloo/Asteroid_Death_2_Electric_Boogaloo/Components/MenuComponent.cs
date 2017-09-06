@@ -13,16 +13,18 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
 {
     class MenuComponent : AstroidsComponent
     {
+        
         private SpriteFont menuFont,buttonFont;
         private Texture2D Button;
-        private Astroids pGame;
+        private AsteroidsGame pGame;
         private MouseState oldState;
 
 
         public MenuComponent(Game game) : base(game)
         {
-            pGame = (Astroids) game; 
+            pGame = (AsteroidsGame) game;
 
+            
             DrawableStates = GameState.Menu;
             UpdatableStates = GameState.Menu;
 
@@ -49,16 +51,17 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
             int x = newState.X, y = newState.Y;
             if (newState.LeftButton == ButtonState.Pressed && oldState.LeftButton == ButtonState.Released)
             {
+                
 
                 if (x >= pGame.graphics.PreferredBackBufferWidth / 3 &&
                     x <= (pGame.graphics.PreferredBackBufferWidth / 3) + 222 &&
                     y >= (pGame.graphics.PreferredBackBufferHeight / 4) + (pGame.graphics.PreferredBackBufferHeight / 8) && y<= ((pGame.graphics.PreferredBackBufferHeight / 4) + (pGame.graphics.PreferredBackBufferHeight / 8)) +39)
-                pGame.ChangeGameStates(GameState.loading);
+                pGame.ChangeGameState(GameState.loading);
                 
                 else if (x >= pGame.graphics.PreferredBackBufferWidth / 3 &&
                          x <= (pGame.graphics.PreferredBackBufferWidth / 3) + 222 &&
                          y >= ((pGame.graphics.PreferredBackBufferHeight / 4) + (pGame.graphics.PreferredBackBufferHeight / 8) +50)&& y <= ((pGame.graphics.PreferredBackBufferHeight / 4) + (pGame.graphics.PreferredBackBufferHeight / 8)) + 89)
-                    pGame.ChangeGameStates(GameState.highscoremenu);
+                    pGame.ChangeGameState(GameState.highscoremenu);
 
                 else if (x >= pGame.graphics.PreferredBackBufferWidth / 3 &&
                          x <= (pGame.graphics.PreferredBackBufferWidth / 3) + 222 &&
