@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Asteroid_Death_2_Electric_Boogaloo.Components
+namespace Asteroid_Death_2_Electric_Boogaloo.Devices
+
 {
     class AstroidsComponent : DrawableGameComponent
     {

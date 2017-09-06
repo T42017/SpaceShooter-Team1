@@ -15,7 +15,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         private KeyboardState lastKeyboardState;
         public MeteorSize   MeteorSize   { get; }
         public MeteorColour MeteorColour { get; }
-        
+        public float RotationSpeed;
         public Meteor(Game game, Vector2 position, MeteorSize meteorSize, MeteorColour meteorColour) : base(game)
         {
             Position = position;
@@ -23,6 +23,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 (float) Globals.RNG.NextDouble(),
                 (float) Globals.RNG.NextDouble()
             );
+            RotationSpeed =(float) Globals.RNG.Next(12)/100;
+            MaxSpeed = Globals.RNG.Next(250);
             MeteorSize = meteorSize;
             MeteorColour = meteorColour;
         }
@@ -33,6 +35,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         private void SetAppropriateTexture()
         {
             string colour = string.Empty;
+            string fileSuffix = string.Empty;
 
             switch (MeteorColour)
             {
@@ -43,8 +46,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                     colour = "Brown";
                     break;
             }
-
-            string fileSuffix = string.Empty;
 
             switch (MeteorSize)
             {
@@ -58,6 +59,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                     fileSuffix = "big1";
                     break;
             }
+
             string fileName = $"meteor{colour}_{fileSuffix}";
             LoadTexture(fileName);
         }
@@ -80,14 +82,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         protected override void LoadContent()
         {
             SetAppropriateTexture();
-            Position += new Vector2();
             base.LoadContent();
         }
 
         public override void Update(GameTime gameTime)
         {
             //requires further work to add a randomly generated speed of the meteors instead of a static speed
-            Rotation += 0.04f; // Change fixed float to property later
+            Rotation += RotationSpeed; // Change fixed float to property later
             Position += Speed;
 
             if (Position.X < Globals.GameArea.Left)
@@ -102,19 +103,19 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             base.Update(gameTime);
         }
 
-        public override void Draw(GameTime gameTime)
-        {
-            SpriteBatch.Begin();
-            SpriteBatch.Draw(Texture, Position,
-                null,
-                Color.White,
-                Rotation,
-                new Vector2(Texture.Width * .5f, Texture.Height * .5f),
-                1.0f,
-                SpriteEffects.None,
-                0f);
-            SpriteBatch.End();
-            // Check if base.Draw() should be called
-        }
+        //public override void Draw(GameTime gameTime)
+        //{
+        //    SpriteBatch.Begin();
+        //    SpriteBatch.Draw(Texture, Position,
+        //        null,
+        //        Color.White,
+        //        Rotation,
+        //        new Vector2(Texture.Width * .5f, Texture.Height * .5f),
+        //        1.0f,
+        //        SpriteEffects.None,
+        //        0f);
+        //    SpriteBatch.End();
+        //    //Check if base.Draw() should be called
+        //}
     }
 }

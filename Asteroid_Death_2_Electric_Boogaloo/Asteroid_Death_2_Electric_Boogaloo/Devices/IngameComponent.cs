@@ -8,7 +8,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace Asteroid_Death_2_Electric_Boogaloo.Components
+
+namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 {
     class IngameComponent : AstroidsComponent
     {
@@ -37,9 +38,15 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
                 pGame.AddGameObjects();
                 hasaddedgameobjetcs = true;
             }
-            
 
-            
+            for (int i = pGame.Components.Count - 1; i >= 0; i--)
+            {
+                if (!(pGame.Components[i] is GameObject gameObject))
+                    continue;
+                pGame.CheckForCollisionWith(gameObject);
+            }
+            pGame.GenerateRandomNewMeteor(gameTime, 5);
+
             base.Update(gameTime);
         }
     }

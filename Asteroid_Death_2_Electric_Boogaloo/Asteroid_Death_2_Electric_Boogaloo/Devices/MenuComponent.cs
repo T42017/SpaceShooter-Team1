@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
-namespace Asteroid_Death_2_Electric_Boogaloo.Components
+namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 {
     class MenuComponent : AstroidsComponent
     {
@@ -23,7 +23,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
         public MenuComponent(Game game) : base(game)
         {
             pGame = (AsteroidsGame) game;
-
             
             DrawableStates = GameState.Menu;
             UpdatableStates = GameState.Menu;
@@ -95,7 +94,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
 
                 String 
                 Name = "Asteroid Death 2 Electric Boogaloo",
-                button1 = "start",
+                button1 = "Start",
                 button2 = "Highscore",
                 button3 = "Quit";
             
