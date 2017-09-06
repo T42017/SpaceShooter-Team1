@@ -14,7 +14,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     {
         private KeyboardState lastKeyboardState;
         private DateTime _timeSenceLastShot = DateTime.Today;
-        private int _timeForLaserCooldownInMs = 100;
+        private int _timeForLaserCooldownInMs = 210;
 
         public Player(Game game) : base(game) { }
       

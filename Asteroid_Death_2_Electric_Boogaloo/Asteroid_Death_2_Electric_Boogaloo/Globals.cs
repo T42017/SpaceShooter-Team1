@@ -10,9 +10,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     class Globals
     {
-        public static int ScreenWidth = 1280;
-        public static int ScreenHeight = 720;
+        
+        public static int ScreenWidth = 1920;
+        public static int ScreenHeight = 1080;
         public static Random RNG = new Random();
-        public static Rectangle GameArea => new Rectangle(-40, -40, ScreenWidth + 80, ScreenHeight + 80);
+        public static Rectangle GameArea => new Rectangle(-30, -30, ScreenWidth + 60, ScreenHeight + 60);
     }
 }

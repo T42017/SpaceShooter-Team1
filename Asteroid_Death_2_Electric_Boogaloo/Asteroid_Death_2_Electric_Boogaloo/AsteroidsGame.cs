@@ -95,14 +95,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         protected override void Initialize()
         {
             // center window
-            /*
-            Window.Position = new Point((GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / 2) - (graphics.PreferredBackBufferWidth / 2), 
-                                        (GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height / 2) - (graphics.PreferredBackBufferHeight / 2));
-    
+
+            //Window.Position = new Point((GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / 2) - (graphics.PreferredBackBufferWidth / 2),
+            //                            (GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height / 2) - (graphics.PreferredBackBufferHeight / 2));
+
             // allow resizing
             Window.AllowUserResizing = true;
-            //*/
-            
+            //
+
             Components.Add(new MenuComponent(this));
             Components.Add(new HighscoreMenuComponent(this));
             Components.Add(new IngameComponent(this));
@@ -131,14 +131,16 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-           /* for (int i = Components.Count - 1; i >= 0; i--)
-            {
-                if (!(Components[i] is GameObject gameObject))
-                    continue;
-                CheckForCollisionWith(gameObject);
-            }
+            Globals.ScreenHeight = graphics.PreferredBackBufferHeight;
+            Globals.ScreenWidth = graphics.PreferredBackBufferWidth;
+            /* for (int i = Components.Count - 1; i >= 0; i--)
+             {
+                 if (!(Components[i] is GameObject gameObject))
+                     continue;
+                 CheckForCollisionWith(gameObject);
+             }
 
-            GenerateRandomNewMeteor(gameTime, 5);*/
+             GenerateRandomNewMeteor(gameTime, 5);*/
 
             base.Update(gameTime);
         }
