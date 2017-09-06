@@ -28,6 +28,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
             UpdatableStates = GameState.Menu;
 
             pGame.IsMouseVisible = true;
+
+
         }
         
         
@@ -55,7 +57,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
                 if (x >= pGame.graphics.PreferredBackBufferWidth / 3 &&
                     x <= (pGame.graphics.PreferredBackBufferWidth / 3) + 222 &&
                     y >= (pGame.graphics.PreferredBackBufferHeight / 4) + (pGame.graphics.PreferredBackBufferHeight / 8) && y<= ((pGame.graphics.PreferredBackBufferHeight / 4) + (pGame.graphics.PreferredBackBufferHeight / 8)) +39)
-                pGame.ChangeGameState(GameState.loading);
+                pGame.ChangeGameState(GameState.ingame);
                 
                 else if (x >= pGame.graphics.PreferredBackBufferWidth / 3 &&
                          x <= (pGame.graphics.PreferredBackBufferWidth / 3) + 222 &&
