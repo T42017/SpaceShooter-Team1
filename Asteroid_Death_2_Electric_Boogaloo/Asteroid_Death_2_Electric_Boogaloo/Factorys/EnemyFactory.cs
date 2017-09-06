@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace Asteroid_Death_2_Electric_Boogaloo
 {
-    class EnemyFactory
+    public class EnemyFactory
     {
 
         private Random random = new Random();

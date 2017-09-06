@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Asteroid_Death_2_Electric_Boogaloo
 {
-    class Player : Ship
+    public class Player : Ship
     {
         private KeyboardState lastKeyboardState;
         private DateTime _timeSenceLastShot = DateTime.Today;
@@ -47,15 +47,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             
             Speed += new Vector2(-Speed.X * 0.015f, -Speed.Y * 0.015f);
             Move();
-
-            if(Position.X < Globals.GameArea.Left)
-                Position = new Vector2(Globals.GameArea.Right, Position.Y);
-            if (Position.X > Globals.GameArea.Right)
-                Position = new Vector2(Globals.GameArea.Left, Position.Y);
-            if (Position.Y <Globals.GameArea.Top)
-                Position = new Vector2(Position.X, Globals.GameArea.Bottom);
-            if (Position.Y > Globals.GameArea.Bottom)
-                Position = new Vector2(Position.X, Globals.GameArea.Top);
         }      
     }
 }

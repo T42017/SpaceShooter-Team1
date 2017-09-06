@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace Asteroid_Death_2_Electric_Boogaloo
 {
-    class Laser : GameObject
+    public class Laser : GameObject
     {
         public enum Color
         {
@@ -18,7 +18,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         private Color color;
 
-        public Laser(AsteroidsGame game, Vector2 position, float rotation, Color color) : base(game, 1)
+        public Laser(AsteroidsGame game, Vector2 position, float rotation, Color color) : base(game)
         {
             this.Position = position;
             this.Rotation = rotation;

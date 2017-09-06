@@ -15,7 +15,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public MeteorSize   MeteorSize   { get; }
         public MeteorColour MeteorColour { get; }
         public float RotationSpeed;
-        public Meteor(AsteroidsGame game, Vector2 position, MeteorSize meteorSize, MeteorColour meteorColour) : base(game, 1)
+        public Meteor(AsteroidsGame game, Vector2 position, MeteorSize meteorSize, MeteorColour meteorColour) : base(game)
         {
             Position = position;
             Speed = new Vector2(
@@ -90,14 +90,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Rotation += RotationSpeed; // Change fixed float to property later
             Position += Speed;
 
-            if (Position.X < Globals.GameArea.Left)
-                Position = new Vector2(Globals.GameArea.Right, Position.Y);
-            if (Position.X > Globals.GameArea.Right)
-                Position = new Vector2(Globals.GameArea.Left, Position.Y);
-            if (Position.Y < Globals.GameArea.Top)
-                Position = new Vector2(Position.X, Globals.GameArea.Bottom);
-            if (Position.Y > Globals.GameArea.Bottom)
-                Position = new Vector2(Position.X, Globals.GameArea.Top);
+            //if (Position.X < Globals.GameArea.Left)
+            //    Position = new Vector2(Globals.GameArea.Right, Position.Y);
+            //if (Position.X > Globals.GameArea.Right)
+            //    Position = new Vector2(Globals.GameArea.Left, Position.Y);
+            //if (Position.Y < Globals.GameArea.Top)
+            //    Position = new Vector2(Position.X, Globals.GameArea.Bottom);
+            //if (Position.Y > Globals.GameArea.Bottom)
+            //    Position = new Vector2(Position.X, Globals.GameArea.Top);
         }
     }
 }

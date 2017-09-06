@@ -14,18 +14,16 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public Vector2 Position { get; set; }
         public float Radius { get; set; }
         public Vector2 Speed { get; set; }
-        public float Rotation { get; set; }
+        public float Rotation { get; set; } = Physic.DegreesToRadians(-90);
         public int MaxSpeed = 9;
         public int Width { get; set; } 
         public int Height { get; set; }
         protected Texture2D Texture;
         protected AsteroidsGame Game;
-        private int DrawOrder = 0;
 
-        protected GameObject(AsteroidsGame game, int drawOrder)
+        protected GameObject(AsteroidsGame game)
         {
             Game = game;
-            DrawOrder = drawOrder;
         }
 
         public void LoadTexture(string name)

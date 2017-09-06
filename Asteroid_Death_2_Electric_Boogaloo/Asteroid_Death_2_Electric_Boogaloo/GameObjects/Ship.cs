@@ -13,7 +13,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     {
         private bool ShootLefCannon = false;
 
-        protected Ship(AsteroidsGame game) : base(game, 1)
+        protected Ship(AsteroidsGame game) : base(game)
         {
             
         }
@@ -28,7 +28,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Laser laser = new Laser(Game, new Vector2(shootPoint.X, shootPoint.Y), Rotation, Laser.Color.Red);
             laser.LoadContent();
 
-            Game._gameObjects.Add(laser);
+            Game.GameObjectManager.GameObjects.Add(laser);
             ShootLefCannon = !ShootLefCannon;
         }
 

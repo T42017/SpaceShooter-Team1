@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 
 namespace Asteroid_Death_2_Electric_Boogaloo
 {
-    internal class Enemy : Ship
+    public class Enemy : Ship
     {
 
         public enum Type

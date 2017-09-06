@@ -17,7 +17,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         private DateTime _timeLastFrame = DateTime.Now;
         private int currenTexture = 0;
 
-        public PixelExplosion(AsteroidsGame game) : base(game, 1)
+        public PixelExplosion(AsteroidsGame game) : base(game)
         {
             
         }
@@ -39,9 +39,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             {
                 currenTexture++;
                 if (currenTexture > _amountOfPictures - 1)
-                    Game._gameObjects.Add(this);
+                    Game.GameObjectManager.GameObjects.Add(this);
                 else
-                Texture = _textures[currenTexture];
+                    Texture = _textures[currenTexture];
 
                 _timeLastFrame = DateTime.Now;
             }
