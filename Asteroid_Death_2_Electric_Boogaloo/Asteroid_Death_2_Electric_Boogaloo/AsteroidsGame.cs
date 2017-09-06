@@ -64,7 +64,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             //    }
             //}
 
-            for (int i = Components.Count - 1; i >= 0; i--)
+           /* for (int i = Components.Count - 1; i >= 0; i--)
             {
                 if (Components[i] == null || !(Components[i] is GameObject otherGameObject) || otherGameObject == thisObject)
                     continue;
@@ -74,7 +74,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                     Components.Remove(otherGameObject);
                     return;
                 }
-            }
+            }*/
         }
 
         
@@ -84,16 +84,17 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             /*
             Window.Position = new Point((GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / 2) - (graphics.PreferredBackBufferWidth / 2), 
                                         (GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height / 2) - (graphics.PreferredBackBufferHeight / 2));
-
+    
             // allow resizing
             Window.AllowUserResizing = true;
             //*/
+            
             Components.Add(new MenuComponent(this));
             Components.Add(new HighscoreMenuComponent(this));
             Components.Add(new IngameComponent(this));
             ChangeGameState(GameState.Menu);
 
-            AddGameObjects();
+            
 
             base.Initialize();
         }
