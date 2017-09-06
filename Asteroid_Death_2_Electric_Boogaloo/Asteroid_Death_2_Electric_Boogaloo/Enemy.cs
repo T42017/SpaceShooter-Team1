@@ -41,6 +41,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public Enemy(Game game) : base(game)
         {
         }
+
         public Enemy(Game game, Type type) : base(game)
         {
             this.type = type;
@@ -48,15 +49,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         protected override void LoadContent()
         {
-            if (type == Type.none)
-                LoadTexture(GetRandomizedTexture());
-            else
-                LoadTexture(Enum.GetName(typeof(Type), type));
+            LoadTexture(type == Type.none ? GetRandomizedTexture() : Enum.GetName(typeof(Type), type));
         }
 
         public string GetRandomizedTexture()
         {
-            int randomNumber = Globals.RNG.Next(Enum.GetNames(typeof(Type)).Length - 1);
+            var randomNumber = Globals.RNG.Next(Enum.GetNames(typeof(Type)).Length - 1);
 
             return Enum.GetName(typeof(Type), randomNumber);
         }
