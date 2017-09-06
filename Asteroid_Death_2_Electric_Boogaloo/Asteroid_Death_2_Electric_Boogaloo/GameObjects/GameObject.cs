@@ -67,6 +67,38 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             spriteBatch.Draw(Texture, Position, null, Color.White, Rotation - MathHelper.PiOver2, new Vector2(Texture.Width / 2, Texture.Height / 2), 1.0f, SpriteEffects.None, 0f);
         }
 
+        public void StayInsideLevel(Level level)
+        {
+            if (Position.X + Texture.Width / 2 > level.SizeX)
+            {
+                Position = new Vector2(level.SizeX - Texture.Width / 2, Position.Y);
+                if (Speed.X > 0) Speed = new Vector2(0, Speed.Y);
+            }
+            else if (Position.X - Texture.Width / 2 < 0)
+            {
+                Position = new Vector2(Texture.Width / 2, Position.Y);
+                if (Speed.X < 0) Speed = new Vector2(0, Speed.Y);
+            }
+
+            if (Position.Y + Texture.Height / 2 > level.SizeY)
+            {
+                Position = new Vector2(Position.X, level.SizeY - Texture.Height / 2);
+                if (Speed.Y > 0) Speed = new Vector2(Speed.X, 0);
+            }
+            else if (Position.Y - Texture.Height / 2 < 0)
+            {
+                Position = new Vector2(Position.X, Texture.Height / 2);
+                if (Speed.Y < 0) Speed = new Vector2(Speed.X, 0);
+            }
+
+            //if (Position.Y - Texture.Height < Globals.GameArea.Top)
+            //    Position = new Vector2(Position.X, Position.Y - Texture.Height);
+            //if (Position.Y + Texture.Height > Globals.GameArea.Bottom)
+            //    Position = new Vector2(Position.X, Position.Y + Texture.Height);
+
+
+        }
+
         public void Move()
         {
             Position += Speed;

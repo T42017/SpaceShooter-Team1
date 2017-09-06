@@ -44,9 +44,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             else if (state.IsKeyDown(Keys.Right))
                 Rotation += 0.07f;
             lastKeyboardState = state;
-            
+
             Speed += new Vector2(-Speed.X * 0.015f, -Speed.Y * 0.015f);
             Move();
-        }      
+
+            StayInsideLevel(Game.Level);
+        }
     }
 }

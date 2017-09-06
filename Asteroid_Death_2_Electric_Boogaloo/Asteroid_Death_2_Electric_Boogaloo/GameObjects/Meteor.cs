@@ -88,16 +88,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             //requires further work to add a randomly generated speed of the meteors instead of a static speed
             Rotation += RotationSpeed; // Change fixed float to property later
-            Position += Speed;
-
-            //if (Position.X < Globals.GameArea.Left)
-            //    Position = new Vector2(Globals.GameArea.Right, Position.Y);
-            //if (Position.X > Globals.GameArea.Right)
-            //    Position = new Vector2(Globals.GameArea.Left, Position.Y);
-            //if (Position.Y < Globals.GameArea.Top)
-            //    Position = new Vector2(Position.X, Globals.GameArea.Bottom);
-            //if (Position.Y > Globals.GameArea.Bottom)
-            //    Position = new Vector2(Position.X, Globals.GameArea.Top);
+            Move();
         }
     }
 }
