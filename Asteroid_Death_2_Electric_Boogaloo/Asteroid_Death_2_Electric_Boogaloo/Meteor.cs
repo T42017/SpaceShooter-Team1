@@ -72,7 +72,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
             for (int i = 0; i < amountOfChildren; i++)
             {
-                children.Add(new Meteor(Game, Position, MeteorSize + 1, MeteorColour));
+                children.Add(new Meteor(_game, Position, MeteorSize - 1, MeteorColour));
             }
             return children;
         }
@@ -80,13 +80,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         protected override void LoadContent()
         {
             SetAppropriateTexture();
+            Position += new Vector2();
             base.LoadContent();
         }
 
         public override void Update(GameTime gameTime)
         {
             //requires further work to add a randomly generated speed of the meteors instead of a static speed
-            Rotation += 0.04f;
+            Rotation += 0.04f; // Change fixed float to property later
             Position += Speed;
 
             if (Position.X < Globals.GameArea.Left)

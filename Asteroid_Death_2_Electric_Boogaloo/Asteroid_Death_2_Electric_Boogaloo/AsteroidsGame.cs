@@ -28,25 +28,38 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Window.Title = "Asteroid Death 2 Electric Boogaloo";
         }
 
-        private void CheckForCollision()
+        private void CheckForCollision(GameObject thisObject)
         {
+            // -- Removed temporarily to try other approaches
+            //for (int i = Components.Count - 1; i >= 0; i--)
+            //{
+            //    var outerCurrent = Components[i];
+            //    if (outerCurrent == null || !(outerCurrent is GameObject gameObject))
+            //        continue;
+            //    for (int j = Components.Count - 1; j >= 0; j--)
+            //    {
+            //        var innerCurrent = Components[j];
+            //        if (innerCurrent == null || !(innerCurrent is GameObject otherGameObject))
+            //            continue;
+
+            //        if (gameObject.CollidesWith(otherGameObject))
+            //        {
+            //            Components.Remove(gameObject);
+            //            Components.Remove(otherGameObject);
+            //            return;
+            //        }
+            //    }
+            //}
+
             for (int i = Components.Count - 1; i >= 0; i--)
             {
-                var outerCurrent = Components[i];
-                if (outerCurrent == null || !(outerCurrent is GameObject gameObject))
+                if (Components[i] == null || !(Components[i] is GameObject otherGameObject) || otherGameObject == thisObject)
                     continue;
-                for (int j = Components.Count - 1; j >= 0; j--)
-                {
-                    var innerCurrent = Components[j];
-                    if (innerCurrent == null || !(innerCurrent is GameObject otherGameObject))
-                        continue;
 
-                    if (gameObject.CollidesWith(otherGameObject))
-                    {
-                        Components.Remove(gameObject);
-                        Components.Remove(otherGameObject);
-                        return;
-                    }
+                if (thisObject.CollidesWith(otherGameObject))
+                {
+                    Components.Remove(otherGameObject);
+                    return;
                 }
             }
         }
@@ -83,8 +96,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            //CheckForCollision();
-            
+
+            CheckForCollision(player);
+
             base.Update(gameTime);
         }
         
