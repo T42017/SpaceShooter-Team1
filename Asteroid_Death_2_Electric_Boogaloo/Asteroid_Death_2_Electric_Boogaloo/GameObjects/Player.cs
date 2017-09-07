@@ -19,12 +19,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public override void LoadContent()
         {
             LoadTexture("shipPlayer");
+            ShootingSpeed = 200;
         }
         
         public override void Update()
         {
             if ((GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed ||
-                 Keyboard.GetState().IsKeyDown(Keys.Space)))
+                 Keyboard.GetState().IsKeyDown(Keys.Space)) && lastKeyboardState.IsKeyUp(Keys.Space))
             {
                 Shoot();
             }

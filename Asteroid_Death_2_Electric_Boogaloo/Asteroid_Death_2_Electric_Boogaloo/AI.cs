@@ -27,13 +27,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public void Update()
         {
-            Player player = _game.GameObjectManager.player;
+            Player player = _game.GameObjectManager.Player;
 
             if (Vector2.Distance(player.Position, _enemy.Position) < 300)
                 currentState = State.FollowPlayer;
             else if (Vector2.Distance(player.Position, _enemy.Position) > 300)
                 currentState = State.MoveAround;
-                
+
             if (currentState == State.MoveAround)
             {
 

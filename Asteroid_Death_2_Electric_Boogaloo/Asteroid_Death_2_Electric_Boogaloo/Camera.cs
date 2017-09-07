@@ -11,10 +11,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     public class Camera
     {
-        protected float _zoom; // Camera Zoom
-        public Matrix Transform; // Matrix Transform
-        private Vector2 _pos; // Camera Position
-        private float _rotation; // Camera Rotation
+        protected float _zoom;
+        public Matrix Transform;
+        private Vector2 _pos;
+        private float _rotation;
 
         public Camera()
         {
@@ -45,7 +45,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             Pos = player.Position;
             Rotation = -player.Rotation + Physic.DegreesToRadians(-90);
-            Zoom = 0.5f;
+            Zoom = 0.8f;
         }
 
         public Matrix get_transformation(GraphicsDevice graphicsDevice, int windowWidth, int windowHeight)
@@ -56,17 +56,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 Matrix.CreateScale(new Vector3(Zoom, Zoom, 1)) *
                 Matrix.CreateTranslation(new Vector3(windowWidth * 0.5f, windowHeight * 0.5f, 0));
             return Transform;
-        }
-
-        public float CalculatZoomFromWindowSize(int windowWidth, int windowHeight)
-        {
-            float zoom = 0f;
-            if (windowHeight < windowWidth / 16 * 9)
-                zoom = 1280f / windowWidth;
-            else
-                zoom = 720f / windowHeight;
-
-            return zoom * -1 + 2;
         }
 
     }
