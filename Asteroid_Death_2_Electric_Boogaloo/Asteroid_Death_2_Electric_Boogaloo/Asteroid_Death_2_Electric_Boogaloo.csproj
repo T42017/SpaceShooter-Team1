@@ -44,6 +44,7 @@
     <Compile Include="AI.cs" />
     <Compile Include="AsteroidsGame.cs" />
     <Compile Include="Camera.cs" />
+    <Compile Include="Devices\PauseComponent.cs" />
     <Compile Include="GameObjects\Enemy.cs" />
     <Compile Include="Factorys\EnemyFactory.cs" />
     <Compile Include="Devices\HighscoreMenuComponent.cs" />

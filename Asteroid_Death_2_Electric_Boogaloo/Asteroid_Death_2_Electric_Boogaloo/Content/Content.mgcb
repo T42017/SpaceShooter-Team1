@@ -1455,3 +1455,9 @@
 /processorParam:Quality=Best
 /build:CantinaBand.mp3
 
+#begin Blaster.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Blaster.mp3
+

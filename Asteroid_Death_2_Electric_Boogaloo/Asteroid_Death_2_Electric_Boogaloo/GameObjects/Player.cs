@@ -21,7 +21,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
       
         public override void LoadContent()
         {
-            pewEffect = Game.Content.Load<SoundEffect>("Deus");
+            pewEffect = Game.Content.Load<SoundEffect>("Blaster");
             LoadTexture("shipPlayer");
         }
         

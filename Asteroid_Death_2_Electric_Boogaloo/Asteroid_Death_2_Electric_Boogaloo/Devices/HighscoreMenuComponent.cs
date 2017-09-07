@@ -14,7 +14,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 
     {
         private SpriteFont menuFont, buttonFont;
-        private Texture2D Button;
+        private Texture2D Button,texture;
         private AsteroidsGame pGame;
         private MouseState oldState;
         private Song song;
@@ -27,13 +27,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             DrawableStates = GameState.highscoremenu;
             UpdatableStates = GameState.highscoremenu;
             playing = false;
-
+            MediaPlayer.IsRepeating = true;
 
         }
 
         protected override void LoadContent()
         {
-            
+            texture = Game.Content.Load<Texture2D>("background");
             song = Game.Content.Load<Song>("CantinaBand");
            
             base.LoadContent();
@@ -49,6 +49,25 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             }
             
             base.Update(gameTime);
+        }
+
+
+        public override void Draw(GameTime gameTime)
+        {
+            SpriteBatch.Begin();
+            for (int x = 0; x < 2000; x += texture.Width)
+            {
+                for (int y = 0; y < 2000; y += texture.Height)
+                {
+
+                    SpriteBatch.Draw(texture, new Vector2(x, y), Color.White);
+                }
+
+            }
+
+
+            SpriteBatch.End();
+            base.Draw(gameTime);
         }
     }
 }

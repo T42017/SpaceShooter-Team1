@@ -30,7 +30,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             UpdatableStates = GameState.ingame;
 
             playing = false;
-
+            MediaPlayer.IsRepeating = true;
 
         }
 
