@@ -43,7 +43,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 
         public override void Update(GameTime gameTime)
         {
-            if (playing==false)
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
+                Keyboard.GetState().IsKeyDown(Keys.Escape))
+                pGame.ChangeGameState(GameState.paused);
+
+                if (playing==false)
             {
                 MediaPlayer.Stop();
                 MediaPlayer.Play(song);

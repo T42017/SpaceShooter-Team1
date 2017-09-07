@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing.Text;
 using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
@@ -28,8 +29,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         private GameState _gameState;
         private SpriteBatch _spriteBatch;
         private Camera _camera;
-        
 
+        
+        
         public AsteroidsGame()
         {
             Graphics = new GraphicsDeviceManager(this);
@@ -39,6 +41,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Content.RootDirectory = "Content";
             Window.Position = new Point(300, 300);
             Window.Title = "Asteroid Death 2 Electric Boogaloo";
+           
+
         }
 
         public void ChangeGameState(GameState desiredState)
@@ -73,7 +77,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Components.Add(new MenuComponent(this));
             Components.Add(new HighscoreMenuComponent(this));
             Components.Add(new IngameComponent(this));
-            
+            Components.Add(new PauseComponent(this));
             //Components.Add(new YouAreDead());
             ChangeGameState(GameState.Menu);
            
@@ -106,8 +110,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
+            
+           
+            
+           
+               
 
             Globals.ScreenWidth = Graphics.PreferredBackBufferWidth;
             if(_gameState== GameState.ingame) { 
