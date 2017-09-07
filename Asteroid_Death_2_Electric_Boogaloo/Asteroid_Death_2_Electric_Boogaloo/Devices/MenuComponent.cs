@@ -32,8 +32,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 
         }
         
-        
-
         protected override void LoadContent()
         {
             menuFont= Game.Content.Load<SpriteFont>("GameState");
