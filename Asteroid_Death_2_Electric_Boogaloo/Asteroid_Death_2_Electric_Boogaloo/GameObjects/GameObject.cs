@@ -68,11 +68,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         private void DrawBounds(SpriteBatch spriteBatch)
         {
-            var rectangle = new Texture2D(Game.GraphicsDevice, Width, Height);
-            var data = new Color[Width * Height];
-            for (int i = 0; i < data.Length; i++) data[i] = Color.Red;
-            rectangle.SetData(data);
-            spriteBatch.Draw(rectangle, Position - new Vector2(Width / 2f, Height / 2f), Color.Red);
+            //var rectangle = new Texture2D(Game.GraphicsDevice, Width, Height);
+            //var data = new Color[Width * Height];
+            //for (int i = 0; i < data.Length; i++) data[i] = Color.Red;
+            //rectangle.SetData(data);
+            //spriteBatch.Draw(rectangle, Position - new Vector2(Width / 2f, Height / 2f), Color.Red);
         }
 
         public abstract void LoadContent();

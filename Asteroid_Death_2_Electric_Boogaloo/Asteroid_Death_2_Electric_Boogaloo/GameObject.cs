@@ -18,21 +18,15 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public int MaxSpeed = 9;
         public int Width { get; set; } 
         public int Height { get; set; }
-<<<<<<<<< Temporary merge branch 1
-=========
-
         public Rectangle Bounds => new Rectangle(
             (int) Position.X - Width / 2,
             (int) Position.Y - Height / 2,
             Width,
             Height
         );
-
->>>>>>>>> Temporary merge branch 2
         protected Texture2D Texture;
         protected Game Game;
         protected readonly SpriteBatch SpriteBatch;
-
         protected GameObject(Game game) : base(game)
         {
             Game = game;
@@ -49,7 +43,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public bool CollidesWith(GameObject otherGameObject)
         {
-<<<<<<<<< Temporary merge branch 1
             if ((this is Player && otherGameObject is Laser) || (this is Laser && otherGameObject is Player))
                 return false;
             //var fullWidth = Width + otherGameObject.Width;
@@ -59,21 +52,21 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
             //return distanceX < fullWidth && distanceY < fullHeight;
 
-            var theseBounds = new Rectangle((int) Position.X - Texture.Width, 
-                (int) Position.Y - Texture.Height, 
-                Texture.Width, 
-                Texture.Height
-=========
-            if ((this is Player && otherGameObject is LaserRed) || (this is LaserRed && otherGameObject is Player))
+            var theseBounds = new Rectangle((int)Position.X - Texture.Width,
+                (int)Position.Y - Texture.Height,
+                Texture.Width,
+                Texture.Height);
+
+                if ((this is Player && otherGameObject is LaserRed) || (this is LaserRed && otherGameObject is Player))
                 return false; // Check this when enemies shoot lasers
 
             int aLittleToMakeCollisionSeemMoreCorrect = 0;
+
             var theseBounds = new Rectangle(
                 (int) Position.X - Texture.Width / 2 + aLittleToMakeCollisionSeemMoreCorrect,
                 (int) Position.Y - Texture.Height / 2 + aLittleToMakeCollisionSeemMoreCorrect,
                 Texture.Width - 2 * aLittleToMakeCollisionSeemMoreCorrect,
                 Texture.Height - 2 * aLittleToMakeCollisionSeemMoreCorrect
->>>>>>>>> Temporary merge branch 2
             );
 
             var otherBounds = new Rectangle(

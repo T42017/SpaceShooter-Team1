@@ -14,7 +14,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public Player Player { get; private set; }
         public List<GameObject> GameObjects = new List<GameObject>();
 
-        
+        private GameState _gameState;
         private EnemyFactory _enemyFactory;
         private readonly AsteroidsGame _game;
 
@@ -131,10 +131,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         internal void DrawGameObjects(SpriteBatch spriteBatch)
         {
-            for (int i = 0; i < GameObjects.Count; i++)
-            {
-                GameObjects[i].Draw(spriteBatch);
-            }
+            
+                for (int i = 0; i < GameObjects.Count; i++)
+                {
+                    GameObjects[i].Draw(spriteBatch);
+                }
+            
+            
         }
     }
 }

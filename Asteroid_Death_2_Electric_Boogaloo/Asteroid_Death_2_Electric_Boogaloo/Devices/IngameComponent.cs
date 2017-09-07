@@ -33,19 +33,19 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 
        public override void Update(GameTime gameTime)
         {
-            if (!hasaddedgameobjetcs)
-            {
-                pGame.AddGameObjects();
-                hasaddedgameobjetcs = true;
-            }
+            ////if (!hasaddedgameobjetcs)
+            ////{
+            ////    pGame.AddGameObjects();
+            ////    hasaddedgameobjetcs = true;
+            ////}
 
-            for (int i = pGame.Components.Count - 1; i >= 0; i--)
-            {
-                if (!(pGame.Components[i] is GameObject gameObject))
-                    continue;
-                pGame.CheckForCollisionWith(gameObject);
-            }
-            pGame.GenerateRandomNewMeteor(gameTime, 5);
+            //for (int i = pGame.Components.Count - 1; i >= 0; i--)
+            //{
+            //    if (!(pGame.Components[i] is GameObject gameObject))
+            //        continue;
+            //    pGame.CheckForCollisionWith(gameObject);
+            //}
+            //pGame.GenerateRandomNewMeteor(gameTime, 5);
 
             base.Update(gameTime);
         }

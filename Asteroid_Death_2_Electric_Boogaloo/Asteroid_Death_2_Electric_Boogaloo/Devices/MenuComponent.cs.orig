@@ -4,13 +4,12 @@ using System.Linq;
 using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
-using Asteroid_Death_2_Electric_Boogaloo.Devices;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
-namespace Asteroid_Death_2_Electric_Boogaloo.Components
+namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 {
     class MenuComponent : AstroidsComponent
     {
@@ -55,10 +54,17 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
             {
                 
 
+<<<<<<< HEAD:Asteroid_Death_2_Electric_Boogaloo/Asteroid_Death_2_Electric_Boogaloo/Devices/MenuComponent.cs
+                if (x >= pGame.graphics.PreferredBackBufferWidth / 3 &&
+                    x <= (pGame.graphics.PreferredBackBufferWidth / 3) + 222 &&
+                    y >= (pGame.graphics.PreferredBackBufferHeight / 4) + (pGame.graphics.PreferredBackBufferHeight / 8) && y<= ((pGame.graphics.PreferredBackBufferHeight / 4) + (pGame.graphics.PreferredBackBufferHeight / 8)) +39)
+                pGame.ChangeGameState(GameState.ingame);
+=======
                 if (x >= pGame.Graphics.PreferredBackBufferWidth / 3 &&
                     x <= (pGame.Graphics.PreferredBackBufferWidth / 3) + 222 &&
                     y >= (pGame.Graphics.PreferredBackBufferHeight / 4) + (pGame.Graphics.PreferredBackBufferHeight / 8) && y<= ((pGame.Graphics.PreferredBackBufferHeight / 4) + (pGame.Graphics.PreferredBackBufferHeight / 8)) +39)
-                pGame.ChangeGameState(GameState.ingame);
+                pGame.ChangeGameState(GameState.loading);
+>>>>>>> origin/feature-collision_detection:Asteroid_Death_2_Electric_Boogaloo/Asteroid_Death_2_Electric_Boogaloo/Components/MenuComponent.cs
                 
                 else if (x >= pGame.Graphics.PreferredBackBufferWidth / 3 &&
                          x <= (pGame.Graphics.PreferredBackBufferWidth / 3) + 222 &&
