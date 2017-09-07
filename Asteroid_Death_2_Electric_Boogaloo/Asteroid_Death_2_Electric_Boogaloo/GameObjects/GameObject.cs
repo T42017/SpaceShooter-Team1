@@ -9,13 +9,13 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Asteroid_Death_2_Electric_Boogaloo
 {
-    public abstract class GameObject : DrawableGameComponent
+    public abstract class GameObject
     {
         public bool IsDead { get; set; }
         public Vector2 Position { get; set; }
         public float Radius { get; set; }
         public Vector2 Speed { get; set; }
-        public float Rotation { get; set; }
+        public float Rotation { get; set; } = Physic.DegreesToRadians(-90);
         public int MaxSpeed = 9;
         public int Width { get; set; } 
         public int Height { get; set; }
@@ -28,13 +28,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         );
 
         protected Texture2D Texture;
-        protected Game Game;
-        protected readonly SpriteBatch SpriteBatch;
+        protected AsteroidsGame Game;
 
-        protected GameObject(Game game) : base(game)
+        protected GameObject(AsteroidsGame game)
         {
             Game = game;
-            SpriteBatch = new SpriteBatch(game.GraphicsDevice);
         }
 
         public void LoadTexture(string name)
@@ -47,7 +45,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public virtual bool CollidesWith(GameObject otherGameObject)
         {
-            if ((this is Player && otherGameObject is LaserRed) || (this is LaserRed && otherGameObject is Player))
+            if ((this is Player && otherGameObject is Laser) || (this is Laser && otherGameObject is Player))
                 return false; // Check this when enemies shoot lasers
             if (GetType() == otherGameObject.GetType())
                 return false;
@@ -77,13 +75,42 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             SpriteBatch.Draw(rectangle, Position - new Vector2(Width / 2f, Height / 2f), Color.Red);
         }
 
-        public override void Draw(GameTime gameTime)
+        public abstract void LoadContent();
+        public abstract void Update();
+
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
-            SpriteBatch.Begin();
+            spriteBatch.Draw(Texture, Position, null, Color.White, Rotation - MathHelper.PiOver2, new Vector2(Texture.Width / 2, Texture.Height / 2), 1.0f, SpriteEffects.None, 0f);
             DrawBounds();
-            SpriteBatch.Draw(Texture, Position, null, Color.White, Rotation - MathHelper.PiOver2, new Vector2(Texture.Width / 2, Texture.Height / 2), 1.0f, SpriteEffects.None, 0f);
-            SpriteBatch.End();
-            base.Draw(gameTime);
+
+        public void StayInsideLevel(Level level)
+        {
+            if (Position.X + Texture.Width / 2 > level.SizeX)
+            {
+                Position = new Vector2(level.SizeX - Texture.Width / 2, Position.Y);
+                if (Speed.X > 0) Speed = new Vector2(0, Speed.Y);
+            }
+            else if (Position.X - Texture.Width / 2 < 0)
+            {
+                Position = new Vector2(Texture.Width / 2, Position.Y);
+                if (Speed.X < 0) Speed = new Vector2(0, Speed.Y);
+            }
+
+            if (Position.Y + Texture.Height / 2 > level.SizeY)
+            {
+                Position = new Vector2(Position.X, level.SizeY - Texture.Height / 2);
+                if (Speed.Y > 0) Speed = new Vector2(Speed.X, 0);
+            }
+            else if (Position.Y - Texture.Height / 2 < 0)
+            {
+                Position = new Vector2(Position.X, Texture.Height / 2);
+                if (Speed.Y < 0) Speed = new Vector2(Speed.X, 0);
+            }
+
+            //if (Position.Y - Texture.Height < Globals.GameArea.Top)
+            //    Position = new Vector2(Position.X, Position.Y - Texture.Height);
+            //if (Position.Y + Texture.Height > Globals.GameArea.Bottom)
+            //    Position = new Vector2(Position.X, Position.Y + Texture.Height);
         }
 
         public void Move()
@@ -97,7 +124,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 (float) Math.Sin(Rotation));
         }
 
-        public void Accelerate(float speed)
+        public void AccelerateForward(float speed)
         {
             Speed += Forward() * speed;
 

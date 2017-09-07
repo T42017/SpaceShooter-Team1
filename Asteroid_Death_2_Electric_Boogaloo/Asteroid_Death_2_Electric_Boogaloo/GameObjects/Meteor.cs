@@ -12,17 +12,18 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     // TODO: make brown and gray meteors have different health
     public class Meteor : GameObject
     {
-        private KeyboardState lastKeyboardState;
         public MeteorSize   MeteorSize   { get; }
         public MeteorColour MeteorColour { get; }
-        
-        public Meteor(Game game, Vector2 position, MeteorSize meteorSize, MeteorColour meteorColour) : base(game)
+        public float RotationSpeed;
+        public Meteor(AsteroidsGame game, Vector2 position, MeteorSize meteorSize, MeteorColour meteorColour) : base(game)
         {
             Position = position;
             Speed = new Vector2(
                 (float) Globals.RNG.NextDouble(),
                 (float) Globals.RNG.NextDouble()
             );
+            RotationSpeed =(float) Globals.RNG.Next(12)/100;
+            MaxSpeed = Globals.RNG.Next(250);
             MeteorSize = meteorSize;
             MeteorColour = meteorColour;
         }
@@ -77,32 +78,17 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             return children;
         }
 
-        protected override void LoadContent()
+        public override void LoadContent()
         {
             SetAppropriateTexture();
-            base.LoadContent();
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update()
         {
             //requires further work to add a randomly generated speed of the meteors instead of a static speed
-            Rotation += 0.04f; // Change fixed float to property later
-            Position += Speed;
-
-            if (Position.X < Globals.GameArea.Left)
-                Position = new Vector2(Globals.GameArea.Right, Position.Y);
-            if (Position.X > Globals.GameArea.Right)
-                Position = new Vector2(Globals.GameArea.Left, Position.Y);
-            if (Position.Y < Globals.GameArea.Top)
-                Position = new Vector2(Position.X, Globals.GameArea.Bottom);
-            if (Position.Y > Globals.GameArea.Bottom)
-                Position = new Vector2(Position.X, Globals.GameArea.Top);
-
-            base.Update(gameTime);
-        }
-
+            Rotation += RotationSpeed; // Change fixed float to property later
+            Move();
         public override bool CollidesWith(GameObject otherGameObject)
-        {
             var children = SpawnChildren();
             if (children != null)
             {

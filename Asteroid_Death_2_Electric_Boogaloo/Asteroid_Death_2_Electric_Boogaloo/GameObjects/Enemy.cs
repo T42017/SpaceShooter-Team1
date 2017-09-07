@@ -8,12 +8,11 @@ using Microsoft.Xna.Framework;
 
 namespace Asteroid_Death_2_Electric_Boogaloo
 {
-    internal class Enemy : Ship
+    public class Enemy : Ship
     {
 
         public enum Type
         {
-            none,
             enemyRed1,
             enemyRed2,
             enemyRed3,
@@ -36,32 +35,24 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             enemyBlack5
         }
 
-        public Type type = Type.none;
-
-        public Enemy(Game game) : base(game)
+        public Type type;
+        private AI _ai;
+        
+        public Enemy(AsteroidsGame game, Type type) : base(game)
         {
-        }
-
-        public Enemy(Game game, Type type) : base(game)
-        {
+            this.type = type;
+            _ai = new AI((AsteroidsGame) game, this);
             this.type = type;
         }
 
-        protected override void LoadContent()
+        public override void LoadContent()
         {
-            LoadTexture(type == Type.none ? GetRandomizedTexture() : Enum.GetName(typeof(Type), type));
+            LoadTexture(Enum.GetName(typeof(Type), type));
         }
 
-        public string GetRandomizedTexture()
+        public override void Update()
         {
-            var randomNumber = Globals.RNG.Next(Enum.GetNames(typeof(Type)).Length - 1);
-
-            return Enum.GetName(typeof(Type), randomNumber);
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-            base.Update(gameTime);
+            _ai.Update();
         }
     }
 }

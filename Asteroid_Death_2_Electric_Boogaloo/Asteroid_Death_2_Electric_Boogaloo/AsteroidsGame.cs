@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 using Asteroid_Death_2_Electric_Boogaloo.Components;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ButtonState = Microsoft.Xna.Framework.Input.ButtonState;
@@ -13,17 +16,20 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     public class AsteroidsGame : Game
     {
-        private GameState _gameState;
-        public GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
-        private Texture2D backgroundTexture;
-        private Player player;
+        public GraphicsDeviceManager Graphics;
+        public int WindowWidth, Windowheight;
+        public GameObjectManager GameObjectManager;
+        public Level Level;
 
+        private GameState _gameState;
+        private SpriteBatch _spriteBatch;
+        private Camera _camera;
+        
         public AsteroidsGame()
         {
-            graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferHeight = Globals.ScreenHeight;
-            graphics.PreferredBackBufferWidth = Globals.ScreenWidth;
+            Graphics = new GraphicsDeviceManager(this);
+            Graphics.PreferredBackBufferHeight = Globals.ScreenHeight;
+            Graphics.PreferredBackBufferWidth = Globals.ScreenWidth;
 
             Content.RootDirectory = "Content";
             Window.Position = new Point(300, 300);
@@ -52,16 +58,15 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
                 if (thisObject.CollidesWith(otherGameObject))
                 {
-                    if (thisObject is Meteor && otherGameObject is Meteor)
+                    GameObjectManager.GameObjects.Remove(otherGameObject);
                         continue;
-                    Components.Remove(otherGameObject);
                     //if (thisObject is LaserRed laser)
                     //    Components.Remove(laser);
                     return;
                 }
             }
         }
-
+        
         private void GenerateRandomNewMeteor(GameTime gameTime, int intervalInMilliseconds)
         {
             var currentGameTimeModInterval = (int)gameTime.TotalGameTime.TotalMilliseconds % intervalInMilliseconds;
@@ -96,15 +101,22 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         protected override void Initialize()
         {
             // center window
-            /*
-            Window.Position = new Point((GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / 2) - (graphics.PreferredBackBufferWidth / 2), 
-                                        (GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height / 2) - (graphics.PreferredBackBufferHeight / 2));
+            Window.Position = new Point((GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / 2) - (Graphics.PreferredBackBufferWidth / 2), 
+                                        (GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height / 2) - (Graphics.PreferredBackBufferHeight / 2));
 
             // allow resizing
-            Window.AllowUserResizing = true;
-            //*/
+            //Window.AllowUserResizing = true;
+            UpdateWindowSize();
 
-            AddGameObjects();
+            Level = new Level(this, 3000, 3000);
+
+            GameObjectManager = new GameObjectManager(this);
+            GameObjectManager.AddEnemyFactory(new EnemyFactory(this));
+
+            _camera = new Camera();
+            GameObjectManager.AddNewPlayer();
+            GameObjectManager.AddEnemys(4);
+            GameObjectManager.AddMeteors(10);
 
             base.Initialize();
         }
@@ -112,9 +124,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-            backgroundTexture = Content.Load<Texture2D>("background");
-            
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            Level.LoadContent();
+            GameObjectManager.LoadContent();
         }
         
         protected override void UnloadContent()
@@ -140,40 +153,28 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-            
-            spriteBatch.Begin();
-            for (int y = 0; y < Globals.ScreenHeight; y += backgroundTexture.Width)
-            {
-                for (int x = 0; x < Globals.ScreenWidth; x += backgroundTexture.Width)
-                {
-                    spriteBatch.Draw(backgroundTexture, new Vector2(x, y), Color.White);
-                }
-            }
-            spriteBatch.End();
+            GraphicsDevice.Clear(Color.HotPink);
 
+            //// if using XNA 4.0
+            _spriteBatch.Begin(SpriteSortMode.Deferred,
+                BlendState.AlphaBlend,
+                null,
+                null,
+                null,
+                null,
+                _camera.get_transformation(GraphicsDevice, WindowWidth, Windowheight));
+            
+            Level.DrawBackground(_spriteBatch);
+
+            GameObjectManager.DrawGameObjects(_spriteBatch);
+
+            _spriteBatch.End();
             base.Draw(gameTime);
         }
-
-        public void AddGameObjects()
+        public void UpdateWindowSize()
         {
-            player = new Player(this)
-            {
-                Position = new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2)
-            };
-
-            /*
-            for (int i = 0; i < 5; i++)
-            {
-                Enemy e = new Enemy(this)
-                {
-                    Position = new Vector2(i * 140 + 100, 100)
-                };
-                Components.Add(e);
-            }
-            //*/
-
-            Components.Add(player);
+            WindowWidth = Graphics.PreferredBackBufferWidth;
+            Windowheight = Graphics.PreferredBackBufferHeight;
         }
     }
 }
