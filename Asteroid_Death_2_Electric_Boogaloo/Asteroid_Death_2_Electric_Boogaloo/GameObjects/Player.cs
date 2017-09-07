@@ -5,61 +5,57 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
 
 namespace Asteroid_Death_2_Electric_Boogaloo
 {
-    class Player : Ship
+    public class Player : Ship
     {
         private KeyboardState lastKeyboardState;
         private DateTime _timeSenceLastShot = DateTime.Today;
         private int _timeForLaserCooldownInMs = 100;
 
-        public Player(Game game) : base(game) { }
+        public Player(AsteroidsGame game) : base(game) { }
       
-        protected override void LoadContent()
+        public override void LoadContent()
         {
             LoadTexture("shipPlayer");
         }
         
-        public override void Update(GameTime gameTime)
+        public override void Update()
         {
             if ((GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed ||
                  Keyboard.GetState().IsKeyDown(Keys.Space)) && 
                  (DateTime.Now - _timeSenceLastShot).TotalMilliseconds > _timeForLaserCooldownInMs)
             {
                 Shoot();
-                SoundEffect shot = Game.Content.Load<SoundEffect>("Deus");
-                shot.Play();
                 _timeSenceLastShot = DateTime.Now;
             }
 
             KeyboardState state = Keyboard.GetState();
-
+            
             if (state.IsKeyDown(Keys.Up))
-                Accelerate(0.25f);
-           if (state.IsKeyDown(Keys.Down))
-                Accelerate(-0.07f);
+                AccelerateForward(0.25f);
+            if (state.IsKeyDown(Keys.Down))
+                AccelerateForward(-0.07f);
             if (state.IsKeyDown(Keys.Left))
                 Rotation -= 0.07f;
             else if (state.IsKeyDown(Keys.Right))
                 Rotation += 0.07f;
             lastKeyboardState = state;
-            
-            Speed += new Vector2(-Speed.X * 0.015f, -Speed.Y * 0.015f);
-            Position += Speed;
 
-            if(Position.X < Globals.GameArea.Left)
-                Position = new Vector2(Globals.GameArea.Right, Position.Y);
-            if (Position.X > Globals.GameArea.Right)
-                Position = new Vector2(Globals.GameArea.Left, Position.Y);
-            if (Position.Y <Globals.GameArea.Top)
-                Position = new Vector2(Position.X, Globals.GameArea.Bottom);
-            if (Position.Y > Globals.GameArea.Bottom)
-                Position = new Vector2(Position.X, Globals.GameArea.Top);
-        }      
+            Speed += new Vector2(-Speed.X * 0.015f, -Speed.Y * 0.015f);
+            Move();
+            
+            StayInsideLevel(Game.Level);
+        }
+
+        public override bool CollidesWith(GameObject otherGameObject)
+        {
+            var collides = base.CollidesWith(otherGameObject);
+            if (collides) Game.Exit();
+            return collides;
+        }
     }
 }

@@ -11,8 +11,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
     {
         public YouAreDead(Game game) : base(game)
         {
-            
-
+            //if Player collides with object remove Player, write "You have died! You suck!"
+                    
             DrawableStates = GameState.gameover;
             UpdatableStates = GameState.gameover;
         }
