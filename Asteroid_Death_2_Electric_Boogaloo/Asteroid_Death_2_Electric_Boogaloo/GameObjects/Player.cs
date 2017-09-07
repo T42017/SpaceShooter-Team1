@@ -13,8 +13,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     public class Player : Ship
     {
         private KeyboardState lastKeyboardState;
-        private DateTime _timeSenceLastShot = DateTime.Today;
-        private int _timeForLaserCooldownInMs = 100;
 
         public Player(AsteroidsGame game) : base(game) { }
       
@@ -26,11 +24,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public override void Update()
         {
             if ((GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed ||
-                 Keyboard.GetState().IsKeyDown(Keys.Space)) && 
-                 (DateTime.Now - _timeSenceLastShot).TotalMilliseconds > _timeForLaserCooldownInMs)
+                 Keyboard.GetState().IsKeyDown(Keys.Space)))
             {
                 Shoot();
-                _timeSenceLastShot = DateTime.Now;
             }
 
             KeyboardState state = Keyboard.GetState();
@@ -48,7 +44,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Speed += new Vector2(-Speed.X * 0.015f, -Speed.Y * 0.015f);
             Move();
 
-            StayInsideLevel(Game.Level);
+            StayInsideLevel();
         }
     }
 }
