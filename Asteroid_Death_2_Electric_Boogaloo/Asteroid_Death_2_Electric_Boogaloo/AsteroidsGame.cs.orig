@@ -5,10 +5,13 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 using Asteroid_Death_2_Electric_Boogaloo.Components;
+
+using Asteroid_Death_2_Electric_Boogaloo.Devices;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using ButtonState = Microsoft.Xna.Framework.Input.ButtonState;
 using Keys = Microsoft.Xna.Framework.Input.Keys;
 
@@ -17,15 +20,19 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     public class AsteroidsGame : Game
     {
 <<<<<<< HEAD
+      
         private GameState _gameState;
         public GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         private Texture2D backgroundTexture;
         private Player player;
+     
+=======
         public GraphicsDeviceManager Graphics;
         public int WindowWidth, Windowheight;
         public GameObjectManager GameObjectManager;
         public Level Level;
+>>>>>>> origin/Feature_MovementOfPlayer
 
         private GameState _gameState;
         private SpriteBatch _spriteBatch;
@@ -38,21 +45,28 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Graphics.PreferredBackBufferWidth = Globals.ScreenWidth;
 
             Content.RootDirectory = "Content";
+            Window.Position = new Point(300, 300);
             Window.Title = "Asteroid Death 2 Electric Boogaloo";
         }
 
         public void ChangeGameState(GameState desiredState)
         {
+           
            _gameState = desiredState;
 
-           foreach (var component in Components.Cast<AstroidsComponent>())
+           foreach (var component in Components)
             {
-               component.Visible = component.DrawableStates.HasFlag(_gameState);
-               component.Enabled = component.UpdatableStates.HasFlag(_gameState);
+                if(!(component is AstroidsComponent astroidsComponent))
+
+               continue;
+               astroidsComponent.Visible = astroidsComponent.DrawableStates.HasFlag(_gameState);
+               astroidsComponent.Enabled = astroidsComponent.UpdatableStates.HasFlag(_gameState);
            }
         }
+<<<<<<< HEAD
 
-	    private void CheckForCollisionWith(GameObject thisObject)	
+        
+        public void CheckForCollisionWith(GameObject thisObject)	
         {
             for (int i = Components.Count - 1; i >= 0; i--)
             {
@@ -63,29 +77,25 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
                 if (thisObject.CollidesWith(otherGameObject))
                 {
-
                     if (thisObject is Meteor && otherGameObject is Meteor)
                         continue;
                     Components.Remove(otherGameObject);
                     //if (thisObject is LaserRed laser)
                     //    Components.Remove(laser);
-
-                    GameObjectManager.GameObjects.Remove(otherGameObject);
-
                     return;
                 }
-            }*/
+            }
         }
 
-        private void GenerateRandomNewMeteor(GameTime gameTime, int intervalInSeconds)
+        public void GenerateRandomNewMeteor(GameTime gameTime, int intervalInSeconds)
         {
             var currentGameTimeModInterval = gameTime.TotalGameTime.TotalSeconds % intervalInSeconds;
-            var respawnArea = new Rectangle(
-                (int) player.Position.X - player.Width / 2 - 100,
-                (int) player.Position.Y - player.Height / 2 - 100,
-                player.Width + 100,
-                player.Height + 100
-            );
+            //var respawnArea = new Rectangle(
+            //    (int) player.Position.X - player.Width / 2 - 100,
+            //    (int) player.Position.Y - player.Height / 2 - 100,
+            //    player.Width + 100,
+            //    player.Height + 100
+            //);
             
             if ((int) currentGameTimeModInterval == 0)
             {
@@ -101,50 +111,29 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 Components.Add(meteor);
             }
         }
-<<<<<<< HEAD
-
-        private void GenerateRandomNewMeteor(GameTime gameTime, int intervalInMilliseconds)
-        {
-            var currentGameTimeModInterval = (int)gameTime.TotalGameTime.TotalMilliseconds % intervalInMilliseconds;
-            if (currentGameTimeModInterval != 0) return;
-
-            const int a = 100;
-            var respawnArea = new Rectangle(
-                (int) player.Position.X - player.Width / 2 - a,
-                (int) player.Position.Y - player.Height / 2 - a,
-                player.Width + 2 * a,
-                player.Height + 2 * a
-            );
-
-            Meteor meteor;
-            do
-            { 
-                meteor = new Meteor(
-                    this,
-                    new Vector2(
-                        Globals.RNG.Next(0, Globals.ScreenWidth),
-                        Globals.RNG.Next(0, Globals.ScreenHeight)
-                    ),
-                    (MeteorSize) Globals.RNG.Next(0, 3),
-                    (MeteorColour) Globals.RNG.Next(0, 2)
-                );
-            }
-            while (respawnArea.Contains(meteor.Bounds)) ;
-            Components.Add(meteor);
-        }
-
 =======
->>>>>>> origin/feature-enemy
+        
+        
+>>>>>>> origin/Feature_MovementOfPlayer
+
         
         protected override void Initialize()
         {
             // center window
             Window.Position = new Point((GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / 2) - (Graphics.PreferredBackBufferWidth / 2), 
                                         (GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height / 2) - (Graphics.PreferredBackBufferHeight / 2));
-    
+
             // allow resizing
             //Window.AllowUserResizing = true;
             UpdateWindowSize();
+
+            Components.Add(new MenuComponent(this));
+            Components.Add(new HighscoreMenuComponent(this));
+            Components.Add(new IngameComponent(this));
+            
+            //Components.Add(new YouAreDead());
+            ChangeGameState(GameState.Menu);
+           
             
             Level = new Level(this, 3000, 3000);
 
@@ -153,13 +142,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
             _camera = new Camera();
             GameObjectManager.AddNewPlayer();
-            Components.Add(new MenuComponent(this));
-            Components.Add(new HighscoreMenuComponent(this));
-            Components.Add(new IngameComponent(this));
-            //Components.Add(new YouAreDead());
-            ChangeGameState(GameState.Menu);
-
-            
             GameObjectManager.AddEnemys(4);
             GameObjectManager.AddMeteors(10);
 
@@ -185,24 +167,25 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 Exit();
 
 <<<<<<< HEAD
-            for (int i = Components.Count - 2; i >= 0; i--) // htf does this work??
-            {
-                if (!(Components[i] is GameObject gameObject))
-                    continue;
-                CheckForCollisionWith(gameObject);
-            }
 
-            GenerateRandomNewMeteor(gameTime, 1000);
+           
+            /* for (int i = Components.Count - 1; i >= 0; i--)
+             {
+                 if (!(Components[i] is GameObject gameObject))
+                     continue;
+                 CheckForCollisionWith(gameObject);
+             }
+
+             GenerateRandomNewMeteor(gameTime, 5);*/
+
 =======
-            UpdateWindowSize();
-
-            _camera.FollowPlayer(GameObjectManager.player);
-
-            CheckForCollision(GameObjectManager.player);
-
+            Globals.ScreenWidth = Graphics.PreferredBackBufferWidth;
+            if(_gameState== GameState.ingame) { 
+            _camera.FollowPlayer(GameObjectManager.Player);
+            //GameObjectManager.GenerateRandomNewMeteor(gameTime, 1000);
             GameObjectManager.UpdateGameObjects();
->>>>>>> origin/feature-enemy
-
+            }
+>>>>>>> origin/Feature_MovementOfPlayer
             base.Update(gameTime);
         }
         
@@ -218,51 +201,21 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 null,
                 null,
                 _camera.get_transformation(GraphicsDevice, WindowWidth, Windowheight));
-            
-<<<<<<< HEAD
-            spriteBatch.Begin();
-            for (int y = 0; y < Globals.ScreenHeight; y += backgroundTexture.Width)
+            if (_gameState==GameState.ingame ||_gameState==GameState.paused)
             {
-                for (int x = 0; x < Globals.ScreenWidth; x += backgroundTexture.Width)
-                {
-                    spriteBatch.Draw(backgroundTexture, new Vector2(x, y), Color.White);
-                }
-            }
-            spriteBatch.End();
-=======
-            Level.DrawBackground(_spriteBatch);
+                Level.DrawBackground(_spriteBatch);
 
-            GameObjectManager.DrawGameObjects(_spriteBatch);
->>>>>>> origin/feature-enemy
+                GameObjectManager.DrawGameObjects(_spriteBatch);
+            }
 
             _spriteBatch.End();
             base.Draw(gameTime);
         }
-
         public void UpdateWindowSize()
         {
-<<<<<<< HEAD
-            player = new Player(this)
-            {
-                Position = new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2)
-            };
-
-            /*
-            for (int i = 0; i < 5; i++)
-            {
-                Enemy e = new Enemy(this)
-                {
-                    Position = new Vector2(i * 140 + 100, 100)
-                };
-                Components.Add(e);
-            }
-            //*/
-
-            Components.Add(player);
-=======
             WindowWidth = Graphics.PreferredBackBufferWidth;
             Windowheight = Graphics.PreferredBackBufferHeight;
->>>>>>> origin/feature-enemy
         }
+        
     }
 }

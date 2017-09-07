@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -15,11 +16,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         private KeyboardState lastKeyboardState;
         private DateTime _timeSenceLastShot = DateTime.Today;
         private int _timeForLaserCooldownInMs = 100;
-
+        private SoundEffect pewEffect;
         public Player(AsteroidsGame game) : base(game) { }
       
         public override void LoadContent()
         {
+            pewEffect = Game.Content.Load<SoundEffect>("Deus");
             LoadTexture("shipPlayer");
         }
         
@@ -29,6 +31,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                  Keyboard.GetState().IsKeyDown(Keys.Space)) && 
                  (DateTime.Now - _timeSenceLastShot).TotalMilliseconds > _timeForLaserCooldownInMs)
             {
+                pewEffect.Play();
                 Shoot();
                 _timeSenceLastShot = DateTime.Now;
             }

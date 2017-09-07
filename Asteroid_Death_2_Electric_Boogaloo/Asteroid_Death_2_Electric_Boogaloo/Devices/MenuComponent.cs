@@ -63,31 +63,31 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
 
                 if (x >= pGame.Graphics.PreferredBackBufferWidth / 3 &&
                     x <= (pGame.Graphics.PreferredBackBufferWidth / 3) + 222 &&
-                    y >= (pGame.graphics.PreferredBackBufferHeight / 4) +
-                    (pGame.graphics.PreferredBackBufferHeight / 8) && y <=
-                    ((pGame.graphics.PreferredBackBufferHeight / 4) + (pGame.graphics.PreferredBackBufferHeight / 8)) +
+                    y >= (pGame.Graphics.PreferredBackBufferHeight / 4) +
+                    (pGame.Graphics.PreferredBackBufferHeight / 8) && y <=
+                    ((pGame.Graphics.PreferredBackBufferHeight / 4) + (pGame.Graphics.PreferredBackBufferHeight / 8)) +
                     39)
                 { pGame.ChangeGameState(GameState.ingame);
                 
                 }
 
-            else if (x >= pGame.graphics.PreferredBackBufferWidth / 3 &&
-                     x <= (pGame.graphics.PreferredBackBufferWidth / 3) + 222 &&
-                     y >= ((pGame.graphics.PreferredBackBufferHeight / 4) +
-                           (pGame.graphics.PreferredBackBufferHeight / 8) + 50) && y <=
-                     ((pGame.graphics.PreferredBackBufferHeight / 4) + (pGame.graphics.PreferredBackBufferHeight / 8)) +
+            else if (x >= pGame.Graphics.PreferredBackBufferWidth / 3 &&
+                     x <= (pGame.Graphics.PreferredBackBufferWidth / 3) + 222 &&
+                     y >= ((pGame.Graphics.PreferredBackBufferHeight / 4) +
+                           (pGame.Graphics.PreferredBackBufferHeight / 8) + 50) && y <=
+                     ((pGame.Graphics.PreferredBackBufferHeight / 4) + (pGame.Graphics.PreferredBackBufferHeight / 8)) +
                      89)
                 {
                     pGame.ChangeGameState(GameState.highscoremenu);
-                    SoundEffect beep = Game.Content.Load<SoundEffect>("roasted");
-                    beep.Play();
+                    //SoundEffect beep = Game.Content.Load<SoundEffect>("roasted");
+                    //beep.Play();
                 }
 
-            else if (x >= pGame.graphics.PreferredBackBufferWidth / 3 &&
-                     x <= (pGame.graphics.PreferredBackBufferWidth / 3) + 222 &&
-                     y >= ((pGame.graphics.PreferredBackBufferHeight / 4) +
-                           (pGame.graphics.PreferredBackBufferHeight / 8) + 100) && y <=
-                     ((pGame.graphics.PreferredBackBufferHeight / 4) + (pGame.graphics.PreferredBackBufferHeight / 8)) +
+            else if (x >= pGame.Graphics.PreferredBackBufferWidth / 3 &&
+                     x <= (pGame.Graphics.PreferredBackBufferWidth / 3) + 222 &&
+                     y >= ((pGame.Graphics.PreferredBackBufferHeight / 4) +
+                           (pGame.Graphics.PreferredBackBufferHeight / 8) + 100) && y <=
+                     ((pGame.Graphics.PreferredBackBufferHeight / 4) + (pGame.Graphics.PreferredBackBufferHeight / 8)) +
                      139)
                 pGame.Exit();
 

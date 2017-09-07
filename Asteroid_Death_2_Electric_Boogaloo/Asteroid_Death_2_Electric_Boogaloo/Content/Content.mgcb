@@ -1425,12 +1425,6 @@
 /processorParam:TextureFormat=Color
 /build:laserRed.png
 
-#begin Cantina.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Cantina.mp3
-
 #begin shot.mp3
 /importer:Mp3Importer
 /processor:SoundEffectProcessor
@@ -1454,4 +1448,10 @@
 /processor:SongProcessor
 /processorParam:Quality=Best
 /build:Combat.mp3
+
+#begin CantinaBand.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:CantinaBand.mp3
 

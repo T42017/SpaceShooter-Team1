@@ -34,7 +34,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         protected override void LoadContent()
         {
             
-            song = Game.Content.Load<Song>("Cantina");
+            song = Game.Content.Load<Song>("CantinaBand");
            
             base.LoadContent();
         }
