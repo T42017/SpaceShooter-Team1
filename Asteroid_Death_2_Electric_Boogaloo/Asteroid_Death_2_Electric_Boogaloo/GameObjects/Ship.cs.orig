@@ -12,8 +12,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     public abstract class Ship : GameObject
     {
         private bool ShootLefCannon = false;
+<<<<<<< HEAD:Asteroid_Death_2_Electric_Boogaloo/Asteroid_Death_2_Electric_Boogaloo/Ship.cs
         
+        protected Ship(Game game) : base(game)
+=======
+
         protected Ship(AsteroidsGame game) : base(game)
+>>>>>>> origin/feature-enemy:Asteroid_Death_2_Electric_Boogaloo/Asteroid_Death_2_Electric_Boogaloo/GameObjects/Ship.cs
         {
         }
         
@@ -50,7 +55,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public override bool CollidesWith(GameObject otherGameObject)
         {
             bool collides = base.CollidesWith(otherGameObject);
-            if (collides) Game.GameObjectManager.GameObjects.Remove(this);
+            if (collides) Game.Components.Remove(this);
             return collides;
         }
     }

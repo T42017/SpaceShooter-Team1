@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 using Asteroid_Death_2_Electric_Boogaloo.Components;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ButtonState = Microsoft.Xna.Framework.Input.ButtonState;
@@ -13,27 +16,33 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     public class AsteroidsGame : Game
     {
+<<<<<<< HEAD
         private GameState _gameState;
         public GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         private Texture2D backgroundTexture;
         private Player player;
-        private Meteor[] meteors;
+=======
+        public GraphicsDeviceManager Graphics;
+        public int WindowWidth, Windowheight;
+        public GameObjectManager GameObjectManager;
+        public Level Level;
+>>>>>>> origin/feature-enemy
 
+        private GameState _gameState;
+        private SpriteBatch _spriteBatch;
+        private Camera _camera;
+        
         public AsteroidsGame()
         {
-            graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferHeight = Globals.ScreenHeight;
-            graphics.PreferredBackBufferWidth = Globals.ScreenWidth;
+            Graphics = new GraphicsDeviceManager(this);
+            Graphics.PreferredBackBufferHeight = Globals.ScreenHeight;
+            Graphics.PreferredBackBufferWidth = Globals.ScreenWidth;
 
             Content.RootDirectory = "Content";
-            Window.Position = new Point(300, 300);
             Window.Title = "Asteroid Death 2 Electric Boogaloo";
         }
 
-<<<<<<< HEAD
-        private void CheckForCollisionWith(GameObject thisObject)
-=======
         public void ChangeGameState(GameState desiredState)
         {
             _gameState = desiredState;
@@ -44,59 +53,85 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 component.Enabled = component.UpdatableStates.HasFlag(_gameState);
             }
         }
-        private void CheckForCollision(GameObject thisObject)
->>>>>>> origin/develop
+
+	    private void CheckForCollisionWith(GameObject thisObject)	
         {
-            // -- Removed temporarily to try other approaches
-
-            //for (int i = Components.Count - 1; i >= 0; i--)
-            //{
-            //    var outerCurrent = Components[i];
-            //    if (outerCurrent == null || !(outerCurrent is GameObject gameObject))
-            //        continue;
-            //    for (int j = Components.Count - 1; j >= 0; j--)
-            //    {
-            //        var innerCurrent = Components[j];
-            //        if (innerCurrent == null || !(innerCurrent is GameObject otherGameObject))
-            //            continue;
-
-            //        if (gameObject.CollidesWith(otherGameObject))
-            //        {
-            //            Components.Remove(gameObject);
-            //            Components.Remove(otherGameObject);
-            //            return;
-            //        }
-            //    }
-            //}
-
             for (int i = Components.Count - 1; i >= 0; i--)
             {
-                if (Components[i] == null || 
-                    !(Components[i] is GameObject otherGameObject) || 
+                if (Components[i] == null ||
+                    !(Components[i] is GameObject otherGameObject) ||
                     otherGameObject == thisObject)
                     continue;
 
                 if (thisObject.CollidesWith(otherGameObject))
                 {
+<<<<<<< HEAD
+                    if (thisObject is Meteor && otherGameObject is Meteor)
+                        continue;
                     Components.Remove(otherGameObject);
+                    //if (thisObject is LaserRed laser)
+                    //    Components.Remove(laser);
+=======
+                    GameObjectManager.GameObjects.Remove(otherGameObject);
+>>>>>>> origin/feature-enemy
                     return;
                 }
             }
         }
+<<<<<<< HEAD
 
+        private void GenerateRandomNewMeteor(GameTime gameTime, int intervalInMilliseconds)
+        {
+            var currentGameTimeModInterval = (int)gameTime.TotalGameTime.TotalMilliseconds % intervalInMilliseconds;
+            if (currentGameTimeModInterval != 0) return;
+
+            const int a = 100;
+            var respawnArea = new Rectangle(
+                (int) player.Position.X - player.Width / 2 - a,
+                (int) player.Position.Y - player.Height / 2 - a,
+                player.Width + 2 * a,
+                player.Height + 2 * a
+            );
+
+            Meteor meteor;
+            do
+            { 
+                meteor = new Meteor(
+                    this,
+                    new Vector2(
+                        Globals.RNG.Next(0, Globals.ScreenWidth),
+                        Globals.RNG.Next(0, Globals.ScreenHeight)
+                    ),
+                    (MeteorSize) Globals.RNG.Next(0, 3),
+                    (MeteorColour) Globals.RNG.Next(0, 2)
+                );
+            }
+            while (respawnArea.Contains(meteor.Bounds)) ;
+            Components.Add(meteor);
+        }
+
+=======
+>>>>>>> origin/feature-enemy
         
         protected override void Initialize()
         {
             // center window
-            /*
-            Window.Position = new Point((GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / 2) - (graphics.PreferredBackBufferWidth / 2), 
-                                        (GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height / 2) - (graphics.PreferredBackBufferHeight / 2));
+            Window.Position = new Point((GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / 2) - (Graphics.PreferredBackBufferWidth / 2), 
+                                        (GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height / 2) - (Graphics.PreferredBackBufferHeight / 2));
 
             // allow resizing
-            Window.AllowUserResizing = true;
-            //*/
+            //Window.AllowUserResizing = true;
+            UpdateWindowSize();
 
-            AddGameObjects();
+            Level = new Level(this, 3000, 3000);
+
+            GameObjectManager = new GameObjectManager(this);
+            GameObjectManager.AddEnemyFactory(new EnemyFactory(this));
+
+            _camera = new Camera();
+            GameObjectManager.AddNewPlayer();
+            GameObjectManager.AddEnemys(4);
+            GameObjectManager.AddMeteors(10);
 
             base.Initialize();
         }
@@ -104,9 +139,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-            backgroundTexture = Content.Load<Texture2D>("background");
-            
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            Level.LoadContent();
+            GameObjectManager.LoadContent();
         }
         
         protected override void UnloadContent()
@@ -118,15 +154,42 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            CheckForCollisionWith(player);
+<<<<<<< HEAD
+            for (int i = Components.Count - 2; i >= 0; i--) // htf does this work??
+            {
+                if (!(Components[i] is GameObject gameObject))
+                    continue;
+                CheckForCollisionWith(gameObject);
+            }
+
+            GenerateRandomNewMeteor(gameTime, 1000);
+=======
+            UpdateWindowSize();
+
+            _camera.FollowPlayer(GameObjectManager.player);
+
+            CheckForCollision(GameObjectManager.player);
+
+            GameObjectManager.UpdateGameObjects();
+>>>>>>> origin/feature-enemy
 
             base.Update(gameTime);
         }
         
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.HotPink);
+
+            //// if using XNA 4.0
+            _spriteBatch.Begin(SpriteSortMode.Deferred,
+                BlendState.AlphaBlend,
+                null,
+                null,
+                null,
+                null,
+                _camera.get_transformation(GraphicsDevice, WindowWidth, Windowheight));
             
+<<<<<<< HEAD
             spriteBatch.Begin();
             for (int y = 0; y < Globals.ScreenHeight; y += backgroundTexture.Width)
             {
@@ -135,31 +198,24 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                     spriteBatch.Draw(backgroundTexture, new Vector2(x, y), Color.White);
                 }
             }
-
             spriteBatch.End();
+=======
+            Level.DrawBackground(_spriteBatch);
 
+            GameObjectManager.DrawGameObjects(_spriteBatch);
+>>>>>>> origin/feature-enemy
+
+            _spriteBatch.End();
             base.Draw(gameTime);
         }
 
-        public void AddGameObjects()
+        public void UpdateWindowSize()
         {
+<<<<<<< HEAD
             player = new Player(this)
             {
                 Position = new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2)
             };
-
-            meteors = new Meteor[10];
-            for (int i = 0; i < meteors.Length; i++)
-            {
-                var position = new Vector2(
-                    Globals.RNG.Next(Globals.ScreenWidth),
-                    Globals.RNG.Next(Globals.ScreenHeight)
-                );
-                meteors[i] = new Meteor(this, position, MeteorSize.Big, MeteorColour.Gray)
-                {
-                    Rotation = (float) Globals.RNG.NextDouble()
-                };
-            }
 
             /*
             for (int i = 0; i < 5; i++)
@@ -173,8 +229,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             //*/
 
             Components.Add(player);
-            foreach (var meteor in meteors)
-                Components.Add(meteor);
+=======
+            WindowWidth = Graphics.PreferredBackBufferWidth;
+            Windowheight = Graphics.PreferredBackBufferHeight;
+>>>>>>> origin/feature-enemy
         }
     }
 }
