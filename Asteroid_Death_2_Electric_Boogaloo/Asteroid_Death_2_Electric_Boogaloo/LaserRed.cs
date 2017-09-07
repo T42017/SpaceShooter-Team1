@@ -7,27 +7,17 @@ using Microsoft.Xna.Framework;
 
 namespace Asteroid_Death_2_Electric_Boogaloo
 {
-    class Laser : GameObject
+    class LaserRed : GameObject
     {
-        public enum Color
-        {
-            Red,
-            Green,
-            Blue
-        }
-
-        private Color color;
-
-        public Laser(Game game, Vector2 position, float rotation, Color color) : base(game)
+        public LaserRed(Game game, Vector2 position, float rotation) : base(game)
         {
             this.Position = position;
             this.Rotation = rotation;
-            this.color = color;
         }
 
         protected override void LoadContent()
         {
-            LoadTexture("laser" + Enum.GetName(typeof(Color), color));
+            LoadTexture("laserRed");
             MaxSpeed = 200;
         }
 
