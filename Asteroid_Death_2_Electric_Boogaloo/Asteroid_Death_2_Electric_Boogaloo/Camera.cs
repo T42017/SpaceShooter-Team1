@@ -45,6 +45,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             Pos = player.Position;
             Rotation = -player.Rotation + Physic.DegreesToRadians(-90);
+            Zoom = 0.5f;
         }
 
         public Matrix get_transformation(GraphicsDevice graphicsDevice, int windowWidth, int windowHeight)

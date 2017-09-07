@@ -91,13 +91,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             //Window.AllowUserResizing = true;
             UpdateWindowSize();
 
-            Level = new Level(this, 3000, 3000);
+            Level = new Level(this, 8, 8);
 
             GameObjectManager = new GameObjectManager(this);
             GameObjectManager.AddEnemyFactory(new EnemyFactory(this));
 
             _camera = new Camera();
-            GameObjectManager.AddNewPlayer();
             GameObjectManager.AddEnemys(4);
             GameObjectManager.AddMeteors(10);
 
@@ -108,8 +107,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            Level.LoadContent();
+            
             GameObjectManager.LoadContent();
         }
         
@@ -129,6 +127,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             CheckForCollision(GameObjectManager.player);
 
             GameObjectManager.UpdateGameObjects();
+            GameObjectManager.RemoveDeadGameObjects();
 
             base.Update(gameTime);
         }

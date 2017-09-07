@@ -90,13 +90,17 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 Position = new Vector2(Position.X, Texture.Height / 2);
                 if (Speed.Y < 0) Speed = new Vector2(Speed.X, 0);
             }
+        }
 
-            //if (Position.Y - Texture.Height < Globals.GameArea.Top)
-            //    Position = new Vector2(Position.X, Position.Y - Texture.Height);
-            //if (Position.Y + Texture.Height > Globals.GameArea.Bottom)
-            //    Position = new Vector2(Position.X, Position.Y + Texture.Height);
+        public bool IsOutSideLevel(Level level)
+        {
+            if (Position.X + Texture.Width / 2 > level.SizeX ||
+                Position.X - Texture.Width / 2 < 0 ||
+                Position.Y + Texture.Height / 2 > level.SizeY ||
+                Position.Y - Texture.Height / 2 < 0)
+                return true;
 
-
+            return false;
         }
 
         public void Move()

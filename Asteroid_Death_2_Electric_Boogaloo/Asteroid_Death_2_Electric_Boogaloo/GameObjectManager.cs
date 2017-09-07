@@ -21,6 +21,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public GameObjectManager(AsteroidsGame game)
         {
             _game = game;
+            AddNewPlayer();
         }
 
         public void AddEnemyFactory(EnemyFactory factory)
@@ -56,6 +57,15 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                     Rotation = (float)Globals.RNG.NextDouble()
                 };
                 GameObjects.Add(meteor);
+            }
+        }
+
+        internal void RemoveDeadGameObjects()
+        {
+            for (int i = 0; i < GameObjects.Count; i++)
+            {
+                if (GameObjects[i].IsDead)
+                    GameObjects.Remove(GameObjects[i]);
             }
         }
 

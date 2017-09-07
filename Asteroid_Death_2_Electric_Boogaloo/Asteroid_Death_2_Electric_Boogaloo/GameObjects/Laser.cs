@@ -33,6 +33,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public override void Update()
         {
+            if (IsOutSideLevel(Game.Level))
+                IsDead = true;
             Speed = Forward() * 10;
             AccelerateForward(3);
             Move();
