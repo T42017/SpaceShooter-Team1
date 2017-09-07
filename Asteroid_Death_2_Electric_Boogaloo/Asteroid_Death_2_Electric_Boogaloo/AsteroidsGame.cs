@@ -32,6 +32,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Graphics.PreferredBackBufferWidth = Globals.ScreenWidth;
 
             Content.RootDirectory = "Content";
+            Window.Position = new Point(300, 300);
             Window.Title = "Asteroid Death 2 Electric Boogaloo";
         }
 
@@ -45,41 +46,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 component.Enabled = component.UpdatableStates.HasFlag(_gameState);
             }
         }
-        private void CheckForCollision(GameObject thisObject)
-        {
-            // -- Removed temporarily to try other approaches
-            //for (int i = Components.Count - 1; i >= 0; i--)
-            //{
-            //    var outerCurrent = Components[i];
-            //    if (outerCurrent == null || !(outerCurrent is GameObject gameObject))
-            //        continue;
-            //    for (int j = Components.Count - 1; j >= 0; j--)
-            //    {
-            //        var innerCurrent = Components[j];
-            //        if (innerCurrent == null || !(innerCurrent is GameObject otherGameObject))
-            //            continue;
+        
+        
 
-            //        if (gameObject.CollidesWith(otherGameObject))
-            //        {
-            //            Components.Remove(gameObject);
-            //            Components.Remove(otherGameObject);
-            //            return;
-            //        }
-            //    }
-            //}
-
-            for (int i = Components.Count - 1; i >= 0; i--)
-            {
-                if (Components[i] == null || !(Components[i] is GameObject otherGameObject) || otherGameObject == thisObject)
-                    continue;
-
-                if (thisObject.CollidesWith(otherGameObject))
-                {
-                    GameObjectManager.GameObjects.Remove(otherGameObject);
-                    return;
-                }
-            }
-        }
         
         protected override void Initialize()
         {
@@ -120,15 +89,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            UpdateWindowSize();
-
-            _camera.FollowPlayer(GameObjectManager.player);
-
-            CheckForCollision(GameObjectManager.player);
-
+            
+            _camera.FollowPlayer(GameObjectManager.Player);
+            //GameObjectManager.GenerateRandomNewMeteor(gameTime, 1000);
             GameObjectManager.UpdateGameObjects();
             GameObjectManager.RemoveDeadGameObjects();
-
             base.Update(gameTime);
         }
         
@@ -152,7 +117,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             _spriteBatch.End();
             base.Draw(gameTime);
         }
-
         public void UpdateWindowSize()
         {
             WindowWidth = Graphics.PreferredBackBufferWidth;

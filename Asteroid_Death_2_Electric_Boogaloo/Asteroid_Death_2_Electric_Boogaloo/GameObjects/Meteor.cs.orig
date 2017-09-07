@@ -81,13 +81,30 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public override void LoadContent()
         {
             SetAppropriateTexture();
+<<<<<<< HEAD:Asteroid_Death_2_Electric_Boogaloo/Asteroid_Death_2_Electric_Boogaloo/Meteor.cs
+            base.LoadContent();
+=======
+            Position += new Vector2();
+>>>>>>> origin/feature-enemy:Asteroid_Death_2_Electric_Boogaloo/Asteroid_Death_2_Electric_Boogaloo/GameObjects/Meteor.cs
         }
 
         public override void Update()
         {
             //requires further work to add a randomly generated speed of the meteors instead of a static speed
-            Rotation += RotationSpeed;
-            Move();
+<<<<<<< HEAD:Asteroid_Death_2_Electric_Boogaloo/Asteroid_Death_2_Electric_Boogaloo/Meteor.cs
+            Rotation += 0.04f; // Change fixed float to property later
+            Position += Speed;
+
+            if (Position.X < Globals.GameArea.Left)
+                Position = new Vector2(Globals.GameArea.Right, Position.Y);
+            if (Position.X > Globals.GameArea.Right)
+                Position = new Vector2(Globals.GameArea.Left, Position.Y);
+            if (Position.Y < Globals.GameArea.Top)
+                Position = new Vector2(Position.X, Globals.GameArea.Bottom);
+            if (Position.Y > Globals.GameArea.Bottom)
+                Position = new Vector2(Position.X, Globals.GameArea.Top);
+
+            base.Update(gameTime);
         }
 
         public override bool CollidesWith(GameObject otherGameObject)
@@ -96,11 +113,30 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             if (children != null)
             {
                 foreach (var child in children)
-                    Game.GameObjectManager.GameObjects.Add(child);
+                    Game.Components.Add(child);
             }
             bool collides = base.CollidesWith(otherGameObject);
-            if (collides) Game.GameObjectManager.GameObjects.Remove(this);
+            if (collides) Game.Components.Remove(this);
             return collides;
+=======
+            Rotation += RotationSpeed; // Change fixed float to property later
+            Move();
+>>>>>>> origin/feature-enemy:Asteroid_Death_2_Electric_Boogaloo/Asteroid_Death_2_Electric_Boogaloo/GameObjects/Meteor.cs
         }
+
+        //public override void Draw(GameTime gameTime)
+        //{
+        //    SpriteBatch.Begin();
+        //    SpriteBatch.Draw(Texture, Position,
+        //        null,
+        //        Color.White,
+        //        Rotation,
+        //        new Vector2(Texture.Width * .5f, Texture.Height * .5f),
+        //        1.0f,
+        //        SpriteEffects.None,
+        //        0f);
+        //    SpriteBatch.End();
+        //    // Check if base.Draw() should be called
+        //}
     }
 }
