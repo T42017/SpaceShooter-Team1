@@ -5,8 +5,10 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 namespace Asteroid_Death_2_Electric_Boogaloo
 {
@@ -30,6 +32,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                  (DateTime.Now - _timeSenceLastShot).TotalMilliseconds > _timeForLaserCooldownInMs)
             {
                 Shoot();
+                SoundEffect shot = Game.Content.Load<SoundEffect>("Deus");
+                shot.Play();
                 _timeSenceLastShot = DateTime.Now;
             }
 

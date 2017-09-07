@@ -7,6 +7,7 @@ using Asteroid_Death_2_Electric_Boogaloo.Devices;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using ButtonState = Microsoft.Xna.Framework.Input.ButtonState;
 using Keys = Microsoft.Xna.Framework.Input.Keys;
 
@@ -14,11 +15,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     public class AsteroidsGame : Game
     {
+      
         private GameState _gameState;
         public GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         private Texture2D backgroundTexture;
         private Player player;
+     
 
         public AsteroidsGame()
         {
@@ -33,6 +36,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public void ChangeGameState(GameState desiredState)
         {
+           
            _gameState = desiredState;
 
            foreach (var component in Components)
@@ -45,7 +49,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
            }
         }
 
-	    public void CheckForCollisionWith(GameObject thisObject)	
+        
+        public void CheckForCollisionWith(GameObject thisObject)	
         {
             for (int i = Components.Count - 1; i >= 0; i--)
             {
@@ -106,9 +111,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Components.Add(new MenuComponent(this));
             Components.Add(new HighscoreMenuComponent(this));
             Components.Add(new IngameComponent(this));
+            
             //Components.Add(new YouAreDead());
             ChangeGameState(GameState.Menu);
-
+           
             
 
             base.Initialize();
@@ -131,14 +137,16 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-           /* for (int i = Components.Count - 1; i >= 0; i--)
-            {
-                if (!(Components[i] is GameObject gameObject))
-                    continue;
-                CheckForCollisionWith(gameObject);
-            }
 
-            GenerateRandomNewMeteor(gameTime, 5);*/
+           
+            /* for (int i = Components.Count - 1; i >= 0; i--)
+             {
+                 if (!(Components[i] is GameObject gameObject))
+                     continue;
+                 CheckForCollisionWith(gameObject);
+             }
+
+             GenerateRandomNewMeteor(gameTime, 5);*/
 
             base.Update(gameTime);
         }

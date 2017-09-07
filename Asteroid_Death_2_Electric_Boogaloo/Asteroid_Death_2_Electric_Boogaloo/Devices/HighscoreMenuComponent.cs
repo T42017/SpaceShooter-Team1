@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 {
@@ -16,6 +17,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         private Texture2D Button;
         private AsteroidsGame pGame;
         private MouseState oldState;
+        private Song song;
+        private bool playing;
         public HighscoreMenuComponent(Game game) : base(game)
         {
             Game.IsMouseVisible = true;
@@ -23,9 +26,29 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 
             DrawableStates = GameState.highscoremenu;
             UpdatableStates = GameState.highscoremenu;
+            playing = false;
 
 
+        }
 
+        protected override void LoadContent()
+        {
+            
+            song = Game.Content.Load<Song>("Cantina");
+           
+            base.LoadContent();
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            if (playing==false)
+            {
+                MediaPlayer.Stop();
+                MediaPlayer.Play(song);
+                playing = true;
+            }
+            
+            base.Update(gameTime);
         }
     }
 }

@@ -7,17 +7,20 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 
 namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 {
     class IngameComponent : AstroidsComponent
     {
-        private bool hasaddedgameobjetcs;
+        private bool hasaddedgameobjetcs, playing;
         private SpriteFont menuFont, buttonFont;
         private Texture2D Button;
         private AsteroidsGame pGame;
         private MouseState oldState;
+        private Song song;
+
         public IngameComponent(Game game) : base(game)
         {
             pGame = (AsteroidsGame)game;
@@ -26,13 +29,26 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             DrawableStates = GameState.ingame;
             UpdatableStates = GameState.ingame;
 
-
+            playing = false;
 
 
         }
 
-       public override void Update(GameTime gameTime)
+        protected override void LoadContent()
         {
+
+            song = Game.Content.Load<Song>("Combat");
+            base.LoadContent();
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            if (playing==false)
+            {
+                MediaPlayer.Stop();
+                MediaPlayer.Play(song);
+                playing = true;
+            }
             if (!hasaddedgameobjetcs)
             {
                 pGame.AddGameObjects();
