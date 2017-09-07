@@ -56,7 +56,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             return Bounds.Intersects(otherGameObject.Bounds) || otherGameObject.Bounds.Intersects(Bounds);
         }
 
-        private void DrawBounds(SpriteBatch spriteBatch)
+        private void DrawBounds(SpriteBatch spriteBatch) // fix memory exception
         {
             _boundingBox = new Texture2D(Game.GraphicsDevice, Bounds.Width, Bounds.Height);
             var data = new Color[Bounds.Width * Bounds.Height];
@@ -70,7 +70,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 ),
                 Color.Red
             );
-            // fix memory exception
         }
 
         public abstract void LoadContent();
@@ -78,7 +77,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            DrawBounds(spriteBatch);
+            //DrawBounds(spriteBatch);
             spriteBatch.Draw(Texture, Position, null, Color.White, Rotation - MathHelper.PiOver2,
                 new Vector2(Texture.Width / 2f, Texture.Height / 2f), 1.0f, SpriteEffects.None, 0f);
         }
@@ -116,10 +115,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public void Move()
         {
             Position += Speed;
-            if (!Game.VisibleArea.Contains(Bounds))
-            {
-                Game.GameObjectManager.ActiveGameObjects.Remove(this);
-            }
         }
 
         public Vector2 Forward()
@@ -140,7 +135,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public override string ToString()
         {
-            return $"{GetType().Name} with position ({(int) Position.X}, {(int) Position.Y}) is active={Game.GameObjectManager.ActiveGameObjects.Contains(this)}";
+            //return $"{GetType().Name} with position ({(int) Position.X}, {(int) Position.Y}) is active={Game.GameObjectManager.ActiveGameObjects.Contains(this)}";
+            return $"{GetType().Name} with position ({(int) Position.X}, {(int) Position.Y})";
         }
     }
 }

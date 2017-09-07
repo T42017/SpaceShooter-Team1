@@ -106,40 +106,37 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             GameObjectManager.UpdateGameObjects();
 
             VisibleArea = new Rectangle(
-                //(int)GameObjectManager.Player.Position.X - Graphics.PreferredBackBufferWidth / 2,
-                //(int)GameObjectManager.Player.Position.Y - Graphics.PreferredBackBufferHeight / 2,
-                (int)GameObjectManager.Player.Position.X - 400,
-                (int)GameObjectManager.Player.Position.Y - 400,
-                //Globals.ScreenWidth / 2,
-                //Globals.ScreenHeight / 2
-                400, 
-                400
+                (int)GameObjectManager.Player.Position.X - Graphics.PreferredBackBufferWidth / 2,
+                (int)GameObjectManager.Player.Position.Y - Graphics.PreferredBackBufferHeight / 2,
+                Globals.ScreenWidth / 2,
+                Globals.ScreenHeight / 2
             );
 
-            if ((int) gameTime.TotalGameTime.TotalMilliseconds % 1000 == 0)
-            {
-                foreach (var gameObject in GameObjectManager.GameObjects)
-                {
-                    if (gameObject is Player)
-                        continue;
+            //if ((int) gameTime.TotalGameTime.TotalMilliseconds % 1000 == 0)
+            //{
+            //    foreach (var gameObject in GameObjectManager.GameObjects)
+            //    {
+            //        if (gameObject is Player)
+            //            continue;
 
-                    if (VisibleArea.Contains(gameObject.Bounds) && !GameObjectManager.ActiveGameObjects.Contains(gameObject))
-                        GameObjectManager.ActiveGameObjects.Add(gameObject);
-                    else if (!VisibleArea.Contains(gameObject.Bounds) && GameObjectManager.ActiveGameObjects.Contains(gameObject))
-                        GameObjectManager.ActiveGameObjects.Remove(gameObject);
+            //        if (VisibleArea.Contains(gameObject.Bounds) && !GameObjectManager.ActiveGameObjects.Contains(gameObject))
+            //            GameObjectManager.ActiveGameObjects.Add(gameObject);
+            //        else if (!VisibleArea.Contains(gameObject.Bounds) && GameObjectManager.ActiveGameObjects.Contains(gameObject))
+            //            GameObjectManager.ActiveGameObjects.Remove(gameObject);
 
-                    //if (gameObject.Position.X >= VisibleArea.Left &&
-                    //    gameObject.Position.X <= VisibleArea.Right &&
-                    //    gameObject.Position.Y >= VisibleArea.Top &&
-                    //    gameObject.Position.Y <= VisibleArea.Bottom)
-                    //    GameObjectManager.ActiveGameObjects.Add(gameObject);
-                    //else if (GameObjectManager.ActiveGameObjects.Contains(gameObject))
-                    //    GameObjectManager.ActiveGameObjects.Remove(gameObject);
-                }
-                Debug.WriteLine((int) gameTime.TotalGameTime.TotalSeconds + ": " + string.Join("\r\n", GameObjectManager.ActiveGameObjects));
-                Debug.Write("\r\n");
-                //Debug.WriteLine($"{VisibleArea.Left}, {VisibleArea.Top}, {VisibleArea.Right}, {VisibleArea.Bottom}");
-            }
+            //        //if (gameObject.Position.X >= VisibleArea.Left &&
+            //        //    gameObject.Position.X <= VisibleArea.Right &&
+            //        //    gameObject.Position.Y >= VisibleArea.Top &&
+            //        //    gameObject.Position.Y <= VisibleArea.Bottom)
+            //        //    GameObjectManager.ActiveGameObjects.Add(gameObject);
+            //        //else if (GameObjectManager.ActiveGameObjects.Contains(gameObject))
+            //        //    GameObjectManager.ActiveGameObjects.Remove(gameObject);
+            //    }
+            //    //Debug.WriteLine((int) gameTime.TotalGameTime.TotalSeconds + ": " + string.Join("\r\n", GameObjectManager.ActiveGameObjects));
+            //    //Debug.Write("\r\n");
+            //    Debug.WriteLine($"Player: ({GameObjectManager.Player.Position.X}, {GameObjectManager.Player.Position.Y})");
+            //    Debug.WriteLine($"{VisibleArea.Left}, {VisibleArea.Top}, {VisibleArea.Right}, {VisibleArea.Bottom}");
+            //}
             base.Update(gameTime);
         }
         

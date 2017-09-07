@@ -98,9 +98,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 foreach (var child in children)
                     Game.GameObjectManager.GameObjects.Add(child);
             }
-            bool collides = base.CollidesWith(otherGameObject);
-            if (collides) Game.GameObjectManager.GameObjects.Remove(this);
-            return collides;
+            Game.GameObjectManager.GameObjects.Remove(this);
+            return base.CollidesWith(otherGameObject);
         }
     }
 }

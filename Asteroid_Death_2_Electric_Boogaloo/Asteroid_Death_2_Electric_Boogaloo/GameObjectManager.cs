@@ -12,9 +12,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     {
 
         public Player Player { get; private set; }
-
-        //public List<GameObject> Meteors { get; set; }
-        public List<GameObject> ActiveGameObjects { get; set; } = new List<GameObject>();
+        public List<GameObject> ActiveGameObjects { get; set; } = new List<GameObject>(); // re-think this
 
         public List<GameObject> GameObjects = new List<GameObject>();
 
@@ -45,7 +43,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 Position = new Vector2(_game.Level.SizeX / 2, _game.Level.SizeY / 2)
             };
             GameObjects.Add(Player);
-            ActiveGameObjects.Add(Player);
         }
 
         public void AddMeteors(int amount)
@@ -107,12 +104,16 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             for (int i = 0; i < GameObjects.Count; i++)
             {
                 GameObjects[i].Update();
+                var collision = CheckForCollisionWith(GameObjects[i]);
+                if (collision == null)
+                    continue;
+                GameObjects.Remove(collision);
             }
         }
 
         public GameObject CheckForCollisionWith(GameObject thisObject)
         {
-            for (int i = ActiveGameObjects.Count - 1; i >= 0; i--)
+            for (int i = GameObjects.Count - 1; i >= 0; i--)
             {
                 var otherGameObject = GameObjects[i];
                 if (otherGameObject == null ||
