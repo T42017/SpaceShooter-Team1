@@ -24,6 +24,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         private GameState _gameState;
         private SpriteBatch _spriteBatch;
         private Camera _camera;
+
+        public Rectangle VisibleArea { get; set; }
         
         public AsteroidsGame()
         {
@@ -70,6 +72,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             GameObjectManager.AddEnemys(4);
             GameObjectManager.AddMeteors(10);
 
+            VisibleArea = new Rectangle(
+                (int)GameObjectManager.Player.Position.X - Globals.ScreenWidth / 2,
+                (int)GameObjectManager.Player.Position.Y - Globals.ScreenHeight / 2,
+                Globals.ScreenWidth / 2,
+                Globals.ScreenHeight / 2
+            );
+            
             base.Initialize();
         }
         
@@ -95,6 +104,42 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             _camera.FollowPlayer(GameObjectManager.Player);
             //GameObjectManager.GenerateRandomNewMeteor(gameTime, 1000);
             GameObjectManager.UpdateGameObjects();
+
+            VisibleArea = new Rectangle(
+                //(int)GameObjectManager.Player.Position.X - Graphics.PreferredBackBufferWidth / 2,
+                //(int)GameObjectManager.Player.Position.Y - Graphics.PreferredBackBufferHeight / 2,
+                (int)GameObjectManager.Player.Position.X - 400,
+                (int)GameObjectManager.Player.Position.Y - 400,
+                //Globals.ScreenWidth / 2,
+                //Globals.ScreenHeight / 2
+                400, 
+                400
+            );
+
+            if ((int) gameTime.TotalGameTime.TotalMilliseconds % 1000 == 0)
+            {
+                foreach (var gameObject in GameObjectManager.GameObjects)
+                {
+                    if (gameObject is Player)
+                        continue;
+
+                    if (VisibleArea.Contains(gameObject.Bounds) && !GameObjectManager.ActiveGameObjects.Contains(gameObject))
+                        GameObjectManager.ActiveGameObjects.Add(gameObject);
+                    else if (!VisibleArea.Contains(gameObject.Bounds) && GameObjectManager.ActiveGameObjects.Contains(gameObject))
+                        GameObjectManager.ActiveGameObjects.Remove(gameObject);
+
+                    //if (gameObject.Position.X >= VisibleArea.Left &&
+                    //    gameObject.Position.X <= VisibleArea.Right &&
+                    //    gameObject.Position.Y >= VisibleArea.Top &&
+                    //    gameObject.Position.Y <= VisibleArea.Bottom)
+                    //    GameObjectManager.ActiveGameObjects.Add(gameObject);
+                    //else if (GameObjectManager.ActiveGameObjects.Contains(gameObject))
+                    //    GameObjectManager.ActiveGameObjects.Remove(gameObject);
+                }
+                Debug.WriteLine((int) gameTime.TotalGameTime.TotalSeconds + ": " + string.Join("\r\n", GameObjectManager.ActiveGameObjects));
+                Debug.Write("\r\n");
+                //Debug.WriteLine($"{VisibleArea.Left}, {VisibleArea.Top}, {VisibleArea.Right}, {VisibleArea.Bottom}");
+            }
             base.Update(gameTime);
         }
         

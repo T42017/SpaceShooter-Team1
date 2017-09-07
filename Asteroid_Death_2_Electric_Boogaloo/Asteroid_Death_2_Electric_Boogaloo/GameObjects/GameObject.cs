@@ -20,16 +20,19 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public int Width { get; set; } 
         public int Height { get; set; }
 
+        //public Rectangle Bounds => _bounds;
         public Rectangle Bounds => new Rectangle(
             (int)Position.X - Width / 2,
             (int)Position.Y - Height / 2,
-            Width - 50,
-            Height - 50
+            Math.Max(Width, Height),
+            Math.Max(Width, Height)
         );
 
         protected Texture2D Texture;
         protected AsteroidsGame Game;
-        
+
+        private Texture2D _boundingBox;
+
         protected GameObject(AsteroidsGame game)
         {
             Game = game;
@@ -45,34 +48,29 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public virtual bool CollidesWith(GameObject otherGameObject)
         {
-            if ((this is Player && otherGameObject is Laser) || (this is Laser && otherGameObject is Player))
+            if ((this is Player && otherGameObject is Laser) || 
+                (this is Laser && otherGameObject is Player) ||
+                GetType() == otherGameObject.GetType())
                 return false; // Check this when enemies shoot lasers
-            if (GetType() == otherGameObject.GetType())
-                return false;
-            int aLittleToMakeCollisionSeemMoreCorrect = 0;
-            var theseBounds = new Rectangle(
-                (int) Position.X - Texture.Width / 2 + aLittleToMakeCollisionSeemMoreCorrect,
-                (int) Position.Y - Texture.Height / 2 + aLittleToMakeCollisionSeemMoreCorrect,
-                Texture.Width - 2 * aLittleToMakeCollisionSeemMoreCorrect,
-                Texture.Height - 2 * aLittleToMakeCollisionSeemMoreCorrect
-            );
 
-            var otherBounds = new Rectangle(
-                (int) otherGameObject.Position.X - otherGameObject.Texture.Width / 2 + aLittleToMakeCollisionSeemMoreCorrect,
-                (int) otherGameObject.Position.Y - otherGameObject.Texture.Height / 2 + aLittleToMakeCollisionSeemMoreCorrect,
-                otherGameObject.Texture.Width - 2 * aLittleToMakeCollisionSeemMoreCorrect,
-                otherGameObject.Texture.Height - 2 * aLittleToMakeCollisionSeemMoreCorrect
-            );
-            return theseBounds.Intersects(otherBounds) || otherBounds.Intersects(theseBounds);
+            return Bounds.Intersects(otherGameObject.Bounds) || otherGameObject.Bounds.Intersects(Bounds);
         }
 
         private void DrawBounds(SpriteBatch spriteBatch)
         {
-            var rectangle = new Texture2D(Game.GraphicsDevice, Width, Height);
-            var data = new Color[Width * Height];
-            for (int i = 0; i < data.Length; i++) data[i] = Color.Red;
-            rectangle.SetData(data);
-            spriteBatch.Draw(rectangle, Position - new Vector2(Width / 2f, Height / 2f), Color.Red);
+            _boundingBox = new Texture2D(Game.GraphicsDevice, Bounds.Width, Bounds.Height);
+            var data = new Color[Bounds.Width * Bounds.Height];
+            for (int i = 0; i < data.Length; i++)
+                data[i] = Color.Red;
+            _boundingBox.SetData(data);
+            spriteBatch.Draw(_boundingBox,
+                Position - new Vector2(
+                    Bounds.Width / 2f,
+                    Bounds.Height / 2f
+                ),
+                Color.Red
+            );
+            // fix memory exception
         }
 
         public abstract void LoadContent();
@@ -82,30 +80,30 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             DrawBounds(spriteBatch);
             spriteBatch.Draw(Texture, Position, null, Color.White, Rotation - MathHelper.PiOver2,
-                new Vector2(Texture.Width / 2, Texture.Height / 2), 1.0f, SpriteEffects.None, 0f);
+                new Vector2(Texture.Width / 2f, Texture.Height / 2f), 1.0f, SpriteEffects.None, 0f);
         }
 
         public void StayInsideLevel(Level level)
         {
-            if (Position.X + Texture.Width / 2 > level.SizeX)
+            if (Position.X + Texture.Width / 2f > level.SizeX)
             {
                 Position = new Vector2(level.SizeX - Texture.Width / 2, Position.Y);
                 if (Speed.X > 0) Speed = new Vector2(0, Speed.Y);
             }
-            else if (Position.X - Texture.Width / 2 < 0)
+            else if (Position.X - Texture.Width / 2f < 0)
             {
-                Position = new Vector2(Texture.Width / 2, Position.Y);
+                Position = new Vector2(Texture.Width / 2f, Position.Y);
                 if (Speed.X < 0) Speed = new Vector2(0, Speed.Y);
             }
 
-            if (Position.Y + Texture.Height / 2 > level.SizeY)
+            if (Position.Y + Texture.Height / 2f > level.SizeY)
             {
                 Position = new Vector2(Position.X, level.SizeY - Texture.Height / 2);
                 if (Speed.Y > 0) Speed = new Vector2(Speed.X, 0);
             }
-            else if (Position.Y - Texture.Height / 2 < 0)
+            else if (Position.Y - Texture.Height / 2f < 0)
             {
-                Position = new Vector2(Position.X, Texture.Height / 2);
+                Position = new Vector2(Position.X, Texture.Height / 2f);
                 if (Speed.Y < 0) Speed = new Vector2(Speed.X, 0);
             }
 
@@ -118,6 +116,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public void Move()
         {
             Position += Speed;
+            if (!Game.VisibleArea.Contains(Bounds))
+            {
+                Game.GameObjectManager.ActiveGameObjects.Remove(this);
+            }
         }
 
         public Vector2 Forward()
@@ -134,6 +136,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             {
                 Speed = Vector2.Normalize(Speed) * MaxSpeed;
             }
+        }
+
+        public override string ToString()
+        {
+            return $"{GetType().Name} with position ({(int) Position.X}, {(int) Position.Y}) is active={Game.GameObjectManager.ActiveGameObjects.Contains(this)}";
         }
     }
 }

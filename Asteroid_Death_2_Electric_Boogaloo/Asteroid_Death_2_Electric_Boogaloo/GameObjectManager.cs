@@ -12,6 +12,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     {
 
         public Player Player { get; private set; }
+
+        //public List<GameObject> Meteors { get; set; }
+        public List<GameObject> ActiveGameObjects { get; set; } = new List<GameObject>();
+
         public List<GameObject> GameObjects = new List<GameObject>();
 
         
@@ -41,6 +45,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 Position = new Vector2(_game.Level.SizeX / 2, _game.Level.SizeY / 2)
             };
             GameObjects.Add(Player);
+            ActiveGameObjects.Add(Player);
         }
 
         public void AddMeteors(int amount)
@@ -103,16 +108,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             {
                 GameObjects[i].Update();
             }
-
-            for (int i = GameObjects.Count - 1; i >= 0; i--) // htf does this work??
-            {
-                CheckForCollisionWith(GameObjects[i]);
-            }
         }
 
-        public void CheckForCollisionWith(GameObject thisObject)
+        public GameObject CheckForCollisionWith(GameObject thisObject)
         {
-            for (int i = GameObjects.Count - 1; i >= 0; i--)
+            for (int i = ActiveGameObjects.Count - 1; i >= 0; i--)
             {
                 var otherGameObject = GameObjects[i];
                 if (otherGameObject == null ||
@@ -121,12 +121,17 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
                 if (thisObject.CollidesWith(otherGameObject))
                 {
-                    GameObjects.Remove(otherGameObject);
                     //if (thisObject is LaserRed laser)
                     //    Components.Remove(laser);
-                    return;
+                    return otherGameObject;
                 }
             }
+            return null;
+        }
+
+        private void CheckForPixelPerfectCollisionBetween(GameObject firstGameObject, GameObject secondGameObject)
+        {
+            
         }
 
         internal void DrawGameObjects(SpriteBatch spriteBatch)
