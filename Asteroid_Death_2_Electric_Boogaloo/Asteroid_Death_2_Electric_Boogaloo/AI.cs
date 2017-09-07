@@ -11,13 +11,15 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     {
         public enum State
         {
-            MoveAround,
+            GoToPosition,
             FollowPlayer
         }
 
-        private State currentState = State.MoveAround;
+        private State currentState = State.GoToPosition;
         private readonly AsteroidsGame _game;
         private Enemy _enemy;
+
+        private Vector2 _positionGoTO = new Vector2();
 
         public AI(AsteroidsGame game, Enemy enemy)
         {
@@ -32,23 +34,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             if (Vector2.Distance(player.Position, _enemy.Position) < 300)
                 currentState = State.FollowPlayer;
             else if (Vector2.Distance(player.Position, _enemy.Position) > 300)
-                currentState = State.MoveAround;
+                currentState = State.GoToPosition;
 
-            if (currentState == State.MoveAround)
+            if (currentState == State.GoToPosition)
             {
 
-                if (GetDistanceToClosestMeteor() < 200)
-                {
-                    _enemy.Rotation = Physic.LookAt(_enemy.Position, GetClosestMeteor().Position) +
-                                      Physic.DegreesToRadians(180);
-                    _enemy.AccelerateForward(0.1f);
-                }
-                else
-                {
-                    _enemy.AccelerateForward(0.25f);
-                }
+                if (_positionGoTO.Equals(Vector2.Zero))
+                    _positionGoTO = GetRandomPositionInLevel();
 
-                _enemy.Move();
             }
             else if (currentState == State.FollowPlayer)
             {
@@ -61,9 +54,16 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             _enemy.StayInsideLevel();
         }
 
-        private void RandomizeRotation()
+        private Vector2 GetRandomPositionInLevel()
         {
-            _enemy.Rotation = (float)(Globals.RNG.NextDouble() * (2 * Math.PI));
+            Vector2 vec = new Vector2(Globals.RNG.Next(_game.Level.SizeX, _game.Level.SizeY));
+
+            while (Vector2.Distance(_enemy.Position, vec) < 100)
+            {
+                vec = new Vector2(Globals.RNG.Next(_game.Level.SizeX, _game.Level.SizeY));
+            }
+
+            return vec;
         }
 
         private List<Meteor> GetMeteors()

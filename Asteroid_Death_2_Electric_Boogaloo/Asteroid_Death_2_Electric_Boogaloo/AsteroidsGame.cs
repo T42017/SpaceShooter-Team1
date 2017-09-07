@@ -67,7 +67,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
             _camera = new Camera();
             GameObjectManager.AddEnemys(4);
-            GameObjectManager.AddMeteors(40);
+            GameObjectManager.AddMeteors(10);
 
             base.Initialize();
         }

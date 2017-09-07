@@ -49,6 +49,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 return false; // Check this when enemies shoot lasers
             if (GetType() == otherGameObject.GetType())
                 return false;
+
             int aLittleToMakeCollisionSeemMoreCorrect = 0;
             var theseBounds = new Rectangle(
                 (int) Position.X - Texture.Width / 2 + aLittleToMakeCollisionSeemMoreCorrect,

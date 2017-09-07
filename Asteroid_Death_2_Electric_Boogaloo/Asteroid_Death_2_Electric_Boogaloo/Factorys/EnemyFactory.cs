@@ -24,8 +24,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
             Enemy enemy = new Enemy(_game, enemyType)
             {
-                Position = new Vector2(random.Next(_game.Level.SizeX - 1), random.Next(_game.Level.SizeY))
+                Position = new Vector2(random.Next(Globals.ScreenWidth - 1), random.Next(Globals.ScreenHeight))
             };
+
             return enemy;
         }
 

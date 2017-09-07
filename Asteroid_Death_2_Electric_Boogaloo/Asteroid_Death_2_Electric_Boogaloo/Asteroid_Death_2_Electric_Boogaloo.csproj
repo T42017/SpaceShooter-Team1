@@ -48,6 +48,7 @@
     <Compile Include="Factorys\EnemyFactory.cs" />
     <Compile Include="GameObjectManager.cs" />
     <Compile Include="Level.cs" />
+    <Compile Include="PathfindingAStar.cs" />
     <Compile Include="Physic.cs" />
     <Compile Include="GameObjects\PixelExplosion.cs" />
     <Compile Include="Components\AstroidsComponent.cs" />

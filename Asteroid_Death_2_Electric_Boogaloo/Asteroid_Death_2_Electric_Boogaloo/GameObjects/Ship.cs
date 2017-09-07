@@ -23,6 +23,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             if (!((DateTime.Now - _timeSenceLastShot).TotalMilliseconds > ShootingSpeed))
                 return;
+
             Point shipCenterPoint = new Point((int)(Position.X), (int)(Position.Y));
             Point shootPoint = new Point((int) (Position.X + Width / 2), (int) (Position.Y + (Height / 4 * (ShootLefCannon ? 1 : -1))));
 
@@ -39,7 +40,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public override bool CollidesWith(GameObject otherGameObject)
         {
             bool collides = base.CollidesWith(otherGameObject);
-            if (collides) Game.GameObjectManager.GameObjects.Remove(this);
+            if (collides) IsDead = true;
             return collides;
         }
     }

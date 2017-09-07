@@ -26,6 +26,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             MaxSpeed = Globals.RNG.Next(250);
             MeteorSize = meteorSize;
             MeteorColour = meteorColour;
+            SetAppropriateTexture();
         }
 
         /// <summary>
@@ -80,7 +81,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public override void LoadContent()
         {
-            SetAppropriateTexture();
+            
         }
 
         public override void Update()
@@ -99,7 +100,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                     Game.GameObjectManager.GameObjects.Add(child);
             }
             bool collides = base.CollidesWith(otherGameObject);
-            if (collides) Game.GameObjectManager.GameObjects.Remove(this);
+            if (collides) IsDead = true;
             return collides;
         }
     }

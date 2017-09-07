@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -12,7 +13,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     {
 
         public Player Player { get; private set; }
-        public List<GameObject> GameObjects = new List<GameObject>();
+        public List<GameObject> GameObjects { get; private set; } = new List<GameObject>();
 
         
         private EnemyFactory _enemyFactory;
@@ -65,7 +66,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             for (int i = 0; i < GameObjects.Count; i++)
             {
                 if (GameObjects[i].IsDead)
+                {
                     GameObjects.Remove(GameObjects[i]);
+                }
             }
         }
 
@@ -131,7 +134,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
                 if (thisObject.CollidesWith(otherGameObject))
                 {
-                    GameObjects.Remove(otherGameObject);
+                    otherGameObject.IsDead = true;
                     //if (thisObject is LaserRed laser)
                     //    Components.Remove(laser);
                     return;
