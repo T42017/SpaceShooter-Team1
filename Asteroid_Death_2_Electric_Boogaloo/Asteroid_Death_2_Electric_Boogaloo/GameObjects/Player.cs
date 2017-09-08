@@ -42,23 +42,30 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
             KeyboardState state = Keyboard.GetState();
 
-            //GamePadState m_pad; // create GamePadState struct
-            //m_pad = GamePad.GetState(PlayerIndex.One); // retrieve current controller state
-            //if (m_pad.DPad.Up == ButtonState.Pressed) AccelerateForward(0.25f); // do something if DPad up button pressed|
-            //if (m_pad.DPad.Left == ButtonState.Pressed) // do something if DPad left button pressed 
+            GamePadState m_pad;
+            m_pad = GamePad.GetState(PlayerIndex.One);
+
+            //Movement using the DPad on the Xbox controller
+            if (m_pad.DPad.Up == ButtonState.Pressed) AccelerateForward(0.25f); 
+
+            if (m_pad.DPad.Down == ButtonState.Pressed) AccelerateForward(-0.07f);
+
+            if (m_pad.DPad.Left == ButtonState.Pressed)  Rotation -= 0.04f; 
+
+            if (m_pad.DPad.Right == ButtonState.Pressed) Rotation += 0.04f;
 
 
-
-            if (gamePadState.ThumbSticks.Left.Y== 1.0f || (state.IsKeyDown(Keys.Up))) 
+            //Movement using the left joystick on the Xbox controller or the Arrows
+            if (gamePadState.ThumbSticks.Left.Y>= 0.3f || (state.IsKeyDown(Keys.Up))) 
                 AccelerateForward(0.25f);
            
-            if (gamePadState.ThumbSticks.Left.Y == -1.0f || (state.IsKeyDown(Keys.Down)))
+            if (gamePadState.ThumbSticks.Left.Y <= -0.3f || (state.IsKeyDown(Keys.Down)))
                 AccelerateForward(-0.07f);
 
-            if (gamePadState.ThumbSticks.Left.X == -1.0f ||(state.IsKeyDown(Keys.Left)))
+            if (gamePadState.ThumbSticks.Left.X <= -0.3f ||(state.IsKeyDown(Keys.Left)))
                 Rotation -= 0.04f;
 
-            else if (gamePadState.ThumbSticks.Left.X == 1.0f || (state.IsKeyDown(Keys.Right)))
+            else if (gamePadState.ThumbSticks.Left.X >= 0.3f || (state.IsKeyDown(Keys.Right)))
                 Rotation += 0.04f;
 
             lastKeyboardState = state;
