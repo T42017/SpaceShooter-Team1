@@ -73,7 +73,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
                     39)
                 {
                     pGame.ChangeGameState(GameState.ingame);
-
+                    playing = false;
                 }
 
                 else if (x >= pGame.Graphics.PreferredBackBufferWidth / 3 &&
@@ -133,7 +133,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
 
 
                 SpriteBatch.DrawString(menuFont, Name,
-                    new Vector2(pGame.Graphics.PreferredBackBufferWidth / 8,
+                    new Vector2((pGame.Graphics.PreferredBackBufferWidth / 2)-(pGame.Graphics.PreferredBackBufferWidth/6),
                         pGame.Graphics.PreferredBackBufferHeight / 4), Color.Fuchsia);
 
                 SpriteBatch.Draw(Button,

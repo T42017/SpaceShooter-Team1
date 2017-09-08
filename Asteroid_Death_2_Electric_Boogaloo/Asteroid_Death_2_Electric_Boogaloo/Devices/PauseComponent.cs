@@ -11,6 +11,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 {
     class PauseComponent : AstroidsComponent
     {
+        private KeyboardState lastKeyboardState;
         private SpriteFont font;
         private AsteroidsGame pGame;
         public PauseComponent(Game game) : base(game)
@@ -24,7 +25,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 
         protected override void LoadContent()
         {
-            font = Game.Content.Load<SpriteFont>("GameState");
+            font = Game.Content.Load<SpriteFont>("Text");
 
             base.LoadContent();
         }
@@ -32,21 +33,34 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         public override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
-                Keyboard.GetState().IsKeyDown(Keys.Escape))
+                Keyboard.GetState().IsKeyDown(Keys.Escape)&& lastKeyboardState.IsKeyUp(Keys.Escape))
                 pGame.ChangeGameState(GameState.ingame);
 
-
-                base.Update(gameTime);
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
+                Keyboard.GetState().IsKeyDown(Keys.M))
+                pGame.ChangeGameState(GameState.Menu);
+             lastKeyboardState=Keyboard.GetState();
+            base.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime)
         {
-            
-            String Text;
-            Text = "Game is paused";
+            String Text1,text2;
+            Text1 = "Game is paused";
+            text2 = "press M to go back to main menu";
 
+            SpriteBatch.Begin();
 
-            
+            SpriteBatch.DrawString(font, Text1,
+                new Vector2((pGame.Graphics.PreferredBackBufferWidth / 2) - (pGame.Graphics.PreferredBackBufferWidth / 16),
+                    (pGame.Graphics.PreferredBackBufferHeight / 4) +
+                    (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Black);
+            SpriteBatch.DrawString(font, text2,
+                new Vector2(pGame.Graphics.PreferredBackBufferWidth / 2 - (pGame.Graphics.PreferredBackBufferWidth / 12),
+                    (pGame.Graphics.PreferredBackBufferHeight / 4) +
+                    (pGame.Graphics.PreferredBackBufferHeight / 8)+30), Color.Black);
+
+            SpriteBatch.End();
 
             base.Draw(gameTime);
         }
