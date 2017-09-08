@@ -14,12 +14,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
 {
     class MenuComponent : AstroidsComponent
     {
-        
         private SpriteFont menuFont,buttonFont;
         private Texture2D Button;
         private AsteroidsGame pGame;
         private MouseState oldState;
-
 
         public MenuComponent(Game game) : base(game)
         {
@@ -33,8 +31,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
 
         }
         
-        
-
         protected override void LoadContent()
         {
             menuFont= Game.Content.Load<SpriteFont>("GameState");
@@ -53,8 +49,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
             int x = newState.X, y = newState.Y;
             if (newState.LeftButton == ButtonState.Pressed && oldState.LeftButton == ButtonState.Released)
             {
-                
-
                 if (x >= pGame.Graphics.PreferredBackBufferWidth / 3 &&
                     x <= (pGame.Graphics.PreferredBackBufferWidth / 3) + 222 &&
                     y >= (pGame.Graphics.PreferredBackBufferHeight / 4) + (pGame.Graphics.PreferredBackBufferHeight / 8) && y<= ((pGame.Graphics.PreferredBackBufferHeight / 4) + (pGame.Graphics.PreferredBackBufferHeight / 8)) +39)
@@ -72,10 +66,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
 
 
             }
-
-
-
-
 
             oldState = newState;
             base.Update(gameTime);
@@ -99,7 +89,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
                 button2 = "Highscore",
                 button3 = "Quit";
             
-
             SpriteBatch.DrawString(menuFont, Name, new Vector2(pGame.Graphics.PreferredBackBufferWidth/8,pGame.Graphics.PreferredBackBufferHeight/4),Color.Fuchsia);
 
             SpriteBatch.Draw(Button,new Vector2(pGame.Graphics.PreferredBackBufferWidth/3,(pGame.Graphics.PreferredBackBufferHeight/4)+(pGame.Graphics.PreferredBackBufferHeight/8)),Color.Cyan);
