@@ -1,0 +1,58 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
+
+namespace Asteroid_Death_2_Electric_Boogaloo
+{
+    public class Enemy : Ship
+    {
+
+        public enum Type
+        {
+            enemyRed1,
+            enemyRed2,
+            enemyRed3,
+            enemyRed4,
+            enemyRed5,
+            enemyBlue1,
+            enemyBlue2,
+            enemyBlue3,
+            enemyBlue4,
+            enemyBlue5,
+            enemyGreen1,
+            enemyGreen2,
+            enemyGreen3,
+            enemyGreen4,
+            enemyGreen5,
+            enemyBlack1,
+            enemyBlack2,
+            enemyBlack3,
+            enemyBlack4,
+            enemyBlack5
+        }
+
+        public Type type;
+        private AI _ai;
+        
+        public Enemy(AsteroidsGame game, Type type) : base(game)
+        {
+            this.type = type;
+            _ai = new AI((AsteroidsGame) game, this);
+            this.type = type;
+        }
+
+        public override void LoadContent()
+        {
+            LoadTexture(Enum.GetName(typeof(Type), type));
+        }
+
+        public override void Update()
+        {
+            _ai.Update();
+        }
+    }
+}

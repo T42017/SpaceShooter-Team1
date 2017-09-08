@@ -24,11 +24,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Width,
             Height
         );
-
         protected Texture2D Texture;
         protected Game Game;
         protected readonly SpriteBatch SpriteBatch;
-
         protected GameObject(Game game) : base(game)
         {
             Game = game;
@@ -46,10 +44,24 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public bool CollidesWith(GameObject otherGameObject)
         {
             if ((this is Player && otherGameObject is Laser) || (this is Laser && otherGameObject is Player))
-            if ((this is Player && otherGameObject is Laser) || (this is Laser && otherGameObject is Player))
+                return false;
+            //var fullWidth = Width + otherGameObject.Width;
+            //var fullHeight = Height + otherGameObject.Height;
+            //var distanceX = Math.Abs(Position.X - otherGameObject.Position.X);
+            //var distanceY = Math.Abs(Position.Y - otherGameObject.Position.Y);
+
+            //return distanceX < fullWidth && distanceY < fullHeight;
+
+            var theseBounds = new Rectangle((int)Position.X - Texture.Width,
+                (int)Position.Y - Texture.Height,
+                Texture.Width,
+                Texture.Height);
+
+                if ((this is Player && otherGameObject is LaserRed) || (this is LaserRed && otherGameObject is Player))
                 return false; // Check this when enemies shoot lasers
 
             int aLittleToMakeCollisionSeemMoreCorrect = 0;
+
             var theseBounds = new Rectangle(
                 (int) Position.X - Texture.Width / 2 + aLittleToMakeCollisionSeemMoreCorrect,
                 (int) Position.Y - Texture.Height / 2 + aLittleToMakeCollisionSeemMoreCorrect,
