@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing.Text;
 using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
@@ -19,24 +20,17 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     public class AsteroidsGame : Game
     {
-<<<<<<< HEAD
       
-        private GameState _gameState;
-        public GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
-        private Texture2D backgroundTexture;
-        private Player player;
-     
-=======
         public GraphicsDeviceManager Graphics;
         public int WindowWidth, Windowheight;
         public GameObjectManager GameObjectManager;
         public Level Level;
->>>>>>> origin/Feature_MovementOfPlayer
 
         private GameState _gameState;
         private SpriteBatch _spriteBatch;
         private Camera _camera;
+
+        
         
         public AsteroidsGame()
         {
@@ -47,6 +41,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Content.RootDirectory = "Content";
             Window.Position = new Point(300, 300);
             Window.Title = "Asteroid Death 2 Electric Boogaloo";
+           
+
         }
 
         public void ChangeGameState(GameState desiredState)
@@ -63,58 +59,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                astroidsComponent.Enabled = astroidsComponent.UpdatableStates.HasFlag(_gameState);
            }
         }
-<<<<<<< HEAD
-
-        
-        public void CheckForCollisionWith(GameObject thisObject)	
-        {
-            for (int i = Components.Count - 1; i >= 0; i--)
-            {
-                if (Components[i] == null ||
-                    !(Components[i] is GameObject otherGameObject) ||
-                    otherGameObject == thisObject)
-                    continue;
-
-                if (thisObject.CollidesWith(otherGameObject))
-                {
-                    if (thisObject is Meteor && otherGameObject is Meteor)
-                        continue;
-                    Components.Remove(otherGameObject);
-                    //if (thisObject is LaserRed laser)
-                    //    Components.Remove(laser);
-                    return;
-                }
-            }
-        }
-
-        public void GenerateRandomNewMeteor(GameTime gameTime, int intervalInSeconds)
-        {
-            var currentGameTimeModInterval = gameTime.TotalGameTime.TotalSeconds % intervalInSeconds;
-            //var respawnArea = new Rectangle(
-            //    (int) player.Position.X - player.Width / 2 - 100,
-            //    (int) player.Position.Y - player.Height / 2 - 100,
-            //    player.Width + 100,
-            //    player.Height + 100
-            //);
-            
-            if ((int) currentGameTimeModInterval == 0)
-            {
-                var meteor = new Meteor(
-                    this,
-                    new Vector2(
-                        Globals.RNG.Next(0, 200),
-                        Globals.RNG.Next(0, 200)
-                    ),
-                    (MeteorSize)Globals.RNG.Next(0, 3),
-                    (MeteorColour)Globals.RNG.Next(0, 2)
-                );
-                Components.Add(meteor);
-            }
-        }
-=======
         
         
->>>>>>> origin/Feature_MovementOfPlayer
+        
 
         
         protected override void Initialize()
@@ -130,8 +77,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Components.Add(new MenuComponent(this));
             Components.Add(new HighscoreMenuComponent(this));
             Components.Add(new IngameComponent(this));
-            
+<<<<<<< HEAD
+            Components.Add(new PauseComponent(this));
             //Components.Add(new YouAreDead());
+=======
+>>>>>>> origin/Feature_MovementOfPlayer
             ChangeGameState(GameState.Menu);
            
             
@@ -142,8 +92,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
             _camera = new Camera();
             GameObjectManager.AddNewPlayer();
-            GameObjectManager.AddEnemys(4);
-            GameObjectManager.AddMeteors(10);
+            //GameObjectManager.AddEnemys(4);
+            //GameObjectManager.AddMeteors(10);
 
             base.Initialize();
         }
@@ -163,27 +113,24 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
-<<<<<<< HEAD
-
+            
            
-            /* for (int i = Components.Count - 1; i >= 0; i--)
-             {
-                 if (!(Components[i] is GameObject gameObject))
-                     continue;
-                 CheckForCollisionWith(gameObject);
-             }
+            
+           
+               
 
-             GenerateRandomNewMeteor(gameTime, 5);*/
-
-=======
             Globals.ScreenWidth = Graphics.PreferredBackBufferWidth;
             if(_gameState== GameState.ingame) { 
+<<<<<<< HEAD
             _camera.FollowPlayer(GameObjectManager.Player);
             //GameObjectManager.GenerateRandomNewMeteor(gameTime, 1000);
             GameObjectManager.UpdateGameObjects();
+             }
+=======
+                Debug.WriteLine(_gameState);
+                _camera.FollowPlayer(GameObjectManager.Player);
+                //GameObjectManager.GenerateRandomNewMeteor(gameTime, 1000);
+                GameObjectManager.UpdateGameObjects();
             }
 >>>>>>> origin/Feature_MovementOfPlayer
             base.Update(gameTime);
@@ -201,10 +148,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 null,
                 null,
                 _camera.get_transformation(GraphicsDevice, WindowWidth, Windowheight));
+           
             if (_gameState==GameState.ingame ||_gameState==GameState.paused)
             {
-                Level.DrawBackground(_spriteBatch);
 
+                Level.DrawBackground(_spriteBatch);
                 GameObjectManager.DrawGameObjects(_spriteBatch);
             }
 

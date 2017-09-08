@@ -15,6 +15,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
 {
     class MenuComponent : AstroidsComponent
     {
+<<<<<<< HEAD
         private SpriteBatch batch;
         private SpriteFont menuFont, buttonFont;
         private Texture2D Button, texture;
@@ -23,6 +24,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
         private Song song;
         private Level level;
         private bool playing;
+=======
+        private SpriteFont menuFont,buttonFont;
+        private Texture2D Button;
+        private AsteroidsGame pGame;
+        private MouseState oldState;
+>>>>>>> origin/Feature_MovementOfPlayer
 
         public MenuComponent(Game game) : base(game)
         {
@@ -38,12 +45,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
             MediaPlayer.IsRepeating = true;
         }
 <<<<<<< HEAD
-        
+
+
+
 =======
-
-
-
->>>>>>> Feature_menu
+        
+>>>>>>> origin/Feature_MovementOfPlayer
         protected override void LoadContent()
         {
             menuFont = Game.Content.Load<SpriteFont>("GameState");
@@ -67,8 +74,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
             int x = newState.X, y = newState.Y;
             if (newState.LeftButton == ButtonState.Pressed && oldState.LeftButton == ButtonState.Released)
             {
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> origin/Feature_MovementOfPlayer
                 if (x >= pGame.Graphics.PreferredBackBufferWidth / 3 &&
                     x <= (pGame.Graphics.PreferredBackBufferWidth / 3) + 222 &&
                     y >= (pGame.Graphics.PreferredBackBufferHeight / 4) +
@@ -102,6 +112,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
                          139)
                     pGame.Exit();
             }
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/Feature_MovementOfPlayer
             oldState = newState;
             base.Update(gameTime);
         }
@@ -116,8 +130,18 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
         public override void Draw(GameTime gameTime)
         {
 
+<<<<<<< HEAD
             SpriteBatch.Begin();
 
+=======
+                String 
+                Name = "Asteroid Death 2 Electric Boogaloo",
+                button1 = "Start",
+                button2 = "Highscore",
+                button3 = "Quit";
+            
+            SpriteBatch.DrawString(menuFont, Name, new Vector2(pGame.Graphics.PreferredBackBufferWidth/8,pGame.Graphics.PreferredBackBufferHeight/4),Color.Fuchsia);
+>>>>>>> origin/Feature_MovementOfPlayer
 
 
             for (int x = 0; x < 2000; x += texture.Width)

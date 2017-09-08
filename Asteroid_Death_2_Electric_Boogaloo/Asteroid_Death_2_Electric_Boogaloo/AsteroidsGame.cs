@@ -81,7 +81,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             ChangeGameState(GameState.Menu);
            
             
-            Level = new Level(this, 3000, 3000);
+            Level = new Level(this, 20, 20);
 
             GameObjectManager = new GameObjectManager(this);
             GameObjectManager.AddEnemyFactory(new EnemyFactory(this));
