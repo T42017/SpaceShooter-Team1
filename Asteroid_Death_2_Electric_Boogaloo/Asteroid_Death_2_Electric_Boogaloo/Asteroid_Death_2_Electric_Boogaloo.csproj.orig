@@ -43,27 +43,23 @@
   <ItemGroup>
     <Compile Include="AI.cs" />
     <Compile Include="AsteroidsGame.cs" />
-<<<<<<< HEAD
-    <Compile Include="Devices\HighscoreMenuComponent.cs" />
-    <Compile Include="Devices\IngameComponent.cs" />
-    <Compile Include="Devices\YouAreDead.cs" />
-    <Compile Include="Enemy.cs" />
-    <Compile Include="PixelExplosion.cs" />
-    <Compile Include="Devices\AstroidsComponent.cs" />
-    <Compile Include="Devices\MenuComponent.cs" />
-    <Compile Include="GameObject.cs" />
-=======
     <Compile Include="Camera.cs" />
+    <Compile Include="Devices\PauseComponent.cs" />
     <Compile Include="GameObjects\Enemy.cs" />
     <Compile Include="Factorys\EnemyFactory.cs" />
+    <Compile Include="Devices\HighscoreMenuComponent.cs" />
+    <Compile Include="Devices\IngameComponent.cs" />
     <Compile Include="GameObjectManager.cs" />
     <Compile Include="Level.cs" />
+<<<<<<< HEAD
+    <Compile Include="PathfindingAStar.cs" />
+=======
+    <Compile Include="Devices\AstroidsComponent.cs" />
+    <Compile Include="Devices\MenuComponent.cs" />
+>>>>>>> develop
     <Compile Include="Physic.cs" />
     <Compile Include="GameObjects\PixelExplosion.cs" />
-    <Compile Include="Components\AstroidsComponent.cs" />
-    <Compile Include="Components\MenuComponent.cs" />
     <Compile Include="GameObjects\GameObject.cs" />
->>>>>>> origin/feature-collision_detection
     <Compile Include="Globals.cs" />
     <Compile Include="GameState.cs" />
     <Compile Include="GameObjects\Laser.cs" />

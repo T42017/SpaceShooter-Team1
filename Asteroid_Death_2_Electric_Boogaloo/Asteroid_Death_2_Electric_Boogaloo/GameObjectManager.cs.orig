@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -12,8 +13,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     {
 
         public Player Player { get; private set; }
-        public List<GameObject> GameObjects = new List<GameObject>();
+<<<<<<< HEAD
+        public List<GameObject> GameObjects { get; private set; } = new List<GameObject>();
 
+=======
+        public List<GameObject> GameObjects = new List<GameObject>();
+>>>>>>> develop
         
         private EnemyFactory _enemyFactory;
         private readonly AsteroidsGame _game;
@@ -60,15 +65,17 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             }
         }
 
-<<<<<<< HEAD
         internal void RemoveDeadGameObjects()
         {
             for (int i = 0; i < GameObjects.Count; i++)
             {
                 if (GameObjects[i].IsDead)
+                {
                     GameObjects.Remove(GameObjects[i]);
+                }
             }
-=======
+        }
+
         public void GenerateRandomNewMeteor(GameTime gameTime, int intervalInMilliseconds)
         {
             var currentGameTimeModInterval = (int)gameTime.TotalGameTime.TotalMilliseconds % intervalInMilliseconds;
@@ -97,7 +104,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             }
             while (respawnArea.Contains(meteor.Bounds));
             GameObjects.Add(meteor);
->>>>>>> origin/feature-collision_detection
         }
 
         internal void LoadContent()
@@ -113,12 +119,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             for (int i = 0; i < GameObjects.Count; i++)
             {
                 GameObjects[i].Update();
-            }
-
-            for (int i = GameObjects.Count - 1; i >= 0; i--) // htf does this work??
-            {
                 CheckForCollisionWith(GameObjects[i]);
             }
+
+           // for (int i = GameObjects.Count - 1; i >= 0; i--) // htf does this work??
+          //  {
+               
+            //}
         }
 
         public void CheckForCollisionWith(GameObject thisObject)
@@ -132,7 +139,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
                 if (thisObject.CollidesWith(otherGameObject))
                 {
-                    GameObjects.Remove(otherGameObject);
+                    otherGameObject.IsDead = true;
                     //if (thisObject is LaserRed laser)
                     //    Components.Remove(laser);
                     return;
@@ -142,10 +149,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         internal void DrawGameObjects(SpriteBatch spriteBatch)
         {
+            
             for (int i = 0; i < GameObjects.Count; i++)
             {
-                GameObjects[i].Draw(spriteBatch);
+                  GameObjects[i].Draw(spriteBatch);
             }
+            
+            
         }
     }
 }

@@ -1,0 +1,61 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
+
+namespace Asteroid_Death_2_Electric_Boogaloo
+{
+    public class Laser : GameObject
+    {
+        public enum Color
+        {
+            Red,
+            Green,
+            Blue
+        }
+
+        private Color color;
+
+        public Laser(AsteroidsGame game, Vector2 position, float rotation, Color color) : base(game)
+        {
+            this.Position = position;
+            this.Rotation = rotation;
+            this.color = color;
+            LoadTexture("laser" + Enum.GetName(typeof(Color), color));
+            MaxSpeed = 200;
+        }
+
+        public override void LoadContent()
+        {
+<<<<<<< HEAD
+            
+=======
+            LoadTexture("laser" + Enum.GetName(typeof(Color), color));
+            MaxSpeed = 220;
+>>>>>>> develop
+        }
+
+        public override void Update()
+        {
+<<<<<<< HEAD
+            if (IsOutSideLevel(Game.Level))
+                IsDead = true;
+            Speed = Forward() * 10;
+            AccelerateForward(3);
+=======
+            Speed = Forward() * 11;
+            AccelerateForward(9);
+>>>>>>> develop
+            Move();
+        }
+
+        public override bool CollidesWith(GameObject otherGameObject)
+        {
+            var collides = base.CollidesWith(otherGameObject);
+            if (collides) Game.GameObjectManager.GameObjects.Remove(this);
+            return collides;
+        }
+    }
+}
