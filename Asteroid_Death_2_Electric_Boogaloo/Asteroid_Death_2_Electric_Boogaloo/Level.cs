@@ -20,6 +20,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public Level(AsteroidsGame game, int SizeX, int SizeY)
         {
             _game = game;
+            LoadContent();
+            this.SizeX = SizeX*texture.Width;
+            this.SizeY = SizeY*texture.Height;
             texture = _game.Content.Load<Texture2D>("background");
             this.SizeX = SizeX * texture.Width;
             this.SizeY = SizeY * texture.Height;

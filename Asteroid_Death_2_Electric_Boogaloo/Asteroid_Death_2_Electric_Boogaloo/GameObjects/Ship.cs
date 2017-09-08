@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -40,7 +41,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public override bool CollidesWith(GameObject otherGameObject)
         {
             bool collides = base.CollidesWith(otherGameObject);
-            if (collides) IsDead = true;
+            if (collides)
+            {
+                Game.GameObjectManager.GameObjects.Remove(this);
+            }
             return collides;
         }
     }

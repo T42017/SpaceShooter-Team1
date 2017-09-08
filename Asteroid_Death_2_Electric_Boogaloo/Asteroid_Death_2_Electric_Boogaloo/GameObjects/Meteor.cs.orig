@@ -108,7 +108,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         }
 
         public override bool CollidesWith(GameObject otherGameObject)
-        {
+        //{
             var children = SpawnChildren();
             if (children != null)
             {
@@ -122,7 +122,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Rotation += RotationSpeed; // Change fixed float to property later
             Move();
 >>>>>>> origin/feature-enemy:Asteroid_Death_2_Electric_Boogaloo/Asteroid_Death_2_Electric_Boogaloo/GameObjects/Meteor.cs
-        }
 
         //public override void Draw(GameTime gameTime)
         //{

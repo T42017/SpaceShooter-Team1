@@ -30,15 +30,21 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public override void LoadContent()
         {
             
+            MaxSpeed = 220;
         }
 
         public override void Update()
         {
             if (IsOutSideLevel(Game.Level))
                 IsDead = true;
-            Speed = Forward() * 10;
-            AccelerateForward(3);
             Move();
+        }
+
+        public override bool CollidesWith(GameObject otherGameObject)
+        {
+            var collides = base.CollidesWith(otherGameObject);
+            if (collides) Game.GameObjectManager.GameObjects.Remove(this);
+            return collides;
         }
     }
 }

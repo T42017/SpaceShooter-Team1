@@ -14,7 +14,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public Player Player { get; private set; }
         public List<GameObject> GameObjects { get; private set; } = new List<GameObject>();
-
         
         private EnemyFactory _enemyFactory;
         private readonly AsteroidsGame _game;
@@ -115,12 +114,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             for (int i = 0; i < GameObjects.Count; i++)
             {
                 GameObjects[i].Update();
-            }
-
-            for (int i = GameObjects.Count - 1; i >= 0; i--) // htf does this work??
-            {
                 CheckForCollisionWith(GameObjects[i]);
             }
+
+           // for (int i = GameObjects.Count - 1; i >= 0; i--) // htf does this work??
+          //  {
+               
+            //}
         }
 
         public void CheckForCollisionWith(GameObject thisObject)
@@ -144,10 +144,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         internal void DrawGameObjects(SpriteBatch spriteBatch)
         {
+            
             for (int i = 0; i < GameObjects.Count; i++)
             {
-                GameObjects[i].Draw(spriteBatch);
+                  GameObjects[i].Draw(spriteBatch);
             }
+            
+            
         }
     }
 }
