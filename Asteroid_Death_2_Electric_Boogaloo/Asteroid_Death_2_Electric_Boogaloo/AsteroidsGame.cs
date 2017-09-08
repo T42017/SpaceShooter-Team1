@@ -107,11 +107,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         protected override void Update(GameTime gameTime)
         {
             Globals.ScreenWidth = Graphics.PreferredBackBufferWidth;
-            if(_gameState== GameState.ingame) { 
+            if (_gameState == GameState.ingame)
+            {
                 _camera.FollowPlayer(GameObjectManager.Player);
                 //GameObjectManager.GenerateRandomNewMeteor(gameTime, 1000);
                 GameObjectManager.UpdateGameObjects();
-            GameObjectManager.RemoveDeadGameObjects();
+                GameObjectManager.RemoveDeadGameObjects();
+            }
             base.Update(gameTime);
         }
         

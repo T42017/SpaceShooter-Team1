@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asteroid_Death_2_Electric_Boogaloo", "Asteroid_Death_2_Electric_Boogaloo\Asteroid_Death_2_Electric_Boogaloo.csproj", "{810069C1-F478-4B6D-BAC6-FAB43E19CB59}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2FB2A89E-D9E7-46E2-8D59-12F2AA8FB4BD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86

@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="AI.cs" />
     <Compile Include="AsteroidsGame.cs" />
+    <Compile Include="Devices\AstroidsComponent.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="Devices\PauseComponent.cs" />
     <Compile Include="GameObjects\Enemy.cs" />
@@ -57,7 +58,7 @@
     <Compile Include="GameObjects\PixelExplosion.cs" />
     <Compile Include="GameObjects\GameObject.cs" />
     <Compile Include="Globals.cs" />
-    <Compile Include="GameState.cs" />
+    <Compile Include="Devices\GameState.cs" />
     <Compile Include="GameObjects\Laser.cs" />
     <Compile Include="GameObjects\Meteor.cs" />
     <Compile Include="Enums\MeteorColour.cs" />
