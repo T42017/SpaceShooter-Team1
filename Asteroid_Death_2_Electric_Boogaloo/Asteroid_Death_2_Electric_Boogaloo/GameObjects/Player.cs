@@ -31,6 +31,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             var gamePadState = GamePad.GetState(PlayerIndex.One);
             
             if ((gamePadState.Buttons.A == ButtonState.Pressed ||
+                 Keyboard.GetState().IsKeyDown(Keys.Space)))
             {
                 pewEffect.Play();
                 Shoot();
@@ -48,7 +49,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             if (gamePadState.ThumbSticks.Left.Y== 1.0f || (state.IsKeyDown(Keys.Up))) 
                 AccelerateForward(0.25f);
            
-            if (gamePadState.ThumbSticks.Left.Y == -1.0f || (state.IsKeyDown(Keys.Down)))
+            else if (gamePadState.ThumbSticks.Left.Y == -1.0f || (state.IsKeyDown(Keys.Down)))
                 AccelerateForward(-0.07f);
 
             if (gamePadState.ThumbSticks.Left.X == -1.0f ||(state.IsKeyDown(Keys.Left)))
