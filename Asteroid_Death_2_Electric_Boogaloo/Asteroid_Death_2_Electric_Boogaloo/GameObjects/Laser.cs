@@ -30,13 +30,15 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public override void LoadContent()
         {
             
-            MaxSpeed = 220;
         }
 
         public override void Update()
         {
             if (IsOutSideLevel(Game.Level))
                 IsDead = true;
+
+            Speed = Forward() * 11;
+            AccelerateForward(9);
             Move();
         }
 
