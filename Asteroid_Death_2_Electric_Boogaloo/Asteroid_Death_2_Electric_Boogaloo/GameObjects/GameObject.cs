@@ -23,8 +23,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public Rectangle Bounds => new Rectangle(
             (int)Position.X - Width / 2,
             (int)Position.Y - Height / 2,
-            Width - 50,
-            Height - 50
+            Width,
+            Height
         );
 
         protected Texture2D Texture;
@@ -47,8 +47,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             if ((this is Player && otherGameObject is Laser) || (this is Laser && otherGameObject is Player))
                 return false; // Check this when enemies shoot lasers
+
             if (GetType() == otherGameObject.GetType())
                 return false;
+
             int aLittleToMakeCollisionSeemMoreCorrect = 0;
             var theseBounds = new Rectangle(
                 (int) Position.X - Texture.Width / 2 + aLittleToMakeCollisionSeemMoreCorrect,
@@ -63,6 +65,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 otherGameObject.Texture.Width - 2 * aLittleToMakeCollisionSeemMoreCorrect,
                 otherGameObject.Texture.Height - 2 * aLittleToMakeCollisionSeemMoreCorrect
             );
+
+           
             return theseBounds.Intersects(otherBounds) || otherBounds.Intersects(theseBounds);
         }
 

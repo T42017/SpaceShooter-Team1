@@ -23,7 +23,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
         private Song song;
         private Level level;
         private bool playing;
-
         public MenuComponent(Game game) : base(game)
         {
             batch = SpriteBatch;
@@ -37,7 +36,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
             playing = false;
             MediaPlayer.IsRepeating = true;
         }
-
 
 
         protected override void LoadContent()
@@ -63,7 +61,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
             int x = newState.X, y = newState.Y;
             if (newState.LeftButton == ButtonState.Pressed && oldState.LeftButton == ButtonState.Released)
             {
-
 
                 if (x >= pGame.Graphics.PreferredBackBufferWidth / 3 &&
                     x <= (pGame.Graphics.PreferredBackBufferWidth / 3) + 222 &&
@@ -130,7 +127,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
                     button1 = "Start",
                     button2 = "Highscore",
                     button3 = "Quit";
-
 
                 SpriteBatch.DrawString(menuFont, Name,
                     new Vector2((pGame.Graphics.PreferredBackBufferWidth / 2)-(pGame.Graphics.PreferredBackBufferWidth/6),

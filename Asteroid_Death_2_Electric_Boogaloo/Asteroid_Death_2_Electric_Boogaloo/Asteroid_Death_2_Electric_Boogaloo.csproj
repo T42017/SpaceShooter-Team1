@@ -49,7 +49,6 @@
     <Compile Include="Factorys\EnemyFactory.cs" />
     <Compile Include="Devices\HighscoreMenuComponent.cs" />
     <Compile Include="Devices\IngameComponent.cs" />
-    <Compile Include="Devices\YouAreDead.cs" />
     <Compile Include="GameObjectManager.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="Devices\AstroidsComponent.cs" />

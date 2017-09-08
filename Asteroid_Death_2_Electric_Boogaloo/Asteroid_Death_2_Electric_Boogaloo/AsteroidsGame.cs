@@ -78,7 +78,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Components.Add(new HighscoreMenuComponent(this));
             Components.Add(new IngameComponent(this));
             Components.Add(new PauseComponent(this));
-            //Components.Add(new YouAreDead());
             ChangeGameState(GameState.Menu);
            
             
@@ -89,8 +88,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
             _camera = new Camera();
             GameObjectManager.AddNewPlayer();
-            GameObjectManager.AddEnemys(4);
-            GameObjectManager.AddMeteors(10);
+            //GameObjectManager.AddEnemys(4);
+            //GameObjectManager.AddMeteors(10);
 
             base.Initialize();
         }
@@ -118,9 +117,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
             Globals.ScreenWidth = Graphics.PreferredBackBufferWidth;
             if(_gameState== GameState.ingame) { 
-            _camera.FollowPlayer(GameObjectManager.Player);
-            //GameObjectManager.GenerateRandomNewMeteor(gameTime, 1000);
-            GameObjectManager.UpdateGameObjects();
+                _camera.FollowPlayer(GameObjectManager.Player);
+                //GameObjectManager.GenerateRandomNewMeteor(gameTime, 1000);
+                GameObjectManager.UpdateGameObjects();
              }
             base.Update(gameTime);
         }
