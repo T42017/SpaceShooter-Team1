@@ -29,16 +29,25 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public override void LoadContent()
         {
+<<<<<<< HEAD
             
+=======
+            LoadTexture("laser" + Enum.GetName(typeof(Color), color));
+            MaxSpeed = 220;
+>>>>>>> develop
         }
 
         public override void Update()
         {
+<<<<<<< HEAD
             if (IsOutSideLevel(Game.Level))
                 IsDead = true;
-
+            Speed = Forward() * 10;
+            AccelerateForward(3);
+=======
             Speed = Forward() * 11;
             AccelerateForward(9);
+>>>>>>> develop
             Move();
         }
 

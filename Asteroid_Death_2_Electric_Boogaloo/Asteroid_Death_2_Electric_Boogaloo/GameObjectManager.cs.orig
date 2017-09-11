@@ -13,7 +13,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     {
 
         public Player Player { get; private set; }
+<<<<<<< HEAD
         public List<GameObject> GameObjects { get; private set; } = new List<GameObject>();
+
+=======
+        public List<GameObject> GameObjects = new List<GameObject>();
+>>>>>>> develop
         
         private EnemyFactory _enemyFactory;
         private readonly AsteroidsGame _game;

@@ -20,11 +20,19 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public Level(AsteroidsGame game, int SizeX, int SizeY)
         {
             _game = game;
+<<<<<<< HEAD
+=======
+            LoadContent();
+            this.SizeX = SizeX*texture.Width;
+            this.SizeY = SizeY*texture.Height;
+        }
+
+        public void LoadContent()
+        {
+>>>>>>> develop
             texture = _game.Content.Load<Texture2D>("background");
             this.SizeX = SizeX * texture.Width;
             this.SizeY = SizeY * texture.Height;
-            this.SizeX = SizeX*texture.Width;
-            this.SizeY = SizeY*texture.Height;
         }
 
         public void DrawBackground(SpriteBatch spriteBatch)

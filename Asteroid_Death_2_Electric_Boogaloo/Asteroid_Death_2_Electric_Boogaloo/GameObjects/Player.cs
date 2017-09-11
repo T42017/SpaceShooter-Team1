@@ -15,8 +15,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     public class Player : Ship
     {
         private KeyboardState lastKeyboardState;
-        private DateTime _timeSenceLastShot = DateTime.Today;
-        private int _timeForLaserCooldownInMs = 100;
         private SoundEffect pewEffect;
         public Player(AsteroidsGame game) : base(game) { }
       
@@ -24,6 +22,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             pewEffect = Game.Content.Load<SoundEffect>("Blaster");
             LoadTexture("shipPlayer");
+            ShootingSpeed = 200;
         }
         public GamePadDPad DPad { get; }
         public override void Update()
@@ -32,12 +31,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             var gamePadState = GamePad.GetState(PlayerIndex.One);
             
             if ((gamePadState.Buttons.A == ButtonState.Pressed ||
-                 Keyboard.GetState().IsKeyDown(Keys.Space)) && 
-                 (DateTime.Now - _timeSenceLastShot).TotalMilliseconds > _timeForLaserCooldownInMs)
+                 Keyboard.GetState().IsKeyDown(Keys.Space)))
             {
                 pewEffect.Play();
                 Shoot();
-                _timeSenceLastShot = DateTime.Now;
             }
 
             KeyboardState state = Keyboard.GetState();
@@ -73,7 +70,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Speed += new Vector2(-Speed.X * 0.015f, -Speed.Y * 0.015f);
             Move();
             
-            StayInsideLevel(Game.Level);
+            StayInsideLevel();
         }
 
         public override bool CollidesWith(GameObject otherGameObject)
