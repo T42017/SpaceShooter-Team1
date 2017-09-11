@@ -17,13 +17,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         private DateTime _timeLastFrame = DateTime.Now;
         private int currenTexture = 0;
 
-        public PixelExplosion(AsteroidsGame game) : base(game)
+        public PixelExplosion(AsteroidsGame game, Vector2 position) : base(game)
         {
-            
-        }
+            Position = position;
 
-        public override void LoadContent()
-        {
             _textures = new Texture2D[_amountOfPictures];
 
             for (int i = 0; i < _amountOfPictures; i++)
@@ -33,13 +30,18 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             }
         }
 
+        public override void LoadContent()
+        {
+            
+        }
+
         public override void Update()
         {
             if ((DateTime.Now - _timeLastFrame).TotalMilliseconds > _timeBetweenFramesMs)
             {
                 currenTexture++;
                 if (currenTexture > _amountOfPictures - 1)
-                    Game.GameObjectManager.GameObjects.Add(this);
+                    IsDead = true;
                 else
                     Texture = _textures[currenTexture];
 

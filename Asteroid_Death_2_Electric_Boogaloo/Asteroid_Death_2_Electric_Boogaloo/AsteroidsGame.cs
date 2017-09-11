@@ -86,7 +86,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             GameObjectManager.AddEnemyFactory(new EnemyFactory(this));
 
             _camera = new Camera();
-            GameObjectManager.AddNewPlayer();
             //GameObjectManager.AddEnemys(4);
             //GameObjectManager.AddMeteors(10);
 
@@ -97,8 +96,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            Level.LoadContent();
+            
             GameObjectManager.LoadContent();
         }
         
@@ -109,11 +107,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         protected override void Update(GameTime gameTime)
         {
             Globals.ScreenWidth = Graphics.PreferredBackBufferWidth;
-            if(_gameState== GameState.ingame) { 
+            if (_gameState == GameState.ingame)
+            {
                 _camera.FollowPlayer(GameObjectManager.Player);
                 //GameObjectManager.GenerateRandomNewMeteor(gameTime, 1000);
                 GameObjectManager.UpdateGameObjects();
-             }
+                GameObjectManager.RemoveDeadGameObjects();
+            }
             base.Update(gameTime);
         }
         
