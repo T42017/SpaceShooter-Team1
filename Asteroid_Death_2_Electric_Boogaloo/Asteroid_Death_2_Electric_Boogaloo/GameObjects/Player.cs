@@ -36,7 +36,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                  (DateTime.Now - _timeSenceLastShot).TotalMilliseconds > _timeForLaserCooldownInMs)
             {
                 pewEffect.Play();
-                Shoot();
+                Shoot(typeof(Player));
                 _timeSenceLastShot = DateTime.Now;
             }
 
@@ -67,16 +67,18 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Move();
             
             StayInsideLevel(Game.Level);
+            base.Update();
+            //Debug.WriteLine($"Player position: ({Position.X}, {Position.Y})");
         }
 
         public override bool CollidesWith(GameObject otherGameObject)
         {
-            var collides = base.CollidesWith(otherGameObject);
+            //bool collides = base.CollidesWith(otherGameObject) && !(otherGameObject is Laser laser && laser.ParentType == typeof(Player));
+            bool collides = base.CollidesWith(otherGameObject) && (otherGameObject is Meteor || otherGameObject is Enemy);
             if (collides)
             {
                 Game.ChangeGameState(GameState.gameover);
             }
-
             return collides;
         }
     }

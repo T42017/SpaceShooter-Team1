@@ -18,14 +18,17 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
         }
         
-        public void Shoot()
+        public void Shoot(Type parentType)
         {
             Point shipCenterPoint = new Point((int)(Position.X), (int)(Position.Y));
             Point shootPoint = new Point((int) (Position.X + Width / 2), (int) (Position.Y + (Height / 4 * (ShootLefCannon ? 1 : -1))));
 
             shootPoint = RotatePoint(shootPoint, shipCenterPoint, Rotation);
 
-            Laser laser = new Laser(Game, new Vector2(shootPoint.X, shootPoint.Y), Rotation, Laser.Color.Red);
+            Laser laser = new Laser(Game, new Vector2(shootPoint.X, shootPoint.Y), Rotation, Laser.Color.Red)
+            {
+                ParentType = parentType
+            };
             laser.LoadContent();
 
             Game.GameObjectManager.GameObjects.Add(laser);
@@ -46,16 +49,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 (sinTheta * (pointToRotate.X - centerPoint.X) +
                  cosTheta * (pointToRotate.Y - centerPoint.Y) + centerPoint.Y)
             };
-        }
-
-        public override bool CollidesWith(GameObject otherGameObject)
-        {
-            bool collides = base.CollidesWith(otherGameObject);
-            if (collides)
-            {
-                Game.GameObjectManager.GameObjects.Remove(this);
-            }
-            return collides;
         }
     }
 }

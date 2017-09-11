@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using Microsoft.Xna.Framework;
 
 namespace Asteroid_Death_2_Electric_Boogaloo
@@ -17,6 +17,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         }
 
         private Color color;
+
+        public Type ParentType { get; set; }
 
         public Laser(AsteroidsGame game, Vector2 position, float rotation, Color color) : base(game)
         {
@@ -36,12 +38,25 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Speed = Forward() * 11;
             AccelerateForward(9);
             Move();
+
+            if (Position.X + Texture.Width / 2f > Game.Level.SizeX ||
+                Position.X - Texture.Width / 2f < 0 ||
+                Position.Y + Texture.Height / 2f > Game.Level.SizeY ||
+                Position.Y - Texture.Height / 2f < 0)
+            {
+                Game.GameObjectManager.GameObjects.Remove(this);
+            }
+            base.Update();
         }
 
         public override bool CollidesWith(GameObject otherGameObject)
         {
-            var collides = base.CollidesWith(otherGameObject);
-            if (collides) Game.GameObjectManager.GameObjects.Remove(this);
+            var collides = base.CollidesWith(otherGameObject) && ParentType != otherGameObject.GetType();
+            
+            if (collides)
+            {
+                //Game.GameObjectManager.GameObjects.Remove(this);
+            }
             return collides;
         }
     }

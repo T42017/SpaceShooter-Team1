@@ -14,7 +14,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     {
         public MeteorSize   MeteorSize   { get; }
         public MeteorColour MeteorColour { get; }
-        public float RotationSpeed;
+        public float RotationSpeed { get; }
         public Meteor(AsteroidsGame game, Vector2 position, MeteorSize meteorSize, MeteorColour meteorColour) : base(game)
         {
             Position = position;
@@ -63,19 +63,18 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             LoadTexture(fileName);
         }
 
-        public List<Meteor> SpawnChildren()
+        public void SpawnChildren()
         {
-            if (!IsDead || MeteorSize == MeteorSize.Small)
-                return null;
+            if (MeteorSize == MeteorSize.Small)
+                return;
 
-            var children = new List<Meteor>();
-            int amountOfChildren = MeteorColour == MeteorColour.Brown ? 5 : 3;
-
+            int amountOfChildren = (int) MeteorColour + 3;
             for (int i = 0; i < amountOfChildren; i++)
             {
-                children.Add(new Meteor(Game, Position, MeteorSize - 1, MeteorColour));
+                Game.GameObjectManager.GameObjects.Add(
+                    new Meteor(Game, Position, MeteorSize - 1, MeteorColour)
+                );
             }
-            return children;
         }
 
         public override void LoadContent()
@@ -88,18 +87,17 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             //requires further work to add a randomly generated speed of the meteors instead of a static speed
             Rotation += RotationSpeed;
             Move();
+            base.Update();
         }
 
         public override bool CollidesWith(GameObject otherGameObject)
         {
-            var children = SpawnChildren();
-            if (children != null)
+            bool collides = base.CollidesWith(otherGameObject) && (otherGameObject.GetType() == typeof(Laser) || otherGameObject is Laser);
+            if (collides)
             {
-                foreach (var child in children)
-                    Game.GameObjectManager.GameObjects.Add(child);
+                //SpawnChildren();
+                Game.GameObjectManager.GameObjects.Remove(this);
             }
-            bool collides = base.CollidesWith(otherGameObject);
-            if (collides) Game.GameObjectManager.GameObjects.Remove(this);
             return collides;
         }
     }

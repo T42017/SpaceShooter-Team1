@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     {
 
         public Player Player { get; private set; }
-        public List<GameObject> GameObjects = new List<GameObject>();
+        public List<GameObject> GameObjects { get; } = new List<GameObject>();
         
         private EnemyFactory _enemyFactory;
         private readonly AsteroidsGame _game;
@@ -30,7 +31,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public void AddEnemys(int amount)
         {
             for (int i = 0; i < amount; i++)
-                GameObjects.Add(_enemyFactory.GetRandomEnemy());
+            {
+                var enemy = _enemyFactory.GetRandomEnemy();
+                GameObjects.Add(enemy);
+            }
         }
 
         public void AddNewPlayer()
@@ -98,16 +102,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         internal void UpdateGameObjects()
         {
-            for (int i = 0; i < GameObjects.Count; i++)
+            for (int i = GameObjects.Count - 1; i >= 0; i--)
             {
-                GameObjects[i].Update();
-                CheckForCollisionWith(GameObjects[i]);
+                var gameObject = GameObjects[i];
+                gameObject.Update();
+                CheckForCollisionWith(gameObject);
             }
-
-           // for (int i = GameObjects.Count - 1; i >= 0; i--) // htf does this work??
-          //  {
-               
-            //}
         }
 
         public void CheckForCollisionWith(GameObject thisObject)
@@ -115,29 +115,21 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             for (int i = GameObjects.Count - 1; i >= 0; i--)
             {
                 var otherGameObject = GameObjects[i];
-                if (otherGameObject == null ||
-                    otherGameObject == thisObject)
+                if (thisObject.DistanceToSquared(otherGameObject) <= 100 * 100)
                     continue;
-
-                if (thisObject.CollidesWith(otherGameObject))
-                {
-                    GameObjects.Remove(otherGameObject);
-                    //if (thisObject is LaserRed laser)
-                    //    Components.Remove(laser);
-                    return;
-                }
+                if (thisObject == otherGameObject || !thisObject.CollidesWith(otherGameObject))
+                    continue;
+                Debug.WriteLine($"{thisObject} collided with {otherGameObject}");
+                return;
             }
         }
 
         internal void DrawGameObjects(SpriteBatch spriteBatch)
         {
-            
-            for (int i = 0; i < GameObjects.Count; i++)
+            for (int i = GameObjects.Count - 1; i >= 0; i--)
             {
-                  GameObjects[i].Draw(spriteBatch);
+                GameObjects[i].Draw(spriteBatch);
             }
-            
-            
         }
     }
 }

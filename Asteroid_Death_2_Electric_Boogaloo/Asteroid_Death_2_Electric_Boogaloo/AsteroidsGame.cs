@@ -89,7 +89,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             _camera = new Camera();
             GameObjectManager.AddNewPlayer();
             //GameObjectManager.AddEnemys(4);
-            //GameObjectManager.AddMeteors(10);
+            GameObjectManager.AddMeteors(10);
 
             base.Initialize();
         }
@@ -110,13 +110,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         protected override void Update(GameTime gameTime)
         {
             
-           
+           //Debug.WriteLine(GameObjectManager.GameObjects.Count);
             
            
                
 
             Globals.ScreenWidth = Graphics.PreferredBackBufferWidth;
-            if(_gameState== GameState.ingame) { 
+            if(_gameState == GameState.ingame)
+            { 
                 _camera.FollowPlayer(GameObjectManager.Player);
                 //GameObjectManager.GenerateRandomNewMeteor(gameTime, 1000);
                 GameObjectManager.UpdateGameObjects();
