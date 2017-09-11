@@ -46,11 +46,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed ||
                 Keyboard.GetState().IsKeyDown(Keys.Escape) && lastKeyboardState.IsKeyUp(Keys.Escape))
-            { pGame.ChangeGameState(GameState.paused); }
+            { pGame.ChangeGameState(GameState.paused);
+                playing = false;
+            }
 
                 if (playing==false)
             {
                 MediaPlayer.Stop();
+                MediaPlayer.Volume = 1.0f;
                 MediaPlayer.Play(song);
                 playing = true;
             }

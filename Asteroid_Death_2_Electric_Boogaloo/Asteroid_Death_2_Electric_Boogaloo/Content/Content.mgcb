@@ -25,20 +25,6 @@
 /processorParam:TextureFormat=Color
 /build:shipPlayer.png
 
-#begin Text.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:Text.spritefont
-
-#begin GameState.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:GameState.spritefont
-
 #begin background.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1407,12 +1393,6 @@
 /processorParam:TextureFormat=Color
 /build:pixelExplosion02.png
 
-#begin Best.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Best.mp3
-
 #begin laserRed.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1480,4 +1460,16 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:Text.spritefont
+
+#begin Chameleon.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Chameleon.mp3
+
+#begin Laugh.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Laugh.mp3
 
