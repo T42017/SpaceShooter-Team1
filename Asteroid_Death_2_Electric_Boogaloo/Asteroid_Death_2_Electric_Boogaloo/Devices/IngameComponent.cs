@@ -23,9 +23,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 
         public IngameComponent(Game game) : base(game)
         {
-            pGame = (AsteroidsGame)game;
-            
-           DrawableStates = GameState.ingame;
+            pGame = (AsteroidsGame) game;
+
+            DrawableStates = GameState.ingame;
             UpdatableStates = GameState.ingame;
 
             playing = false;
@@ -41,16 +41,17 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         public override void Update(GameTime gameTime)
         {
             MediaPlayer.Volume = 0.4f;
-                || Keyboard.GetState().IsKeyDown(Keys.Escape) && lastKeyboardState.IsKeyUp(Keys.Escape))
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed ||
+                Keyboard.GetState().IsKeyDown(Keys.Escape) && lastKeyboardState.IsKeyUp(Keys.Escape))
             {
                 pGame.ChangeGameState(GameState.paused);
-            }
+
             }
 
-            if (playing==false)
+            if (playing == false)
             {
                 MediaPlayer.Stop();
-              
+
                 MediaPlayer.Play(song);
                 playing = true;
             }
