@@ -38,7 +38,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         {
             if (playing==false )
             {
-                MediaPlayer.Volume = 0.2f;
+                MediaPlayer.Volume = 0.05f;
                 playing = true;
 
             }

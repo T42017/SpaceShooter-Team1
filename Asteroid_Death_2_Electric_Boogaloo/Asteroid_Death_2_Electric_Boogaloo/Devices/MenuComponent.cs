@@ -55,6 +55,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
             {
                 MediaPlayer.Stop();
                 MediaPlayer.Play(song);
+                MediaPlayer.Volume = 0.4f;
                 playing = true;
             }
             MouseState newState = Mouse.GetState();
