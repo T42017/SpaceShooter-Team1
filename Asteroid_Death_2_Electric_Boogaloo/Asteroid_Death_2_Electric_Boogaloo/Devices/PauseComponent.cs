@@ -21,8 +21,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             UpdatableStates = GameState.paused;
             DrawableStates = GameState.paused;
         }
-
-
+        
         protected override void LoadContent()
         {
             font = Game.Content.Load<SpriteFont>("Text");
@@ -32,12 +31,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 
         public override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
-                Keyboard.GetState().IsKeyDown(Keys.Escape)&& lastKeyboardState.IsKeyUp(Keys.Escape))
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed
+                || Keyboard.GetState().IsKeyDown(Keys.Escape) && lastKeyboardState.IsKeyUp(Keys.Escape))
                 pGame.ChangeGameState(GameState.ingame);
 
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
-                Keyboard.GetState().IsKeyDown(Keys.M))
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed 
+                || Keyboard.GetState().IsKeyDown(Keys.M))
                 pGame.ChangeGameState(GameState.Menu);
              lastKeyboardState=Keyboard.GetState();
             base.Update(gameTime);
