@@ -15,6 +15,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     public class Player : Ship
     {
         private KeyboardState lastKeyboardState;
+        private GamePadState lastGamePadState;
         private SoundEffect pewEffect;
         public Player(AsteroidsGame game) : base(game) { }
       
@@ -34,7 +35,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             // Fire all lasers!
             if ((gamePadState.Buttons.A == ButtonState.Pressed)
                 || (state.IsKeyDown(Keys.Space))
-                || (gamePadState.Triggers.Right > 0))
+                || (gamePadState.Triggers.Right > 0.2))
             {
                 pewEffect.Play();
                 Shoot();
@@ -68,6 +69,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 Rotation += 0.026f;
 
             lastKeyboardState = state;
+            lastGamePadState = gamePadState;
 
             Speed += new Vector2(-Speed.X * 0.015f, -Speed.Y * 0.015f);
             Move();

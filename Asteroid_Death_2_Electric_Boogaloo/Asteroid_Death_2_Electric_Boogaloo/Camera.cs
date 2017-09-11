@@ -57,6 +57,5 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 Matrix.CreateTranslation(new Vector3(windowWidth * 0.5f, windowHeight * 0.5f, 0));
             return Transform;
         }
-
     }
 }

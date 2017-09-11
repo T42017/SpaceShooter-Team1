@@ -29,7 +29,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             UpdatableStates = GameState.highscoremenu;
             playing = false;
             MediaPlayer.IsRepeating = true;
-
         }
 
         protected override void LoadContent()
@@ -52,7 +51,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             base.Update(gameTime);
         }
 
-
         public override void Draw(GameTime gameTime)
         {
             SpriteBatch.Begin();
@@ -63,9 +61,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 
                     SpriteBatch.Draw(texture, new Vector2(x, y), Color.White);
                 }
-
             }
-
 
             SpriteBatch.End();
             base.Draw(gameTime);

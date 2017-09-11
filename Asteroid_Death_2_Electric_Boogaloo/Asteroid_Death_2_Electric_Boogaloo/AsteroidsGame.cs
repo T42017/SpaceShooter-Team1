@@ -20,7 +20,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     public class AsteroidsGame : Game
     {
-      
         public GraphicsDeviceManager Graphics;
         public int WindowWidth, Windowheight;
         public GameObjectManager GameObjectManager;
@@ -29,7 +28,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         private GameState _gameState;
         private SpriteBatch _spriteBatch;
         private Camera _camera;
-        
         
         public AsteroidsGame()
         {
@@ -40,13 +38,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Content.RootDirectory = "Content";
             Window.Position = new Point(300, 300);
             Window.Title = "Asteroid Death 2 Electric Boogaloo";
-           
-
         }
 
         public void ChangeGameState(GameState desiredState)
         {
-           
            _gameState = desiredState;
 
            foreach (var component in Components)
@@ -58,10 +53,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                astroidsComponent.Enabled = astroidsComponent.UpdatableStates.HasFlag(_gameState);
            }
         }
-        
-        
-        
-
         
         protected override void Initialize()
         {
@@ -79,7 +70,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Components.Add(new PauseComponent(this));
             ChangeGameState(GameState.Menu);
            
-            
             Level = new Level(this, 20, 20);
 
             GameObjectManager = new GameObjectManager(this);
@@ -145,6 +135,5 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             WindowWidth = Graphics.PreferredBackBufferWidth;
             Windowheight = Graphics.PreferredBackBufferHeight;
         }
-        
     }
 }

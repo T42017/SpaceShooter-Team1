@@ -14,6 +14,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         private KeyboardState lastKeyboardState;
         private SpriteFont font;
         private AsteroidsGame pGame;
+
         public PauseComponent(Game game) : base(game)
         {
             pGame = (AsteroidsGame) game;
@@ -38,7 +39,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed 
                 || Keyboard.GetState().IsKeyDown(Keys.M))
                 pGame.ChangeGameState(GameState.Menu);
-             lastKeyboardState=Keyboard.GetState();
+
+            lastKeyboardState =Keyboard.GetState();
             base.Update(gameTime);
         }
 
