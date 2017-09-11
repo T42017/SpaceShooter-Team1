@@ -35,7 +35,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                  Keyboard.GetState().IsKeyDown(Keys.Space)) && 
                  (DateTime.Now - _timeSenceLastShot).TotalMilliseconds > _timeForLaserCooldownInMs)
             {
-                pewEffect.Play();
+                //pewEffect.Play();
                 Shoot(typeof(Player));
                 _timeSenceLastShot = DateTime.Now;
             }

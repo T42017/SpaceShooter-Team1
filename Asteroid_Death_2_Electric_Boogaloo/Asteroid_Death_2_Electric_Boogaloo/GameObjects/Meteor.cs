@@ -26,6 +26,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             MaxSpeed = Globals.RNG.Next(250);
             MeteorSize = meteorSize;
             MeteorColour = meteorColour;
+            SetAppropriateTexture();
         }
 
         /// <summary>
@@ -71,9 +72,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             int amountOfChildren = (int) MeteorColour + 3;
             for (int i = 0; i < amountOfChildren; i++)
             {
-                Game.GameObjectManager.GameObjects.Add(
-                    new Meteor(Game, Position, MeteorSize - 1, MeteorColour)
-                );
+                var meteor = new Meteor(Game, Position, MeteorSize - 1, MeteorColour)
+                {
+                    Speed = new Vector2(
+                        Speed.X * 2, 
+                        Speed.Y * 2
+                    )
+                };
+                Game.GameObjectManager.GameObjects.Add(meteor);
             }
         }
 
@@ -92,11 +98,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public override bool CollidesWith(GameObject otherGameObject)
         {
-            bool collides = base.CollidesWith(otherGameObject) && (otherGameObject.GetType() == typeof(Laser) || otherGameObject is Laser);
+            bool collides = base.CollidesWith(otherGameObject) && otherGameObject is Laser;
             if (collides)
             {
-                //SpawnChildren();
+                SpawnChildren();
                 Game.GameObjectManager.GameObjects.Remove(this);
+                Game.GameObjectManager.GameObjects.Remove(otherGameObject);
             }
             return collides;
         }
