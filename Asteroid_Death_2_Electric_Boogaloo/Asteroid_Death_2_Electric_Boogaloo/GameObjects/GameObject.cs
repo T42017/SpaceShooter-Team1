@@ -65,8 +65,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 otherGameObject.Texture.Width - 2 * aLittleToMakeCollisionSeemMoreCorrect,
                 otherGameObject.Texture.Height - 2 * aLittleToMakeCollisionSeemMoreCorrect
             );
-
-           
+            
             return theseBounds.Intersects(otherBounds) || otherBounds.Intersects(theseBounds);
         }
 

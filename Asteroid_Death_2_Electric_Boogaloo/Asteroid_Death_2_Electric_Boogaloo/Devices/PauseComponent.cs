@@ -40,16 +40,15 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             {
                 MediaPlayer.Volume = 0.05f;
                 playing = true;
-
             }
 
+            if(GamePad.GetState(PlayerIndex.One).Buttons.Start==ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape) && lastKeyboardState.IsKeyUp(Keys.Escape))
                 pGame.ChangeGameState(GameState.ingame); playing = false;
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed 
                 || Keyboard.GetState().IsKeyDown(Keys.M))
                 pGame.ChangeGameState(GameState.Menu); playing = false;
-
-
+            
             lastKeyboardState =Keyboard.GetState();
             base.Update(gameTime);
         }
@@ -66,6 +65,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
                 new Vector2((pGame.Graphics.PreferredBackBufferWidth / 2) - (pGame.Graphics.PreferredBackBufferWidth / 16),
                     (pGame.Graphics.PreferredBackBufferHeight / 4) +
                     (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Gold);
+
             SpriteBatch.DrawString(font, text2,
                 new Vector2(
                     pGame.Graphics.PreferredBackBufferWidth / 2 - (pGame.Graphics.PreferredBackBufferWidth / 12),

@@ -99,7 +99,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
                          139)
                     pGame.Exit();
             }
-
             oldState = newState;
             base.Update(gameTime);
         }

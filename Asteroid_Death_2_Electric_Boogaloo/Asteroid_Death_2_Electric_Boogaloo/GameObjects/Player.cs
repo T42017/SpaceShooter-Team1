@@ -33,8 +33,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
             KeyboardState state = Keyboard.GetState();
             
-            
-            
             //Movement using the left, right joystick and the Dpad on the Xbox controller or the arrows or WASD on the keyboard
             if ((gamePadState.ThumbSticks.Left.Y >= 0.3f)
                 || (gamePadState.DPad.Up == ButtonState.Pressed)
@@ -61,24 +59,26 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 || (state.IsKeyDown(Keys.Right)) 
                 || (state.IsKeyDown(Keys.D)))
                 Rotation += 0.026f;
+
             Speed += new Vector2(-Speed.X * 0.015f, -Speed.Y * 0.015f);
             Move();
+
             // Fire all lasers!
             if ((gamePadState.Buttons.A == ButtonState.Pressed)
                 || (state.IsKeyDown(Keys.Space))
                 || (gamePadState.Triggers.Right > 0.2))
             {
                 Shoot();
-                if (!((DateTime.Now - _timeSenceLastShot).TotalMilliseconds > ShootingSpeed))
+                if (!((DateTime.Now - _timeSenceLastShot).TotalMilliseconds >= ShootingSpeed))
                     return;
+
                 pewEffect.Play();
+                _timeSenceLastShot = DateTime.Now;
             }
 
             lastKeyboardState = state;
             lastGamePadState = gamePadState;
-
             
-            _timeSenceLastShot = DateTime.Now;
             StayInsideLevel();
         }
 

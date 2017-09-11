@@ -122,7 +122,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
            
             if (_gameState==GameState.ingame ||_gameState==GameState.paused)
             {
-
                 Level.DrawBackground(_spriteBatch);
                 GameObjectManager.DrawGameObjects(_spriteBatch);
             }

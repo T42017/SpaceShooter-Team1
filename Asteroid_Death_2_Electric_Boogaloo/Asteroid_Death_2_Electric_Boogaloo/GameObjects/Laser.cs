@@ -29,7 +29,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public override void LoadContent()
         {
-            
+         
         }
 
         public override void Update()
