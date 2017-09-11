@@ -42,10 +42,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 
         public override void Update(GameTime gameTime)
         {
+
             if (playing==false)
             {
                 MediaPlayer.Stop();
                 MediaPlayer.Play(song);
+                MediaPlayer.Volume = 0.4f;
                 playing = true;
             }
             
