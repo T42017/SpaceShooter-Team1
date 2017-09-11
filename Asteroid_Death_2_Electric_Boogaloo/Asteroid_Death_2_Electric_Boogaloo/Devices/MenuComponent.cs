@@ -55,6 +55,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
             {
                 MediaPlayer.Stop();
                 MediaPlayer.Play(song);
+                MediaPlayer.Volume = 0.4f;
                 playing = true;
             }
 
@@ -70,6 +71,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
                     ((pGame.Graphics.PreferredBackBufferHeight / 4) + (pGame.Graphics.PreferredBackBufferHeight / 8)) +
                     39)
                 {
+                
                     pGame.ChangeGameState(GameState.ingame);
                     playing = false;
                 }
@@ -85,6 +87,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
                     pGame.ChangeGameState(GameState.highscoremenu);
                     //SoundEffect beep = Game.Content.Load<SoundEffect>("roasted");
                     //beep.Play();
+                    playing = false;
                 }
 
                 else if (x >= (pGame.Graphics.PreferredBackBufferWidth / 4) + (pGame.Graphics.PreferredBackBufferWidth / 6) + 10 &&

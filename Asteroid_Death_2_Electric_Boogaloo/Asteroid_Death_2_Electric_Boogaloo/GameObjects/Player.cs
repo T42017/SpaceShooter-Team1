@@ -17,6 +17,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         private KeyboardState lastKeyboardState;
         private GamePadState lastGamePadState;
         private SoundEffect pewEffect;
+        private DateTime _timeSenceLastShot = DateTime.Today;
         public Player(AsteroidsGame game) : base(game) { }
       
         public override void LoadContent()
@@ -37,8 +38,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 || (state.IsKeyDown(Keys.Space))
                 || (gamePadState.Triggers.Right > 0.2))
             {
-                pewEffect.Play();
                 Shoot();
+                if (!((DateTime.Now - _timeSenceLastShot).TotalMilliseconds > ShootingSpeed))
+                    return;
+                pewEffect.Play();
+
+                
             }
             
             //Movement using the left, right joystick and the Dpad on the Xbox controller or the arrows or WASD on the keyboard
@@ -73,7 +78,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
             Speed += new Vector2(-Speed.X * 0.015f, -Speed.Y * 0.015f);
             Move();
-            
+            _timeSenceLastShot = DateTime.Now;
             StayInsideLevel();
         }
 
