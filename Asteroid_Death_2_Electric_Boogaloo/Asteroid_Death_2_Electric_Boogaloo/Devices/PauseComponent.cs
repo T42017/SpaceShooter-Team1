@@ -24,8 +24,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             UpdatableStates = GameState.paused;
             DrawableStates = GameState.paused;
         }
-
-
+        
         protected override void LoadContent()
         {
             song = Game.Content.Load<Song>("Chameleon");
@@ -43,12 +42,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 
             }
 
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
-                Keyboard.GetState().IsKeyDown(Keys.Escape)&& lastKeyboardState.IsKeyUp(Keys.Escape))
                 pGame.ChangeGameState(GameState.ingame); playing = false;
 
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
-                Keyboard.GetState().IsKeyDown(Keys.M))
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed 
+                || Keyboard.GetState().IsKeyDown(Keys.M))
                 pGame.ChangeGameState(GameState.Menu); playing = false;
 
 
