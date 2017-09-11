@@ -19,7 +19,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         private MouseState oldState;
         private Song song;
         private bool playing;
-        
         public HighscoreMenuComponent(Game game) : base(game)
         {
             Game.IsMouseVisible = true;
