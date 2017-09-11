@@ -17,6 +17,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         private KeyboardState lastKeyboardState;
         private SpriteFont font;
         private AsteroidsGame pGame;
+
         public PauseComponent(Game game) : base(game)
         {
             pGame = (AsteroidsGame) game;
@@ -35,7 +36,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 
         public override void Update(GameTime gameTime)
         {
-<<<<<<< HEAD
             if (playing==false )
             {
                 MediaPlayer.Volume = 0.05f;
@@ -43,25 +43,20 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 
             }
 
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
-                Keyboard.GetState().IsKeyDown(Keys.Escape)&& lastKeyboardState.IsKeyUp(Keys.Escape))
                 pGame.ChangeGameState(GameState.ingame); playing = false;
-
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
-                Keyboard.GetState().IsKeyDown(Keys.M))
-                pGame.ChangeGameState(GameState.Menu); playing = false;
-
-
-=======
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed
-                || Keyboard.GetState().IsKeyDown(Keys.Escape) && lastKeyboardState.IsKeyUp(Keys.Escape))
-                pGame.ChangeGameState(GameState.ingame);
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed 
                 || Keyboard.GetState().IsKeyDown(Keys.M))
+<<<<<<< HEAD
                 pGame.ChangeGameState(GameState.Menu);
->>>>>>> origin/Feature_MovementOfPlayer
+
+            lastKeyboardState =Keyboard.GetState();
+=======
+                pGame.ChangeGameState(GameState.Menu); playing = false;
+
+
              lastKeyboardState=Keyboard.GetState();
+>>>>>>> origin/Feature_menu
             base.Update(gameTime);
         }
 
