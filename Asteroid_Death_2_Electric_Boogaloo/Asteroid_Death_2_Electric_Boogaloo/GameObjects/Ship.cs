@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
-namespace Asteroid_Death_2_Electric_Boogaloo
+namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
     public abstract class Ship : GameObject
     {
@@ -28,7 +21,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Point shipCenterPoint = new Point((int)(Position.X), (int)(Position.Y));
             Point shootPoint = new Point((int) (Position.X + Width / 2), (int) (Position.Y + (Height / 4 * (ShootLefCannon ? 1 : -1))));
 
-            shootPoint = Physic.RotateAroundPoint(shootPoint, shipCenterPoint, Rotation);
+            shootPoint = MathHelper.RotateAroundPoint(shootPoint, shipCenterPoint, Rotation);
 
             Laser laser = new Laser(Game, new Vector2(shootPoint.X, shootPoint.Y), Rotation, Laser.Color.Red);
             laser.LoadContent();

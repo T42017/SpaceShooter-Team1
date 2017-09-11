@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace Asteroid_Death_2_Electric_Boogaloo
 {
-    class Physic
+    class MathHelper
     {
 
         public static float DegreesToRadians(int angle)

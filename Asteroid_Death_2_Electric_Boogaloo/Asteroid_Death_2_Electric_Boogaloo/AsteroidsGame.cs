@@ -78,16 +78,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Components.Add(new IngameComponent(this));
             Components.Add(new PauseComponent(this));
             ChangeGameState(GameState.Menu);
-           
-            
-            Level = new Level(this, 20, 20);
 
-            GameObjectManager = new GameObjectManager(this);
-            GameObjectManager.AddEnemyFactory(new EnemyFactory(this));
-
-            _camera = new Camera();
-            //GameObjectManager.AddEnemys(4);
-            //GameObjectManager.AddMeteors(10);
+            Start();
 
             base.Initialize();
         }
@@ -140,11 +132,24 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             _spriteBatch.End();
             base.Draw(gameTime);
         }
+
         public void UpdateWindowSize()
         {
             WindowWidth = Graphics.PreferredBackBufferWidth;
             Windowheight = Graphics.PreferredBackBufferHeight;
         }
-        
+
+        public void Start()
+        {
+            Level = new Level(this, 20, 20);
+
+            GameObjectManager = new GameObjectManager(this);
+            GameObjectManager.AddEnemyFactory(new EnemyFactory(this));
+
+            _camera = new Camera();
+            GameObjectManager.AddEnemys(4);
+            //GameObjectManager.AddMeteors(10);
+        }
+
     }
 }

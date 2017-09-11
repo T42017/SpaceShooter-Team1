@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Asteroid_Death_2_Electric_Boogaloo.GameObjects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -44,7 +45,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public void FollowPlayer(Player player)
         {
             Pos = player.Position;
-            Rotation = -player.Rotation + Physic.DegreesToRadians(-90);
+            Rotation = -player.Rotation + MathHelper.DegreesToRadians(-90);
             Zoom = 0.8f;
         }
 

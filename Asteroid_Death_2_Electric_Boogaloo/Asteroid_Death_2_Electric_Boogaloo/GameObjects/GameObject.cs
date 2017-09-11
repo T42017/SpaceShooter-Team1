@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Asteroid_Death_2_Electric_Boogaloo
+namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
     public abstract class GameObject
     {
@@ -15,7 +10,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public Vector2 Position { get; set; }
         public float Radius { get; set; }
         public Vector2 Speed { get; set; }
-        public float Rotation { get; set; } = Physic.DegreesToRadians(-90);
+        public float Rotation { get; set; } = MathHelper.DegreesToRadians(-90);
         public int MaxSpeed = 9;
         public int Width { get; set; } 
         public int Height { get; set; }
@@ -85,7 +80,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             DrawBounds(spriteBatch);
-            spriteBatch.Draw(Texture, Position, null, Color.White, Rotation - MathHelper.PiOver2,
+            spriteBatch.Draw(Texture, Position, null, Color.White, Rotation - Microsoft.Xna.Framework.MathHelper.PiOver2,
                 new Vector2(Texture.Width / 2, Texture.Height / 2), 1.0f, SpriteEffects.None, 0f);
         }
 

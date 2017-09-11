@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using Asteroid_Death_2_Electric_Boogaloo.GameObjects;
 using Microsoft.Xna.Framework;
 
 namespace Asteroid_Death_2_Electric_Boogaloo
 {
-    class AI
+    public class AI
     {
         public enum State
         {
@@ -45,7 +42,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             }
             else if (currentState == State.FollowPlayer)
             {
-                _enemy.Rotation = Physic.LookAt(_enemy.Position, player.Position);
+                _enemy.Rotation = MathHelper.LookAt(_enemy.Position, player.Position);
                 _enemy.Shoot();
                 _enemy.AccelerateForward(0.25f);
                 _enemy.Move();
