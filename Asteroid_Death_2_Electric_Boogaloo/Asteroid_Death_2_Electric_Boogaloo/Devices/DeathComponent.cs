@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Utilities;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.Devices
@@ -13,6 +14,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
     {
         private Song song;
         private bool playing;
+        private Texture2D texture;
         
         public DeathComponent(Game game) : base(game)
         {
@@ -24,7 +26,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         protected override void LoadContent()
         {
             song = Game.Content.Load<Song>("Laugh");
-
+            texture = Game.Content.Load<Texture2D>("background");
             base.LoadContent();
         }
 
@@ -35,13 +37,29 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 
             if (playing==false)
             {
-
+                MediaPlayer.Stop();
                 MediaPlayer.Play(song);
                 playing = true;
             }
 
 
             base.Update(gameTime);
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            SpriteBatch.Begin();
+
+            for (int x = 0; x < 2000; x += texture.Width)
+            {
+                for (int y = 0; y < 2000; y += texture.Height)
+                {
+                    SpriteBatch.Draw(texture, new Vector2(x, y), Color.White);
+                }
+            }
+
+            SpriteBatch.End();
+            base.Draw(gameTime);
         }
     }
 }

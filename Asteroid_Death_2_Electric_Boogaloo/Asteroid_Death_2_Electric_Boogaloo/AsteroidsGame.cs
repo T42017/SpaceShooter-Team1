@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing.Text;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 using Asteroid_Death_2_Electric_Boogaloo.Components;
@@ -69,6 +70,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Components.Add(new HighscoreMenuComponent(this));
             Components.Add(new IngameComponent(this));
             Components.Add(new PauseComponent(this));
+            Components.Add(new DeathComponent(this));
             ChangeGameState(GameState.Menu);
            
             Level = new Level(this, 20, 20);
