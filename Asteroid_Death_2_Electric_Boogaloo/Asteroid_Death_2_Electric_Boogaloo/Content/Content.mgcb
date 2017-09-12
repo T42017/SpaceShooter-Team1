@@ -1419,7 +1419,7 @@
 
 #begin roasted.mp3
 /importer:Mp3Importer
-/processor:SoundEffectProcessor
+/processor:SongProcessor
 /processorParam:Quality=Best
 /build:roasted.mp3
 

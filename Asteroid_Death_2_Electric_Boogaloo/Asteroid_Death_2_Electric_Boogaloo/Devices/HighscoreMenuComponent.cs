@@ -20,18 +20,41 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         private MouseState oldState;
         private Song song;
         private bool playing;
-        private StreamReader highscoreReader;
+        public static StreamReader highscoreReader;
         private String highscore;
         public HighscoreMenuComponent(Game game) : base(game)
         {
             Game.IsMouseVisible = true;
             pGame = (AsteroidsGame)game;
-            highscoreReader = new StreamReader("Highscore.txt");
+            //highscoreReader = new StreamReader("Highscore.txt");
             DrawableStates = GameState.highscoremenu;
             UpdatableStates = GameState.highscoremenu;
             playing = false;
             MediaPlayer.IsRepeating = true;
-            highscore = highscoreReader.ReadToEnd();
+            //highscore = highscoreReader.ReadToEnd();
+
+            string path = @"C:\Users\usr\Documents\Git repositories\SpaceShooter-Team1\Asteroid_Death_2_Electric_Boogaloo\Asteroid_Death_2_Electric_Boogaloo\bin\Windows\x86\Debug\Content/Highscore.txt";
+
+            // This text is added only once to the file.
+            if (!File.Exists(path))
+            {
+                // Create a file to write to.
+                string[] createText = { "Hello", "And", "Welcome" };
+                File.WriteAllLines(path, createText);
+            }
+
+            // This text is always added, making the file longer over time
+            // if it is not deleted.
+            string appendText = "This is extra text" + Environment.NewLine;
+            File.AppendAllText(path, appendText);
+
+            // Open the file to read from.
+            string[] readText = File.ReadAllLines(path);
+            foreach (string s in readText)
+            {
+                Console.WriteLine(s);
+            }
+
         }
 
         protected override void LoadContent()
@@ -71,7 +94,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             }
 
 
-            SpriteBatch.DrawString(menuFont,highscore,new Vector2(200,200),Color.Gold);
+            //SpriteBatch.DrawString(menuFont,highscore,new Vector2(200,200),Color.Gold);
 
             SpriteBatch.End();
             base.Draw(gameTime);
