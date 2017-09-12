@@ -104,7 +104,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             GraphicsDevice.Clear(Color.Black);
 
-            //// if using XNA 4.0
+            // if using XNA 4.0
             _spriteBatch.Begin(SpriteSortMode.Deferred,
                 BlendState.AlphaBlend,
                 null,
