@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 
 namespace Asteroid_Death_2_Electric_Boogaloo
 {
-    class Globals
+    public static class Globals
     {
         public static int ScreenWidth = 1920;
         public static int ScreenHeight = 1080;

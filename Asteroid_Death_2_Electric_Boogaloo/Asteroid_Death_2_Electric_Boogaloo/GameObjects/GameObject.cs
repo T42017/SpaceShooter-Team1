@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -20,15 +21,16 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public int Width { get; set; } 
         public int Height { get; set; }
 
-        public Rectangle Bounds => new Rectangle(
-            (int)Position.X - Width / 2,
-            (int)Position.Y - Height / 2,
-            Width,
-            Height
-        );
+        private Rectangle _bounds;
 
-        protected Texture2D Texture;
-        protected AsteroidsGame Game;
+        public Rectangle Bounds
+        {
+            get { return _bounds; }
+            set { _bounds = value; }
+        }
+
+        protected Texture2D Texture { get; set; }
+        protected AsteroidsGame Game { get; }
         
         protected GameObject(AsteroidsGame game)
         {
@@ -45,47 +47,48 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public virtual bool CollidesWith(GameObject otherGameObject)
         {
-            if ((this is Player && otherGameObject is Laser) || (this is Laser && otherGameObject is Player))
-                return false; // Check this when enemies shoot lasers
+            return _bounds.Intersects(otherGameObject.Bounds) || otherGameObject.Bounds.Intersects(_bounds);
+        }
 
-            if (GetType() == otherGameObject.GetType())
-                return false;
+        public float DistanceToSquared(GameObject otherGameObject)
+        {
+            if (CollidesWith(otherGameObject))
+                return 0f;
 
-            int aLittleToMakeCollisionSeemMoreCorrect = 0;
-            var theseBounds = new Rectangle(
-                (int) Position.X - Texture.Width / 2 + aLittleToMakeCollisionSeemMoreCorrect,
-                (int) Position.Y - Texture.Height / 2 + aLittleToMakeCollisionSeemMoreCorrect,
-                Texture.Width - 2 * aLittleToMakeCollisionSeemMoreCorrect,
-                Texture.Height - 2 * aLittleToMakeCollisionSeemMoreCorrect
-            );
-
-            var otherBounds = new Rectangle(
-                (int) otherGameObject.Position.X - otherGameObject.Texture.Width / 2 + aLittleToMakeCollisionSeemMoreCorrect,
-                (int) otherGameObject.Position.Y - otherGameObject.Texture.Height / 2 + aLittleToMakeCollisionSeemMoreCorrect,
-                otherGameObject.Texture.Width - 2 * aLittleToMakeCollisionSeemMoreCorrect,
-                otherGameObject.Texture.Height - 2 * aLittleToMakeCollisionSeemMoreCorrect
-            );
-            
-            return theseBounds.Intersects(otherBounds) || otherBounds.Intersects(theseBounds);
+            float dx = Math.Abs(Position.X - otherGameObject.Position.X);
+            float dy = Math.Abs(Position.Y - otherGameObject.Position.Y);
+            return dx * dx + dy * dy;
         }
 
         private void DrawBounds(SpriteBatch spriteBatch)
         {
-            //var rectangle = new Texture2D(Game.GraphicsDevice, Width, Height);
-            //var data = new Color[Width * Height];
-            //for (int i = 0; i < data.Length; i++) data[i] = Color.Red;
-            //rectangle.SetData(data);
-            //spriteBatch.Draw(rectangle, Position - new Vector2(Width / 2f, Height / 2f), Color.Red);
+            if (_bounds == Rectangle.Empty)
+                return;
+            var rectangle = new Texture2D(Game.GraphicsDevice, Bounds.Width, Bounds.Height);
+            var data = new Color[Bounds.Width * Bounds.Height];
+            for (int i = 0; i < data.Length; i++) data[i] = Color.Red;
+            rectangle.SetData(data);
+            spriteBatch.Draw(rectangle, Position - new Vector2(Bounds.Width / 2f, Bounds.Height / 2f), Color.Red);
         }
 
         public abstract void LoadContent();
-        public abstract void Update();
+
+        public virtual void Update()
+        {
+            int offset = 20;
+            _bounds = new Rectangle(
+                (int) Position.X - Width / 2 + offset,
+                (int) Position.Y - Height / 2 + offset,
+                Math.Max(Width, Height) - offset,
+                Math.Max(Width, Height) - offset
+            );
+        }
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            DrawBounds(spriteBatch);
+            //DrawBounds(spriteBatch);
             spriteBatch.Draw(Texture, Position, null, Color.White, Rotation - MathHelper.PiOver2,
-                new Vector2(Texture.Width / 2, Texture.Height / 2), 1.0f, SpriteEffects.None, 0f);
+                new Vector2(Texture.Width / 2f, Texture.Height / 2f), 1.0f, SpriteEffects.None, 0f);
         }
 
         public void StayInsideLevel()
@@ -142,6 +145,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             {
                 Speed = Vector2.Normalize(Speed) * MaxSpeed;
             }
+        }
+
+        public override string ToString()
+        {
+            return $"{GetType().Name} at position ({Position.X}, {Position.Y})";
         }
     }
 }

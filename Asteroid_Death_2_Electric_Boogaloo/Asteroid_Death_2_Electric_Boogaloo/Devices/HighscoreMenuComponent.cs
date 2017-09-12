@@ -22,7 +22,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         private bool playing;
         private StreamReader highscoreReader;
         private String highscore;
-        
         public HighscoreMenuComponent(Game game) : base(game)
         {
             Game.IsMouseVisible = true;

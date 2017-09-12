@@ -20,7 +20,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
         }
         
-        public void Shoot()
+        public void Shoot(Type parentType)
         {
             if (!((DateTime.Now - _timeSenceLastShot).TotalMilliseconds > ShootingSpeed))
                 return;
@@ -30,22 +30,15 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
             shootPoint = Physic.RotateAroundPoint(shootPoint, shipCenterPoint, Rotation);
 
-            Laser laser = new Laser(Game, new Vector2(shootPoint.X, shootPoint.Y), Rotation, Laser.Color.Red);
+            Laser laser = new Laser(Game, new Vector2(shootPoint.X, shootPoint.Y), Rotation, Laser.Color.Red)
+            {
+                ParentType = parentType
+            };
             laser.LoadContent();
 
             Game.GameObjectManager.GameObjects.Add(laser);
             ShootLefCannon = !ShootLefCannon;
             _timeSenceLastShot = DateTime.Now;
-        }
-
-        public override bool CollidesWith(GameObject otherGameObject)
-        {
-            bool collides = base.CollidesWith(otherGameObject);
-            if (collides)
-            {
-                Game.GameObjectManager.GameObjects.Remove(this);
-            }
-            return collides;
         }
     }
 }

@@ -31,6 +31,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             var gamePadState = GamePad.GetState(PlayerIndex.One);
 
+                pewEffect.Play();
+                Shoot();
             KeyboardState state = Keyboard.GetState();
             
             //Movement using the left, right joystick and the Dpad on the Xbox controller or the arrows or WASD on the keyboard
@@ -64,6 +66,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Move();
 
             // Fire all lasers!
+            base.Update();
+            //Debug.WriteLine($"Player position: ({Position.X}, {Position.Y})");
             if ((gamePadState.Buttons.A == ButtonState.Pressed)
                 || (state.IsKeyDown(Keys.Space))
                 || (gamePadState.Triggers.Right > 0.2))
@@ -84,7 +88,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public override bool CollidesWith(GameObject otherGameObject)
         {
-            var collides = base.CollidesWith(otherGameObject);
+            //bool collides = base.CollidesWith(otherGameObject) && !(otherGameObject is Laser laser && laser.ParentType == typeof(Player));
+            bool collides = base.CollidesWith(otherGameObject) && (otherGameObject is Meteor || otherGameObject is Enemy);
             if (collides)
             {
                 Game.ChangeGameState(GameState.gameover);
