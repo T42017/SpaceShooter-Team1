@@ -89,7 +89,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
                     //beep.Play();
                     playing = false;
                 }
-
                 else if (x >= pGame.Graphics.PreferredBackBufferWidth / 3 &&
                          x <= (pGame.Graphics.PreferredBackBufferWidth / 3) + 222 &&
                          y >= ((pGame.Graphics.PreferredBackBufferHeight / 4) +
@@ -97,7 +96,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
                          ((pGame.Graphics.PreferredBackBufferHeight / 4) +
                           (pGame.Graphics.PreferredBackBufferHeight / 8)) +
                          139)
+                {
                     pGame.Exit();
+                }
             }
             oldState = newState;
             base.Update(gameTime);
