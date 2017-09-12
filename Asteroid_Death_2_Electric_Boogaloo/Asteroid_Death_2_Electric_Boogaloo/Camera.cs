@@ -19,7 +19,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public Camera()
         {
-            _zoom = 0.9f;
+            _zoom = 0.3f;
             _rotation = 0.0f;
             _pos = Vector2.Zero;
         }
@@ -46,7 +46,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             Pos = player.Position;
             Rotation = -player.Rotation + MathHelper.DegreesToRadians(-90);
-            Zoom = 0.8f;
         }
 
         public Matrix get_transformation(GraphicsDevice graphicsDevice, int windowWidth, int windowHeight)

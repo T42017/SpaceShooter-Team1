@@ -61,6 +61,19 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             }
         }
 
+        public List<Meteor> GetMeteors()
+        {
+            List<Meteor> meteors = new List<Meteor>();
+
+            for (int i = 0; i < GameObjects.Count; i++)
+            {
+                if (GameObjects[i] is Meteor meteor)
+                    meteors.Add(meteor);
+            }
+
+            return meteors;
+        }
+
         internal void RemoveDeadGameObjects()
         {
             for (int i = 0; i < GameObjects.Count; i++)

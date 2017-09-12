@@ -10,8 +10,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     public class EnemyFactory
     {
-
-        private Random random = new Random();
+        
         private AsteroidsGame _game;
 
         public EnemyFactory(AsteroidsGame game)
@@ -21,11 +20,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public Enemy GetRandomEnemy()
         {
-            Enemy.Type enemyType = (Enemy.Type) random.Next(Enum.GetNames(typeof(Enemy.Type)).Length - 1);
+            Enemy.Type enemyType = (Enemy.Type)Globals.RNG.Next(Enum.GetNames(typeof(Enemy.Type)).Length - 1);
 
             Enemy enemy = new Enemy(_game, enemyType)
             {
-                Position = new Vector2(random.Next(Globals.ScreenWidth - 1), random.Next(Globals.ScreenHeight))
+                //Position = new Vector2(Globals.RNG.Next(_game.Level.SizeX - 1), Globals.RNG.Next(_game.Level.SizeY))
+                Position = new Vector2(2000, 2000)
             };
 
             return enemy;

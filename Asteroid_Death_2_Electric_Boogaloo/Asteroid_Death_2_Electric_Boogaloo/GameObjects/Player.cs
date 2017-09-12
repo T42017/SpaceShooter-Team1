@@ -16,7 +16,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             LoadTexture("shipPlayer");
             ShootingSpeed = 200;
         }
+
         public GamePadDPad DPad { get; }
+
         public override void Update()
         {
 

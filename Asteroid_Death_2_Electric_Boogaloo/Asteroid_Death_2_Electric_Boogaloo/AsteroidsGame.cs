@@ -38,10 +38,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Graphics.PreferredBackBufferWidth = Globals.ScreenWidth;
 
             Content.RootDirectory = "Content";
-            Window.Position = new Point(300, 300);
             Window.Title = "Asteroid Death 2 Electric Boogaloo";
-           
-
         }
 
         public void ChangeGameState(GameState desiredState)
@@ -58,10 +55,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                astroidsComponent.Enabled = astroidsComponent.UpdatableStates.HasFlag(_gameState);
            }
         }
-        
-        
-        
-
         
         protected override void Initialize()
         {
@@ -147,7 +140,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             GameObjectManager.AddEnemyFactory(new EnemyFactory(this));
 
             _camera = new Camera();
-            GameObjectManager.AddEnemys(4);
+            GameObjectManager.AddEnemys(1);
             //GameObjectManager.AddMeteors(10);
         }
 
