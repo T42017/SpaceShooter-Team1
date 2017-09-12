@@ -41,7 +41,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                     _positionGoTO = GetRandomPositionInLevel();
 
                 _enemy.Rotation = MathHelper.LookAt(_enemy.Position, _positionGoTO);
-                _enemy.Shoot(typeof(Enemy));
+                _enemy.Shoot();
                 _enemy.AccelerateForward(0.25f);
                 _enemy.Move();
 
@@ -58,8 +58,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             }
             else if (currentState == State.FollowPlayer)
             {
+<<<<<<< HEAD
                 _enemy.Rotation = MathHelper.LookAt(_enemy.Position, player.Position);
+                _enemy.Shoot();
+=======
+                _enemy.Rotation = Physic.LookAt(_enemy.Position, player.Position);
                 _enemy.Shoot(typeof(Enemy));
+>>>>>>> origin/develop
                 _enemy.AccelerateForward(0.25f);
                 _enemy.Move();
             }

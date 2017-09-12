@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace Asteroid_Death_2_Electric_Boogaloo
+namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
     public class Player : Ship
     {
@@ -26,23 +18,17 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             LoadTexture("shipPlayer");
             ShootingSpeed = 200;
         }
+<<<<<<< HEAD
+
+        public GamePadDPad DPad { get; }
+
+=======
         
+>>>>>>> origin/develop
         public override void Update()
         {
             var gamePadState = GamePad.GetState(PlayerIndex.One);
-<<<<<<< HEAD
             
-            if ((gamePadState.Buttons.A == ButtonState.Pressed ||
-                 Keyboard.GetState().IsKeyDown(Keys.Space)) && 
-                 (DateTime.Now - _timeSenceLastShot).TotalMilliseconds > _timeForLaserCooldownInMs)
-            {
-                //pewEffect.Play();
-                Shoot(typeof(Player));
-                _timeSenceLastShot = DateTime.Now;
-            }
-=======
->>>>>>> origin/develop
-
             KeyboardState state = Keyboard.GetState();
             
             //Movement using the left, right joystick and the Dpad on the Xbox controller or the arrows or WASD on the keyboard
@@ -76,11 +62,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Move();
 
             // Fire all lasers!
+            base.Update();
+            //Debug.WriteLine($"Player position: ({Position.X}, {Position.Y})");
             if ((gamePadState.Buttons.A == ButtonState.Pressed)
                 || (state.IsKeyDown(Keys.Space))
                 || (gamePadState.Triggers.Right > 0.2))
             {
-                Shoot();
+                Shoot(typeof(Player));
                 if (!((DateTime.Now - _timeSenceLastShot).TotalMilliseconds >= ShootingSpeed))
                     return;
 
@@ -91,13 +79,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             lastKeyboardState = state;
             lastGamePadState = gamePadState;
             
-<<<<<<< HEAD
-            StayInsideLevel(Game.Level);
-            base.Update();
-            //Debug.WriteLine($"Player position: ({Position.X}, {Position.Y})");
-=======
             StayInsideLevel();
->>>>>>> origin/develop
         }
 
         public override bool CollidesWith(GameObject otherGameObject)
@@ -106,6 +88,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             bool collides = base.CollidesWith(otherGameObject) && (otherGameObject is Meteor || otherGameObject is Enemy);
             if (collides)
             {
+                IsDead = true;
                 Game.ChangeGameState(GameState.gameover);
             }
             return collides;

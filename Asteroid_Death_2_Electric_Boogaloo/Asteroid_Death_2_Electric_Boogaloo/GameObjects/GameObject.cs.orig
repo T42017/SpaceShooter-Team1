@@ -1,14 +1,17 @@
 ﻿using System;
+<<<<<<< HEAD
+=======
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+>>>>>>> origin/develop
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Asteroid_Death_2_Electric_Boogaloo
+namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
     public abstract class GameObject
     {
@@ -16,7 +19,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public Vector2 Position { get; set; }
         public float Radius { get; set; }
         public Vector2 Speed { get; set; }
-        public float Rotation { get; set; } = Physic.DegreesToRadians(-90);
+        public float Rotation { get; set; } = MathHelper.DegreesToRadians(-90);
         public int MaxSpeed = 9;
         public int Width { get; set; } 
         public int Height { get; set; }
@@ -50,7 +53,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             return _bounds.Intersects(otherGameObject.Bounds) || otherGameObject.Bounds.Intersects(_bounds);
         }
 
-<<<<<<< HEAD
         public float DistanceToSquared(GameObject otherGameObject)
         {
             if (CollidesWith(otherGameObject))
@@ -59,16 +61,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             float dx = Math.Abs(Position.X - otherGameObject.Position.X);
             float dy = Math.Abs(Position.Y - otherGameObject.Position.Y);
             return dx * dx + dy * dy;
-=======
-            var otherBounds = new Rectangle(
-                (int) otherGameObject.Position.X - otherGameObject.Texture.Width / 2 + aLittleToMakeCollisionSeemMoreCorrect,
-                (int) otherGameObject.Position.Y - otherGameObject.Texture.Height / 2 + aLittleToMakeCollisionSeemMoreCorrect,
-                otherGameObject.Texture.Width - 2 * aLittleToMakeCollisionSeemMoreCorrect,
-                otherGameObject.Texture.Height - 2 * aLittleToMakeCollisionSeemMoreCorrect
-            );
-            
-            return theseBounds.Intersects(otherBounds) || otherBounds.Intersects(theseBounds);
->>>>>>> origin/develop
         }
 
         private void DrawBounds(SpriteBatch spriteBatch)
@@ -97,9 +89,15 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
+<<<<<<< HEAD
+            DrawBounds(spriteBatch);
+            spriteBatch.Draw(Texture, Position, null, Color.White, Rotation - Microsoft.Xna.Framework.MathHelper.PiOver2,
+                new Vector2(Texture.Width / 2, Texture.Height / 2), 1.0f, SpriteEffects.None, 0f);
+=======
             //DrawBounds(spriteBatch);
             spriteBatch.Draw(Texture, Position, null, Color.White, Rotation - MathHelper.PiOver2,
                 new Vector2(Texture.Width / 2f, Texture.Height / 2f), 1.0f, SpriteEffects.None, 0f);
+>>>>>>> origin/develop
         }
 
         public void StayInsideLevel()
