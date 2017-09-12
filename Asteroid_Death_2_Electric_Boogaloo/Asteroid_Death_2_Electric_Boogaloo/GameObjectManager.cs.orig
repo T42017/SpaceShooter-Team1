@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,14 +12,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     public class GameObjectManager
     {
-
         public Player Player { get; private set; }
 <<<<<<< HEAD
-        public List<GameObject> GameObjects { get; private set; } = new List<GameObject>();
-
+        public List<GameObject> GameObjects { get; } = new List<GameObject>();
 =======
-        public List<GameObject> GameObjects = new List<GameObject>();
->>>>>>> develop
+        public List<GameObject> GameObjects { get; private set; } = new List<GameObject>();
+>>>>>>> origin/develop
         
         private EnemyFactory _enemyFactory;
         private readonly AsteroidsGame _game;
@@ -37,7 +36,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public void AddEnemys(int amount)
         {
             for (int i = 0; i < amount; i++)
-                GameObjects.Add(_enemyFactory.GetRandomEnemy());
+            {
+                var enemy = _enemyFactory.GetRandomEnemy();
+                GameObjects.Add(enemy);
+            }
         }
 
         public void AddNewPlayer()
@@ -57,7 +59,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                     Globals.RNG.Next(_game.Level.SizeX),
                     Globals.RNG.Next(_game.Level.SizeY)
                 );
-                Meteor meteor = new Meteor(_game, position, MeteorSize.Big, MeteorColour.Gray)
+                Meteor meteor = new Meteor(_game, position, MeteorSize.Big, MeteorColour.Brown)
                 {
                     Rotation = (float)Globals.RNG.NextDouble()
                 };
@@ -118,24 +120,25 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             for (int i = 0; i < GameObjects.Count; i++)
             {
-                GameObjects[i].Update();
-                CheckForCollisionWith(GameObjects[i]);
+                var gameObject = GameObjects[i];
+                gameObject.Update();
+                CheckForCollisionWith(gameObject);
             }
-
-           // for (int i = GameObjects.Count - 1; i >= 0; i--) // htf does this work??
-          //  {
-               
-            //}
         }
 
         public void CheckForCollisionWith(GameObject thisObject)
         {
-            for (int i = GameObjects.Count - 1; i >= 0; i--)
+            for (int i = 0; i < GameObjects.Count; i++)
             {
                 var otherGameObject = GameObjects[i];
-                if (otherGameObject == null ||
-                    otherGameObject == thisObject)
+                if (thisObject.DistanceToSquared(otherGameObject) <= 100 * 100 ||
+                    thisObject == otherGameObject ||
+                    !thisObject.CollidesWith(otherGameObject))
                     continue;
+<<<<<<< HEAD
+                Debug.WriteLine($"{thisObject} collided with {otherGameObject}");
+                return;
+=======
 
                 if (thisObject.CollidesWith(otherGameObject))
                 {
@@ -144,18 +147,20 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                     //    Components.Remove(laser);
                     return;
                 }
+>>>>>>> origin/develop
             }
         }
 
         internal void DrawGameObjects(SpriteBatch spriteBatch)
         {
-            
+<<<<<<< HEAD
             for (int i = 0; i < GameObjects.Count; i++)
+=======
+           for (int i = 0; i < GameObjects.Count; i++)
+>>>>>>> origin/develop
             {
-                  GameObjects[i].Draw(spriteBatch);
+                GameObjects[i].Draw(spriteBatch);
             }
-            
-            
         }
     }
 }

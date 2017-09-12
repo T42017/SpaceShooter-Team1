@@ -23,6 +23,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
         private Song song;
         private Level level;
         private bool playing;
+
         public MenuComponent(Game game) : base(game)
         {
             batch = SpriteBatch;
@@ -36,7 +37,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
             playing = false;
             MediaPlayer.IsRepeating = true;
         }
-
 
         protected override void LoadContent()
         {
@@ -55,26 +55,29 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
             {
                 MediaPlayer.Stop();
                 MediaPlayer.Play(song);
+                MediaPlayer.Volume = 0.4f;
                 playing = true;
             }
+
             MouseState newState = Mouse.GetState();
             int x = newState.X, y = newState.Y;
+
             if (newState.LeftButton == ButtonState.Pressed && oldState.LeftButton == ButtonState.Released)
             {
-
-                if (x >= (pGame.Graphics.PreferredBackBufferWidth / 4) + (pGame.Graphics.PreferredBackBufferWidth / 6) + 10 &&
-                    x <= (pGame.Graphics.PreferredBackBufferWidth / 4) + (pGame.Graphics.PreferredBackBufferWidth / 6) + 232 &&
+                if (x >= pGame.Graphics.PreferredBackBufferWidth / 3 &&
+                    x <= (pGame.Graphics.PreferredBackBufferWidth / 3) + 222 &&
                     y >= (pGame.Graphics.PreferredBackBufferHeight / 4) +
                     (pGame.Graphics.PreferredBackBufferHeight / 8) && y <=
                     ((pGame.Graphics.PreferredBackBufferHeight / 4) + (pGame.Graphics.PreferredBackBufferHeight / 8)) +
                     39)
                 {
+                
                     pGame.ChangeGameState(GameState.ingame);
                     playing = false;
                 }
 
-                else if (x >= (pGame.Graphics.PreferredBackBufferWidth / 4) + (pGame.Graphics.PreferredBackBufferWidth / 6) + 10 &&
-                         x <= (pGame.Graphics.PreferredBackBufferWidth / 4) + (pGame.Graphics.PreferredBackBufferWidth / 6) + 232 &&
+                else if (x >= pGame.Graphics.PreferredBackBufferWidth / 3 &&
+                         x <= (pGame.Graphics.PreferredBackBufferWidth / 3) + 222 &&
                          y >= ((pGame.Graphics.PreferredBackBufferHeight / 4) +
                                (pGame.Graphics.PreferredBackBufferHeight / 8) + 50) && y <=
                          ((pGame.Graphics.PreferredBackBufferHeight / 4) +
@@ -84,10 +87,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
                     pGame.ChangeGameState(GameState.highscoremenu);
                     //SoundEffect beep = Game.Content.Load<SoundEffect>("roasted");
                     //beep.Play();
+                    playing = false;
                 }
 
-                else if (x >= (pGame.Graphics.PreferredBackBufferWidth / 4) + (pGame.Graphics.PreferredBackBufferWidth / 6) + 10 &&
-                         x <= (pGame.Graphics.PreferredBackBufferWidth / 4) + (pGame.Graphics.PreferredBackBufferWidth / 6) + 232 &&
+                else if (x >= pGame.Graphics.PreferredBackBufferWidth / 3 &&
+                         x <= (pGame.Graphics.PreferredBackBufferWidth / 3) + 222 &&
                          y >= ((pGame.Graphics.PreferredBackBufferHeight / 4) +
                                (pGame.Graphics.PreferredBackBufferHeight / 8) + 100) && y <=
                          ((pGame.Graphics.PreferredBackBufferHeight / 4) +
@@ -101,27 +105,21 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
 
         protected override void UnloadContent()
         {
-
-
             base.UnloadContent();
         }
 
         public override void Draw(GameTime gameTime)
         {
-
             SpriteBatch.Begin();
-
-
-
+            
             for (int x = 0; x < 2000; x += texture.Width)
             {
                 for (int y = 0; y < 2000; y += texture.Height)
                 {
-                    
                     SpriteBatch.Draw(texture, new Vector2(x, y), Color.White);
                 }
-
             }
+
             String
                     Name = "Asteroid Death 2 Electric Boogaloo",
                     button1 = "Start",
@@ -133,37 +131,34 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
                         pGame.Graphics.PreferredBackBufferHeight / 4), Color.Fuchsia);
 
                 SpriteBatch.Draw(Button,
-                    new Vector2((pGame.Graphics.PreferredBackBufferWidth / 4)+(pGame.Graphics.PreferredBackBufferWidth/6)+10,
+                    new Vector2(pGame.Graphics.PreferredBackBufferWidth / 3,
                         (pGame.Graphics.PreferredBackBufferHeight / 4) +
                         (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Cyan);
                 SpriteBatch.DrawString(buttonFont, button1,
-                    new Vector2((pGame.Graphics.PreferredBackBufferWidth / 4) + (pGame.Graphics.PreferredBackBufferWidth / 6) + 90,
+                    new Vector2(pGame.Graphics.PreferredBackBufferWidth / 3 + 80,
                         (pGame.Graphics.PreferredBackBufferHeight / 4) +
                         (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Black);
 
                 SpriteBatch.Draw(Button,
-                    new Vector2((pGame.Graphics.PreferredBackBufferWidth / 4) + (pGame.Graphics.PreferredBackBufferWidth / 6) + 10,
+                    new Vector2(pGame.Graphics.PreferredBackBufferWidth / 3,
                         (pGame.Graphics.PreferredBackBufferHeight / 4) +
                         (pGame.Graphics.PreferredBackBufferHeight / 8) + 50), Color.Cyan);
                 SpriteBatch.DrawString(buttonFont, button2,
-                    new Vector2((pGame.Graphics.PreferredBackBufferWidth / 4) + (pGame.Graphics.PreferredBackBufferWidth / 6) + 60,
+                    new Vector2(pGame.Graphics.PreferredBackBufferWidth / 3 + 50,
                         (pGame.Graphics.PreferredBackBufferHeight / 4) +
                         (pGame.Graphics.PreferredBackBufferHeight / 8) + 50), Color.Black);
 
                 SpriteBatch.Draw(Button,
-                    new Vector2((pGame.Graphics.PreferredBackBufferWidth / 4) + (pGame.Graphics.PreferredBackBufferWidth / 6) + 10,
+                    new Vector2(pGame.Graphics.PreferredBackBufferWidth / 3,
                         (pGame.Graphics.PreferredBackBufferHeight / 4) +
                         (pGame.Graphics.PreferredBackBufferHeight / 8) + 100), Color.Cyan);
                 SpriteBatch.DrawString(buttonFont, button3,
-                    new Vector2((pGame.Graphics.PreferredBackBufferWidth / 4) + (pGame.Graphics.PreferredBackBufferWidth / 6) + 90,
+                    new Vector2(pGame.Graphics.PreferredBackBufferWidth / 3 + 80,
                         (pGame.Graphics.PreferredBackBufferHeight / 4) +
                         (pGame.Graphics.PreferredBackBufferHeight / 8) + 100), Color.Black);
 
-                
-           
             SpriteBatch.End();
             base.Draw(gameTime);
         }
-
     }
 }

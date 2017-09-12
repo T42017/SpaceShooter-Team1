@@ -19,7 +19,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         private MouseState oldState;
         private Song song;
         private bool playing;
-        
         public HighscoreMenuComponent(Game game) : base(game)
         {
             Game.IsMouseVisible = true;
@@ -29,7 +28,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             UpdatableStates = GameState.highscoremenu;
             playing = false;
             MediaPlayer.IsRepeating = true;
-
         }
 
         protected override void LoadContent()
@@ -42,16 +40,17 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 
         public override void Update(GameTime gameTime)
         {
+
             if (playing==false)
             {
                 MediaPlayer.Stop();
                 MediaPlayer.Play(song);
+                MediaPlayer.Volume = 0.4f;
                 playing = true;
             }
             
             base.Update(gameTime);
         }
-
 
         public override void Draw(GameTime gameTime)
         {
@@ -63,9 +62,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 
                     SpriteBatch.Draw(texture, new Vector2(x, y), Color.White);
                 }
-
             }
-
 
             SpriteBatch.End();
             base.Draw(gameTime);

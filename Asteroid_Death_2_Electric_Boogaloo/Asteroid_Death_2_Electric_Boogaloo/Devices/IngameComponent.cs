@@ -9,12 +9,12 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
-
 namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 {
     class IngameComponent : AstroidsComponent
     {
         private KeyboardState lastKeyboardState;
+        private GamePadState lastGamePadState;
         private bool hasaddedgameobjetcs, playing;
         private SpriteFont menuFont, buttonFont;
         private Texture2D Button;
@@ -24,31 +24,33 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 
         public IngameComponent(Game game) : base(game)
         {
-            pGame = (AsteroidsGame)game;
-            
-           
+            pGame = (AsteroidsGame) game;
+
             DrawableStates = GameState.ingame;
             UpdatableStates = GameState.ingame;
 
             playing = false;
             MediaPlayer.IsRepeating = true;
-
         }
 
         protected override void LoadContent()
         {
-
             song = Game.Content.Load<Song>("Combat");
             base.LoadContent();
         }
 
         public override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed ||
-                Keyboard.GetState().IsKeyDown(Keys.Escape) && lastKeyboardState.IsKeyUp(Keys.Escape))
-            { pGame.ChangeGameState(GameState.paused); }
+            MediaPlayer.Volume = 0.4f;
+            var gamePadState = GamePad.GetState(PlayerIndex.One);
 
-                if (playing==false)
+            if (gamePadState.Buttons.Start == ButtonState.Pressed  
+                || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            {
+                pGame.ChangeGameState(GameState.paused);
+            }
+
+            if (playing == false)
             {
                 MediaPlayer.Stop();
                 MediaPlayer.Play(song);

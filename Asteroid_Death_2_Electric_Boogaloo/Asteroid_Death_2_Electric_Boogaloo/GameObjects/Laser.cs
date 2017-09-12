@@ -14,6 +14,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         private Color color;
 
+        public Type ParentType { get; set; }
+
         public Laser(AsteroidsGame game, Vector2 position, float rotation, Color color) : base(game)
         {
             this.Position = position;
@@ -25,7 +27,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         public override void LoadContent()
         {
-            
+         
         }
 
         public override void Update()
@@ -36,13 +38,20 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             Speed = Forward() * 11;
             AccelerateForward(9);
             Move();
+
+            //if (Position.X + Texture.Width / 2f > Game.Level.SizeX ||
+            //    Position.X - Texture.Width / 2f < 0 ||
+            //    Position.Y + Texture.Height / 2f > Game.Level.SizeY ||
+            //    Position.Y - Texture.Height / 2f < 0)
+            //{
+            //    Game.GameObjectManager.GameObjects.Remove(this);
+            //}
+            base.Update();
         }
 
         public override bool CollidesWith(GameObject otherGameObject)
         {
-            var collides = base.CollidesWith(otherGameObject);
-            if (collides) Game.GameObjectManager.GameObjects.Remove(this);
-            return collides;
+            return base.CollidesWith(otherGameObject) && ParentType != otherGameObject.GetType();
         }
     }
 }

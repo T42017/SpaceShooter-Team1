@@ -20,7 +20,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     public class AsteroidsGame : Game
     {
-      
         public GraphicsDeviceManager Graphics;
         public int WindowWidth, Windowheight;
         public GameObjectManager GameObjectManager;
@@ -29,7 +28,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         private GameState _gameState;
         private SpriteBatch _spriteBatch;
         private Camera _camera;
-        
+
         
         public AsteroidsGame()
         {
@@ -43,7 +42,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public void ChangeGameState(GameState desiredState)
         {
-           
            _gameState = desiredState;
 
            foreach (var component in Components)
@@ -91,20 +89,26 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         
         protected override void Update(GameTime gameTime)
         {
+            
+           //Debug.WriteLine(GameObjectManager.GameObjects.Count);
+            
+           
+               
+
             Globals.ScreenWidth = Graphics.PreferredBackBufferWidth;
-            if (_gameState == GameState.ingame)
+            if(_gameState == GameState.ingame)
             {
+                GameObjectManager.RemoveDeadGameObjects();
+                GameObjectManager.UpdateGameObjects();
                 _camera.FollowPlayer(GameObjectManager.Player);
                 //GameObjectManager.GenerateRandomNewMeteor(gameTime, 1000);
-                GameObjectManager.UpdateGameObjects();
-                GameObjectManager.RemoveDeadGameObjects();
             }
             base.Update(gameTime);
         }
         
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);
+            GraphicsDevice.Clear(Color.HotPink);
 
             //// if using XNA 4.0
             _spriteBatch.Begin(SpriteSortMode.Deferred,
@@ -117,7 +121,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
            
             if (_gameState==GameState.ingame ||_gameState==GameState.paused)
             {
-
                 Level.DrawBackground(_spriteBatch);
                 GameObjectManager.DrawGameObjects(_spriteBatch);
             }

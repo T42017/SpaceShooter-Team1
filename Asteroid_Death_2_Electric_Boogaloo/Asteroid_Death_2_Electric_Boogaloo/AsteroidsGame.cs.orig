@@ -30,7 +30,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         private Camera _camera;
 
         
-        
         public AsteroidsGame()
         {
             Graphics = new GraphicsDeviceManager(this);
@@ -40,25 +39,21 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Content.RootDirectory = "Content";
             Window.Position = new Point(300, 300);
             Window.Title = "Asteroid Death 2 Electric Boogaloo";
-           
-
         }
 
         public void ChangeGameState(GameState desiredState)
         {
-           
            _gameState = desiredState;
-        
+
            foreach (var component in Components)
+            {
                 if(!(component is AstroidsComponent astroidsComponent))
+
                continue;
                astroidsComponent.Visible = astroidsComponent.DrawableStates.HasFlag(_gameState);
                astroidsComponent.Enabled = astroidsComponent.UpdatableStates.HasFlag(_gameState);
            }
-        
-        
-        
-
+        }
         
         protected override void Initialize()
         {
@@ -73,21 +68,17 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Components.Add(new MenuComponent(this));
             Components.Add(new HighscoreMenuComponent(this));
             Components.Add(new IngameComponent(this));
-<<<<<<< HEAD
             Components.Add(new PauseComponent(this));
-            //Components.Add(new YouAreDead());
-=======
->>>>>>> origin/Feature_MovementOfPlayer
             ChangeGameState(GameState.Menu);
            
-            
+            Level = new Level(this, 20, 20);
 
             GameObjectManager = new GameObjectManager(this);
             GameObjectManager.AddEnemyFactory(new EnemyFactory(this));
 
             _camera = new Camera();
             //GameObjectManager.AddEnemys(4);
-            //GameObjectManager.AddMeteors(10);
+            GameObjectManager.AddMeteors(10);
 
             base.Initialize();
         }
@@ -107,24 +98,24 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         protected override void Update(GameTime gameTime)
         {
             
+           //Debug.WriteLine(GameObjectManager.GameObjects.Count);
+            
+           
                
-            _camera.FollowPlayer(GameObjectManager.Player);
-            //GameObjectManager.GenerateRandomNewMeteor(gameTime, 1000);
-            GameObjectManager.RemoveDeadGameObjects();
 
-            if(_gameState== GameState.ingame) { 
+            Globals.ScreenWidth = Graphics.PreferredBackBufferWidth;
 <<<<<<< HEAD
-            _camera.FollowPlayer(GameObjectManager.Player);
-            //GameObjectManager.GenerateRandomNewMeteor(gameTime, 1000);
-            GameObjectManager.UpdateGameObjects();
-             }
+            if(_gameState == GameState.ingame)
+            { 
 =======
-                Debug.WriteLine(_gameState);
+            if (_gameState == GameState.ingame)
+            {
+>>>>>>> origin/develop
                 _camera.FollowPlayer(GameObjectManager.Player);
                 //GameObjectManager.GenerateRandomNewMeteor(gameTime, 1000);
                 GameObjectManager.UpdateGameObjects();
+                GameObjectManager.RemoveDeadGameObjects();
             }
->>>>>>> origin/Feature_MovementOfPlayer
             base.Update(gameTime);
         }
         
@@ -143,7 +134,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
            
             if (_gameState==GameState.ingame ||_gameState==GameState.paused)
             {
-
                 Level.DrawBackground(_spriteBatch);
                 GameObjectManager.DrawGameObjects(_spriteBatch);
             }
@@ -156,6 +146,5 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             WindowWidth = Graphics.PreferredBackBufferWidth;
             Windowheight = Graphics.PreferredBackBufferHeight;
         }
-        
     }
 }

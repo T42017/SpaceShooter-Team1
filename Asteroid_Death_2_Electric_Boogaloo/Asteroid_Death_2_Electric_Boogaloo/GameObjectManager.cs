@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     public class GameObjectManager
     {
-
         public Player Player { get; private set; }
         public List<GameObject> GameObjects { get; private set; } = new List<GameObject>();
         
@@ -33,7 +33,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public void AddEnemys(int amount)
         {
             for (int i = 0; i < amount; i++)
-                GameObjects.Add(_enemyFactory.GetRandomEnemy());
+            {
+                var enemy = _enemyFactory.GetRandomEnemy();
+                GameObjects.Add(enemy);
+            }
         }
 
         public void AddNewPlayer()
@@ -53,7 +56,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                     Globals.RNG.Next(_game.Level.SizeX),
                     Globals.RNG.Next(_game.Level.SizeY)
                 );
-                Meteor meteor = new Meteor(_game, position, MeteorSize.Big, MeteorColour.Gray)
+                Meteor meteor = new Meteor(_game, position, MeteorSize.Big, MeteorColour.Brown)
                 {
                     Rotation = (float)Globals.RNG.NextDouble()
                 };
@@ -127,44 +130,30 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             for (int i = 0; i < GameObjects.Count; i++)
             {
-                GameObjects[i].Update();
-                CheckForCollisionWith(GameObjects[i]);
+                var gameObject = GameObjects[i];
+                gameObject.Update();
+                CheckForCollisionWith(gameObject);
             }
-
-           // for (int i = GameObjects.Count - 1; i >= 0; i--) // htf does this work??
-          //  {
-               
-            //}
         }
 
         public void CheckForCollisionWith(GameObject thisObject)
         {
-            for (int i = GameObjects.Count - 1; i >= 0; i--)
+            for (int i = 0; i < GameObjects.Count; i++)
             {
                 var otherGameObject = GameObjects[i];
-                if (otherGameObject == null ||
-                    otherGameObject == thisObject)
+                if (thisObject == otherGameObject || !thisObject.CollidesWith(otherGameObject))
                     continue;
-
-                if (thisObject.CollidesWith(otherGameObject))
-                {
-                    otherGameObject.IsDead = true;
-                    //if (thisObject is LaserRed laser)
-                    //    Components.Remove(laser);
-                    return;
-                }
+                Debug.WriteLine($"{thisObject} collided with {otherGameObject}");
+                return;
             }
         }
 
         internal void DrawGameObjects(SpriteBatch spriteBatch)
         {
-            
-            for (int i = 0; i < GameObjects.Count; i++)
+           for (int i = 0; i < GameObjects.Count; i++)
             {
-                  GameObjects[i].Draw(spriteBatch);
+                GameObjects[i].Draw(spriteBatch);
             }
-            
-            
         }
     }
 }
