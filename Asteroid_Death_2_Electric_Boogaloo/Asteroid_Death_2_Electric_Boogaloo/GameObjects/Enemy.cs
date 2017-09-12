@@ -38,7 +38,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             this.type = type;
             _ai = new AI((AsteroidsGame) game, this);
             this.type = type;
-            ShootingSpeed = 300;
+            ShootingSpeed = 100;
         }
 
         public override void LoadContent()
