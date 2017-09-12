@@ -18,6 +18,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         private GamePadState lastGamePadState;
         private SoundEffect pewEffect;
         private DateTime _timeSenceLastShot = DateTime.Today;
+
         public Player(AsteroidsGame game) : base(game) { }
       
         public override void LoadContent()
@@ -30,8 +31,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public override void Update()
         {
             var gamePadState = GamePad.GetState(PlayerIndex.One);
-
-
+            
             KeyboardState state = Keyboard.GetState();
             
             //Movement using the left, right joystick and the Dpad on the Xbox controller or the arrows or WASD on the keyboard
@@ -87,7 +87,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public override bool CollidesWith(GameObject otherGameObject)
         {
-            
             bool collides = base.CollidesWith(otherGameObject) && (otherGameObject is Meteor || otherGameObject is Enemy);
             if (collides)
             {
