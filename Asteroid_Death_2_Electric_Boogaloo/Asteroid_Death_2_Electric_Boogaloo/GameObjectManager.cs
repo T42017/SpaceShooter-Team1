@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -11,9 +12,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     public class GameObjectManager
     {
-
         public Player Player { get; private set; }
-        public List<GameObject> GameObjects { get; } = new List<GameObject>();
+        public List<GameObject> GameObjects { get; private set; } = new List<GameObject>();
         
         private EnemyFactory _enemyFactory;
         private readonly AsteroidsGame _game;
@@ -21,6 +21,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public GameObjectManager(AsteroidsGame game)
         {
             _game = game;
+            AddNewPlayer();
         }
 
         public void AddEnemyFactory(EnemyFactory factory)
@@ -59,6 +60,17 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                     Rotation = (float)Globals.RNG.NextDouble()
                 };
                 GameObjects.Add(meteor);
+            }
+        }
+
+        internal void RemoveDeadGameObjects()
+        {
+            for (int i = 0; i < GameObjects.Count; i++)
+            {
+                if (GameObjects[i].IsDead)
+                {
+                    GameObjects.Remove(GameObjects[i]);
+                }
             }
         }
 
@@ -126,7 +138,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         internal void DrawGameObjects(SpriteBatch spriteBatch)
         {
-            for (int i = 0; i < GameObjects.Count; i++)
+           for (int i = 0; i < GameObjects.Count; i++)
             {
                 GameObjects[i].Draw(spriteBatch);
             }

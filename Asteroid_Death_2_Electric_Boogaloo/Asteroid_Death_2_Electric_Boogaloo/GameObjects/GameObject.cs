@@ -91,11 +91,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 new Vector2(Texture.Width / 2f, Texture.Height / 2f), 1.0f, SpriteEffects.None, 0f);
         }
 
-        public void StayInsideLevel(Level level)
+        public void StayInsideLevel()
         {
-            if (Position.X + Texture.Width / 2 > level.SizeX)
+            if (Position.X + Texture.Width / 2 > Game.Level.SizeX)
             {
-                Position = new Vector2(level.SizeX - Texture.Width / 2, Position.Y);
+                Position = new Vector2(Game.Level.SizeX - Texture.Width / 2, Position.Y);
                 if (Speed.X > 0) Speed = new Vector2(0, Speed.Y);
             }
             else if (Position.X - Texture.Width / 2 < 0)
@@ -104,9 +104,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 if (Speed.X < 0) Speed = new Vector2(0, Speed.Y);
             }
 
-            if (Position.Y + Texture.Height / 2 > level.SizeY)
+            if (Position.Y + Texture.Height / 2 > Game.Level.SizeY)
             {
-                Position = new Vector2(Position.X, level.SizeY - Texture.Height / 2);
+                Position = new Vector2(Position.X, Game.Level.SizeY - Texture.Height / 2);
                 if (Speed.Y > 0) Speed = new Vector2(Speed.X, 0);
             }
             else if (Position.Y - Texture.Height / 2 < 0)
@@ -114,11 +114,16 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 Position = new Vector2(Position.X, Texture.Height / 2);
                 if (Speed.Y < 0) Speed = new Vector2(Speed.X, 0);
             }
+        }
 
-            //if (Position.Y - Texture.Height < Globals.GameArea.Top)
-            //    Position = new Vector2(Position.X, Position.Y - Texture.Height);
-            //if (Position.Y + Texture.Height > Globals.GameArea.Bottom)
-            //    Position = new Vector2(Position.X, Position.Y + Texture.Height);
+        public bool IsOutSideLevel(Level level)
+        {
+            if (Position.X + Texture.Width / 2 > level.SizeX ||
+                Position.X - Texture.Width / 2 < 0 ||
+                Position.Y + Texture.Height / 2 > level.SizeY ||
+                Position.Y - Texture.Height / 2 < 0)
+                return true;
+            return false;
         }
 
         public void Move()

@@ -6,25 +6,29 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 {
     class PauseComponent : AstroidsComponent
     {
+        private Song song;
+        private bool playing;
         private KeyboardState lastKeyboardState;
         private SpriteFont font;
         private AsteroidsGame pGame;
+
         public PauseComponent(Game game) : base(game)
         {
             pGame = (AsteroidsGame) game;
-
+            playing = false;
             UpdatableStates = GameState.paused;
             DrawableStates = GameState.paused;
         }
-
-
+        
         protected override void LoadContent()
         {
+            song = Game.Content.Load<Song>("Chameleon");
             font = Game.Content.Load<SpriteFont>("Text");
 
             base.LoadContent();
@@ -32,14 +36,20 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 
         public override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
-                Keyboard.GetState().IsKeyDown(Keys.Escape)&& lastKeyboardState.IsKeyUp(Keys.Escape))
-                pGame.ChangeGameState(GameState.ingame);
+            if (playing==false )
+            {
+                MediaPlayer.Volume = 0.05f;
+                playing = true;
+            }
 
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
-                Keyboard.GetState().IsKeyDown(Keys.M))
-                pGame.ChangeGameState(GameState.Menu);
-             lastKeyboardState=Keyboard.GetState();
+            if(GamePad.GetState(PlayerIndex.One).Buttons.Start==ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape) && lastKeyboardState.IsKeyUp(Keys.Escape))
+                pGame.ChangeGameState(GameState.ingame); playing = false;
+
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed 
+                || Keyboard.GetState().IsKeyDown(Keys.M))
+                pGame.ChangeGameState(GameState.Menu); playing = false;
+            
+            lastKeyboardState =Keyboard.GetState();
             base.Update(gameTime);
         }
 
@@ -54,12 +64,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             SpriteBatch.DrawString(font, Text1,
                 new Vector2((pGame.Graphics.PreferredBackBufferWidth / 2) - (pGame.Graphics.PreferredBackBufferWidth / 16),
                     (pGame.Graphics.PreferredBackBufferHeight / 4) +
-                    (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Black);
-            SpriteBatch.DrawString(font, text2,
-                new Vector2(pGame.Graphics.PreferredBackBufferWidth / 2 - (pGame.Graphics.PreferredBackBufferWidth / 12),
-                    (pGame.Graphics.PreferredBackBufferHeight / 4) +
-                    (pGame.Graphics.PreferredBackBufferHeight / 8)+30), Color.Black);
+                    (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Gold);
 
+            SpriteBatch.DrawString(font, text2,
+                new Vector2(
+                    pGame.Graphics.PreferredBackBufferWidth / 2 - (pGame.Graphics.PreferredBackBufferWidth / 12),
+                    (pGame.Graphics.PreferredBackBufferHeight / 4) +
+                    (pGame.Graphics.PreferredBackBufferHeight / 8) + 30), Color.Goldenrod );
             SpriteBatch.End();
 
             base.Draw(gameTime);

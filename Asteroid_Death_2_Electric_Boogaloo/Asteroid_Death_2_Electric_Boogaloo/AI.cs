@@ -11,48 +11,93 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     {
         public enum State
         {
-            MoveAround,
-            FoundPlayer
+            GoToPosition,
+            FollowPlayer
         }
 
-        private State currentState = State.MoveAround;
+        private State currentState = State.GoToPosition;
         private readonly AsteroidsGame _game;
         private Enemy _enemy;
+
+        private Vector2 _positionGoTO = new Vector2();
 
         public AI(AsteroidsGame game, Enemy enemy)
         {
             _game = game;
             this._enemy = enemy;
-            RandomizeRotation();
         }
 
         public void Update()
         {
-            if (currentState == State.MoveAround)
+            Player player = _game.GameObjectManager.Player;
+
+            if (Vector2.Distance(player.Position, _enemy.Position) < 300)
+                currentState = State.FollowPlayer;
+            else if (Vector2.Distance(player.Position, _enemy.Position) > 300)
+                currentState = State.GoToPosition;
+
+            if (currentState == State.GoToPosition)
             {
-                List<Meteor> meteors = GetMeteors();
+
+                if (_positionGoTO.Equals(Vector2.Zero))
+                    _positionGoTO = GetRandomPositionInLevel();
+
+            }
+            else if (currentState == State.FollowPlayer)
+            {
+                _enemy.Rotation = Physic.LookAt(_enemy.Position, player.Position);
+                _enemy.Shoot();
                 _enemy.AccelerateForward(0.25f);
                 _enemy.Move();
             }
+
+            _enemy.StayInsideLevel();
         }
 
-        private void RandomizeRotation()
+        private Vector2 GetRandomPositionInLevel()
         {
-            _enemy.Rotation = (float)(Globals.RNG.NextDouble() * (2 * Math.PI));
+            Vector2 vec = new Vector2(Globals.RNG.Next(_game.Level.SizeX, _game.Level.SizeY));
+
+            while (Vector2.Distance(_enemy.Position, vec) < 100)
+            {
+                vec = new Vector2(Globals.RNG.Next(_game.Level.SizeX, _game.Level.SizeY));
+            }
+
+            return vec;
         }
 
         private List<Meteor> GetMeteors()
         {
             List<Meteor> meteors = new List<Meteor>();
 
-            foreach (var component in _game.Components)
+            foreach (var gameObject in _game.GameObjectManager.GameObjects)
             {
-                if (!(component is Meteor))
-                    continue;
-
-                meteors.Add((Meteor)component);
+                if (gameObject is Meteor meteor)
+                    meteors.Add(meteor);
             }
             return meteors;
+        }
+
+        private float GetDistanceToClosestMeteor()
+        {
+            List<Meteor> meteors = GetMeteors();
+           return Vector2.Distance(_enemy.Position, GetClosestMeteor().Position);
+        }
+
+        private Meteor GetClosestMeteor()
+        {
+            List<Meteor> meteors = GetMeteors();
+            Meteor meteor = null;
+
+            for (int i = 0; i < meteors.Count; i++)
+            {
+                if (meteor == null)
+                    meteor = meteors[i];
+
+                if (Vector2.Distance(_enemy.Position, meteors[i].Position) < Vector2.Distance(_enemy.Position, meteor.Position))
+                    meteor = meteors[i];
+            }
+            return meteor;
         }
 
     }

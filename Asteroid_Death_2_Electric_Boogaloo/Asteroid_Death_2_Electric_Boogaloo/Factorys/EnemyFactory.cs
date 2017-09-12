@@ -26,6 +26,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             {
                 Position = new Vector2(random.Next(Globals.ScreenWidth - 1), random.Next(Globals.ScreenHeight))
             };
+
             return enemy;
         }
 

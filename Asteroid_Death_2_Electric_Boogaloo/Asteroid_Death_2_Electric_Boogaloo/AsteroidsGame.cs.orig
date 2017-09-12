@@ -20,7 +20,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     public class AsteroidsGame : Game
     {
-      
         public GraphicsDeviceManager Graphics;
         public int WindowWidth, Windowheight;
         public GameObjectManager GameObjectManager;
@@ -49,16 +48,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
            
            _gameState = desiredState;
-
+        
            foreach (var component in Components)
-            {
                 if(!(component is AstroidsComponent astroidsComponent))
-
                continue;
                astroidsComponent.Visible = astroidsComponent.DrawableStates.HasFlag(_gameState);
                astroidsComponent.Enabled = astroidsComponent.UpdatableStates.HasFlag(_gameState);
            }
-        }
         
         
         
@@ -85,13 +81,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             ChangeGameState(GameState.Menu);
            
             
-            Level = new Level(this, 3000, 3000);
 
             GameObjectManager = new GameObjectManager(this);
             GameObjectManager.AddEnemyFactory(new EnemyFactory(this));
 
             _camera = new Camera();
-            GameObjectManager.AddNewPlayer();
             //GameObjectManager.AddEnemys(4);
             //GameObjectManager.AddMeteors(10);
 
@@ -102,8 +96,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            Level.LoadContent();
+            
             GameObjectManager.LoadContent();
         }
         
@@ -114,12 +107,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         protected override void Update(GameTime gameTime)
         {
             
-           
-            
-           
                
+            _camera.FollowPlayer(GameObjectManager.Player);
+            //GameObjectManager.GenerateRandomNewMeteor(gameTime, 1000);
+            GameObjectManager.RemoveDeadGameObjects();
 
-            Globals.ScreenWidth = Graphics.PreferredBackBufferWidth;
             if(_gameState== GameState.ingame) { 
 <<<<<<< HEAD
             _camera.FollowPlayer(GameObjectManager.Player);

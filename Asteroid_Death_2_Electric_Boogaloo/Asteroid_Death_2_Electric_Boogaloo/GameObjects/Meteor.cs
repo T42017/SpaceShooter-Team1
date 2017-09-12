@@ -93,7 +93,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public override void LoadContent()
         {
-            SetAppropriateTexture();
+            
         }
 
         public override void Update()
@@ -118,6 +118,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 Game.GameObjectManager.GameObjects.Remove(this);
                 Game.GameObjectManager.GameObjects.Remove(otherGameObject);
             }
+            if (collides) Game.GameObjectManager.GameObjects.Remove(this);
+            if (collides) IsDead = true;
             return collides;
         }
     }

@@ -15,60 +15,75 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     public class Player : Ship
     {
         private KeyboardState lastKeyboardState;
-        private DateTime _timeSenceLastShot = DateTime.Today;
-        private int _timeForLaserCooldownInMs = 100;
+        private GamePadState lastGamePadState;
         private SoundEffect pewEffect;
+        private DateTime _timeSenceLastShot = DateTime.Today;
         public Player(AsteroidsGame game) : base(game) { }
       
         public override void LoadContent()
         {
             pewEffect = Game.Content.Load<SoundEffect>("Blaster");
             LoadTexture("shipPlayer");
+            ShootingSpeed = 200;
         }
-        public GamePadDPad DPad { get; }
+        
         public override void Update()
         {
-
             var gamePadState = GamePad.GetState(PlayerIndex.One);
-            
-            if ((gamePadState.Buttons.A == ButtonState.Pressed ||
-                 Keyboard.GetState().IsKeyDown(Keys.Space)) && 
-                 (DateTime.Now - _timeSenceLastShot).TotalMilliseconds > _timeForLaserCooldownInMs)
-            {
-                //pewEffect.Play();
-                Shoot(typeof(Player));
-                _timeSenceLastShot = DateTime.Now;
-            }
 
+                pewEffect.Play();
+                Shoot();
             KeyboardState state = Keyboard.GetState();
-
-            //GamePadState m_pad; // create GamePadState struct
-            //m_pad = GamePad.GetState(PlayerIndex.One); // retrieve current controller state
-            //if (m_pad.DPad.Up == ButtonState.Pressed) AccelerateForward(0.25f); // do something if DPad up button pressed|
-            //if (m_pad.DPad.Left == ButtonState.Pressed) // do something if DPad left button pressed 
-
-
-
-            if (gamePadState.ThumbSticks.Left.Y== 1.0f || (state.IsKeyDown(Keys.Up))) 
+            
+            //Movement using the left, right joystick and the Dpad on the Xbox controller or the arrows or WASD on the keyboard
+            if ((gamePadState.ThumbSticks.Left.Y >= 0.3f)
+                || (gamePadState.DPad.Up == ButtonState.Pressed)
+                || (state.IsKeyDown(Keys.Up))
+                || (state.IsKeyDown(Keys.W))) 
                 AccelerateForward(0.25f);
            
-            if (gamePadState.ThumbSticks.Left.Y == -1.0f || (state.IsKeyDown(Keys.Down)))
+            if ((gamePadState.ThumbSticks.Left.Y <= -0.3f) 
+                || (gamePadState.DPad.Down == ButtonState.Pressed)
+                || (state.IsKeyDown(Keys.Down)) 
+                || (state.IsKeyDown(Keys.S)))
                 AccelerateForward(-0.07f);
 
-            if (gamePadState.ThumbSticks.Left.X == -1.0f ||(state.IsKeyDown(Keys.Left)))
-                Rotation -= 0.04f;
+            if ((gamePadState.ThumbSticks.Left.X <= -0.3f)
+                || (gamePadState.ThumbSticks.Right.X <= -0.3f)
+                || (gamePadState.DPad.Left == ButtonState.Pressed)
+                || (state.IsKeyDown(Keys.Left))
+                || (state.IsKeyDown(Keys.A))) 
+                Rotation -= 0.026f;
 
-            else if (gamePadState.ThumbSticks.Left.X == 1.0f || (state.IsKeyDown(Keys.Right)))
-                Rotation += 0.04f;
-
-            lastKeyboardState = state;
+            if ((gamePadState.ThumbSticks.Left.X >= 0.3f) 
+                || (gamePadState.ThumbSticks.Right.X >= 0.3f)
+                || (gamePadState.DPad.Right == ButtonState.Pressed)
+                || (state.IsKeyDown(Keys.Right)) 
+                || (state.IsKeyDown(Keys.D)))
+                Rotation += 0.026f;
 
             Speed += new Vector2(-Speed.X * 0.015f, -Speed.Y * 0.015f);
             Move();
-            
-            StayInsideLevel(Game.Level);
+
+            // Fire all lasers!
             base.Update();
             //Debug.WriteLine($"Player position: ({Position.X}, {Position.Y})");
+            if ((gamePadState.Buttons.A == ButtonState.Pressed)
+                || (state.IsKeyDown(Keys.Space))
+                || (gamePadState.Triggers.Right > 0.2))
+            {
+                Shoot();
+                if (!((DateTime.Now - _timeSenceLastShot).TotalMilliseconds >= ShootingSpeed))
+                    return;
+
+                pewEffect.Play();
+                _timeSenceLastShot = DateTime.Now;
+            }
+
+            lastKeyboardState = state;
+            lastGamePadState = gamePadState;
+            
+            StayInsideLevel();
         }
 
         public override bool CollidesWith(GameObject otherGameObject)
