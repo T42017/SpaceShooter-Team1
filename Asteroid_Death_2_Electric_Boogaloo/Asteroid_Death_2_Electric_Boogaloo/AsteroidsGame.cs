@@ -38,7 +38,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Graphics.PreferredBackBufferWidth = Globals.ScreenWidth;
 
             Content.RootDirectory = "Content";
-            Window.Position = new Point(300, 300);
             Window.Title = "Asteroid Death 2 Electric Boogaloo";
         }
 
@@ -72,24 +71,15 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Components.Add(new PauseComponent(this));
             Components.Add(new DeathComponent(this));
             ChangeGameState(GameState.Menu);
-           
-            Level = new Level(this, 20, 20);
 
-            GameObjectManager = new GameObjectManager(this);
-            GameObjectManager.AddEnemyFactory(new EnemyFactory(this));
-
-            _camera = new Camera();
-            //GameObjectManager.AddEnemys(4);
-            GameObjectManager.AddMeteors(10);
+            Start();
 
             base.Initialize();
         }
         
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            
             GameObjectManager.LoadContent();
         }
         
@@ -101,17 +91,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             
            //Debug.WriteLine(GameObjectManager.GameObjects.Count);
-            
-           
-               
 
             Globals.ScreenWidth = Graphics.PreferredBackBufferWidth;
             if(_gameState == GameState.ingame)
-            { 
+            {
+                GameObjectManager.RemoveDeadGameObjects();
+                GameObjectManager.UpdateGameObjects();
                 _camera.FollowPlayer(GameObjectManager.Player);
                 //GameObjectManager.GenerateRandomNewMeteor(gameTime, 1000);
-                GameObjectManager.UpdateGameObjects();
-                GameObjectManager.RemoveDeadGameObjects();
             }
             base.Update(gameTime);
         }
@@ -138,10 +125,24 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             _spriteBatch.End();
             base.Draw(gameTime);
         }
+
         public void UpdateWindowSize()
         {
             WindowWidth = Graphics.PreferredBackBufferWidth;
             Windowheight = Graphics.PreferredBackBufferHeight;
         }
+
+        public void Start()
+        {
+            Level = new Level(this, 20, 20);
+
+            GameObjectManager = new GameObjectManager(this);
+            GameObjectManager.AddEnemyFactory(new EnemyFactory(this));
+
+            _camera = new Camera();
+            GameObjectManager.AddEnemys(10);
+            GameObjectManager.AddMeteors(40);
+        }
+
     }
 }

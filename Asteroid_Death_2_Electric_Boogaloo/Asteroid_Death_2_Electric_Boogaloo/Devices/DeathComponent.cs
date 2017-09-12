@@ -43,6 +43,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 
             if (playing==false)
             {
+
                 MediaPlayer.Stop();
                 MediaPlayer.Play(song);
                 playing = true;

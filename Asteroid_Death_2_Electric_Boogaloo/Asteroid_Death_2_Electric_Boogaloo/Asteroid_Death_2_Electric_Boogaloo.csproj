@@ -53,9 +53,8 @@
     <Compile Include="Devices\IngameComponent.cs" />
     <Compile Include="GameObjectManager.cs" />
     <Compile Include="Level.cs" />
-    <Compile Include="PathfindingAStar.cs" />
     <Compile Include="Devices\MenuComponent.cs" />
-    <Compile Include="Physic.cs" />
+    <Compile Include="MathHelper.cs" />
     <Compile Include="GameObjects\PixelExplosion.cs" />
     <Compile Include="GameObjects\GameObject.cs" />
     <Compile Include="Globals.cs" />
