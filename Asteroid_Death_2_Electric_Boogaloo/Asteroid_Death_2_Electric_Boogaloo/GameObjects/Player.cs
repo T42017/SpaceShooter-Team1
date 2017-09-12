@@ -63,8 +63,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 || (state.IsKeyDown(Keys.Space))
                 || (gamePadState.Triggers.Right > 0.2))
             {
+                if (!((DateTime.Now - _timeSenceLastShot).TotalMilliseconds >= ShootingSpeed))
+                    return;
                 Shoot(typeof(Player));
                 pewEffect.Play();
+                _timeSenceLastShot = DateTime.Now;
             }
 
             lastKeyboardState = state;
