@@ -30,9 +30,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public override void Update()
         {
             var gamePadState = GamePad.GetState(PlayerIndex.One);
-
-                pewEffect.Play();
-                Shoot();
+            
             KeyboardState state = Keyboard.GetState();
             
             //Movement using the left, right joystick and the Dpad on the Xbox controller or the arrows or WASD on the keyboard
@@ -72,7 +70,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 || (state.IsKeyDown(Keys.Space))
                 || (gamePadState.Triggers.Right > 0.2))
             {
-                Shoot();
+                Shoot(typeof(Player));
                 if (!((DateTime.Now - _timeSenceLastShot).TotalMilliseconds >= ShootingSpeed))
                     return;
 
@@ -92,6 +90,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             bool collides = base.CollidesWith(otherGameObject) && (otherGameObject is Meteor || otherGameObject is Enemy);
             if (collides)
             {
+                IsDead = true;
                 Game.ChangeGameState(GameState.gameover);
             }
             return collides;

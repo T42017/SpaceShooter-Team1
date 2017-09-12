@@ -43,13 +43,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             AccelerateForward(9);
             Move();
 
-            if (Position.X + Texture.Width / 2f > Game.Level.SizeX ||
-                Position.X - Texture.Width / 2f < 0 ||
-                Position.Y + Texture.Height / 2f > Game.Level.SizeY ||
-                Position.Y - Texture.Height / 2f < 0)
-            {
-                Game.GameObjectManager.GameObjects.Remove(this);
-            }
+            //if (Position.X + Texture.Width / 2f > Game.Level.SizeX ||
+            //    Position.X - Texture.Width / 2f < 0 ||
+            //    Position.Y + Texture.Height / 2f > Game.Level.SizeY ||
+            //    Position.Y - Texture.Height / 2f < 0)
+            //{
+            //    Game.GameObjectManager.GameObjects.Remove(this);
+            //}
             base.Update();
         }
 

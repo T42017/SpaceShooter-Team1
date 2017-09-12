@@ -15,6 +15,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         public DeathComponent(Game game) : base(game)
         {
             playing = false;
+            UpdatableStates =GameState.gameover;
+            DrawableStates=GameState.gameover;
         }
 
         protected override void LoadContent()
@@ -29,6 +31,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 
             if (playing==false)
             {
+
+                MediaPlayer.Stop();
                 MediaPlayer.Play(song);
                 playing = true;
             }
