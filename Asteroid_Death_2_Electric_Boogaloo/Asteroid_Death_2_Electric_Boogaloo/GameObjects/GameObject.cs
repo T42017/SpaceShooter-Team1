@@ -75,20 +75,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public virtual void Update()
         {
-            //_bounds.X = (int)Position.X - Width  / 2;
-            //_bounds.Y = (int)Position.Y - Height / 2;
-            //_bounds.Width = _bounds.Height = Math.Max(Width, Height);
-
             int offset = 20;
             _bounds = new Rectangle(
                 (int) Position.X - Width / 2 + offset,
                 (int) Position.Y - Height / 2 + offset,
                 Math.Max(Width, Height) - offset,
                 Math.Max(Width, Height) - offset
-            //Width,
-            //Height
             );
-            //Debug.WriteLine($"{GetType().Name} at ({_bounds.X}, {_bounds.Y})");
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)

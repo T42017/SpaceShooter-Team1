@@ -64,23 +64,31 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             LoadTexture(fileName);
         }
 
-        public void SpawnChildren()
+        public IEnumerable<Meteor> SpawnChildren()
         {
             if (MeteorSize == MeteorSize.Small)
-                return;
+                return null;
+            return ShatterIntoSmallerMeteors();
+        }
 
-            int amountOfChildren = (int) MeteorColour + 3;
-            for (int i = 0; i < amountOfChildren; i++)
+        private IEnumerable<Meteor> ShatterIntoSmallerMeteors()
+        {
+            int amountOfSmallerMeteors = MeteorColour == MeteorColour.Gray ? 5 : 3;
+            var offset = new Vector2(
+                Globals.RNG.Next(20, 30), 
+                Globals.RNG.Next(20, 30)
+            );
+            for (int i = 0; i < amountOfSmallerMeteors; i++)
             {
-                var meteor = new Meteor(Game, Position, MeteorSize - 1, MeteorColour)
+                yield return new Meteor(Game, Position + offset, MeteorSize - 1, MeteorColour)
                 {
                     Speed = new Vector2(
-                        Speed.X * 2, 
-                        Speed.Y * 2
+                        Speed.X * Globals.RNG.Next(2, 4) * Globals.RNG.Next(-1, 1) < 0 ? -1 : 1,
+                        Speed.Y * Globals.RNG.Next(2, 4) * Globals.RNG.Next(-1, 1) < 0 ? -1 : 1
                     )
                 };
-                Game.GameObjectManager.GameObjects.Add(meteor);
             }
+
         }
 
         public override void LoadContent()
@@ -101,7 +109,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             bool collides = base.CollidesWith(otherGameObject) && otherGameObject is Laser;
             if (collides)
             {
-                SpawnChildren();
+                var smallerMeteors = SpawnChildren();
+                if (smallerMeteors != null)
+                {
+                    foreach (var meteor in smallerMeteors)
+                        Game.GameObjectManager.GameObjects.Add(meteor);
+                }
                 Game.GameObjectManager.GameObjects.Remove(this);
                 Game.GameObjectManager.GameObjects.Remove(otherGameObject);
             }
