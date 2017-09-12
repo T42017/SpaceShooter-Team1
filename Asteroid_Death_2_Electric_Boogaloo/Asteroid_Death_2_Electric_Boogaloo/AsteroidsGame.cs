@@ -30,7 +30,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         private SpriteBatch _spriteBatch;
         private Camera _camera;
         
-        
         public AsteroidsGame()
         {
             Graphics = new GraphicsDeviceManager(this);

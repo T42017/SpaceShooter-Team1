@@ -43,7 +43,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
             menuFont = Game.Content.Load<SpriteFont>("GameState");
             buttonFont = Game.Content.Load<SpriteFont>("Text");
             Button = Game.Content.Load<Texture2D>("ButtonBlue");
-            song = Game.Content.Load<Song>("roasted");
+            song = Game.Content.Load<Song>("Best");
             texture = Game.Content.Load<Texture2D>("background");
 
             base.LoadContent();
@@ -90,11 +90,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
             if (x >= (pGame.Graphics.PreferredBackBufferWidth / 4) + (pGame.Graphics.PreferredBackBufferWidth / 6) + 10 &&
                 x <= (pGame.Graphics.PreferredBackBufferWidth / 4) + (pGame.Graphics.PreferredBackBufferWidth / 6) + 232 &&
                 y >= (pGame.Graphics.PreferredBackBufferHeight / 4) +
-                (pGame.Graphics.PreferredBackBufferHeight / 8) && y <=
-                ((pGame.Graphics.PreferredBackBufferHeight / 4) + (pGame.Graphics.PreferredBackBufferHeight / 8)) +
-                39)
-            {
-                pGame.ChangeGameState(GameState.ingame);
+                (pGame.Graphics.PreferredBackBufferHeight / 8) + 100 && y <=
+                (pGame.Graphics.PreferredBackBufferHeight / 4) +
+                (pGame.Graphics.PreferredBackBufferHeight / 8) + 139)
+                {
+                pGame.Exit();
                 playing = false;
             }
             }
