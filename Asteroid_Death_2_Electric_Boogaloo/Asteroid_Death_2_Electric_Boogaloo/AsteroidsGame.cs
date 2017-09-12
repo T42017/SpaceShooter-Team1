@@ -143,8 +143,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             GameObjectManager.AddEnemyFactory(new EnemyFactory(this));
 
             _camera = new Camera();
-            GameObjectManager.AddEnemys(1);
-            //GameObjectManager.AddMeteors(10);
+            GameObjectManager.AddEnemys(10);
+            GameObjectManager.AddMeteors(40);
         }
 
     }

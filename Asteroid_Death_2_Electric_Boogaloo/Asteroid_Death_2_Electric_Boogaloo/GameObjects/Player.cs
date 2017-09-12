@@ -20,7 +20,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             ShootingSpeed = 200;
         }
 
-
         public override void Update()
         {
             var gamePadState = GamePad.GetState(PlayerIndex.One);
@@ -81,7 +80,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         public override bool CollidesWith(GameObject otherGameObject)
         {
             //bool collides = base.CollidesWith(otherGameObject) && !(otherGameObject is Laser laser && laser.ParentType == typeof(Player));
-            bool collides = base.CollidesWith(otherGameObject) && (otherGameObject is Meteor || otherGameObject is Enemy);
+            bool collides = base.CollidesWith(otherGameObject) && (otherGameObject is Meteor || otherGameObject is Enemy || otherGameObject is Laser laser && laser.ParentType == typeof(Enemy));
             if (collides)
             {
                 IsDead = true;
