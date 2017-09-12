@@ -9,25 +9,22 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
     {
         private KeyboardState lastKeyboardState;
         private GamePadState lastGamePadState;
-        
+        private SoundEffect pewEffect;
         private DateTime _timeSenceLastShot = DateTime.Today;
+
         public Player(AsteroidsGame game) : base(game) { }
       
         public override void LoadContent()
         {
             LoadTexture("shipPlayer");
             ShootingSpeed = 200;
+            pewEffect = Game.Content.Load<SoundEffect>("Blaster");
         }
 
         public override void Update()
         {
             var gamePadState = GamePad.GetState(PlayerIndex.One);
-<<<<<<< HEAD
-
-
-=======
             
->>>>>>> origin/feature-enemy
             KeyboardState state = Keyboard.GetState();
             
             //Movement using the left, right joystick and the Dpad on the Xbox controller or the arrows or WASD on the keyboard
@@ -67,16 +64,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 || (state.IsKeyDown(Keys.Space))
                 || (gamePadState.Triggers.Right > 0.2))
             {
-<<<<<<< HEAD
-               
                 if (!((DateTime.Now - _timeSenceLastShot).TotalMilliseconds >= ShootingSpeed))
                     return;
                 Shoot(typeof(Player));
                 pewEffect.Play();
                 _timeSenceLastShot = DateTime.Now;
-=======
-                Shoot(typeof(Player));
->>>>>>> origin/feature-enemy
             }
 
             lastKeyboardState = state;
@@ -88,11 +80,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         public override bool CollidesWith(GameObject otherGameObject)
         {
 <<<<<<< HEAD
-            
             bool collides = base.CollidesWith(otherGameObject) && (otherGameObject is Meteor || otherGameObject is Enemy);
 =======
             bool collides = base.CollidesWith(otherGameObject) && (otherGameObject is Meteor || otherGameObject is Enemy || otherGameObject is Laser laser && laser.ParentType == typeof(Enemy));
->>>>>>> origin/feature-enemy
+>>>>>>> origin/Feature_menu
             if (collides)
             {
                 IsDead = true;
