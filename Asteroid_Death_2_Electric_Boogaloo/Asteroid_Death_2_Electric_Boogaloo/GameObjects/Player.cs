@@ -9,7 +9,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
     {
         private KeyboardState lastKeyboardState;
         private GamePadState lastGamePadState;
-        
+        private SoundEffect pewEffect;
         private DateTime _timeSenceLastShot = DateTime.Today;
         public Player(AsteroidsGame game) : base(game) { }
       
@@ -17,6 +17,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         {
             LoadTexture("shipPlayer");
             ShootingSpeed = 200;
+            pewEffect = Game.Content.Load<SoundEffect>("Blaster");
         }
 
         public override void Update()
@@ -63,6 +64,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 || (gamePadState.Triggers.Right > 0.2))
             {
                 Shoot(typeof(Player));
+                pewEffect.Play();
             }
 
             lastKeyboardState = state;
