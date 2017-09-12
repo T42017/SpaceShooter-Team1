@@ -41,7 +41,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                     _positionGoTO = GetRandomPositionInLevel();
 
                 _enemy.Rotation = MathHelper.LookAt(_enemy.Position, _positionGoTO);
-                _enemy.AccelerateForward(0.16f);
+                _enemy.AccelerateForward(0.18f);
                 _enemy.Move();
             }
             else if (currentState == State.FollowPlayer)
