@@ -12,7 +12,6 @@ using Microsoft.Xna.Framework.Media;
 namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 {
     class HighscoreMenuComponent : AstroidsComponent
-
     {
         private SpriteFont menuFont, buttonFont;
         private Texture2D Button,texture;
@@ -20,8 +19,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         private MouseState oldState;
         private Song song;
         private bool playing;
-        public static StreamReader highscoreReader;
         private String highscore;
+
+        public static StreamReader highscoreReader;
+
         public HighscoreMenuComponent(Game game) : base(game)
         {
             Game.IsMouseVisible = true;
@@ -33,19 +34,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             MediaPlayer.IsRepeating = true;
             //highscore = highscoreReader.ReadToEnd();
 
-            string path = @"C:\Users\usr\Documents\Git repositories\SpaceShooter-Team1\Asteroid_Death_2_Electric_Boogaloo\Asteroid_Death_2_Electric_Boogaloo\bin\Windows\x86\Debug\Content/Highscore.txt";
+            string path = @"Content/Highscore.txt";
 
-            // This text is added only once to the file.
-            if (!File.Exists(path))
-            {
-                // Create a file to write to.
-                string[] createText = { "Hello", "And", "Welcome" };
-                File.WriteAllLines(path, createText);
-            }
-
-            // This text is always added, making the file longer over time
-            // if it is not deleted.
-            string appendText = "This is extra text" + Environment.NewLine;
+            // This text is always added, making the file longer over time unless the text is deleted manually
+         
+            string appendText = "" + Environment.NewLine;
             File.AppendAllText(path, appendText);
 
             // Open the file to read from.
