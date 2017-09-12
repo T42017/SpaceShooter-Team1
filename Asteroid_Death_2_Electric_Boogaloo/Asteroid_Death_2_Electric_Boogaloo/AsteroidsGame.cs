@@ -29,7 +29,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         private GameState _gameState;
         private SpriteBatch _spriteBatch;
         private Camera _camera;
-
+        
         
         public AsteroidsGame()
         {
@@ -72,7 +72,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Components.Add(new DeathComponent(this));
             ChangeGameState(GameState.Menu);
 
-            Start();
+            _camera = new Camera();
 
             base.Initialize();
         }
@@ -80,7 +80,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            GameObjectManager.LoadContent();
+            //GameObjectManager.LoadContent();
         }
         
         protected override void UnloadContent()
@@ -139,7 +139,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             GameObjectManager = new GameObjectManager(this);
             GameObjectManager.AddEnemyFactory(new EnemyFactory(this));
 
-            _camera = new Camera();
+            
             GameObjectManager.AddEnemys(10);
             GameObjectManager.AddMeteors(40);
         }

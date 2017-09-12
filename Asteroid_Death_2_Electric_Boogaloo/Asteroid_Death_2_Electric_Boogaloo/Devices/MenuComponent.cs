@@ -69,6 +69,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
                 ((pGame.Graphics.PreferredBackBufferHeight / 4) + (pGame.Graphics.PreferredBackBufferHeight / 8)) +
                 39)
             {
+                pGame.Start();
+                pGame.GameObjectManager.LoadContent();
                 pGame.ChangeGameState(GameState.ingame);
                 playing = false;
             }

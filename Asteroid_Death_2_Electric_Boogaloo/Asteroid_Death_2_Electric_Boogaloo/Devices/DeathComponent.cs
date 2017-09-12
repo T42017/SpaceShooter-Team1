@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.Devices
@@ -16,11 +17,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         private bool playing;
         private Texture2D texture,button1,button2;
         private SpriteFont font;
-       
-
+        private AsteroidsGame pGame;
+        private MouseState newState,oldState;
         
         public DeathComponent(Game game) : base(game)
         {
+            pGame = (AsteroidsGame)game;
             playing = false;
             UpdatableStates = GameState.gameover;
             DrawableStates = GameState.gameover;
@@ -49,7 +51,23 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
                 playing = true;
             }
 
-
+            newState = Mouse.GetState();
+            int x = newState.X, y = newState.Y;
+            if (newState.LeftButton == ButtonState.Pressed && oldState.LeftButton == ButtonState.Released)
+            {
+                if (x >= (pGame.Graphics.PreferredBackBufferWidth / 8) +
+                    10 &&
+                    x <= (pGame.Graphics.PreferredBackBufferWidth / 8) +
+                    232 &&
+                    y >= (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8) && y <=
+                    ((pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)) +
+                    39)
+                {
+                    pGame.ChangeGameState(GameState.Menu);
+                    playing = false;
+                }
+            }
+            oldState = newState;
             base.Update(gameTime);
         }
 
@@ -64,7 +82,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
                     SpriteBatch.Draw(texture, new Vector2(x, y), Color.White);
                 }
             }
-            
+            SpriteBatch.Draw(button1, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 8), (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)),Color.Beige);
            
 
             SpriteBatch.End();
