@@ -13,7 +13,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 {
     class IngameComponent : AstroidsComponent
     {
-        private KeyboardState lastKeyboardState;
+        private KeyboardState lastKeyboardState, KeyboardState;
         private GamePadState lastGamePadState;
         private bool hasaddedgameobjetcs, playing;
         private SpriteFont menuFont, buttonFont;
@@ -43,9 +43,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         {
             MediaPlayer.Volume = 0.4f;
             var gamePadState = GamePad.GetState(PlayerIndex.One);
-
+            KeyboardState = Keyboard.GetState();
             if (gamePadState.Buttons.Start == ButtonState.Pressed  
-                || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                || Keyboard.GetState().IsKeyDown(Keys.Escape)&& lastKeyboardState.IsKeyUp(Keys.Escape))
             {
                 pGame.ChangeGameState(GameState.paused);
             }
@@ -64,7 +64,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             //    pGame.CheckForCollisionWith(gameObject);
             //}
             //pGame.GenerateRandomNewMeteor(gameTime, 5);
-            lastKeyboardState = Keyboard.GetState();
+            lastKeyboardState = KeyboardState;
             base.Update(gameTime);
         }
     }

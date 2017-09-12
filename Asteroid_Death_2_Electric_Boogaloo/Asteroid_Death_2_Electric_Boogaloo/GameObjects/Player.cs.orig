@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Input;
 
@@ -8,27 +9,25 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
     {
         private KeyboardState lastKeyboardState;
         private GamePadState lastGamePadState;
-        private SoundEffect pewEffect;
+        
         private DateTime _timeSenceLastShot = DateTime.Today;
         public Player(AsteroidsGame game) : base(game) { }
       
         public override void LoadContent()
         {
-            pewEffect = Game.Content.Load<SoundEffect>("Blaster");
             LoadTexture("shipPlayer");
             ShootingSpeed = 200;
         }
-<<<<<<< HEAD
 
-        public GamePadDPad DPad { get; }
-
-=======
-        
->>>>>>> origin/develop
         public override void Update()
         {
             var gamePadState = GamePad.GetState(PlayerIndex.One);
+<<<<<<< HEAD
+
+
+=======
             
+>>>>>>> origin/feature-enemy
             KeyboardState state = Keyboard.GetState();
             
             //Movement using the left, right joystick and the Dpad on the Xbox controller or the arrows or WASD on the keyboard
@@ -63,17 +62,21 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
             // Fire all lasers!
             base.Update();
-            //Debug.WriteLine($"Player position: ({Position.X}, {Position.Y})");
+            
             if ((gamePadState.Buttons.A == ButtonState.Pressed)
                 || (state.IsKeyDown(Keys.Space))
                 || (gamePadState.Triggers.Right > 0.2))
             {
-                Shoot(typeof(Player));
+<<<<<<< HEAD
+               
                 if (!((DateTime.Now - _timeSenceLastShot).TotalMilliseconds >= ShootingSpeed))
                     return;
-
+                Shoot(typeof(Player));
                 pewEffect.Play();
                 _timeSenceLastShot = DateTime.Now;
+=======
+                Shoot(typeof(Player));
+>>>>>>> origin/feature-enemy
             }
 
             lastKeyboardState = state;
@@ -84,8 +87,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         public override bool CollidesWith(GameObject otherGameObject)
         {
-            //bool collides = base.CollidesWith(otherGameObject) && !(otherGameObject is Laser laser && laser.ParentType == typeof(Player));
+<<<<<<< HEAD
+            
             bool collides = base.CollidesWith(otherGameObject) && (otherGameObject is Meteor || otherGameObject is Enemy);
+=======
+            bool collides = base.CollidesWith(otherGameObject) && (otherGameObject is Meteor || otherGameObject is Enemy || otherGameObject is Laser laser && laser.ParentType == typeof(Enemy));
+>>>>>>> origin/feature-enemy
             if (collides)
             {
                 IsDead = true;

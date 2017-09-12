@@ -10,12 +10,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         private bool ShootLefCannon = false;
         private DateTime _timeSenceLastShot = DateTime.Today;
-        private SoundEffect pewEffect;
+       
         private Laser.Color _laserColor;
 
         protected Ship(AsteroidsGame game, Laser.Color color) : base(game)
         {
-            pewEffect = Game.Content.Load<SoundEffect>("Blaster");
+         
             _laserColor = color;
         }
         
@@ -33,7 +33,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             {
                 ParentType = parentType
             };
-            pewEffect.Play();
+            
             Game.GameObjectManager.GameObjects.Add(laser);
             ShootLefCannon = !ShootLefCannon;
             _timeSenceLastShot = DateTime.Now;
