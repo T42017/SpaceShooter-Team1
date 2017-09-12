@@ -28,6 +28,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public void Update()
         {
+<<<<<<< HEAD
             Player player = _game.GameObjectManager.Player;
 
             if (Vector2.Distance(player.Position, _enemy.Position) < 300)
@@ -37,22 +38,47 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
             if (currentState == State.GoToPosition)
             {
-                if (_positionGoTO.Equals(Vector2.Zero) || Vector2.Distance(_enemy.Position, _positionGoTO) < 200)
+
+                if (_positionGoTO.Equals(Vector2.Zero))
                     _positionGoTO = GetRandomPositionInLevel();
 
-                _enemy.Rotation = MathHelper.LookAt(_enemy.Position, _positionGoTO);
-                _enemy.AccelerateForward(0.2f);
-                _enemy.Move();
             }
             else if (currentState == State.FollowPlayer)
             {
-                _enemy.Rotation = MathHelper.LookAt(_enemy.Position, player.Position);
+                _enemy.Rotation = Physic.LookAt(_enemy.Position, player.Position);
                 _enemy.Shoot(typeof(Enemy));
-                _enemy.AccelerateForward(0.1f);
+                _enemy.AccelerateForward(0.25f);
                 _enemy.Move();
             }
 
             _enemy.StayInsideLevel();
+=======
+            //Player player = _game.GameObjectManager.Player;
+
+            //if (Vector2.Distance(player.Position, _enemy.Position) < 300)
+            //    currentState = State.FollowPlayer;
+            //else if (Vector2.Distance(player.Position, _enemy.Position) > 300)
+            //    currentState = State.GoToPosition;
+
+            //if (currentState == State.GoToPosition)
+            //{
+            //    if (_positionGoTO.Equals(Vector2.Zero) || Vector2.Distance(_enemy.Position, _positionGoTO) < 200)
+            //        _positionGoTO = GetRandomPositionInLevel();
+
+            //    _enemy.Rotation = MathHelper.LookAt(_enemy.Position, _positionGoTO);
+            //    _enemy.AccelerateForward(0.2f);
+            //    _enemy.Move();
+            //}
+            //else if (currentState == State.FollowPlayer)
+            //{
+            //    _enemy.Rotation = MathHelper.LookAt(_enemy.Position, player.Position);
+            //    _enemy.Shoot(typeof(Enemy));
+            //    _enemy.AccelerateForward(0.1f);
+            //    _enemy.Move();
+            //}
+
+            //_enemy.StayInsideLevel();
+>>>>>>> origin/feature-enemy
         }
 
         private Vector2 GetRandomPositionInLevel()

@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using Microsoft.Xna.Framework;
 
-namespace Asteroid_Death_2_Electric_Boogaloo
+namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
     public class Laser : GameObject
     {
@@ -43,13 +39,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             AccelerateForward(9);
             Move();
 
-            if (Position.X + Texture.Width / 2f > Game.Level.SizeX ||
-                Position.X - Texture.Width / 2f < 0 ||
-                Position.Y + Texture.Height / 2f > Game.Level.SizeY ||
-                Position.Y - Texture.Height / 2f < 0)
-            {
-                Game.GameObjectManager.GameObjects.Remove(this);
-            }
             base.Update();
         }
 

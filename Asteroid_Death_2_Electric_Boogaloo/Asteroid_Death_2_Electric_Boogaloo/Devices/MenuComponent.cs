@@ -82,8 +82,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
                      89)
             {
                 pGame.ChangeGameState(GameState.highscoremenu);
-                    SoundEffect beep = Game.Content.Load<SoundEffect>("roasted");
-                    beep.Play();
+                    //SoundEffect beep = Game.Content.Load<SoundEffect>("roasted");
+                    //beep.Play();
                 }
 
             if (x >= (pGame.Graphics.PreferredBackBufferWidth / 4) + (pGame.Graphics.PreferredBackBufferWidth / 6) + 10 &&

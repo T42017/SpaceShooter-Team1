@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
-namespace Asteroid_Death_2_Electric_Boogaloo
+namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
     public class Enemy : Ship
     {
@@ -43,7 +38,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             this.type = type;
             _ai = new AI((AsteroidsGame) game, this);
             this.type = type;
-            ShootingSpeed = 300;
+            ShootingSpeed = 400;
         }
 
         public override void LoadContent()
@@ -55,5 +50,16 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             _ai.Update();
         }
+
+        public override bool CollidesWith(GameObject otherGameObject)
+        {
+            bool collides = base.CollidesWith(otherGameObject) && otherGameObject is Laser laser && laser.ParentType == typeof(Player);
+            if (collides)
+            {
+                IsDead = true;
+            }
+            return collides;
+        }
+
     }
 }

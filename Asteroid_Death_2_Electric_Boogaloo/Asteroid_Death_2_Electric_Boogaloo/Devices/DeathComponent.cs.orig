@@ -22,8 +22,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         public DeathComponent(Game game) : base(game)
         {
             playing = false;
+<<<<<<< HEAD
             UpdatableStates = GameState.gameover;
             DrawableStates = GameState.gameover;
+=======
+            UpdatableStates =GameState.gameover;
+            DrawableStates=GameState.gameover;
+>>>>>>> origin/feature-enemy
         }
 
         protected override void LoadContent()
@@ -43,7 +48,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 
             if (playing==false)
             {
+<<<<<<< HEAD
+=======
 
+>>>>>>> origin/feature-enemy
                 MediaPlayer.Stop();
                 MediaPlayer.Play(song);
                 playing = true;

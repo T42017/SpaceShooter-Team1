@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace Asteroid_Death_2_Electric_Boogaloo
+namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
     public class Player : Ship
     {
@@ -23,11 +16,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
       
         public override void LoadContent()
         {
-            pewEffect = Game.Content.Load<SoundEffect>("Blaster");
             LoadTexture("shipPlayer");
             ShootingSpeed = 200;
+            pewEffect = Game.Content.Load<SoundEffect>("Blaster");
         }
-        
+
         public override void Update()
         {
             var gamePadState = GamePad.GetState(PlayerIndex.One);
@@ -66,12 +59,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
             // Fire all lasers!
             base.Update();
-            //Debug.WriteLine($"Player position: ({Position.X}, {Position.Y})");
+            
             if ((gamePadState.Buttons.A == ButtonState.Pressed)
                 || (state.IsKeyDown(Keys.Space))
                 || (gamePadState.Triggers.Right > 0.2))
             {
-               
                 if (!((DateTime.Now - _timeSenceLastShot).TotalMilliseconds >= ShootingSpeed))
                     return;
                 Shoot(typeof(Player));
@@ -87,9 +79,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public override bool CollidesWith(GameObject otherGameObject)
         {
-            bool collides = base.CollidesWith(otherGameObject) && (otherGameObject is Meteor || otherGameObject is Enemy);
+            bool collides = base.CollidesWith(otherGameObject) && (otherGameObject is Meteor || otherGameObject is Enemy || otherGameObject is Laser laser && laser.ParentType == typeof(Enemy));
             if (collides)
             {
+                IsDead = true;
                 Game.ChangeGameState(GameState.gameover);
             }
             return collides;

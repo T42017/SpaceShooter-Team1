@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Asteroid_Death_2_Electric_Boogaloo.GameObjects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -32,10 +33,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public void AddEnemys(int amount)
         {
             for (int i = 0; i < amount; i++)
-            {
-                var enemy = _enemyFactory.GetRandomEnemy();
-                GameObjects.Add(enemy);
-            }
+                GameObjects.Add(_enemyFactory.GetRandomEnemy());
         }
 
         public void AddNewPlayer()
@@ -61,6 +59,19 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 };
                 GameObjects.Add(meteor);
             }
+        }
+
+        public List<Meteor> GetMeteors()
+        {
+            List<Meteor> meteors = new List<Meteor>();
+
+            for (int i = 0; i < GameObjects.Count; i++)
+            {
+                if (GameObjects[i] is Meteor meteor)
+                    meteors.Add(meteor);
+            }
+
+            return meteors;
         }
 
         internal void RemoveDeadGameObjects()
@@ -124,12 +135,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public void CheckForCollisionWith(GameObject thisObject)
         {
-            for (int i = 0; i < GameObjects.Count; i++)
+            foreach (var otherGameObject in GameObjects)
             {
-                var otherGameObject = GameObjects[i];
-                if (thisObject.DistanceToSquared(otherGameObject) <= 100 * 100 ||
-                    thisObject == otherGameObject ||
-                    !thisObject.CollidesWith(otherGameObject))
+                if (thisObject == otherGameObject || !thisObject.CollidesWith(otherGameObject))
                     continue;
                 Debug.WriteLine($"{thisObject} collided with {otherGameObject}");
                 return;

@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
-namespace Asteroid_Death_2_Electric_Boogaloo
+namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
     // TODO: make brown and gray meteors have different health
     public class Meteor : GameObject
@@ -74,17 +68,18 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         private IEnumerable<Meteor> ShatterIntoSmallerMeteors()
         {
             int amountOfSmallerMeteors = MeteorColour == MeteorColour.Gray ? 5 : 3;
-            var offset = new Vector2(
-                Globals.RNG.Next(20, 30), 
-                Globals.RNG.Next(20, 30)
-            );
+            
             for (int i = 0; i < amountOfSmallerMeteors; i++)
             {
+                var offset = new Vector2(
+                    Globals.RNG.Next(10, 20),
+                    Globals.RNG.Next(10, 20)
+                );
                 yield return new Meteor(Game, Position + offset, MeteorSize - 1, MeteorColour)
                 {
                     Speed = new Vector2(
-                        Speed.X * Globals.RNG.Next(2, 4) * Globals.RNG.Next(-1, 1) < 0 ? -1 : 1,
-                        Speed.Y * Globals.RNG.Next(2, 4) * Globals.RNG.Next(-1, 1) < 0 ? -1 : 1
+                        Speed.X * Globals.RNG.Next(1, 3) * Globals.RNG.Next(-1, 2) < 0 ? -1 : 1,
+                        Speed.Y * Globals.RNG.Next(1, 3) * Globals.RNG.Next(-1, 2) < 0 ? -1 : 1
                     )
                 };
             }
@@ -115,11 +110,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                     foreach (var meteor in smallerMeteors)
                         Game.GameObjectManager.GameObjects.Add(meteor);
                 }
-                Game.GameObjectManager.GameObjects.Remove(this);
-                Game.GameObjectManager.GameObjects.Remove(otherGameObject);
+                IsDead = true;
+                Game.GameObjectManager.GameObjects.Remove(otherGameObject); // To remove laser at correct time
             }
-            if (collides) Game.GameObjectManager.GameObjects.Remove(this);
-            if (collides) IsDead = true;
             return collides;
         }
     }

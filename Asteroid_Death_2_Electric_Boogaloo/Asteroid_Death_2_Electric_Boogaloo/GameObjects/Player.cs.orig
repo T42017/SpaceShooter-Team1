@@ -1,90 +1,103 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace Asteroid_Death_2_Electric_Boogaloo
+namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
     public class Player : Ship
     {
         private KeyboardState lastKeyboardState;
-        private SoundEffect pewEffect;
+        private GamePadState lastGamePadState;
+        
+        private DateTime _timeSenceLastShot = DateTime.Today;
         public Player(AsteroidsGame game) : base(game) { }
       
         public override void LoadContent()
         {
-            pewEffect = Game.Content.Load<SoundEffect>("Blaster");
             LoadTexture("shipPlayer");
             ShootingSpeed = 200;
         }
-        public GamePadDPad DPad { get; }
+
         public override void Update()
         {
-
             var gamePadState = GamePad.GetState(PlayerIndex.One);
+<<<<<<< HEAD
+
+
+=======
             
-            if ((gamePadState.Buttons.A == ButtonState.Pressed ||
-                 Keyboard.GetState().IsKeyDown(Keys.Space)))
-            {
-                pewEffect.Play();
-                Shoot();
-            }
-
+>>>>>>> origin/feature-enemy
             KeyboardState state = Keyboard.GetState();
-
-            GamePadState m_pad;
-            m_pad = GamePad.GetState(PlayerIndex.One);
-
-            //Movement using the DPad on the Xbox controller
-            if (m_pad.DPad.Up == ButtonState.Pressed) AccelerateForward(0.25f); 
-
-            if (m_pad.DPad.Down == ButtonState.Pressed) AccelerateForward(-0.07f);
-
-            if (m_pad.DPad.Left == ButtonState.Pressed)  Rotation -= 0.04f; 
-
-            if (m_pad.DPad.Right == ButtonState.Pressed) Rotation += 0.04f;
-
-
-            //Movement using the left joystick on the Xbox controller or the Arrows
-            if (gamePadState.ThumbSticks.Left.Y>= 0.3f || (state.IsKeyDown(Keys.Up))) 
+            
+            //Movement using the left, right joystick and the Dpad on the Xbox controller or the arrows or WASD on the keyboard
+            if ((gamePadState.ThumbSticks.Left.Y >= 0.3f)
+                || (gamePadState.DPad.Up == ButtonState.Pressed)
+                || (state.IsKeyDown(Keys.Up))
+                || (state.IsKeyDown(Keys.W))) 
                 AccelerateForward(0.25f);
            
-<<<<<<< HEAD
-            if (gamePadState.ThumbSticks.Left.Y <= -0.3f || (state.IsKeyDown(Keys.Down)))
-=======
-            else if (gamePadState.ThumbSticks.Left.Y == -1.0f || (state.IsKeyDown(Keys.Down)))
->>>>>>> origin/feature-enemy
+            if ((gamePadState.ThumbSticks.Left.Y <= -0.3f) 
+                || (gamePadState.DPad.Down == ButtonState.Pressed)
+                || (state.IsKeyDown(Keys.Down)) 
+                || (state.IsKeyDown(Keys.S)))
                 AccelerateForward(-0.07f);
 
-            if (gamePadState.ThumbSticks.Left.X <= -0.3f ||(state.IsKeyDown(Keys.Left)))
-                Rotation -= 0.04f;
+            if ((gamePadState.ThumbSticks.Left.X <= -0.3f)
+                || (gamePadState.ThumbSticks.Right.X <= -0.3f)
+                || (gamePadState.DPad.Left == ButtonState.Pressed)
+                || (state.IsKeyDown(Keys.Left))
+                || (state.IsKeyDown(Keys.A))) 
+                Rotation -= 0.026f;
 
-            else if (gamePadState.ThumbSticks.Left.X >= 0.3f || (state.IsKeyDown(Keys.Right)))
-                Rotation += 0.04f;
-
-            lastKeyboardState = state;
+            if ((gamePadState.ThumbSticks.Left.X >= 0.3f) 
+                || (gamePadState.ThumbSticks.Right.X >= 0.3f)
+                || (gamePadState.DPad.Right == ButtonState.Pressed)
+                || (state.IsKeyDown(Keys.Right)) 
+                || (state.IsKeyDown(Keys.D)))
+                Rotation += 0.026f;
 
             Speed += new Vector2(-Speed.X * 0.015f, -Speed.Y * 0.015f);
             Move();
+
+            // Fire all lasers!
+            base.Update();
+            
+            if ((gamePadState.Buttons.A == ButtonState.Pressed)
+                || (state.IsKeyDown(Keys.Space))
+                || (gamePadState.Triggers.Right > 0.2))
+            {
+<<<<<<< HEAD
+               
+                if (!((DateTime.Now - _timeSenceLastShot).TotalMilliseconds >= ShootingSpeed))
+                    return;
+                Shoot(typeof(Player));
+                pewEffect.Play();
+                _timeSenceLastShot = DateTime.Now;
+=======
+                Shoot(typeof(Player));
+>>>>>>> origin/feature-enemy
+            }
+
+            lastKeyboardState = state;
+            lastGamePadState = gamePadState;
             
             StayInsideLevel();
         }
 
         public override bool CollidesWith(GameObject otherGameObject)
         {
-            var collides = base.CollidesWith(otherGameObject);
+<<<<<<< HEAD
+            
+            bool collides = base.CollidesWith(otherGameObject) && (otherGameObject is Meteor || otherGameObject is Enemy);
+=======
+            bool collides = base.CollidesWith(otherGameObject) && (otherGameObject is Meteor || otherGameObject is Enemy || otherGameObject is Laser laser && laser.ParentType == typeof(Enemy));
+>>>>>>> origin/feature-enemy
             if (collides)
             {
+                IsDead = true;
                 Game.ChangeGameState(GameState.gameover);
             }
-
             return collides;
         }
     }

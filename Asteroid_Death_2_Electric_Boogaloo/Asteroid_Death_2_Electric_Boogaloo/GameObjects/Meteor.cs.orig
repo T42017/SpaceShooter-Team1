@@ -14,7 +14,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     {
         public MeteorSize   MeteorSize   { get; }
         public MeteorColour MeteorColour { get; }
-        public float RotationSpeed;
+        public float RotationSpeed { get; }
         public Meteor(AsteroidsGame game, Vector2 position, MeteorSize meteorSize, MeteorColour meteorColour) : base(game)
         {
             Position = position;
@@ -26,6 +26,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             MaxSpeed = Globals.RNG.Next(250);
             MeteorSize = meteorSize;
             MeteorColour = meteorColour;
+            SetAppropriateTexture();
         }
 
         /// <summary>
@@ -63,79 +64,66 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             LoadTexture(fileName);
         }
 
-        public List<Meteor> SpawnChildren()
+        public IEnumerable<Meteor> SpawnChildren()
         {
-            if (!IsDead || MeteorSize == MeteorSize.Small)
+            if (MeteorSize == MeteorSize.Small)
                 return null;
+            return ShatterIntoSmallerMeteors();
+        }
 
-            var children = new List<Meteor>();
-            int amountOfChildren = MeteorColour == MeteorColour.Brown ? 5 : 3;
-
-            for (int i = 0; i < amountOfChildren; i++)
+        private IEnumerable<Meteor> ShatterIntoSmallerMeteors()
+        {
+            int amountOfSmallerMeteors = MeteorColour == MeteorColour.Gray ? 5 : 3;
+            var offset = new Vector2(
+                Globals.RNG.Next(20, 30), 
+                Globals.RNG.Next(20, 30)
+            );
+            for (int i = 0; i < amountOfSmallerMeteors; i++)
             {
-                children.Add(new Meteor(Game, Position, MeteorSize - 1, MeteorColour));
+                yield return new Meteor(Game, Position + offset, MeteorSize - 1, MeteorColour)
+                {
+                    Speed = new Vector2(
+                        Speed.X * Globals.RNG.Next(2, 4) * Globals.RNG.Next(-1, 1) < 0 ? -1 : 1,
+                        Speed.Y * Globals.RNG.Next(2, 4) * Globals.RNG.Next(-1, 1) < 0 ? -1 : 1
+                    )
+                };
             }
-            return children;
+
         }
 
         public override void LoadContent()
         {
-            SetAppropriateTexture();
-<<<<<<< HEAD:Asteroid_Death_2_Electric_Boogaloo/Asteroid_Death_2_Electric_Boogaloo/Meteor.cs
-            base.LoadContent();
-=======
-            Position += new Vector2();
->>>>>>> origin/feature-enemy:Asteroid_Death_2_Electric_Boogaloo/Asteroid_Death_2_Electric_Boogaloo/GameObjects/Meteor.cs
+            
         }
 
         public override void Update()
         {
             //requires further work to add a randomly generated speed of the meteors instead of a static speed
-<<<<<<< HEAD:Asteroid_Death_2_Electric_Boogaloo/Asteroid_Death_2_Electric_Boogaloo/Meteor.cs
-            Rotation += 0.04f; // Change fixed float to property later
-            Position += Speed;
-
-            if (Position.X < Globals.GameArea.Left)
-                Position = new Vector2(Globals.GameArea.Right, Position.Y);
-            if (Position.X > Globals.GameArea.Right)
-                Position = new Vector2(Globals.GameArea.Left, Position.Y);
-            if (Position.Y < Globals.GameArea.Top)
-                Position = new Vector2(Position.X, Globals.GameArea.Bottom);
-            if (Position.Y > Globals.GameArea.Bottom)
-                Position = new Vector2(Position.X, Globals.GameArea.Top);
-
-            base.Update(gameTime);
+            Rotation += RotationSpeed;
+            Move();
+            base.Update();
         }
 
         public override bool CollidesWith(GameObject otherGameObject)
-        //{
-            var children = SpawnChildren();
-            if (children != null)
+        {
+            bool collides = base.CollidesWith(otherGameObject) && otherGameObject is Laser;
+            if (collides)
             {
-                foreach (var child in children)
-                    Game.Components.Add(child);
+                var smallerMeteors = SpawnChildren();
+                if (smallerMeteors != null)
+                {
+                    foreach (var meteor in smallerMeteors)
+                        Game.GameObjectManager.GameObjects.Add(meteor);
+                }
+                Game.GameObjectManager.GameObjects.Remove(this);
+                Game.GameObjectManager.GameObjects.Remove(otherGameObject);
             }
-            bool collides = base.CollidesWith(otherGameObject);
-            if (collides) Game.Components.Remove(this);
-            return collides;
+<<<<<<< HEAD
 =======
-            Rotation += RotationSpeed; // Change fixed float to property later
-            Move();
->>>>>>> origin/feature-enemy:Asteroid_Death_2_Electric_Boogaloo/Asteroid_Death_2_Electric_Boogaloo/GameObjects/Meteor.cs
-
-        //public override void Draw(GameTime gameTime)
-        //{
-        //    SpriteBatch.Begin();
-        //    SpriteBatch.Draw(Texture, Position,
-        //        null,
-        //        Color.White,
-        //        Rotation,
-        //        new Vector2(Texture.Width * .5f, Texture.Height * .5f),
-        //        1.0f,
-        //        SpriteEffects.None,
-        //        0f);
-        //    SpriteBatch.End();
-        //    // Check if base.Draw() should be called
-        //}
+            bool collides = base.CollidesWith(otherGameObject);
+            if (collides) IsDead = true;
+>>>>>>> origin/develop
+            return collides;
+        }
     }
 }
