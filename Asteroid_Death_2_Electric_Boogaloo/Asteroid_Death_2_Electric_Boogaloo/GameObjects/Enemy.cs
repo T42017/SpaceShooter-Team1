@@ -33,7 +33,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         public Type type;
         private AI _ai;
         
-        public Enemy(AsteroidsGame game, Type type) : base(game)
+        public Enemy(AsteroidsGame game, Type type) : base(game, Laser.Color.Blue)
         {
             this.type = type;
             _ai = new AI((AsteroidsGame) game, this);

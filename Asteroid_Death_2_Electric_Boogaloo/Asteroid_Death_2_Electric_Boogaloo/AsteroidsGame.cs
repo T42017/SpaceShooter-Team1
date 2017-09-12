@@ -87,9 +87,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         
         protected override void Update(GameTime gameTime)
         {
-            
-           //Debug.WriteLine(GameObjectManager.GameObjects.Count);
-
             Globals.ScreenWidth = Graphics.PreferredBackBufferWidth;
             if(_gameState == GameState.ingame)
             {
@@ -103,7 +100,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.HotPink);
+            GraphicsDevice.Clear(Color.Black);
 
             //// if using XNA 4.0
             _spriteBatch.Begin(SpriteSortMode.Deferred,

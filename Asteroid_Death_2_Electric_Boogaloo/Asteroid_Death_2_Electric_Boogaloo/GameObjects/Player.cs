@@ -11,7 +11,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         private GamePadState lastGamePadState;
         
         private DateTime _timeSenceLastShot = DateTime.Today;
-        public Player(AsteroidsGame game) : base(game) { }
+        public Player(AsteroidsGame game) : base(game, Laser.Color.Red) { }
       
         public override void LoadContent()
         {

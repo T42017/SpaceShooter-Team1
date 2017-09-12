@@ -6,14 +6,17 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
     public abstract class Ship : GameObject
     {
+        protected int ShootingSpeed = 100;
+
         private bool ShootLefCannon = false;
         private DateTime _timeSenceLastShot = DateTime.Today;
-        protected int ShootingSpeed = 100;
         private SoundEffect pewEffect;
+        private Laser.Color _laserColor;
 
-        protected Ship(AsteroidsGame game) : base(game)
+        protected Ship(AsteroidsGame game, Laser.Color color) : base(game)
         {
             pewEffect = Game.Content.Load<SoundEffect>("Blaster");
+            _laserColor = color;
         }
         
         public void Shoot(Type parentType)
@@ -26,7 +29,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
             shootPoint = MathHelper.RotateAroundPoint(shootPoint, shipCenterPoint, Rotation);
 
-            Laser laser = new Laser(Game, new Vector2(shootPoint.X, shootPoint.Y), Rotation, Laser.Color.Red)
+            Laser laser = new Laser(Game, new Vector2(shootPoint.X, shootPoint.Y), Rotation, _laserColor)
             {
                 ParentType = parentType
             };
