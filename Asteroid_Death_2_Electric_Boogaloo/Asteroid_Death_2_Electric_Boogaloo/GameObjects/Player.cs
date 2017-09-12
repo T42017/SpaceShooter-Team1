@@ -31,8 +31,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             var gamePadState = GamePad.GetState(PlayerIndex.One);
 
-                pewEffect.Play();
-                Shoot();
+
             KeyboardState state = Keyboard.GetState();
             
             //Movement using the left, right joystick and the Dpad on the Xbox controller or the arrows or WASD on the keyboard
@@ -72,10 +71,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 || (state.IsKeyDown(Keys.Space))
                 || (gamePadState.Triggers.Right > 0.2))
             {
-                Shoot();
+               
                 if (!((DateTime.Now - _timeSenceLastShot).TotalMilliseconds >= ShootingSpeed))
                     return;
-
+                Shoot(typeof(Player));
                 pewEffect.Play();
                 _timeSenceLastShot = DateTime.Now;
             }
