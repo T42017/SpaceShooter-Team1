@@ -77,9 +77,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            
             GameObjectManager.LoadContent();
         }
         
@@ -91,9 +89,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             
            //Debug.WriteLine(GameObjectManager.GameObjects.Count);
-            
-           
-               
 
             Globals.ScreenWidth = Graphics.PreferredBackBufferWidth;
             if(_gameState == GameState.ingame)

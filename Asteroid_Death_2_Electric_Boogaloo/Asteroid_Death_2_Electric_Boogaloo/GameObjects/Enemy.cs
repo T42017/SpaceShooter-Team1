@@ -38,7 +38,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             this.type = type;
             _ai = new AI((AsteroidsGame) game, this);
             this.type = type;
-            ShootingSpeed = 100;
+            ShootingSpeed = 400;
         }
 
         public override void LoadContent()
@@ -53,7 +53,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         public override bool CollidesWith(GameObject otherGameObject)
         {
-            //bool collides = base.CollidesWith(otherGameObject) && !(otherGameObject is Laser laser && laser.ParentType == typeof(Player));
             bool collides = base.CollidesWith(otherGameObject) && otherGameObject is Laser laser && laser.ParentType == typeof(Player);
             if (collides)
             {

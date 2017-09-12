@@ -9,13 +9,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
     {
         private KeyboardState lastKeyboardState;
         private GamePadState lastGamePadState;
-        private SoundEffect pewEffect;
+        
         private DateTime _timeSenceLastShot = DateTime.Today;
         public Player(AsteroidsGame game) : base(game) { }
       
         public override void LoadContent()
         {
-            pewEffect = Game.Content.Load<SoundEffect>("Blaster");
             LoadTexture("shipPlayer");
             ShootingSpeed = 200;
         }
@@ -58,17 +57,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
             // Fire all lasers!
             base.Update();
-            //Debug.WriteLine($"Player position: ({Position.X}, {Position.Y})");
+            
             if ((gamePadState.Buttons.A == ButtonState.Pressed)
                 || (state.IsKeyDown(Keys.Space))
                 || (gamePadState.Triggers.Right > 0.2))
             {
                 Shoot(typeof(Player));
-                if (!((DateTime.Now - _timeSenceLastShot).TotalMilliseconds >= ShootingSpeed))
-                    return;
-
-                pewEffect.Play();
-                _timeSenceLastShot = DateTime.Now;
             }
 
             lastKeyboardState = state;
@@ -82,8 +76,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             bool collides = base.CollidesWith(otherGameObject) && (otherGameObject is Meteor || otherGameObject is Enemy || otherGameObject is Laser laser && laser.ParentType == typeof(Enemy));
             if (collides)
             {
-                //IsDead = true;
-                //Game.ChangeGameState(GameState.gameover);
+                IsDead = true;
+                Game.ChangeGameState(GameState.gameover);
             }
             return collides;
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
@@ -8,9 +9,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         private bool ShootLefCannon = false;
         private DateTime _timeSenceLastShot = DateTime.Today;
         protected int ShootingSpeed = 100;
-        
+        private SoundEffect pewEffect;
+
         protected Ship(AsteroidsGame game) : base(game)
         {
+            pewEffect = Game.Content.Load<SoundEffect>("Blaster");
         }
         
         public void Shoot(Type parentType)
@@ -27,7 +30,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             {
                 ParentType = parentType
             };
-
+            pewEffect.Play();
             Game.GameObjectManager.GameObjects.Add(laser);
             ShootLefCannon = !ShootLefCannon;
             _timeSenceLastShot = DateTime.Now;
