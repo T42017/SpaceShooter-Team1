@@ -15,7 +15,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 
     {
         private SpriteFont menuFont, buttonFont;
-        private Texture2D Button,texture;
+        private Texture2D texture, button1, button2;
         private AsteroidsGame pGame;
         private MouseState oldState;
         private Song song;
@@ -40,13 +40,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             
             texture = Game.Content.Load<Texture2D>("background");
             song = Game.Content.Load<Song>("CantinaBand");
-           
+            button1 = Game.Content.Load<Texture2D>("buttonBlue");
+            button2 = Game.Content.Load<Texture2D>("buttonRed");
             base.LoadContent();
         }
 
         public override void Update(GameTime gameTime)
         {
-
+           
             if (playing==false)
             {
                 MediaPlayer.Stop();
@@ -69,7 +70,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
                     SpriteBatch.Draw(texture, new Vector2(x, y), Color.White);
                 }
             }
-
+            
+            SpriteBatch.Draw(button1,new Vector2(pGame.Graphics.PreferredBackBufferWidth/8,(pGame.Graphics.PreferredBackBufferHeight)-(pGame.Graphics.PreferredBackBufferHeight/8)),Color.Cyan);
+            SpriteBatch.Draw(button2, new Vector2((pGame.Graphics.PreferredBackBufferWidth) -(pGame.Graphics.PreferredBackBufferHeight / 3), (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)),Color.IndianRed);
 
             SpriteBatch.DrawString(menuFont,highscore,new Vector2(200,200),Color.Gold);
 
