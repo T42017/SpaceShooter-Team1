@@ -11,8 +11,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         private GamePadState lastGamePadState;
         private SoundEffect pewEffect;
         private DateTime _timeSenceLastShot = DateTime.Today;
+<<<<<<< HEAD
+        public Player(AsteroidsGame game) : base(game, Laser.Color.Red) { }
+=======
 
         public Player(AsteroidsGame game) : base(game) { }
+>>>>>>> origin/Feature_MovementOfPlayer
       
         public override void LoadContent()
         {
@@ -79,11 +83,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         public override bool CollidesWith(GameObject otherGameObject)
         {
-<<<<<<< HEAD
-            bool collides = base.CollidesWith(otherGameObject) && (otherGameObject is Meteor || otherGameObject is Enemy);
-=======
             bool collides = base.CollidesWith(otherGameObject) && (otherGameObject is Meteor || otherGameObject is Enemy || otherGameObject is Laser laser && laser.ParentType == typeof(Enemy));
->>>>>>> origin/Feature_menu
             if (collides)
             {
                 IsDead = true;
