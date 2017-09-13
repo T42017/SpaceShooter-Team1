@@ -19,8 +19,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         private MouseState oldState;
         private Song song;
         private bool playing;
-        private String highscore;
-
+        private String Mainmenu,startgame;
+        private int highlight;
+        private GamePadState lastGamePadState,lasPadState;
         public static StreamReader highscoreReader;
 
         public HighscoreMenuComponent(Game game) : base(game)
@@ -35,12 +36,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             //highscore = highscoreReader.ReadToEnd();
 
             string path = @"Content/Highscore.txt";
-
+            Mainmenu = "Go back to main menu";
+            startgame = "Start";
             // This text is always added, making the file longer over time unless the text is deleted manually
-         
+
             string appendText = "" + Environment.NewLine;
             File.AppendAllText(path, appendText);
-
+            highlight = 1;
             // Open the file to read from.
             string[] readText = File.ReadAllLines(path);
             foreach (string s in readText)
@@ -63,15 +65,59 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 
         public override void Update(GameTime gameTime)
         {
-           
-            if (playing==false)
+            if (playing == false)
             {
                 MediaPlayer.Stop();
                 MediaPlayer.Play(song);
                 MediaPlayer.Volume = 0.4f;
                 playing = true;
+            } 
+            var gamePadState = GamePad.GetState(PlayerIndex.One);
+            if (gamePadState.DPad.Left == ButtonState.Pressed && lastGamePadState.DPad.Left == ButtonState.Released)
+            {
+                if (highlight == 0)
+                {
+                }
+
+                else
+                {
+                    highlight--;
+                }
             }
-            
+            if (gamePadState.DPad.Right == ButtonState.Pressed && lastGamePadState.DPad.Right == ButtonState.Released)
+            {
+                if (highlight == 2)
+                {
+                }
+
+                else
+                {
+                    highlight++;
+                }
+
+            }
+            lastGamePadState = gamePadState;
+
+            if (gamePadState.Buttons.A == ButtonState.Pressed && lasPadState.Buttons.A ==ButtonState.Released && highlight == 0)
+            {
+                pGame.ChangeGameState(GameState.Menu);
+                playing = false;
+            }
+            if (gamePadState.Buttons.A == ButtonState.Pressed && lasPadState.Buttons.A == ButtonState.Released && highlight == 1)
+            {
+               
+            }
+
+            if (gamePadState.Buttons.A == ButtonState.Pressed && lasPadState.Buttons.A == ButtonState.Released && highlight == 2)
+            {
+                pGame.Start();
+                pGame.GameObjectManager.LoadContent();
+                pGame.ChangeGameState(GameState.ingame);
+                playing = false;
+            }
+            lasPadState = gamePadState;
+           
+           
             base.Update(gameTime);
         }
 
@@ -86,11 +132,33 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
                     SpriteBatch.Draw(texture, new Vector2(x, y), Color.White);
                 }
             }
-            
-            SpriteBatch.Draw(button1,new Vector2(pGame.Graphics.PreferredBackBufferWidth/8,(pGame.Graphics.PreferredBackBufferHeight)-(pGame.Graphics.PreferredBackBufferHeight/8)),Color.Cyan);
-            SpriteBatch.Draw(button2, new Vector2((pGame.Graphics.PreferredBackBufferWidth) -(pGame.Graphics.PreferredBackBufferHeight / 3), (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)),Color.IndianRed);
+            if (highlight == 0)
+            {
+                SpriteBatch.Draw(button1, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 8) - 100, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Red);
+            }
+            else
+            {
+                SpriteBatch.Draw(button1, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 8) - 100, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Cyan);
+            }
 
-            //SpriteBatch.DrawString(menuFont,highscore,new Vector2(200,200),Color.Gold);
+            if (highlight == 1)
+            {
+                SpriteBatch.Draw(button2, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 8) + 600, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Red);
+            }
+            else
+            {
+                SpriteBatch.Draw(button2, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 8) + 600, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Cyan);
+            }
+            if (highlight == 2)
+            {
+                SpriteBatch.Draw(button2, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 8) + 1300, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Red);
+            }
+            else
+            {
+                SpriteBatch.Draw(button2, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 8) + 1300, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Cyan);
+            }
+
+           SpriteBatch.DrawString(menuFont,startgame,new Vector2((pGame.Graphics.PreferredBackBufferWidth / 8) - 20, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)),Color.Black);
 
             SpriteBatch.End();
             base.Draw(gameTime);
