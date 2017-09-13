@@ -10,12 +10,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         private bool ShootLefCannon = false;
         private DateTime _timeSenceLastShot = DateTime.Today;
-       
         private Laser.Color _laserColor;
+
+        public int Health = 1;
 
         protected Ship(AsteroidsGame game, Laser.Color color) : base(game)
         {
-         
             _laserColor = color;
         }
         
@@ -37,6 +37,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             Game.GameObjectManager.GameObjects.Add(laser);
             ShootLefCannon = !ShootLefCannon;
             _timeSenceLastShot = DateTime.Now;
+        }
+
+        public bool ShouldBeDead()
+        {
+            return Health <= 0;
         }
     }
 }
