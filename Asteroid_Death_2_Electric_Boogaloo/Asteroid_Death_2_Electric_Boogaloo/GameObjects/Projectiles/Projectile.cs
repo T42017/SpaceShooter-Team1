@@ -14,12 +14,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         public Type ParentType { get; set; }
 
-        protected Projectile(AsteroidsGame game, Vector2 position, float rotation, Weapon.Color color) : base(game)
+        protected Projectile(AsteroidsGame game, Vector2 position, float rotation, Weapon.Color color, Type parenType) : base(game)
         {
             this.Position = position;
             this.Rotation = rotation;
             this.color = color;
             MaxSpeed = 200;
+            ParentType = parenType;
         }
 
         protected void DieIfOutSideMap()

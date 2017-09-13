@@ -12,7 +12,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         
 
-        public Missile(AsteroidsGame game, Vector2 position, float rotation, Weapon.Color color) : base(game, position, rotation, color)
+        public Missile(AsteroidsGame game, Vector2 position, float rotation, Weapon.Color color, Type parenType) : base(game, position, rotation, color, parenType)
         {
             LoadTexture("Missile" + Enum.GetName(typeof(Weapon.Color), color));
         }

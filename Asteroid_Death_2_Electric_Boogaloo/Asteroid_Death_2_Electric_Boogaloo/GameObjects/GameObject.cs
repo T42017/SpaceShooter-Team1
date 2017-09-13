@@ -15,7 +15,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         public int MaxSpeed = 9;
         public int Width { get; set; } 
         public int Height { get; set; }
-        public float Scale { get; set; }
+        public float Scale { get; set; } = 1;
 
         private Rectangle _bounds;
 

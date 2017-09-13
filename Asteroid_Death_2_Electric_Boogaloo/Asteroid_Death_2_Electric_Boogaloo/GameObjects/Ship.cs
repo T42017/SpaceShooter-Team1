@@ -26,7 +26,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         public bool IsWeaponOverheated()
         {
-            return (DateTime.Now - _timeSenceLastShot).TotalMilliseconds > ShootingSpeed;
+            return !((DateTime.Now - _timeSenceLastShot).TotalMilliseconds > ShootingSpeed);
         }
         
         public void Shoot(Type parentType)
@@ -36,7 +36,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
             shootPoint = MathHelper.RotateAroundPoint(shootPoint, shipCenterPoint, Rotation);
 
-            Projectile projectile = Weapon.GetProjectile(shootPoint, Rotation);
+            Projectile projectile = Weapon.GetProjectile(shootPoint, Rotation, parentType);
             Game.GameObjectManager.GameObjects.Add(projectile);
 
             ShootLefCannon = !ShootLefCannon;

@@ -36,14 +36,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             _game = game;
         }
 
-        public Projectile GetProjectile(Vector2 Position, float rotation)
+        public Projectile GetProjectile(Vector2 Position, float rotation, System.Type parentType)
         {
             Projectile projectile = null;
 
             if (WeaponType == Type.Laser)
-            {
-                projectile = new Laser(_game, Position, rotation, WeaponColor);
-            }
+                projectile = new Laser(_game, Position, rotation, WeaponColor, parentType);
+            else if (WeaponType == Type.Missile)
+                projectile = new Missile(_game, Position, rotation, WeaponColor, parentType);
 
             return projectile;
         }
