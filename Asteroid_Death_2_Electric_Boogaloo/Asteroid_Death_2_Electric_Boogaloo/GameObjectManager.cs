@@ -114,7 +114,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             while (respawnArea.Contains(meteor.Bounds));
             GameObjects.Add(meteor);
         }
-
+        
         internal void LoadContent()
         {
             for (int i = 0; i < GameObjects.Count; i++)
