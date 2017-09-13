@@ -99,7 +99,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             if (collides)
             {
                 if (otherGameObject is Laser)
+                {
                     Health--;
+                    otherGameObject.IsDead = true;
+                }
                 if (ShouldBeDead() || !(otherGameObject is Laser))
                 {
                     IsDead = true;
