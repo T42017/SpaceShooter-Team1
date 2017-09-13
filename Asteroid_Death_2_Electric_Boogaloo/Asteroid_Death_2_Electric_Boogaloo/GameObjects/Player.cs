@@ -16,7 +16,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         private DateTime _timeSenceLastShot = DateTime.Today;
         private Texture2D _lifeTexture;
 
-        public Player(AsteroidsGame game) : base(game, Laser.Color.Red)
+        public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Red))
         {
             Health = 3;
             ShootingSpeed = 200;
@@ -67,10 +67,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             
             base.Update();
             
-            if (((gamePadState.Buttons.A == ButtonState.Pressed)
-                || (state.IsKeyDown(Keys.Space))
-                || (gamePadState.Triggers.Right > 0.2)) && 
-                (DateTime.Now - _timeSenceLastShot).TotalMilliseconds >= ShootingSpeed)
+            if (((gamePadState.Buttons.A == ButtonState.Pressed) ||
+                (state.IsKeyDown(Keys.Space)) ||
+                (gamePadState.Triggers.Right > 0.2)) &&
+                !IsWeaponOverheated())
             {
                 Shoot(typeof(Player));
                 _pewEffect.Play();
@@ -88,9 +88,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             base.Draw(spriteBatch);
             spriteBatch.DrawString(MenuComponent.menuFont, Health + " x ", Position,
                 Color.HotPink, Rotation + MathHelper.DegreesToRadians(90), new Vector2(Globals.ScreenWidth / 2, Globals.ScreenHeight / 2 + 13), 1f, SpriteEffects.None, 0);
-
+                
             spriteBatch.Draw(_lifeTexture, Position, null, Color.White, Rotation + MathHelper.DegreesToRadians(90),
                 new Vector2(Globals.ScreenWidth / 2 - 70, Globals.ScreenHeight / 2), 1.0f, SpriteEffects.None, 0);
+                
         }
 
         public override bool CollidesWith(GameObject otherGameObject)

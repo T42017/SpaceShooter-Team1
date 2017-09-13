@@ -33,12 +33,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         public Type type;
         private AI _ai;
         
-        public Enemy(AsteroidsGame game, Type type) : base(game, Laser.Color.Blue)
+        public Enemy(AsteroidsGame game, Type type) : base(game)
         {
             this.type = type;
             _ai = new AI((AsteroidsGame) game, this);
             this.type = type;
             ShootingSpeed = 500;
+            Weapon = new Weapon(game, Weapon.Type.Laser, Weapon.Color.Green);
         }
 
         public override void LoadContent()

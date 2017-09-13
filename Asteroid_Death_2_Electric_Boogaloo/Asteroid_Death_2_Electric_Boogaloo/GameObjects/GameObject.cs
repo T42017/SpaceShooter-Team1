@@ -15,6 +15,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         public int MaxSpeed = 9;
         public int Width { get; set; } 
         public int Height { get; set; }
+        public float Scale { get; set; }
 
         private Rectangle _bounds;
 
@@ -83,7 +84,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         {
             //DrawBounds(spriteBatch);
             spriteBatch.Draw(Texture, Position, null, Color.White, Rotation - Microsoft.Xna.Framework.MathHelper.PiOver2,
-                new Vector2(Texture.Width / 2f, Texture.Height / 2f), 1.0f, SpriteEffects.None, 0f);
+                new Vector2(Texture.Width / 2f, Texture.Height / 2f), Scale, SpriteEffects.None, 0f);
         }
 
         public void StayInsideLevel()

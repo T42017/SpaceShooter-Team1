@@ -52,6 +52,8 @@
     <Compile Include="Devices\HighscoreMenuComponent.cs" />
     <Compile Include="Devices\IngameComponent.cs" />
     <Compile Include="GameObjectManager.cs" />
+    <Compile Include="GameObjects\Projectiles\Missile.cs" />
+    <Compile Include="GameObjects\Projectiles\Projectile.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="Devices\MenuComponent.cs" />
     <Compile Include="MathHelper.cs" />
@@ -59,7 +61,7 @@
     <Compile Include="GameObjects\GameObject.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="Devices\GameState.cs" />
-    <Compile Include="GameObjects\Laser.cs" />
+    <Compile Include="GameObjects\Projectiles\Laser.cs" />
     <Compile Include="GameObjects\Meteor.cs" />
     <Compile Include="Enums\MeteorColour.cs" />
     <Compile Include="Enums\MeteorSize.cs" />
@@ -67,6 +69,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GameObjects\Ship.cs" />
+    <Compile Include="Weapon.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
