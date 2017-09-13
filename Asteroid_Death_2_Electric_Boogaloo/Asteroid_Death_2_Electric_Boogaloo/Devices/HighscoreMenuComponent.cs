@@ -22,7 +22,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         private String Mainmenu,startgame;
         private int highlight;
         private KeyboardState lastKeyboardState;
-        private GamePadState lastGamePadState,lasPadState;
+        private GamePadState lastGamePadState;
         public static StreamReader highscoreReader;
         private bool hasMovedStick;
 
@@ -30,30 +30,30 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         {
             Game.IsMouseVisible = true;
             pGame = (AsteroidsGame)game;
-            //highscoreReader = new StreamReader("Highscore.txt");
             DrawableStates = GameState.highscoremenu;
             UpdatableStates = GameState.highscoremenu;
             playing = false;
             MediaPlayer.IsRepeating = true;
-            //highscore = highscoreReader.ReadToEnd();
-
-            string path = @"Content/Highscore.txt";
-            Mainmenu = "Go back to main menu";
-            startgame = "Start";
-            // This text is always added, making the file longer over time unless the text is deleted manually
-
             
+            string path = @"Content/Highscore.txt";
 
+            Mainmenu = "Return to main menu";
+            startgame = "Start";
+            
+            //highscoreReader = new StreamReader("Highscore.txt");
+            //highscore = highscoreReader.ReadToEnd();
+            // This text is always added, making the file longer over time unless the text is deleted manually
             string appendText = "" + Environment.NewLine;
             File.AppendAllText(path, appendText);
+
             highlight = 1;
+
             // Open the file to read from.
             string[] readText = File.ReadAllLines(path);
             foreach (string s in readText)
             {
                 Console.WriteLine(s);
             }
-
         }
 
         protected override void LoadContent()
@@ -109,29 +109,27 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
                 {
                     highlight++;
                 }
-
             }
 
             if (gamePadState.ThumbSticks.Left.X <=0.2 && gamePadState.ThumbSticks.Left.X >=-0.2)
             {
                 hasMovedStick = false;
             }
-            lastGamePadState = gamePadState;
-
-            if (gamePadState.Buttons.A == ButtonState.Pressed && lasPadState.Buttons.A ==ButtonState.Released && highlight == 0
+            
+            if (gamePadState.Buttons.A == ButtonState.Pressed && lastGamePadState.Buttons.A ==ButtonState.Released && highlight == 0
                 || keyboardstate.IsKeyDown(Keys.Space) && lastKeyboardState.IsKeyUp(Keys.Space) && highlight==0)
             {
                 pGame.ChangeGameState(GameState.Menu);
                 playing = false;
             }
 
-            if (gamePadState.Buttons.A == ButtonState.Pressed && lasPadState.Buttons.A == ButtonState.Released && highlight == 1
+            if (gamePadState.Buttons.A == ButtonState.Pressed && lastGamePadState.Buttons.A == ButtonState.Released && highlight == 1
                 || keyboardstate.IsKeyDown(Keys.Space) && lastKeyboardState.IsKeyUp(Keys.Space) && highlight == 1)
             {
                
             }
 
-            if (gamePadState.Buttons.A == ButtonState.Pressed && lasPadState.Buttons.A == ButtonState.Released && highlight == 2
+            if (gamePadState.Buttons.A == ButtonState.Pressed && lastGamePadState.Buttons.A == ButtonState.Released && highlight == 2
                 || keyboardstate.IsKeyDown(Keys.Space) && lastKeyboardState.IsKeyUp(Keys.Space) && highlight == 2)
             {
                 pGame.Start();
@@ -140,7 +138,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
                 playing = false;
             }
 
-            lasPadState = gamePadState;
+            lastGamePadState = gamePadState;
             lastKeyboardState = keyboardstate;
             
             base.Update(gameTime);
@@ -153,37 +151,43 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             {
                 for (int y = 0; y < 2000; y += texture.Height)
                 {
-
                     SpriteBatch.Draw(texture, new Vector2(x, y), Color.White);
                 }
             }
+
             if (highlight == 0)
             {
-                SpriteBatch.Draw(button1, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 8) - 100, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Red);
+                SpriteBatch.Draw(button1, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 6) - 180, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Red);
             }
+
             else
             {
-                SpriteBatch.Draw(button1, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 8) - 100, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Cyan);
+                SpriteBatch.Draw(button1, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 6) - 180, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Cyan);
             }
 
             if (highlight == 1)
             {
-                SpriteBatch.Draw(button2, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 8) + 600, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Red);
-            }
-            else
-            {
-                SpriteBatch.Draw(button2, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 8) + 600, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Cyan);
-            }
-            if (highlight == 2)
-            {
-                SpriteBatch.Draw(button2, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 8) + 1300, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Red);
-            }
-            else
-            {
-                SpriteBatch.Draw(button2, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 8) + 1300, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Cyan);
+                SpriteBatch.Draw(button2, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 6) + 600, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Red);
             }
 
-           SpriteBatch.DrawString(menuFont,startgame,new Vector2((pGame.Graphics.PreferredBackBufferWidth / 8) - 20, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)),Color.Black);
+            else
+            {
+                SpriteBatch.Draw(button2, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 6) + 600, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Cyan);
+            }
+
+            if (highlight == 2)
+            {
+                SpriteBatch.Draw(button2, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 6) + 1300, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Red);
+            }
+
+            else
+            {
+                SpriteBatch.Draw(button2, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 6) + 1300, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Cyan);
+            }
+
+            SpriteBatch.DrawString(menuFont, Mainmenu, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 6) - 180, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)),Color.Black);
+
+            SpriteBatch.DrawString(menuFont, startgame, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 6) + 1380, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Black);
 
             SpriteBatch.End();
             base.Draw(gameTime);
