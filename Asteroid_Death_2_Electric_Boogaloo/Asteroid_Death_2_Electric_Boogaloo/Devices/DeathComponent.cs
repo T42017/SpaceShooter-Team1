@@ -23,6 +23,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         private AsteroidsGame pGame;
         private int choice;
         private MouseState newState,oldState;
+        private KeyboardState lastK;
         private GamePadState lastGamePadState,lastPadState;
         private int yes1;
         
@@ -49,8 +50,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 
         public override void Update(GameTime gameTime)
         {
+            var Keyboardstate = Keyboard.GetState();
             var gamePadState = GamePad.GetState(PlayerIndex.One);
-            if (gamePadState.DPad.Up == ButtonState.Pressed && lastGamePadState.DPad.Up == ButtonState.Released)
+            if (gamePadState.DPad.Up == ButtonState.Pressed && lastGamePadState.DPad.Up == ButtonState.Released || Keyboardstate.IsKeyDown(Keys.Up) && lastK.IsKeyUp(Keys.Up))
             {
                 if (choice == 0)
                 {
@@ -61,7 +63,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
                     choice--;
                 }
             }
-            if (gamePadState.DPad.Down == ButtonState.Pressed && lastGamePadState.DPad.Down == ButtonState.Released)
+            if (gamePadState.DPad.Down == ButtonState.Pressed && lastGamePadState.DPad.Down == ButtonState.Released || Keyboardstate.IsKeyDown(Keys.Down) && lastK.IsKeyUp(Keys.Down))
             {
                 if (choice == 1)
                 {
@@ -84,12 +86,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 
            
 
-            if (gamePadState.Buttons.A == ButtonState.Pressed && lastPadState.Buttons.A == ButtonState.Released && choice == 1)
+            if (gamePadState.Buttons.A == ButtonState.Pressed && lastPadState.Buttons.A == ButtonState.Released && choice == 1 || Keyboardstate.IsKeyDown(Keys.Space) && lastK.IsKeyUp(Keys.Space) && choice == 1)
             {
                 pGame.ChangeGameState(GameState.Menu);
                 playing = false;
             }
             oldState = newState;
+            lastK = Keyboardstate;
             lastPadState = gamePadState;
             base.Update(gameTime);
         }

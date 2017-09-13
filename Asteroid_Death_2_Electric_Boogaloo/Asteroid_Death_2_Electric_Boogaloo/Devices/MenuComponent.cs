@@ -22,6 +22,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
         private MouseState oldState;
         private Song song;
         private Level level;
+        private KeyboardState lastState,lastkState;
         private GamePadState lastGamePadState, lastPadState;
         private bool playing;
         private int choice;
@@ -62,7 +63,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
                 playing = true;
             }
             var gamePadState = GamePad.GetState(PlayerIndex.One);
-            if (gamePadState.DPad.Up == ButtonState.Pressed && lastGamePadState.DPad.Up == ButtonState.Released)
+            var Keyboardstate = Keyboard.GetState();
+            if (gamePadState.DPad.Up == ButtonState.Pressed && lastGamePadState.DPad.Up == ButtonState.Released ||Keyboardstate.IsKeyDown(Keys.Up) && lastState.IsKeyUp(Keys.Up))
             {
                 if (choice == 0)
                 {
@@ -73,7 +75,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
                     choice--;
                 }
             }
-            if (gamePadState.DPad.Down == ButtonState.Pressed && lastGamePadState.DPad.Down == ButtonState.Released)
+            if (gamePadState.DPad.Down == ButtonState.Pressed && lastGamePadState.DPad.Down == ButtonState.Released || Keyboardstate.IsKeyDown(Keys.Down) && lastState.IsKeyUp(Keys.Down))
             {
                 if (choice == 2)
                 {
@@ -84,27 +86,28 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
                     choice++;
                 }
             }
+            lastState = Keyboardstate;
             lastGamePadState = gamePadState;
-            if (gamePadState.Buttons.A==ButtonState.Pressed && lastPadState.Buttons.A == ButtonState.Released && choice == 0)
+            if (gamePadState.Buttons.A==ButtonState.Pressed && lastPadState.Buttons.A == ButtonState.Released && choice == 0 || Keyboardstate.IsKeyDown(Keys.Space) && lastkState.IsKeyUp(Keys.Space) && choice== 0)
             {
                 pGame.Start();
                 pGame.GameObjectManager.LoadContent();
                 pGame.ChangeGameState(GameState.ingame);
                 playing = false;
             }
-            if (gamePadState.Buttons.A == ButtonState.Pressed && lastPadState.Buttons.A == ButtonState.Released && choice == 1)
+            if (gamePadState.Buttons.A == ButtonState.Pressed && lastPadState.Buttons.A == ButtonState.Released && choice == 1 || Keyboardstate.IsKeyDown(Keys.Space) && lastkState.IsKeyUp(Keys.Space) && choice == 1)
             {
                 pGame.ChangeGameState(GameState.highscoremenu);
                 playing = false;
             }
 
-            if (gamePadState.Buttons.A == ButtonState.Pressed && lastPadState.Buttons.A == ButtonState.Released && choice == 2)
+            if (gamePadState.Buttons.A == ButtonState.Pressed && lastPadState.Buttons.A == ButtonState.Released && choice == 2 || Keyboardstate.IsKeyDown(Keys.Space) && lastkState.IsKeyUp(Keys.Space) && choice == 2)
             {
                 pGame.Exit();
                 playing = false;
             }
             lastPadState = gamePadState;
-
+            lastkState = Keyboardstate;
 
             base.Update(gameTime);
         }
