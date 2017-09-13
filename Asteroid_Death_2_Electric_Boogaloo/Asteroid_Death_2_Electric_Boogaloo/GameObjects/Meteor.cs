@@ -73,8 +73,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             {
                 var offset = new Vector2(
                     Globals.RNG.Next(10, 20),
-                    Globals.RNG.Next(10, 20)
-                Game.GameObjectManager.GameObjects.Add(meteor);
+                    Globals.RNG.Next(10, 20));
+            
                 yield return new Meteor(Game, Position + offset, MeteorSize - 1, MeteorColour)
                 {
                     Speed = new Vector2(
