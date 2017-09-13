@@ -137,7 +137,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             foreach (var otherGameObject in GameObjects)
             {
-                if (thisObject == otherGameObject || !thisObject.CollidesWith(otherGameObject))
+                if (thisObject.DistanceToSquared(otherGameObject) <= 100 * 100 ||
+                    thisObject == otherGameObject ||
+                    !thisObject.CollidesWith(otherGameObject))
                     continue;
                 Debug.WriteLine($"{thisObject} collided with {otherGameObject}");
                 return;
