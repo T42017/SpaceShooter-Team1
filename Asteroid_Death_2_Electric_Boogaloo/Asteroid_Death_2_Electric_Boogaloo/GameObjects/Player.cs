@@ -1,7 +1,9 @@
 ﻿using System;
+using Asteroid_Death_2_Electric_Boogaloo.Devices;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
@@ -11,7 +13,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         private GamePadState lastGamePadState;
         private SoundEffect pewEffect;
         private DateTime _timeSenceLastShot = DateTime.Today;
-        public Player(AsteroidsGame game) : base(game) { }
+        public Player(AsteroidsGame game) : base(game, Laser.Color.Red) { }
       
         public override void LoadContent()
         {
@@ -31,7 +33,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 || (gamePadState.DPad.Up == ButtonState.Pressed)
                 || (state.IsKeyDown(Keys.Up))
                 || (state.IsKeyDown(Keys.W))) 
-                AccelerateForward(0.25f);
+                AccelerateForward(0.45f);
            
             if ((gamePadState.ThumbSticks.Left.Y <= -0.3f) 
                 || (gamePadState.DPad.Down == ButtonState.Pressed)
@@ -82,7 +84,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             if (collides)
             {
                 IsDead = true;
+                MediaPlayer.Stop();
                 Game.ChangeGameState(GameState.gameover);
+                IngameComponent.playing = false;
             }
             return collides;
         }

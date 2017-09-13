@@ -30,7 +30,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         private SpriteBatch _spriteBatch;
         private Camera _camera;
         
-        
         public AsteroidsGame()
         {
             Graphics = new GraphicsDeviceManager(this);
@@ -89,9 +88,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         
         protected override void Update(GameTime gameTime)
         {
-            
-           //Debug.WriteLine(GameObjectManager.GameObjects.Count);
-
             Globals.ScreenWidth = Graphics.PreferredBackBufferWidth;
             if(_gameState == GameState.ingame)
             {
@@ -107,7 +103,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             GraphicsDevice.Clear(Color.Black);
 
-            //// if using XNA 4.0
+            // if using XNA 4.0
             _spriteBatch.Begin(SpriteSortMode.Deferred,
                 BlendState.AlphaBlend,
                 null,

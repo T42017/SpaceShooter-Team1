@@ -87,15 +87,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
                     //SoundEffect beep = Game.Content.Load<SoundEffect>("roasted");
                     //beep.Play();
                 }
-
             if (x >= (pGame.Graphics.PreferredBackBufferWidth / 4) + (pGame.Graphics.PreferredBackBufferWidth / 6) + 10 &&
                 x <= (pGame.Graphics.PreferredBackBufferWidth / 4) + (pGame.Graphics.PreferredBackBufferWidth / 6) + 232 &&
                 y >= (pGame.Graphics.PreferredBackBufferHeight / 4) +
-                (pGame.Graphics.PreferredBackBufferHeight / 8) && y <=
-                ((pGame.Graphics.PreferredBackBufferHeight / 4) + (pGame.Graphics.PreferredBackBufferHeight / 8)) +
-                39)
-            {
-                pGame.ChangeGameState(GameState.ingame);
+                (pGame.Graphics.PreferredBackBufferHeight / 8) + 100 && y <=
+                (pGame.Graphics.PreferredBackBufferHeight / 4) +
+                (pGame.Graphics.PreferredBackBufferHeight / 8) + 139)
+                {
+                pGame.Exit();
                 playing = false;
             }
             }

@@ -30,9 +30,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             Player player = _game.GameObjectManager.Player;
 
-            if (Vector2.Distance(player.Position, _enemy.Position) < 300)
+            if (Vector2.Distance(player.Position, _enemy.Position) < 800)
                 currentState = State.FollowPlayer;
-            else if (Vector2.Distance(player.Position, _enemy.Position) > 300)
+            else if (Vector2.Distance(player.Position, _enemy.Position) > 800)
                 currentState = State.GoToPosition;
 
             if (currentState == State.GoToPosition)
@@ -41,14 +41,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                     _positionGoTO = GetRandomPositionInLevel();
 
                 _enemy.Rotation = MathHelper.LookAt(_enemy.Position, _positionGoTO);
-                _enemy.AccelerateForward(0.2f);
+                _enemy.AccelerateForward(0.18f);
                 _enemy.Move();
             }
             else if (currentState == State.FollowPlayer)
             {
                 _enemy.Rotation = MathHelper.LookAt(_enemy.Position, player.Position);
                 _enemy.Shoot(typeof(Enemy));
-                _enemy.AccelerateForward(0.1f);
+                _enemy.AccelerateForward(0.05f);
                 _enemy.Move();
             }
 
