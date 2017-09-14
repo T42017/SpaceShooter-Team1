@@ -52,7 +52,6 @@
     <Compile Include="Devices\HighscoreMenuComponent.cs" />
     <Compile Include="Devices\IngameComponent.cs" />
     <Compile Include="GameObjectManager.cs" />
-    <Compile Include="HighScore.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="Devices\MenuComponent.cs" />
     <Compile Include="MathHelper.cs" />
