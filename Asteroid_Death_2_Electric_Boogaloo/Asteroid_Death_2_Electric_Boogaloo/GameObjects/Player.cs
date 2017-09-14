@@ -19,7 +19,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         public Player(AsteroidsGame game) : base(game, Laser.Color.Red)
         {
-            Health = 3;
+            Health = 30000;
             ShootingSpeed = 200;
         }
         
@@ -87,11 +87,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
-            spriteBatch.DrawString(MenuComponent.menuFont, Health + " x ", Position,
-                Color.HotPink, Rotation + MathHelper.DegreesToRadians(90), new Vector2(Globals.ScreenWidth / 2, Globals.ScreenHeight / 2 + 13), 1f, SpriteEffects.None, 0);
 
             spriteBatch.Draw(_lifeTexture, Position, null, Color.White, Rotation + MathHelper.DegreesToRadians(90),
-                new Vector2(Globals.ScreenWidth / 2 - 70, Globals.ScreenHeight / 2), 1.0f, SpriteEffects.None, 0);
+                new Vector2(Globals.ScreenWidth / 2 + 40, Globals.ScreenHeight / 2), 1.0f, SpriteEffects.None, 0);
+
+            spriteBatch.DrawString(MenuComponent.menuFont, Health + "", Position,
+                Color.HotPink, Rotation + MathHelper.DegreesToRadians(90), new Vector2(Globals.ScreenWidth / 2, Globals.ScreenHeight / 2 + 13), 1f, SpriteEffects.None, 0);
+
         }
 
         public override bool CollidesWith(GameObject otherGameObject)
