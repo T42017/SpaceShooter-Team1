@@ -31,7 +31,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         }
 
         public Type enemyType;
-        private AI _ai;
+        private readonly AI _ai;
         
         public Enemy(AsteroidsGame game, Type enemyType) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Green))
         {
