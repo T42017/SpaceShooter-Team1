@@ -16,6 +16,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         private SoundEffect _pewEffect;
         private DateTime _timeSenceLastShot = DateTime.Today;
         private Texture2D _lifeTexture;
+        public int EnemyKills;
 
         public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Red))
         {
@@ -95,6 +96,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             spriteBatch.DrawString(MenuComponent.menuFont, Health + "", Position,
                 Color.HotPink, Rotation + MathHelper.DegreesToRadians(90), new Vector2(Globals.ScreenWidth / 2, Globals.ScreenHeight / 2 + 13), 1f, SpriteEffects.None, 0);
 
+            spriteBatch.DrawString(MenuComponent.menuFont, "kills: " + EnemyKills, Position,
+                Color.HotPink, Rotation + MathHelper.DegreesToRadians(90), new Vector2(-Globals.ScreenWidth / 2, Globals.ScreenHeight / 2 + 13), 1f, SpriteEffects.None, 0);
         }
 
         public override bool CollidesWith(GameObject otherGameObject)
@@ -102,7 +105,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             bool collides = base.CollidesWith(otherGameObject) && (otherGameObject is Meteor || otherGameObject is Enemy || otherGameObject is Projectile projectile && projectile.ParentType == typeof(Enemy));
             if (collides)
             {
-                if (otherGameObject is Projectile)
+                if (otherGameObject is Projectile pro)
                 {
                     Health--;
                     otherGameObject.IsDead = true;

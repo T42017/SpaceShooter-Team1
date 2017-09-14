@@ -11,7 +11,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public enum State
         {
             GoToPosition,
-            FollowPlayer
+            MoveToPlayer
         }
 
         private State currentState;
@@ -30,7 +30,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Player player = _game.GameObjectManager.Player;
 
             if (Vector2.Distance(player.Position, _enemy.Position) < 800)
-                currentState = State.FollowPlayer;
+                currentState = State.MoveToPlayer;
             else if (Vector2.Distance(player.Position, _enemy.Position) > 800)
                 currentState = State.GoToPosition;
 
@@ -40,11 +40,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                     _positionGoTO = GetRandomPositionInLevel();
 
                 _enemy.Rotation = MathHelper.LookAt(_enemy.Position, _positionGoTO);
-                _enemy.MaxSpeed = 9;
-                _enemy.AccelerateForward(0.18f);
+                _enemy.MaxSpeed = 15;
+                _enemy.AccelerateForward(0.25f);
                 _enemy.Move();
             }
-            else if (currentState == State.FollowPlayer)
+            else if (currentState == State.MoveToPlayer)
             {
                 _enemy.Rotation = MathHelper.LookAt(_enemy.Position, player.Position);
                 if (_enemy.Weapon != null && !_enemy.IsWeaponOverheated())
