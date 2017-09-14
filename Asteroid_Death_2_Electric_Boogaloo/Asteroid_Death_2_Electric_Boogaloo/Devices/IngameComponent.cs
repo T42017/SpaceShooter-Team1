@@ -15,13 +15,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
     {
         private KeyboardState lastKeyboardState, KeyboardState;
         private GamePadState lastGamePadState;
-        private bool hasaddedgameobjetcs;
+        private bool hasaddedgameobjetcs,volume;
         public static bool playing;
         private SpriteFont menuFont, buttonFont;
         private Texture2D Button;
         private AsteroidsGame pGame;
         private MouseState oldState;
-     
+        private GamePadState lastgamePadState;
         private Song song;
 
         public IngameComponent(Game game) : base(game)
@@ -30,7 +30,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 
             DrawableStates = GameState.ingame;
             UpdatableStates = GameState.ingame;
-
+            volume = false;
             playing = false;
             MediaPlayer.IsRepeating = true;
         }
@@ -45,22 +45,29 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 
         public override void Update(GameTime gameTime)
         {
-            
-            MediaPlayer.Volume = 0.4f;
-            var gamePadState = GamePad.GetState(PlayerIndex.One);
-            KeyboardState = Keyboard.GetState();
-            if (gamePadState.Buttons.Start == ButtonState.Pressed  
-                || Keyboard.GetState().IsKeyDown(Keys.Escape)&& lastKeyboardState.IsKeyUp(Keys.Escape))
+            if (volume == false)
             {
-                pGame.ChangeGameState(GameState.paused);
+                MediaPlayer.Volume = 0.6f;
+                volume = true;
             }
-
             if (playing == false)
             {
                 MediaPlayer.Stop();
                 MediaPlayer.Play(song);
-                playing = true;
+               
+                playing =true;
             }
+            var gamePadState = GamePad.GetState(PlayerIndex.One);
+            KeyboardState = Keyboard.GetState();
+            if (gamePadState.Buttons.Start == ButtonState.Pressed   &&lastgamePadState.Buttons.Start== ButtonState.Released
+                || KeyboardState.IsKeyDown(Keys.Escape)&& lastKeyboardState.IsKeyUp(Keys.Escape))
+            {
+                pGame.ChangeGameState(GameState.paused);
+                volume= false;
+
+            }
+            
+          
 
             //for (int i = pGame.Components.Count - 1; i >= 0; i--)
             //{
@@ -69,6 +76,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             //    pGame.CheckForCollisionWith(gameObject);
             //}
             //pGame.GenerateRandomNewMeteor(gameTime, 5);
+            lastgamePadState = gamePadState;
             lastKeyboardState = KeyboardState;
             base.Update(gameTime);
         }

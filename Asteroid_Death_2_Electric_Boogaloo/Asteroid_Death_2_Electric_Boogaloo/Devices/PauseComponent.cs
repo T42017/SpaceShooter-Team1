@@ -17,7 +17,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         private KeyboardState lastKeyboardState;
         private SpriteFont font;
         private AsteroidsGame pGame;
-
+        private GamePadState lastGamePadState,laststate;
         public PauseComponent(Game game) : base(game)
         {
             pGame = (AsteroidsGame) game;
@@ -36,20 +36,22 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 
         public override void Update(GameTime gameTime)
         {
-            if (playing==false )
-            {
-                MediaPlayer.Volume = 0.05f;
-                playing = true;
-            }
-
-            if(GamePad.GetState(PlayerIndex.One).Buttons.Start==ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape) && lastKeyboardState.IsKeyUp(Keys.Escape))
+            if(playing==false)
+                MediaPlayer.Volume = 0.05f; playing = true;
+              
+            var gamePadState = GamePad.GetState(PlayerIndex.One);
+            var KeyboardState = Keyboard.GetState();
+            if (gamePadState.Buttons.Start==ButtonState.Pressed && laststate.Buttons.Start== ButtonState.Released || KeyboardState.IsKeyDown(Keys.Escape) && lastKeyboardState.IsKeyUp(Keys.Escape))
                 pGame.ChangeGameState(GameState.ingame); playing = false;
+            laststate = gamePadState;
 
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed 
-                || Keyboard.GetState().IsKeyDown(Keys.M))
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed && lastGamePadState.Buttons.Back==ButtonState.Released
+                || KeyboardState.IsKeyDown(Keys.M) && lastKeyboardState.IsKeyUp(Keys.M))
                 pGame.ChangeGameState(GameState.Menu); playing = false;
-            
-            lastKeyboardState =Keyboard.GetState();
+
+            lastGamePadState = gamePadState;
+
+            lastKeyboardState = KeyboardState;
             base.Update(gameTime);
         }
 
@@ -57,7 +59,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         {
             String Text1,text2;
             Text1 = "Game is paused";
-            text2 = "press M to go back to main menu";
+            text2 = "press M on your keyboard or Back button on your gamepad to go back to main menu";
 
             SpriteBatch.Begin();
 
