@@ -104,6 +104,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         {
             //requires further work to add a randomly generated speed of the meteors instead of a static speed
             Rotation += RotationSpeed;
+            StayInsideLevel();
             Move();
             base.Update();
         }

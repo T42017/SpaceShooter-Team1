@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing.Text;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
-using Asteroid_Death_2_Electric_Boogaloo.Components;
-
+﻿using Asteroid_Death_2_Electric_Boogaloo.Components;
 using Asteroid_Death_2_Electric_Boogaloo.Devices;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -146,6 +137,5 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             base.Draw(gameTime);
         } 
         #endregion
-            GameObjectManager.AddPowerups(12);
     }
 }
