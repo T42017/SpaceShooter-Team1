@@ -84,7 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Highscore.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Icon.ico" />
   </ItemGroup>

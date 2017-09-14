@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Asteroid_Death_2_Electric_Boogaloo.GameObjects;
 using Microsoft.Xna.Framework.Utilities;
 using Microsoft.Xna.Framework;
@@ -12,6 +13,8 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using ButtonState = Microsoft.Xna.Framework.Input.ButtonState;
+using Keys = Microsoft.Xna.Framework.Input.Keys;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 {
@@ -25,6 +28,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         private AsteroidsGame pGame;
         private int choice,nr,max;
         private string name;
+        private SpriteEffect none;
         private Keys lastk,lastk1;
         private MouseState newState,oldState;
         private KeyboardState lastK,LastKey;
@@ -36,7 +40,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             Keys.K, Keys.L, Keys.M, Keys.N, Keys.O,
             Keys.P, Keys.Q, Keys.R, Keys.S, Keys.T,
             Keys.U, Keys.V, Keys.W, Keys.X, Keys.Y,
-            Keys.Z, Keys.Back, Keys.Space };
+            Keys.Z, Keys.Back};
         KeyboardState lastKeyboardState;
         public DeathComponent(Game game) : base(game)
         {
@@ -49,12 +53,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             name = "";
             nr = 0;
             max = 12;
-           
+           
+
         }
 
         protected override void LoadContent()
         {
-            font = Game.Content.Load<SpriteFont>("GameState");
+            font = Game.Content.Load<SpriteFont>("Font");
             song = Game.Content.Load<Song>("Laugh");
             texture = Game.Content.Load<Texture2D>("background");
             button1 = Game.Content.Load<Texture2D>("buttonBlue");
@@ -163,7 +168,16 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
                 pGame.ChangeGameState(GameState.Menu);
                 playing = false;
                 choice = 0;
-                HighScore.SaveScore(name,Player.score);
+                if (name == "" || name.Length == 0)
+                {
+                    name = "Player";
+                    HighScore.SaveScore(name, Player.score);
+                }
+                else
+                {
+                    HighScore.SaveScore(name, Player.score);
+                }
+
                 name = "";
                 Player.score = 0;
             }
@@ -177,6 +191,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 
         private void AddKeyToText(Keys key)
         {
+           
             var currentKeyboardState = Keyboard.GetState();
             string newChar = "";
             if (name.Length >= 12 && key != Keys.Back)
@@ -261,9 +276,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
                 case Keys.Z:
                     newChar += "z";
                     break;
-                case Keys.Space:
-                    newChar += " ";
-                    break;
                 case Keys.Back:
                     if (name.Length != 0)
                         name = name.Remove(name.Length - 1);
@@ -286,7 +298,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         public override void Draw(GameTime gameTime)
         {
             SpriteBatch.Begin();
-
+            float scale = 2.0f;
             for (int x = 0; x < 2000; x += texture.Width)
             {
                 for (int y = 0; y < 2000; y += texture.Height)
@@ -297,19 +309,24 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             if (choice == 1)
             {
                 SpriteBatch.Draw(button1, new Vector2(((pGame.Graphics.PreferredBackBufferWidth / 2) - 80), (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 4)), Color.Red);
+                SpriteBatch.DrawString(font, "Return to Menu", new Vector2(pGame.Graphics.PreferredBackBufferWidth / 2 - 75, (pGame.Graphics.PreferredBackBufferHeight) - pGame.Graphics.PreferredBackBufferHeight /4), Color.Black);
             }
             else
             {
-                SpriteBatch.Draw(button1, new Vector2(((pGame.Graphics.PreferredBackBufferWidth / 2) - 80), (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 4)), Color.Beige);
+                SpriteBatch.Draw(button1, new Vector2(((pGame.Graphics.PreferredBackBufferWidth / 2) - 80), (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 4)), Color.Cyan);
+                SpriteBatch.DrawString(font, "Return to Menu", new Vector2(pGame.Graphics.PreferredBackBufferWidth / 2 - 75, (pGame.Graphics.PreferredBackBufferHeight) - pGame.Graphics.PreferredBackBufferHeight / 4), Color.Black);
             }
 
             if (choice == 0)
             {
-                SpriteBatch.DrawString(font,name,new Vector2(pGame.Graphics.PreferredBackBufferWidth/4,pGame.Graphics.PreferredBackBufferHeight/12),Color.Red);
+               
+                SpriteBatch.Draw(button1, new Vector2(pGame.Graphics.PreferredBackBufferWidth / 2 - 80, pGame.Graphics.PreferredBackBufferHeight / 12), Color.Red);
+                SpriteBatch.DrawString(font,name,new Vector2(pGame.Graphics.PreferredBackBufferWidth/2 - 75,pGame.Graphics.PreferredBackBufferHeight/12),Color.Black);
             }
             else
             {
-                SpriteBatch.DrawString(font, name, new Vector2(pGame.Graphics.PreferredBackBufferWidth / 4, pGame.Graphics.PreferredBackBufferHeight / 12), Color.Cyan);
+                SpriteBatch.Draw(button1, new Vector2(pGame.Graphics.PreferredBackBufferWidth / 2 - 80, pGame.Graphics.PreferredBackBufferHeight / 12), Color.Cyan);
+                SpriteBatch.DrawString(font, name, new Vector2(pGame.Graphics.PreferredBackBufferWidth / 2 - 75, pGame.Graphics.PreferredBackBufferHeight / 12), Color.Black);
             }
 
             SpriteBatch.End();

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
@@ -18,10 +19,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         private AsteroidsGame pGame;
         private MouseState oldState;
         private Song song;
+        private SoundEffect deus,roasted,Tyrone,RE,Man;
         private bool playing,hasloaded;
         private String Mainmenu,startgame,Highscores;
         private String[] highscore1;
-        private int highlight,size;
+        private int highlight,size, rand;
         private KeyboardState lastKeyboardState;
         private GamePadState lastGamePadState;
         private SpriteFont Text;
@@ -40,7 +42,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             
             string path = @"Content/Highscore.txt";
 
-            Mainmenu = "Return";
+            Mainmenu = " Return";
             startgame = "Start";
             
             //highscoreReader = new StreamReader("Highscore.txt");
@@ -61,7 +63,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 
         protected override void LoadContent()
         {
-            
+            deus = Game.Content.Load<SoundEffect>("Deus");
+            roasted = Game.Content.Load<SoundEffect>("roasted");
+            Tyrone = Game.Content.Load<SoundEffect>("Tyrone");
+            RE = Game.Content.Load<SoundEffect>("RE");
+            Man = Game.Content.Load<SoundEffect>("man");
             menuFont = Game.Content.Load<SpriteFont>("Text");
             texture = Game.Content.Load<Texture2D>("background");
             song = Game.Content.Load<Song>("CantinaBand");
@@ -138,7 +144,32 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             if (gamePadState.Buttons.A == ButtonState.Pressed && lastGamePadState.Buttons.A == ButtonState.Released && highlight == 1
                 || keyboardstate.IsKeyDown(Keys.Space) && lastKeyboardState.IsKeyUp(Keys.Space) && highlight == 1)
             {
-               
+                
+               rand=Globals.RNG.Next(4);
+                switch (rand)
+                {
+                    case 0:
+                        deus.Play(0.4f, 0.0f, 0.0f);
+                        break;
+                    case 1:
+                        roasted.Play(0.1f, 0.0f, 0.0f);
+                        break;
+
+                    case 2:
+                        
+                        Man.Play(1.0f,0.0f,0.0f);
+                        break;
+
+                    case 3:
+                        RE.Play(0.08f, 0.0f, 0.0f);
+                        break;
+
+                    case 4:
+                        Tyrone.Play(1.0f, 0.0f, 0.0f);
+                        break;
+                        
+                }
+
             }
 
             if (gamePadState.Buttons.A == ButtonState.Pressed && lastGamePadState.Buttons.A == ButtonState.Released && highlight == 2
@@ -201,9 +232,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
                 SpriteBatch.Draw(button2, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 8) + 1300, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Cyan);
             }
 
-            SpriteBatch.DrawString(menuFont, Mainmenu, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 6) - 180, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)),Color.Black);
+            SpriteBatch.DrawString(menuFont, Mainmenu, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 6) - 200, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)),Color.Black);
 
-            SpriteBatch.DrawString(menuFont, startgame, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 6) + 1380, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Black);
+            SpriteBatch.DrawString(menuFont, startgame, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 6) + 1300, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Black);
             if (hasloaded == true)
             {
                 for (int i = 0;
