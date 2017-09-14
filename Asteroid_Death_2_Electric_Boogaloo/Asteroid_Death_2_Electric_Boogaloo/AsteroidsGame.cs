@@ -138,7 +138,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
             
             GameObjectManager.AddEnemys(10);
-            GameObjectManager.AddMeteors(40);
+            GameObjectManager.AddMeteors(20);
         }
 
     }
