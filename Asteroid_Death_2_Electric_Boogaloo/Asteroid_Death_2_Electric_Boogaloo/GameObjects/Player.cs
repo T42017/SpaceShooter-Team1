@@ -91,14 +91,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
             //Draw player health
             spriteBatch.DrawString(MenuComponent.menuFont, Health + " x ", Position,
-                Color.HotPink, Rotation + MathHelper.DegreesToRadians(90), new Vector2(Globals.ScreenWidth / 2, Globals.ScreenHeight / 2 + 13), 1f, SpriteEffects.None, 0);
+                Color.OrangeRed, Rotation + MathHelper.DegreesToRadians(90), new Vector2(Globals.ScreenWidth / 2, Globals.ScreenHeight / 2 + 13), 1f, SpriteEffects.None, 0);
 
             spriteBatch.Draw(_lifeTexture, Position, null, Color.White, Rotation + MathHelper.DegreesToRadians(90),
                 new Vector2(Globals.ScreenWidth / 2 - 70, Globals.ScreenHeight / 2), 1.0f, SpriteEffects.None, 0);
 
             //Draw score
             spriteBatch.DrawString(MenuComponent.menuFont, "Score: " + score, Position,
-                Color.HotPink, Rotation + MathHelper.DegreesToRadians(90), new Vector2(-Globals.ScreenWidth / 2, Globals.ScreenHeight / 2 + 13), 1f, SpriteEffects.None, 0);
+                Color.OrangeRed, Rotation + MathHelper.DegreesToRadians(90), new Vector2(-Globals.ScreenWidth / 2, Globals.ScreenHeight / 2 + 13), 1f, SpriteEffects.None, 0);
         }
 
         public override bool CollidesWith(GameObject otherGameObject)
