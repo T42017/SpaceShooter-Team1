@@ -69,11 +69,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             xDoc.Load(FileLocation);
             return xDoc;
         }
-
-        private static bool contains(XmlNodeList list, string name)
-        {
-            return false;
-        }
-
+        
     }
 }
