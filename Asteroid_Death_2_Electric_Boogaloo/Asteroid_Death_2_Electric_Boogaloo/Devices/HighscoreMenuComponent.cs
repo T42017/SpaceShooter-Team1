@@ -19,10 +19,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         private MouseState oldState;
         private Song song;
         private bool playing;
-        private String Mainmenu,startgame;
+        private String Mainmenu,startgame,Highscores;
         private int highlight;
         private KeyboardState lastKeyboardState;
         private GamePadState lastGamePadState;
+        private SpriteFont Text;
         public static StreamReader highscoreReader;
         private bool hasMovedStick;
 
@@ -34,6 +35,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             UpdatableStates = GameState.highscoremenu;
             playing = false;
             MediaPlayer.IsRepeating = true;
+            
             
             string path = @"Content/Highscore.txt";
 
@@ -58,6 +60,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 
         protected override void LoadContent()
         {
+            
             menuFont = Game.Content.Load<SpriteFont>("Text");
             texture = Game.Content.Load<Texture2D>("background");
             song = Game.Content.Load<Song>("CantinaBand");
@@ -188,6 +191,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             SpriteBatch.DrawString(menuFont, Mainmenu, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 6) - 180, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)),Color.Black);
 
             SpriteBatch.DrawString(menuFont, startgame, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 6) + 1380, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Black);
+
+            SpriteBatch.DrawString(menuFont,HighScore.GetHighScores().ToString(),new Vector2(pGame.Graphics.PreferredBackBufferWidth/4, pGame.Graphics.PreferredBackBufferHeight/8),Color.Gold);
 
             SpriteBatch.End();
             base.Draw(gameTime);
