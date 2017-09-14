@@ -9,10 +9,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
     /// </summary>
     public class Meteor : GameObject
     {
-        #region Private fields
-        private SoundEffect yea;
-        #endregion
-
         #region Public properties
         public MeteorSize MeteorSize { get; }
         public MeteorColour MeteorColour { get; }
