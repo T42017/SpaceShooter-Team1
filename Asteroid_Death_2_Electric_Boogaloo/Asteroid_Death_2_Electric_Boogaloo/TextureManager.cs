@@ -16,11 +16,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public Texture2D PlayerShipTexture;
         public Texture2D BackGroundTexture;
-
+        public Texture2D[] PowerUpTextures; 
         public Texture2D[] PixelExplosionTextures;
         public Texture2D[] EnemyTexures;
         public Texture2D[] LaserTextures;
-
+        public Texture2D[] MissileTextures;
 
         public SoundEffect PlayerShootSoundEffect;
 
@@ -61,7 +61,21 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             laserTexture2Ds.Add(content.Load<Texture2D>("laserGreen"));
             LaserTextures = laserTexture2Ds.ToArray();
 
+            List<Texture2D> missileTexture2Ds = new List<Texture2D>();
+            missileTexture2Ds.Add(content.Load<Texture2D>("missileRed"));
+            missileTexture2Ds.Add(content.Load<Texture2D>("missileBlue"));
+            missileTexture2Ds.Add(content.Load<Texture2D>("missileGreen"));
+            MissileTextures = missileTexture2Ds.ToArray();
 
+            List<Texture2D> powerupTexture2Ds = new List<Texture2D>();
+            powerupTexture2Ds.Add(content.Load<Texture2D>("PowerupMissile"));
+            powerupTexture2Ds.Add(content.Load<Texture2D>("powerupHealth"));
+            powerupTexture2Ds.Add(content.Load<Texture2D>("powerupLightsaber"));
+            powerupTexture2Ds.Add(content.Load<Texture2D>("powerupStar"));
+            powerupTexture2Ds.Add(content.Load<Texture2D>("powerupImprovedLaser"));
+            powerupTexture2Ds.Add(content.Load<Texture2D>("powerupRandom"));
+            PowerUpTextures = powerupTexture2Ds.ToArray();
+            
             PlayerShootSoundEffect = content.Load<SoundEffect>("Blaster");
         }
 

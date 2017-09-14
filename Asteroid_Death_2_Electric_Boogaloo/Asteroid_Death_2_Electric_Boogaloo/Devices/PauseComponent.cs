@@ -59,7 +59,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         {
             String Text1,text2;
             Text1 = "Game is paused";
-            text2 = "press M on your keyboard or Back button on your gamepad to go back to main menu";
+            text2 = "Return to the main menu by pressing M on the keyboard or Back on your gamepad";
 
             SpriteBatch.Begin();
 

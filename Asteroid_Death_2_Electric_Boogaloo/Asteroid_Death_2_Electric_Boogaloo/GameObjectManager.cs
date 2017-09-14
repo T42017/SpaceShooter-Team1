@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Asteroid_Death_2_Electric_Boogaloo.GameObjects;
+using Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -25,7 +26,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public GameObjectManager(AsteroidsGame game)
         {
             _game = game;
-            AddNewPlayer();
+            AddThePlayer();
         }
 
         public void AddEnemyFactory(EnemyFactory factory)
@@ -39,7 +40,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 GameObjects.Add(_enemyFactory.GetRandomEnemy());
         }
 
-        public void AddNewPlayer()
+        public void AddThePlayer()
         {
             this.Player = new Player(_game)
             {
@@ -61,6 +62,20 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                     Rotation = (float)Globals.RNG.NextDouble()
                 };
                 GameObjects.Add(meteor);
+            }
+        }
+
+        public void AddPowerups(int amount)
+        {
+            for (int i = 0; i < amount; i++)
+            {
+                var position = new Vector2(
+                    Globals.RNG.Next(_game.Level.SizeX),
+                    Globals.RNG.Next(_game.Level.SizeY)
+                );
+                Powerup powerup = new PowerupMissile(_game, position);
+                powerup = new PowerupHealth(_game, position);
+                GameObjects.Add(powerup);
             }
         }
 
@@ -118,7 +133,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 GameObjects.Add(meteor);
             }
         }
-
+        
         internal void LoadContent()
         {
             for (int i = 0; i < GameObjects.Count; i++)
