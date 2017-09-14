@@ -110,7 +110,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 {
                     Health -= pro.Damage;
                     pro.IsDead = true;
-                    score = score + 50;
+                   
                 }
                 if (Health <= 0 || !(otherGameObject is Projectile))
                 {

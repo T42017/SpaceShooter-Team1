@@ -53,18 +53,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                astroidsComponent.Enabled = astroidsComponent.UpdatableStates.HasFlag(_gameState);
            }
            
-            HighScore.SaveScore("player", 270);
-
-            string[] players = HighScore.GetHighScores();
-
-            Debug.WriteLine("------------");
-
-            for (int i = 0; i < players.Length; i++)
-            {
-                Debug.WriteLine(players[i]);
-            }
-
-            Exit();
+          
         }
         
         protected override void Initialize()
