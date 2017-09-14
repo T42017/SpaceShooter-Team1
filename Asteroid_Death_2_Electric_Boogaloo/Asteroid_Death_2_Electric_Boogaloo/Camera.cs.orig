@@ -19,7 +19,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public Camera()
         {
+<<<<<<< HEAD
             _zoom = 0.7f;
+=======
+            _zoom = 0.8f;
+>>>>>>> origin/develop
             _rotation = 0.0f;
             _pos = Vector2.Zero;
         }

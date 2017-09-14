@@ -1,10 +1,11 @@
 ﻿using System;
-using System.Text;
+using Asteroid_Death_2_Electric_Boogaloo.Devices;
 using Asteroid_Death_2_Electric_Boogaloo.Components;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
@@ -24,7 +25,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         
         public override void LoadContent()
         {
-            LoadTexture("shipPlayer");
+            Texture = TextureManager.Instance.PlayerShipTexture;
             _lifeTexture = Game.Content.Load<Texture2D>("playerLife2_red");
             _pewEffect = Game.Content.Load<SoundEffect>("Blaster");
         }
@@ -40,7 +41,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 || (gamePadState.DPad.Up == ButtonState.Pressed)
                 || (state.IsKeyDown(Keys.Up))
                 || (state.IsKeyDown(Keys.W))) 
-                AccelerateForward(0.25f);
+                AccelerateForward(0.45f);
            
             if ((gamePadState.ThumbSticks.Left.Y <= -0.3f) 
                 || (gamePadState.DPad.Down == ButtonState.Pressed)
@@ -107,7 +108,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 if (ShouldBeDead() || !(otherGameObject is Projectile))
                 {
                     IsDead = true;
+                MediaPlayer.Stop();
                     Game.ChangeGameState(GameState.gameover);
+                IngameComponent.playing = false;
                 }
             }
             return collides;

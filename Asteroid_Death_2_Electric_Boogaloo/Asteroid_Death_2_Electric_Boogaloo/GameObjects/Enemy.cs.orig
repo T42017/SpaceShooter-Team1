@@ -39,7 +39,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             _ai = new AI(game, this);
             this.enemyType = enemyType;
             ShootingSpeed = 500;
-            Weapon = new Weapon(game, Weapon.Type.Laser, Weapon.Color.Green);
         }
 
         public override void LoadContent()
@@ -50,12 +49,15 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         public override void Update()
         {
             _ai.Update();
-            base.Update();
         }
 
         public override bool CollidesWith(GameObject otherGameObject)
         {
+<<<<<<< HEAD
             bool collides = base.CollidesWith(otherGameObject) && (otherGameObject is Meteor || (otherGameObject is Laser laser && laser.ParentType == typeof(Player)));
+=======
+            bool collides = base.CollidesWith(otherGameObject) && otherGameObject is Laser laser && laser.ParentType == typeof(Player);
+>>>>>>> origin/develop
             if (collides)
                 IsDead = true;
             return collides;
