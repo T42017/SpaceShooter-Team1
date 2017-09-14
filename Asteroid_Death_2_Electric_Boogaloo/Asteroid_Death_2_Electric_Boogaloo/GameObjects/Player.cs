@@ -16,6 +16,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         private SoundEffect _pewEffect;
         private DateTime _timeSenceLastShot = DateTime.Today;
         private Texture2D _lifeTexture;
+        public static int score;
 
         public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Blue))
         {
@@ -104,6 +105,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 {
                     Health--;
                     otherGameObject.IsDead = true;
+                    score = score + 50;
                 }
                 if (ShouldBeDead() || !(otherGameObject is Projectile))
                 {

@@ -57,7 +57,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         {
             bool collides = base.CollidesWith(otherGameObject) && (otherGameObject is Meteor || (otherGameObject is Projectile projectile && projectile.ParentType == typeof(Player)));
             if (collides)
+            {
                 IsDead = true;
+                Player.score=Player.score+100;
+            }
             return collides;
         }
     }

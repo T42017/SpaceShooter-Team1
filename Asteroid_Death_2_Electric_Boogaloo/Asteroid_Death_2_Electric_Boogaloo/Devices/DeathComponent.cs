@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 using System.Threading.Tasks;
+using Asteroid_Death_2_Electric_Boogaloo.GameObjects;
 using Microsoft.Xna.Framework.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
@@ -44,7 +45,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             UpdatableStates = GameState.gameover;
             DrawableStates = GameState.gameover;
             yes1 = 0;
-            choice = 1;
+            choice = 0;
             name = "";
             nr = 0;
             max = 12;
@@ -161,12 +162,16 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             {
                 pGame.ChangeGameState(GameState.Menu);
                 playing = false;
+                choice = 0;
+                HighScore.SaveScore(name,Player.score);
+                name = "";
             }
             oldState = newState;
             lastK = Keyboardstate;
             lastPadState = gamePadState;
             lastKeyboardState = Keyboardstate;
             base.Update(gameTime);
+            
         }
 
         private void AddKeyToText(Keys key)

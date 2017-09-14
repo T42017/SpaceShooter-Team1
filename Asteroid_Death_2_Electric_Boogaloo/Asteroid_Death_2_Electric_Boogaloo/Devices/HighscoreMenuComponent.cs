@@ -18,9 +18,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         private AsteroidsGame pGame;
         private MouseState oldState;
         private Song song;
-        private bool playing;
+        private bool playing,hasloaded;
         private String Mainmenu,startgame,Highscores;
-        private int highlight;
+        private String[] highscore1;
+        private int highlight,size;
         private KeyboardState lastKeyboardState;
         private GamePadState lastGamePadState;
         private SpriteFont Text;
@@ -35,7 +36,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             UpdatableStates = GameState.highscoremenu;
             playing = false;
             MediaPlayer.IsRepeating = true;
-            
+            hasloaded = false;
             
             string path = @"Content/Highscore.txt";
 
@@ -67,10 +68,17 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             button1 = Game.Content.Load<Texture2D>("buttonBlue");
             button2 = Game.Content.Load<Texture2D>("buttonRed");
             base.LoadContent();
+           
         }
 
         public override void Update(GameTime gameTime)
         {
+
+            if (hasloaded==false)
+            {
+                highscore1= HighScore.GetHighScores();
+                hasloaded = true;
+            }
             if (playing == false)
             {
                 MediaPlayer.Stop();
@@ -124,6 +132,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             {
                 pGame.ChangeGameState(GameState.Menu);
                 playing = false;
+                hasloaded = false;
             }
 
             if (gamePadState.Buttons.A == ButtonState.Pressed && lastGamePadState.Buttons.A == ButtonState.Released && highlight == 1
@@ -139,8 +148,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
                 pGame.GameObjectManager.LoadContent();
                 pGame.ChangeGameState(GameState.ingame);
                 playing = false;
+                hasloaded = false;
             }
 
+
+           
             lastGamePadState = gamePadState;
             lastKeyboardState = keyboardstate;
             
@@ -150,6 +162,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         public override void Draw(GameTime gameTime)
         {
             SpriteBatch.Begin();
+            int size=0;
             for (int x = 0; x < 2000; x += texture.Width)
             {
                 for (int y = 0; y < 2000; y += texture.Height)
@@ -191,8 +204,17 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             SpriteBatch.DrawString(menuFont, Mainmenu, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 6) - 180, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)),Color.Black);
 
             SpriteBatch.DrawString(menuFont, startgame, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 6) + 1380, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Black);
-
-            SpriteBatch.DrawString(menuFont,HighScore.GetHighScores().ToString(),new Vector2(pGame.Graphics.PreferredBackBufferWidth/4, pGame.Graphics.PreferredBackBufferHeight/8),Color.Gold);
+            if (hasloaded == true)
+            {
+                for (int i = 0;
+                    i < highscore1.Length; i++)
+                {
+                    
+                    SpriteBatch.DrawString(menuFont, highscore1[i], new Vector2(pGame.Graphics.PreferredBackBufferWidth / 4, (pGame.Graphics.PreferredBackBufferHeight / 8)+size), Color.Gold);
+                    size = size + 30;
+                }
+            }
+            
 
             SpriteBatch.End();
             base.Draw(gameTime);
