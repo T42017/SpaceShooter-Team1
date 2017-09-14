@@ -165,6 +165,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
                 choice = 0;
                 HighScore.SaveScore(name,Player.score);
                 name = "";
+                Player.score = 0;
             }
             oldState = newState;
             lastK = Keyboardstate;
