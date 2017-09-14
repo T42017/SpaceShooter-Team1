@@ -8,8 +8,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         public enum Color
         {
             Red,
-            Green,
-            Blue
+            Blue,
+            Green
         }
 
         private Color color;
@@ -21,7 +21,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             this.Position = position;
             this.Rotation = rotation;
             this.color = color;
-            LoadTexture("laser" + Enum.GetName(typeof(Color), color));
+            Texture = TextureManager.Instance.LaserTextures[(int) color];
             MaxSpeed = 200;
         }
 

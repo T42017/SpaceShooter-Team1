@@ -21,14 +21,15 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     public class AsteroidsGame : Game
     {
+        private GameState _gameState;
+        private SpriteBatch _spriteBatch;
+        private Camera _camera;
+
+        
         public GraphicsDeviceManager Graphics;
         public int WindowWidth, Windowheight;
         public GameObjectManager GameObjectManager;
         public Level Level;
-
-        private GameState _gameState;
-        private SpriteBatch _spriteBatch;
-        private Camera _camera;
         
         public AsteroidsGame()
         {
@@ -47,8 +48,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
            foreach (var component in Components)
             {
                 if(!(component is AstroidsComponent astroidsComponent))
-
-               continue;
+                    continue;
                astroidsComponent.Visible = astroidsComponent.DrawableStates.HasFlag(_gameState);
                astroidsComponent.Enabled = astroidsComponent.UpdatableStates.HasFlag(_gameState);
            }
@@ -80,6 +80,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             //GameObjectManager.LoadContent();
+            TextureManager.Instance.LoadContent(Content);
         }
         
         protected override void UnloadContent()
@@ -137,7 +138,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
             
             GameObjectManager.AddEnemys(10);
-            GameObjectManager.AddMeteors(40);
+            GameObjectManager.AddMeteors(20);
         }
 
     }
