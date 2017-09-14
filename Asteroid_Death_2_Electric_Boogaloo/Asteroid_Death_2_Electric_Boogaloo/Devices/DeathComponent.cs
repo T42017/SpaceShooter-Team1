@@ -33,7 +33,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         private MouseState newState,oldState;
         private KeyboardState lastK,LastKey;
         private GamePadState lastGamePadState,lastPadState;
-        private int yes1;
+        private int yes1,blink,time;
         private Keys[] keysToCheck = new Keys[] {
             Keys.A, Keys.B, Keys.C, Keys.D, Keys.E,
             Keys.F, Keys.G, Keys.H, Keys.I, Keys.J,
@@ -53,8 +53,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             name = "";
             nr = 0;
             max = 12;
-           
-
+            blink = 0;
+            time = 0;
         }
 
         protected override void LoadContent()
@@ -180,6 +180,23 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 
                 name = "";
                 Player.score = 0;
+            }
+            time++;
+            if (time == 30)
+            {
+                
+           
+            switch (blink)
+            {
+                case 0:
+                    blink = 1;
+                    break;
+
+                case 1:
+                    blink = 0;
+                    break;
+            }
+                time = 0;
             }
             oldState = newState;
             lastK = Keyboardstate;
@@ -319,13 +336,35 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 
             if (choice == 0)
             {
-               
-                SpriteBatch.Draw(button1, new Vector2(pGame.Graphics.PreferredBackBufferWidth / 2 - 80, pGame.Graphics.PreferredBackBufferHeight / 12), Color.Red);
+                if (blink == 0)
+                {
+                    SpriteBatch.Draw(button1,
+                        new Vector2(pGame.Graphics.PreferredBackBufferWidth / 2 - 80,
+                            pGame.Graphics.PreferredBackBufferHeight / 12), Color.LightBlue);
+                }
+                else
+                {
+                    SpriteBatch.Draw(button1,
+                        new Vector2(pGame.Graphics.PreferredBackBufferWidth / 2 - 80,
+                            pGame.Graphics.PreferredBackBufferHeight / 12), Color.Red);
+                    SpriteBatch.DrawString(font, "_", new Vector2(pGame.Graphics.PreferredBackBufferWidth / 2 - 75, pGame.Graphics.PreferredBackBufferHeight / 12), Color.Black);
+                }
+                
                 SpriteBatch.DrawString(font,name,new Vector2(pGame.Graphics.PreferredBackBufferWidth/2 - 75,pGame.Graphics.PreferredBackBufferHeight/12),Color.Black);
             }
             else
             {
-                SpriteBatch.Draw(button1, new Vector2(pGame.Graphics.PreferredBackBufferWidth / 2 - 80, pGame.Graphics.PreferredBackBufferHeight / 12), Color.Cyan);
+
+                if (blink == 0)
+                {
+                    SpriteBatch.Draw(button1, new Vector2(pGame.Graphics.PreferredBackBufferWidth / 2 - 80, pGame.Graphics.PreferredBackBufferHeight / 12), Color.LightBlue);
+                }
+                else
+                {
+                    SpriteBatch.Draw(button1, new Vector2(pGame.Graphics.PreferredBackBufferWidth / 2 - 80, pGame.Graphics.PreferredBackBufferHeight / 12), Color.Red);
+                    SpriteBatch.DrawString(font, "_", new Vector2(pGame.Graphics.PreferredBackBufferWidth / 2 - 75, pGame.Graphics.PreferredBackBufferHeight / 12), Color.Black);
+                }
+               
                 SpriteBatch.DrawString(font, name, new Vector2(pGame.Graphics.PreferredBackBufferWidth / 2 - 75, pGame.Graphics.PreferredBackBufferHeight / 12), Color.Black);
             }
 
