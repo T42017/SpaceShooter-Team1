@@ -61,6 +61,22 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             }
         }
 
+        public void AddPowerups(int amount)
+        {
+            for (int i = 0; i < amount; i++)
+            {
+                var position = new Vector2(
+                    Globals.RNG.Next(_game.Level.SizeX),
+                    Globals.RNG.Next(_game.Level.SizeY)
+                );
+                Powerup powerup = new Powerup(_game, position, PowerupType.Missile)
+                {
+                    Rotation = (float)Globals.RNG.NextDouble()
+                };
+                GameObjects.Add(powerup);
+            }
+        }
+
         public List<Meteor> GetMeteors()
         {
             List<Meteor> meteors = new List<Meteor>();
