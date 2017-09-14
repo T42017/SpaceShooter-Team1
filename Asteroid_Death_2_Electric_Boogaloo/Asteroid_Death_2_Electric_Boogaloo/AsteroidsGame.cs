@@ -95,7 +95,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 GameObjectManager.RemoveDeadGameObjects();
                 GameObjectManager.UpdateGameObjects();
                 _camera.FollowPlayer(GameObjectManager.Player);
-                //GameObjectManager.GenerateRandomNewMeteor(gameTime, 1000);
+                GameObjectManager.AddNewMeteors(gameTime, 10, 1000);
             }
             base.Update(gameTime);
         }
@@ -132,13 +132,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public void Start()
         {
             Level = new Level(this, 20, 20);
-
             GameObjectManager = new GameObjectManager(this);
             GameObjectManager.AddEnemyFactory(new EnemyFactory(this));
-
-            
             GameObjectManager.AddEnemys(10);
-            GameObjectManager.AddMeteors(20);
         }
 
     }

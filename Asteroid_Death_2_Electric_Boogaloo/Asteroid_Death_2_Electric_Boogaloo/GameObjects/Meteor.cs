@@ -18,6 +18,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 (float) Globals.RNG.NextDouble(),
                 (float) Globals.RNG.NextDouble()
             );
+            Rotation = (float) Globals.RNG.NextDouble();
             RotationSpeed =(float) Globals.RNG.Next(12)/100;
             MaxSpeed = Globals.RNG.Next(250);
             MeteorSize = meteorSize;
@@ -80,8 +81,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 yield return new Meteor(Game, Position + offset, MeteorSize - 1, MeteorColour)
                 {
                     Speed = new Vector2(
-                        Speed.X * Globals.RNG.Next(1, 3) * Globals.RNG.Next(-1, 2) < 0 ? -1 : 1,
-                        Speed.Y * Globals.RNG.Next(1, 3) * Globals.RNG.Next(-1, 2) < 0 ? -1 : 1
+                        Speed.X * Globals.RNG.Next(2, 3) * (Globals.RNG.Next(-1, 2) < 0 ? -1 : 1),
+                        Speed.Y * Globals.RNG.Next(2, 3) * (Globals.RNG.Next(-1, 2) < 0 ? -1 : 1)
                     )
                 };
             }
