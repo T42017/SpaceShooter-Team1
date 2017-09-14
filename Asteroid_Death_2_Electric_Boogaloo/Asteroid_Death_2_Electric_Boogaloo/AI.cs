@@ -14,7 +14,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             FollowPlayer
         }
 
-        private State currentState = State.GoToPosition;
+        private State currentState;
         private readonly AsteroidsGame _game;
         private Enemy _enemy;
 
@@ -30,9 +30,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             Player player = _game.GameObjectManager.Player;
 
-            if (Vector2.Distance(player.Position, _enemy.Position) < 300)
+            if (Vector2.Distance(player.Position, _enemy.Position) < 800)
                 currentState = State.FollowPlayer;
-            else if (Vector2.Distance(player.Position, _enemy.Position) > 300)
+            else if (Vector2.Distance(player.Position, _enemy.Position) > 800)
                 currentState = State.GoToPosition;
 
             if (currentState == State.GoToPosition)
@@ -41,14 +41,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                     _positionGoTO = GetRandomPositionInLevel();
 
                 _enemy.Rotation = MathHelper.LookAt(_enemy.Position, _positionGoTO);
-                _enemy.AccelerateForward(0.2f);
+                _enemy.AccelerateForward(0.18f);
                 _enemy.Move();
             }
             else if (currentState == State.FollowPlayer)
             {
                 _enemy.Rotation = MathHelper.LookAt(_enemy.Position, player.Position);
                 _enemy.Shoot(typeof(Enemy));
-                _enemy.AccelerateForward(0.1f);
+                _enemy.AccelerateForward(0.05f);
                 _enemy.Move();
             }
 
@@ -65,40 +65,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             }
 
             return vec;
-        }
-
-        private List<Meteor> GetMeteors()
-        {
-            List<Meteor> meteors = new List<Meteor>();
-
-            foreach (var gameObject in _game.GameObjectManager.GameObjects)
-            {
-                if (gameObject is Meteor meteor)
-                    meteors.Add(meteor);
-            }
-            return meteors;
-        }
-
-        private float GetDistanceToClosestMeteor()
-        {
-            List<Meteor> meteors = GetMeteors();
-           return Vector2.Distance(_enemy.Position, GetClosestMeteor().Position);
-        }
-
-        private Meteor GetClosestMeteor()
-        {
-            List<Meteor> meteors = GetMeteors();
-            Meteor meteor = null;
-
-            for (int i = 0; i < meteors.Count; i++)
-            {
-                if (meteor == null)
-                    meteor = meteors[i];
-
-                if (Vector2.Distance(_enemy.Position, meteors[i].Position) < Vector2.Distance(_enemy.Position, meteor.Position))
-                    meteor = meteors[i];
-            }
-            return meteor;
         }
 
     }

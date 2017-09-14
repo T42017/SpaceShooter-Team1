@@ -13,13 +13,15 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 {
     class IngameComponent : AstroidsComponent
     {
-        private KeyboardState lastKeyboardState;
+        private KeyboardState lastKeyboardState, KeyboardState;
         private GamePadState lastGamePadState;
-        private bool hasaddedgameobjetcs, playing;
+        private bool hasaddedgameobjetcs;
+        public static bool playing;
         private SpriteFont menuFont, buttonFont;
         private Texture2D Button;
         private AsteroidsGame pGame;
         private MouseState oldState;
+     
         private Song song;
 
         public IngameComponent(Game game) : base(game)
@@ -33,6 +35,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             MediaPlayer.IsRepeating = true;
         }
 
+        
+
         protected override void LoadContent()
         {
             song = Game.Content.Load<Song>("Combat");
@@ -41,11 +45,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 
         public override void Update(GameTime gameTime)
         {
+            
             MediaPlayer.Volume = 0.4f;
             var gamePadState = GamePad.GetState(PlayerIndex.One);
-
+            KeyboardState = Keyboard.GetState();
             if (gamePadState.Buttons.Start == ButtonState.Pressed  
-                || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                || Keyboard.GetState().IsKeyDown(Keys.Escape)&& lastKeyboardState.IsKeyUp(Keys.Escape))
             {
                 pGame.ChangeGameState(GameState.paused);
             }
@@ -64,7 +69,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             //    pGame.CheckForCollisionWith(gameObject);
             //}
             //pGame.GenerateRandomNewMeteor(gameTime, 5);
-            lastKeyboardState = Keyboard.GetState();
+            lastKeyboardState = KeyboardState;
             base.Update(gameTime);
         }
     }

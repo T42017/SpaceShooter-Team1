@@ -33,10 +33,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public void AddEnemys(int amount)
         {
             for (int i = 0; i < amount; i++)
-            {
-                var enemy = _enemyFactory.GetRandomEnemy();
-                GameObjects.Add(enemy);
-            }
+                GameObjects.Add(_enemyFactory.GetRandomEnemy());
         }
 
         public void AddNewPlayer()
@@ -95,10 +92,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
             const int a = 100;
             var respawnArea = new Rectangle(
-                (int)Player.Position.X - Player.Width / 2 - a,
-                (int)Player.Position.Y - Player.Height / 2 - a,
-                Player.Width + 2 * a,
-                Player.Height + 2 * a
+                (int)Player.Position.X - Player.Texture.Width / 2 - a,
+                (int)Player.Position.Y - Player.Texture.Height / 2 - a,
+                Player.Texture.Width + 2 * a,
+                Player.Texture.Height + 2 * a
             );
 
             Meteor meteor;
@@ -138,9 +135,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public void CheckForCollisionWith(GameObject thisObject)
         {
-            for (int i = 0; i < GameObjects.Count; i++)
+            foreach (var otherGameObject in GameObjects)
             {
-                var otherGameObject = GameObjects[i];
                 if (thisObject == otherGameObject || !thisObject.CollidesWith(otherGameObject))
                     continue;
                 Debug.WriteLine($"{thisObject} collided with {otherGameObject}");

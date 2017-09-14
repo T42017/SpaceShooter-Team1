@@ -30,20 +30,20 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             enemyBlack5
         }
 
-        public Type type;
+        public Type enemyType;
         private AI _ai;
         
-        public Enemy(AsteroidsGame game, Type type) : base(game)
+        public Enemy(AsteroidsGame game, Type enemyType) : base(game, Laser.Color.Blue)
         {
-            this.type = type;
-            _ai = new AI((AsteroidsGame) game, this);
-            this.type = type;
-            ShootingSpeed = 300;
+            this.enemyType = enemyType;
+            _ai = new AI(game, this);
+            this.enemyType = enemyType;
+            ShootingSpeed = 500;
         }
 
         public override void LoadContent()
         {
-            LoadTexture(Enum.GetName(typeof(Type), type));
+            Texture = TextureManager.Instance.EnemyTexures[(int) enemyType];
         }
 
         public override void Update()

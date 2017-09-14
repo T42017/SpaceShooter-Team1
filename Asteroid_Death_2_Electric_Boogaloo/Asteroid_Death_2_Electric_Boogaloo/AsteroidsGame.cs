@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing.Text;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 using Asteroid_Death_2_Electric_Boogaloo.Components;
@@ -20,15 +21,15 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     public class AsteroidsGame : Game
     {
-        public GraphicsDeviceManager Graphics;
-        public int WindowWidth, Windowheight;
-        public GameObjectManager GameObjectManager;
-        public Level Level;
-
         private GameState _gameState;
         private SpriteBatch _spriteBatch;
         private Camera _camera;
 
+        
+        public GraphicsDeviceManager Graphics;
+        public int WindowWidth, Windowheight;
+        public GameObjectManager GameObjectManager;
+        public Level Level;
         
         public AsteroidsGame()
         {
@@ -47,8 +48,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
            foreach (var component in Components)
             {
                 if(!(component is AstroidsComponent astroidsComponent))
-
-               continue;
+                    continue;
                astroidsComponent.Visible = astroidsComponent.DrawableStates.HasFlag(_gameState);
                astroidsComponent.Enabled = astroidsComponent.UpdatableStates.HasFlag(_gameState);
            }
@@ -68,19 +68,19 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Components.Add(new HighscoreMenuComponent(this));
             Components.Add(new IngameComponent(this));
             Components.Add(new PauseComponent(this));
+            Components.Add(new DeathComponent(this));
             ChangeGameState(GameState.Menu);
 
-            Start();
+            _camera = new Camera();
 
             base.Initialize();
         }
         
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            
-            GameObjectManager.LoadContent();
+            //GameObjectManager.LoadContent();
+            TextureManager.Instance.LoadContent(Content);
         }
         
         protected override void UnloadContent()
@@ -89,9 +89,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         
         protected override void Update(GameTime gameTime)
         {
-            
-           //Debug.WriteLine(GameObjectManager.GameObjects.Count);
-
             Globals.ScreenWidth = Graphics.PreferredBackBufferWidth;
             if(_gameState == GameState.ingame)
             {
@@ -105,9 +102,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.HotPink);
+            GraphicsDevice.Clear(Color.Black);
 
-            //// if using XNA 4.0
+            // if using XNA 4.0
             _spriteBatch.Begin(SpriteSortMode.Deferred,
                 BlendState.AlphaBlend,
                 null,
@@ -139,7 +136,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             GameObjectManager = new GameObjectManager(this);
             GameObjectManager.AddEnemyFactory(new EnemyFactory(this));
 
-            _camera = new Camera();
+            
             GameObjectManager.AddEnemys(10);
             GameObjectManager.AddMeteors(40);
         }

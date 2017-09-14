@@ -1,16 +1,31 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
     public abstract class Ship : GameObject
     {
+        protected int ShootingSpeed = 100;
+
         private bool ShootLefCannon = false;
         private DateTime _timeSenceLastShot = DateTime.Today;
+<<<<<<< HEAD
+        private SoundEffect pewEffect;
+        private Laser.Color _laserColor;
+=======
         protected int ShootingSpeed = 100;
-        
-        protected Ship(AsteroidsGame game) : base(game)
+       
+>>>>>>> Feature_menu
+
+        protected Ship(AsteroidsGame game, Laser.Color color) : base(game)
         {
+<<<<<<< HEAD
+            pewEffect = Game.Content.Load<SoundEffect>("Blaster");
+            _laserColor = color;
+=======
+         
+>>>>>>> Feature_menu
         }
         
         public void Shoot(Type parentType)
@@ -23,16 +38,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
             shootPoint = MathHelper.RotateAroundPoint(shootPoint, shipCenterPoint, Rotation);
 
-<<<<<<< HEAD
-            Laser laser = new Laser(Game, new Vector2(shootPoint.X, shootPoint.Y), Rotation, Laser.Color.Red);
-=======
-            Laser laser = new Laser(Game, new Vector2(shootPoint.X, shootPoint.Y), Rotation, Laser.Color.Red)
+            Laser laser = new Laser(Game, new Vector2(shootPoint.X, shootPoint.Y), Rotation, _laserColor)
             {
                 ParentType = parentType
             };
-            laser.LoadContent();
->>>>>>> origin/develop
-
+            
             Game.GameObjectManager.GameObjects.Add(laser);
             ShootLefCannon = !ShootLefCannon;
             _timeSenceLastShot = DateTime.Now;
