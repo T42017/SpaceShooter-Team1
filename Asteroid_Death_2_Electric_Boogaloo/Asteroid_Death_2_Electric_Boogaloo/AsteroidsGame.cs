@@ -93,7 +93,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             if(_gameState == GameState.ingame)
             {
                 GameObjectManager.RemoveDeadGameObjects();
+                GameObjectManager.RemoveDeadExplosions();
                 GameObjectManager.UpdateGameObjects();
+                GameObjectManager.UpdateExplosions();
                 _camera.FollowPlayer(GameObjectManager.Player);
                 GameObjectManager.AddNewMeteors(gameTime, 10, 1000);
             }
@@ -117,6 +119,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             {
                 Level.DrawBackground(_spriteBatch);
                 GameObjectManager.DrawGameObjects(_spriteBatch);
+                GameObjectManager.DrawExplosions(_spriteBatch);
             }
 
             _spriteBatch.End();

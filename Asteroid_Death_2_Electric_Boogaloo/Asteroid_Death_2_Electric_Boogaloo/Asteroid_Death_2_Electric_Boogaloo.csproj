@@ -55,7 +55,7 @@
     <Compile Include="Level.cs" />
     <Compile Include="Devices\MenuComponent.cs" />
     <Compile Include="MathHelper.cs" />
-    <Compile Include="GameObjects\PixelExplosion.cs" />
+    <Compile Include="GameObjects\Explosion.cs" />
     <Compile Include="GameObjects\GameObject.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="Devices\GameState.cs" />

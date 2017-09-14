@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,8 +16,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     public class GameObjectManager
     {
         public Player Player { get; private set; }
-        public List<GameObject> GameObjects { get; private set; } = new List<GameObject>();
-        
+        public List<GameObject> GameObjects { get; } = new List<GameObject>();
+        public List<Explosion> Explosions { get; set; } = new List<Explosion>();
+
         private EnemyFactory _enemyFactory;
         private readonly AsteroidsGame _game;
 
@@ -86,6 +88,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             }
         }
 
+        public void RemoveDeadExplosions()
+        {
+            Explosions.RemoveAll(explosion => explosion.IsDead);
+        }
+
         public void AddNewMeteors(GameTime gameTime, int amountOfMeteorsToAdd, int intervalInMilliseconds)
         {
             int currentGameTimeModInterval = (int) gameTime.TotalGameTime.TotalMilliseconds % intervalInMilliseconds;
@@ -130,6 +137,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             }
         }
 
+        public void UpdateExplosions()
+        {
+            foreach (var explosion in Explosions)
+                explosion.Update();
+        }
+
         public void CheckForCollisionWith(GameObject thisObject)
         {
             foreach (var otherGameObject in GameObjects)
@@ -148,6 +161,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             {
                 GameObjects[i].Draw(spriteBatch);
             }
+        }
+
+        public void DrawExplosions(SpriteBatch spriteBatch)
+        {
+            foreach (var explosion in Explosions)
+                explosion.Draw(spriteBatch);
         }
     }
 }
