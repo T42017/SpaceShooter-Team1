@@ -49,7 +49,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             {
                 var explosion = new Explosion(Game, Position);
                 if (explosion.NoExplosionsNearby())
-                    Game.GameObjectManager.Explosions.Add(new Explosion(Game, Position));
+                    Game.GameObjectManager.Explosions.Add(explosion);
             }
             return collides;
         }

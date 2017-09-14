@@ -25,9 +25,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         #region Constructors
         public AsteroidsGame()
         {
-            Graphics = new GraphicsDeviceManager(this);
-            Graphics.PreferredBackBufferHeight = Globals.ScreenHeight;
-            Graphics.PreferredBackBufferWidth = Globals.ScreenWidth;
+            Graphics = new GraphicsDeviceManager(this)
+            {
+                PreferredBackBufferHeight = Globals.ScreenHeight,
+                PreferredBackBufferWidth = Globals.ScreenWidth
+            };
 
             Content.RootDirectory = "Content";
             Window.Title = "Asteroid Death 2 Electric Boogaloo";

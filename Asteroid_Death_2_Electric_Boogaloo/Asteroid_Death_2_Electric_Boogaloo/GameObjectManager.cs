@@ -96,9 +96,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public void AddNewMeteors(GameTime gameTime, int amountOfMeteorsToAdd, int intervalInMilliseconds)
         {
             int currentGameTimeModInterval = (int) gameTime.TotalGameTime.TotalMilliseconds % intervalInMilliseconds;
-            if (currentGameTimeModInterval != 0 ||
-                GameObjects.Count(obj => obj is Meteor) >= 100)
+            if (currentGameTimeModInterval != 0 || GameObjects.Count(obj => obj is Meteor) >= 100)
                 return;
+
             int hypothenuseSquared = (Globals.ScreenWidth * Globals.ScreenWidth) / 4 + (Globals.ScreenHeight * Globals.ScreenHeight) / 4;
             for (int i = 0; i < amountOfMeteorsToAdd; i++)
             {

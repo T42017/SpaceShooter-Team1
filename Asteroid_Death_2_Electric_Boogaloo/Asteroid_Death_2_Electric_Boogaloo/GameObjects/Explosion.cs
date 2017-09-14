@@ -11,7 +11,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         private readonly int _amountOfPictures;
         private readonly int _timeBetweenFramesMs;
         private DateTime _timeLastFrame;
-        private int _currentTexture;
+        private int _currentTextureIndex;
+        private GameObject _collidedGameObject;
         #endregion
 
         #region Constructors
@@ -21,7 +22,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             _amountOfPictures = 9;
             _timeBetweenFramesMs = 100;
             _timeLastFrame = DateTime.Now;
-
             _textures = TextureManager.Instance.PixelExplosionTextures;
             Texture = _textures[_textures.Length - 1];
         }
@@ -40,23 +40,37 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         #endregion
 
         #region Overrides
-        public override void LoadContent() { }
+        public override void LoadContent() {}
 
         public override void Update()
         {
-            if (!((DateTime.Now - _timeLastFrame).TotalMilliseconds > _timeBetweenFramesMs))
+            if ((DateTime.Now - _timeLastFrame).TotalMilliseconds <= _timeBetweenFramesMs)
                 return;
 
-            _currentTexture++;
-            if (_currentTexture > _amountOfPictures - 1)
+            _currentTextureIndex++;
+            if (_currentTextureIndex > _amountOfPictures - 1)
                 IsDead = true;
             else
-                Texture = _textures[_currentTexture];
+                Texture = _textures[_currentTextureIndex];
 
             _timeLastFrame = DateTime.Now;
         }
 
-        public override bool CollidesWith(GameObject otherGameObject) => false; // TODO (?) Make explosions hurt other GameObjects.
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            float scale;
+            if (_collidedGameObject == null)
+                scale = 1f;
+            else
+                scale = 1.2f;
+            spriteBatch.Draw(Texture, Position, null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+        }
+
+        public override bool CollidesWith(GameObject otherGameObject)
+        {
+            _collidedGameObject = otherGameObject;
+            return false; // TODO (?) Make explosions hurt other GameObjects.
+        }
         #endregion
 
     }
