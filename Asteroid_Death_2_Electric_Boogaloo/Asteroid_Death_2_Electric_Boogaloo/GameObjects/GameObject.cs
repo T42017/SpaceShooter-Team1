@@ -13,10 +13,18 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         public Vector2 Speed { get; set; }
         public float Rotation { get; set; } = MathHelper.DegreesToRadians(-90);
         public int MaxSpeed = 9;
-        public int Width { get; set; } 
-        public int Height { get; set; }
+        public Texture2D Texture { get; set; }
 
-        private Rectangle _bounds;
+        public int Width
+        {
+            get { return Texture.Width; }
+        }
+
+        public int Height
+        {
+            get { return Texture.Height; }
+        }
+
 
         public Rectangle Bounds
         {
@@ -24,20 +32,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             set { _bounds = value; }
         }
 
-        protected Texture2D Texture { get; set; }
+        private Rectangle _bounds;
+
         protected AsteroidsGame Game { get; }
         
         protected GameObject(AsteroidsGame game)
         {
             Game = game;
-        }
-
-        public void LoadTexture(string name)
-        {
-            Texture = Game.Content.Load<Texture2D>(name);
-
-            Width = Texture.Width;
-            Height = Texture.Height;
         }
 
         public virtual bool CollidesWith(GameObject otherGameObject)
@@ -72,10 +73,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         {
             int offset = 20;
             _bounds = new Rectangle(
-                (int) Position.X - Width / 2 + offset,
-                (int) Position.Y - Height / 2 + offset,
-                Math.Max(Width, Height) - offset,
-                Math.Max(Width, Height) - offset
+                (int) Position.X - Texture.Width / 2 + offset,
+                (int) Position.Y - Texture.Height / 2 + offset,
+                Math.Max(Texture.Width, Texture.Height) - offset,
+                Math.Max(Texture.Width, Texture.Height) - offset
             );
         }
 

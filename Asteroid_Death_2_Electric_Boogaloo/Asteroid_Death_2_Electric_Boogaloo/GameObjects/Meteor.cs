@@ -57,7 +57,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             }
 
             string fileName = $"meteor{colour}_{fileSuffix}";
-            LoadTexture(fileName);
+            Texture = TextureManager.Instance.LoadByName(Game.Content, fileName);
         }
 
         public IEnumerable<Meteor> SpawnChildren()

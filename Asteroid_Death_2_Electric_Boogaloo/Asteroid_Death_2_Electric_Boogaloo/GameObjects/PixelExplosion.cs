@@ -6,7 +6,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
     public class PixelExplosion : GameObject
     {
-        private string name = "pixelExplosion";
         private Texture2D[] _textures;
         private int _amountOfPictures = 9;
         private int _timeBetweenFramesMs = 200;
@@ -17,13 +16,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         {
             Position = position;
 
-            _textures = new Texture2D[_amountOfPictures];
-
-            for (int i = 0; i < _amountOfPictures; i++)
-            {
-                LoadTexture(name + (i <= 9 ? "0" + i : "" + i));
-                _textures[i] = Texture;
-            }
+            _textures = TextureManager.Instance.PixelExplosionTextures;
+            Texture = _textures[_textures.Length - 1];
         }
 
         public override void LoadContent()
