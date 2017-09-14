@@ -13,6 +13,5 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public static int ScreenWidth = 1920;
         public static int ScreenHeight = 1080;
         public static Random RNG = new Random();
-        public static Rectangle GameArea => new Rectangle(-30, -30, ScreenWidth + 60, ScreenHeight + 60);
     }
 }

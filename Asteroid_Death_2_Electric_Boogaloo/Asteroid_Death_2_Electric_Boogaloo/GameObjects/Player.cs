@@ -17,9 +17,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
       
         public override void LoadContent()
         {
-            LoadTexture("shipPlayer");
+            Texture = TextureManager.Instance.PlayerShipTexture;
+            pewEffect = TextureManager.Instance.PlayerShootSoundEffect;
             ShootingSpeed = 200;
-            pewEffect = Game.Content.Load<SoundEffect>("Blaster");
         }
 
         public override void Update()
