@@ -19,7 +19,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         public override void LoadContent()
         {
-            
+ 
         }
 
         public override void Update()

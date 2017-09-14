@@ -17,7 +17,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         private DateTime _timeSenceLastShot = DateTime.Today;
         private Texture2D _lifeTexture;
 
-        public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Blue))
+        public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Red))
         {
             Health = 3;
             ShootingSpeed = 200;
@@ -97,15 +97,26 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         public override bool CollidesWith(GameObject otherGameObject)
         {
-            bool collides = base.CollidesWith(otherGameObject) && (otherGameObject is Meteor || otherGameObject is Enemy || otherGameObject is Projectile projectile && projectile.ParentType == typeof(Enemy));
+            bool collides = base.CollidesWith(otherGameObject) && (otherGameObject is Meteor
+            || otherGameObject is Enemy
+            || otherGameObject is Powerup
+            || otherGameObject is Projectile projectile && projectile.ParentType == typeof(Enemy));
+
             if (collides)
             {
+                if (otherGameObject is Powerup)
+                {
+                    otherGameObject.IsDead = true;
+                    ((Powerup) otherGameObject).DoEffect(this); 
+                }
+
                 if (otherGameObject is Projectile)
                 {
                     Health--;
                     otherGameObject.IsDead = true;
                 }
-                if (ShouldBeDead() || !(otherGameObject is Projectile))
+
+                if (ShouldBeDead() || !(otherGameObject is Projectile || otherGameObject is Powerup))
                 {
                     IsDead = true;
                 MediaPlayer.Stop();

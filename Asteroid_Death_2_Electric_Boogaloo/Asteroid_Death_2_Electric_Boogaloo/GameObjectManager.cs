@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Asteroid_Death_2_Electric_Boogaloo.GameObjects;
+using Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -70,10 +71,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                     Globals.RNG.Next(_game.Level.SizeX),
                     Globals.RNG.Next(_game.Level.SizeY)
                 );
-                Powerup powerup = new Powerup(_game, position, PowerupType.Missile)
-                {
-                    Rotation = (float)Globals.RNG.NextDouble()
-                };
+                Powerup powerup = new PowerupMissile(_game, position);
+                powerup = new PowerupHealth(_game, position);
                 GameObjects.Add(powerup);
             }
         }
