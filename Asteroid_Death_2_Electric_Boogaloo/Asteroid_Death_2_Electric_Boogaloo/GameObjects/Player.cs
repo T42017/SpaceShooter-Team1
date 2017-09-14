@@ -17,7 +17,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         private DateTime _timeSenceLastShot = DateTime.Today;
         private Texture2D _lifeTexture;
 
-        public Player(AsteroidsGame game) : base(game, Laser.Color.Red)
+        public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Blue))
         {
             Health = 3;
             ShootingSpeed = 200;
@@ -68,10 +68,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             
             base.Update();
             
-            if (((gamePadState.Buttons.A == ButtonState.Pressed)
-                || (state.IsKeyDown(Keys.Space))
-                || (gamePadState.Triggers.Right > 0.2)) && 
-                (DateTime.Now - _timeSenceLastShot).TotalMilliseconds >= ShootingSpeed)
+            if (((gamePadState.Buttons.A == ButtonState.Pressed) ||
+                (state.IsKeyDown(Keys.Space)) ||
+                (gamePadState.Triggers.Right > 0.2)) &&
+                !IsWeaponOverheated())
             {
                 Shoot(typeof(Player));
                 _pewEffect.Play();
@@ -87,6 +87,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
+
             spriteBatch.DrawString(MenuComponent.menuFont, Health + " x ", Position,
                 Color.HotPink, Rotation + MathHelper.DegreesToRadians(90), new Vector2(Globals.ScreenWidth / 2, Globals.ScreenHeight / 2 + 13), 1f, SpriteEffects.None, 0);
 
@@ -96,15 +97,15 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         public override bool CollidesWith(GameObject otherGameObject)
         {
-            bool collides = base.CollidesWith(otherGameObject) && (otherGameObject is Meteor || otherGameObject is Enemy || otherGameObject is Laser laser && laser.ParentType == typeof(Enemy));
+            bool collides = base.CollidesWith(otherGameObject) && (otherGameObject is Meteor || otherGameObject is Enemy || otherGameObject is Projectile projectile && projectile.ParentType == typeof(Enemy));
             if (collides)
             {
-                if (otherGameObject is Laser)
+                if (otherGameObject is Projectile)
                 {
                     Health--;
                     otherGameObject.IsDead = true;
                 }
-                if (ShouldBeDead() || !(otherGameObject is Laser))
+                if (ShouldBeDead() || !(otherGameObject is Projectile))
                 {
                     IsDead = true;
                 MediaPlayer.Stop();

@@ -15,12 +15,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             return (float) (Math.PI * angle / 180.0);
         }
 
-        public static Point RotateAroundPoint(Point pointToRotate, Point centerPoint, double angleInRadians)
+        public static Vector2 RotateAroundPoint(Vector2 pointToRotate, Vector2 centerPoint, double angleInRadians)
         {
             double cosTheta = Math.Cos(angleInRadians);
             double sinTheta = Math.Sin(angleInRadians);
 
-            return new Point
+            return new Vector2()
             {
                 X = (int)
                 (cosTheta * (pointToRotate.X - centerPoint.X) -
