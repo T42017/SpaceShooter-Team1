@@ -23,7 +23,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public GameObjectManager(AsteroidsGame game)
         {
             _game = game;
-            AddNewPlayer();
+            AddThePlayer();
         }
 
         public void AddEnemyFactory(EnemyFactory factory)
@@ -37,7 +37,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 GameObjects.Add(_enemyFactory.GetRandomEnemy());
         }
 
-        public void AddNewPlayer()
+        public void AddThePlayer()
         {
             this.Player = new Player(_game)
             {
