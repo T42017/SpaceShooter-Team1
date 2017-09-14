@@ -1,5 +1,7 @@
 ﻿using System;
+using Asteroid_Death_2_Electric_Boogaloo.Devices;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
@@ -58,7 +60,16 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             bool collides = base.CollidesWith(otherGameObject) && (otherGameObject is Meteor || (otherGameObject is Projectile projectile && projectile.ParentType == typeof(Player)));
             if (collides)
             {
-                IsDead = true;
+                if (otherGameObject is Projectile pro)
+                {
+                    Health -= pro.Damage;
+                    pro.IsDead = true;
+                }
+
+                if (Health <= 0)
+                {
+                    IsDead = true;
+                }
                 Player.score=Player.score+100;
             }
             return collides;
