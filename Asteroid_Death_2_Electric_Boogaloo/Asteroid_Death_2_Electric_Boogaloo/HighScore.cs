@@ -31,10 +31,25 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             return strings;
         }
 
-        public static void SaveScore(String playerName, int score)
+        public static void SaveScore(String playerName, long score)
         {
             XmlDocument xDoc = GetXmlDoc();
             XmlNode root = xDoc.GetElementsByTagName("root")[0];
+            XmlNodeList rootChildList = root.ChildNodes;
+            XmlNode refNode = null;
+            
+            for (int i = 0; i < rootChildList.Count; i++)
+            {
+                if (rootChildList[i].Name.Equals("Score"))
+                {
+                    long childScore = long.Parse(rootChildList[i].InnerText);
+                    if (score <= childScore)
+                    {
+                        refNode = rootChildList[i];
+                        break;
+                    }
+                }
+            }
 
             XmlNode playerNode = xDoc.CreateElement("Player");
             playerNode.InnerText = playerName;
@@ -42,8 +57,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             XmlNode scoreNode = xDoc.CreateElement("Score");
             scoreNode.InnerText = score + "";
 
-            root.AppendChild(playerNode);
-            root.AppendChild(scoreNode);
+            root.InsertAfter(playerNode, refNode);
+            root.InsertAfter(scoreNode, playerNode);
             
             xDoc.Save(FileLocation);
         }
@@ -53,6 +68,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             XmlDocument xDoc = new XmlDocument();
             xDoc.Load(FileLocation);
             return xDoc;
+        }
+
+        private static bool contains(XmlNodeList list, string name)
+        {
+            return false;
         }
 
     }
