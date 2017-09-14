@@ -41,6 +41,26 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             }
         }
 
+        public void AddEnemys(int amount, Vector2 position)
+        {
+            for (int i = 0; i < amount; i++)
+            {
+                Enemy enemy = _enemyFactory.GetRandomEnemy();
+                enemy.Position = position;
+                GameObjects.Add(enemy);
+            }
+        }
+
+        public void AddEnemyBosses(int amount)
+        {
+            for (int i = 0; i < amount; i++)
+            {
+                EnemyBoss boss = new EnemyBoss(_game);
+                boss.Position = GetRandmPositionWithADistanceFromPlayer(1000);
+                GameObjects.Add(boss);
+            }
+        }
+
         public void AddThePlayer()
         {
             this.Player = new Player(_game)
@@ -77,6 +97,19 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             }
 
             return enemys.ToArray();
+        }
+
+        public EnemyBoss[] GetEnemyBosses()
+        {
+            List<EnemyBoss> bosses = new List<EnemyBoss>();
+
+            for (int i = 0; i < GameObjects.Count; i++)
+            {
+                if (GameObjects[i] is EnemyBoss)
+                bosses.Add((EnemyBoss) GameObjects[i]);
+            }
+
+            return bosses.ToArray();
         }
 
         public List<Meteor> GetMeteors()

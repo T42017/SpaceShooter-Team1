@@ -32,7 +32,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public GameObjectManager GameObjectManager;
         public Level Level;
 
-        public int AmountOfEnemys = 10;
+        public int AmountOfEnemys = 20;
         
         public AsteroidsGame()
         {
@@ -147,7 +147,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Level = new Level(this, 20, 20);
             GameObjectManager = new GameObjectManager(this);
             GameObjectManager.AddEnemyFactory(new EnemyFactory(this));
-            
         }
 
     }

@@ -52,6 +52,7 @@
     <Compile Include="Devices\HighscoreMenuComponent.cs" />
     <Compile Include="Devices\IngameComponent.cs" />
     <Compile Include="GameObjectManager.cs" />
+    <Compile Include="GameObjects\EnemyBoss.cs" />
     <Compile Include="GameObjects\Projectiles\Missile.cs" />
     <Compile Include="GameObjects\Projectiles\Projectile.cs" />
     <Compile Include="Level.cs" />

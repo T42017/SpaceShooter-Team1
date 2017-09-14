@@ -17,7 +17,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         private DateTime _timeSenceLastShot = DateTime.Today;
         private Texture2D _lifeTexture;
 
-        public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Blue))
+        public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Red))
         {
             Health = 30000;
             ShootingSpeed = 200;
@@ -107,12 +107,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                     Health--;
                     otherGameObject.IsDead = true;
                 }
-                if (ShouldBeDead() || !(otherGameObject is Projectile))
+                if (Health <= 0 || !(otherGameObject is Projectile))
                 {
                     IsDead = true;
-                MediaPlayer.Stop();
+                    MediaPlayer.Stop();
                     Game.ChangeGameState(GameState.gameover);
-                IngameComponent.playing = false;
+                    IngameComponent.playing = false;
                 }
             }
             return collides;

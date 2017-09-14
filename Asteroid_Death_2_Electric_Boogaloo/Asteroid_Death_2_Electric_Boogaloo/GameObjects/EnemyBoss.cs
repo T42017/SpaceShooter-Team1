@@ -1,24 +1,17 @@
 ﻿using System;
+using System.Diagnostics;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
     public class EnemyBoss : Ship
     {
-
-        public enum Type
-        {
-            enemyBoss
-        }
-
-        public Type enemyType;
-        private AI _ai;
         
-        public EnemyBoss(AsteroidsGame game, Type enemyType) : base(game, Laser.Color.Blue)
+        public EnemyBoss(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Missile, Weapon.Color.Green))
         {
-            this.enemyType = enemyType;
-            ShootingSpeed = 1000;
-            Texture = TextureManager.Instance.EnemyTexures[(int) enemyType];
+            Health = 1;
+            Texture = TextureManager.Instance.BossTexture;
         }
 
         public override void LoadContent()
@@ -27,15 +20,27 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         public override void Update()
         {
-            _ai.Update();
+            base.Update();
+            Vector2 playerPositioon = Game.GameObjectManager.Player.Position;
+
+            if (Vector2.Distance(playerPositioon, Position) < 600 &&
+                !IsWeaponOverheated())
+            {
+                Rotation = MathHelper.LookAt(Position, playerPositioon);
+                Shoot(typeof(Enemy));
+                Rotation = MathHelper.DegreesToRadians(-90);
+            }
         }
 
         public override bool CollidesWith(GameObject otherGameObject)
         {
-            bool collides = base.CollidesWith(otherGameObject) && otherGameObject is Laser laser && laser.ParentType == typeof(Player);
+            bool collides = base.CollidesWith(otherGameObject) && (otherGameObject is Meteor || (otherGameObject is Projectile projectile && projectile.ParentType == typeof(Player)));
             if (collides)
             {
-                IsDead = true;
+                Health--;
+
+                if (Health <= 0)
+                    IsDead = true;
             }
             return collides;
         }

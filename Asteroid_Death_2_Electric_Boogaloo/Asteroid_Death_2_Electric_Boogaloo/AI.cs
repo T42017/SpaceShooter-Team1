@@ -17,7 +17,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         private State currentState;
         private readonly AsteroidsGame _game;
         private Enemy _enemy;
-
         private Vector2 _positionGoTO = new Vector2();
 
         public AI(AsteroidsGame game, Enemy enemy)
@@ -41,14 +40,16 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                     _positionGoTO = GetRandomPositionInLevel();
 
                 _enemy.Rotation = MathHelper.LookAt(_enemy.Position, _positionGoTO);
+                _enemy.MaxSpeed = 9;
                 _enemy.AccelerateForward(0.18f);
                 _enemy.Move();
             }
             else if (currentState == State.FollowPlayer)
             {
                 _enemy.Rotation = MathHelper.LookAt(_enemy.Position, player.Position);
-                if (!_enemy.IsWeaponOverheated())
+                if (_enemy.Weapon != null && !_enemy.IsWeaponOverheated())
                     _enemy.Shoot(typeof(Enemy));
+                _enemy.MaxSpeed = 3;
                 _enemy.AccelerateForward(0.05f);
                 _enemy.Move();
             }

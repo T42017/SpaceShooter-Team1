@@ -7,13 +7,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
     public abstract class Ship : GameObject
     {
         public Weapon Weapon;
+        public int Health = 1;
 
         protected int ShootingSpeed = 100;
 
         private bool ShootLefCannon = false;
         private DateTime _timeSenceLastShot = DateTime.Today;
-
-        public int Health = 1;
 
         protected Ship(AsteroidsGame game) : base(game)
         {
@@ -41,11 +40,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
             ShootLefCannon = !ShootLefCannon;
             _timeSenceLastShot = DateTime.Now;
-        }
-
-        public bool ShouldBeDead()
-        {
-            return Health <= 0;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Audio;
@@ -16,6 +17,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public Texture2D PlayerShipTexture;
         public Texture2D BackGroundTexture;
+        public Texture2D BossTexture;
 
         public Texture2D[] PixelExplosionTextures;
         public Texture2D[] EnemyTexures;
@@ -45,6 +47,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             PlayerShipTexture = content.Load<Texture2D>("shipPlayer");
             BackGroundTexture = content.Load<Texture2D>("background");
+            BossTexture = content.Load<Texture2D>("enemyBoss");
 
             PixelExplosionTextures = GetTextures(content, "pixelExplosion", 9);
 
@@ -53,7 +56,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             enemyTexture2Ds.AddRange(GetTextures(content, "enemyBlue", 5));
             enemyTexture2Ds.AddRange(GetTextures(content, "enemyGreen", 5));
             enemyTexture2Ds.AddRange(GetTextures(content, "enemyBlack", 5));
-            enemyTexture2Ds.Add(content.Load<Texture2D>("enemyBoss"));
             EnemyTexures = enemyTexture2Ds.ToArray();
 
             List<Texture2D> laserTexture2Ds = new List<Texture2D>();
