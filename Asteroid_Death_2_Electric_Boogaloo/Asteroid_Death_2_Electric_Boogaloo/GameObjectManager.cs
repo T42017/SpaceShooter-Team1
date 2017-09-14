@@ -34,7 +34,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public void AddEnemys(int amount)
         {
             for (int i = 0; i < amount; i++)
-                GameObjects.Add(_enemyFactory.GetRandomEnemy());
+            {
+                Enemy enemy = _enemyFactory.GetRandomEnemy();
+                enemy.Position = GetRandmPositionWithADistanceFromPlayer(1000);
+                GameObjects.Add(enemy);
+            }
         }
 
         public void AddThePlayer()
@@ -60,6 +64,19 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 };
                 GameObjects.Add(meteor);
             }
+        }
+
+        public Enemy[] GetEnemys()
+        {
+            List<Enemy> enemys = new List<Enemy>();
+
+            for (int i = 0; i < GameObjects.Count; i++)
+            {
+                if (GameObjects[i] is Enemy)
+                    enemys.Add((Enemy) GameObjects[i]);
+            }
+
+            return enemys.ToArray();
         }
 
         public List<Meteor> GetMeteors()
@@ -110,6 +127,18 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 } while (Player.DistanceToSquared(meteor) <= hypothenuseSquared);
                 GameObjects.Add(meteor);
             }
+        }
+
+        public Vector2 GetRandmPositionWithADistanceFromPlayer(int distance)
+        {
+            Vector2 position = new Vector2(Globals.RNG.Next(Globals.ScreenWidth), Globals.RNG.Next(Globals.ScreenHeight));
+
+            while (Vector2.Distance(position, Player.Position) < distance)
+            {
+                position = new Vector2(Globals.RNG.Next(Globals.ScreenWidth), Globals.RNG.Next(Globals.ScreenHeight));
+            }
+
+            return position;
         }
 
         internal void LoadContent()

@@ -27,7 +27,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             enemyBlack2,
             enemyBlack3,
             enemyBlack4,
-            enemyBlack5
+            enemyBlack5,
+            enemyBoss
         }
 
         public Type enemyType;
@@ -37,14 +38,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         {
             this.enemyType = enemyType;
             _ai = new AI(game, this);
-            this.enemyType = enemyType;
             ShootingSpeed = 500;
             Weapon = new Weapon(game, Weapon.Type.Laser, Weapon.Color.Green);
+            Texture = TextureManager.Instance.EnemyTexures[(int) enemyType];
         }
 
         public override void LoadContent()
         {
-            Texture = TextureManager.Instance.EnemyTexures[(int) enemyType];
         }
 
         public override void Update()

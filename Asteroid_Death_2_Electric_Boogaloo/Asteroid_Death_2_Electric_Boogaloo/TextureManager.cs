@@ -53,6 +53,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             enemyTexture2Ds.AddRange(GetTextures(content, "enemyBlue", 5));
             enemyTexture2Ds.AddRange(GetTextures(content, "enemyGreen", 5));
             enemyTexture2Ds.AddRange(GetTextures(content, "enemyBlack", 5));
+            enemyTexture2Ds.Add(content.Load<Texture2D>("enemyBoss"));
             EnemyTexures = enemyTexture2Ds.ToArray();
 
             List<Texture2D> laserTexture2Ds = new List<Texture2D>();
