@@ -21,14 +21,15 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     public class AsteroidsGame : Game
     {
+        private GameState _gameState;
+        private SpriteBatch _spriteBatch;
+        private Camera _camera;
+
+        
         public GraphicsDeviceManager Graphics;
         public int WindowWidth, Windowheight;
         public GameObjectManager GameObjectManager;
         public Level Level;
-
-        private GameState _gameState;
-        private SpriteBatch _spriteBatch;
-        private Camera _camera;
         
         public AsteroidsGame()
         {
@@ -47,8 +48,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
            foreach (var component in Components)
             {
                 if(!(component is AstroidsComponent astroidsComponent))
-
-               continue;
+                    continue;
                astroidsComponent.Visible = astroidsComponent.DrawableStates.HasFlag(_gameState);
                astroidsComponent.Enabled = astroidsComponent.UpdatableStates.HasFlag(_gameState);
            }
@@ -80,6 +80,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             //GameObjectManager.LoadContent();
+            TextureManager.Instance.LoadContent(Content);
         }
         
         protected override void UnloadContent()
@@ -94,7 +95,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 GameObjectManager.RemoveDeadGameObjects();
                 GameObjectManager.UpdateGameObjects();
                 _camera.FollowPlayer(GameObjectManager.Player);
-                //GameObjectManager.GenerateRandomNewMeteor(gameTime, 1000);
+                GameObjectManager.AddNewMeteors(gameTime, 10, 1000);
             }
             base.Update(gameTime);
         }
@@ -131,13 +132,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public void Start()
         {
             Level = new Level(this, 20, 20);
-
             GameObjectManager = new GameObjectManager(this);
             GameObjectManager.AddEnemyFactory(new EnemyFactory(this));
-
-            
             GameObjectManager.AddEnemys(10);
-            GameObjectManager.AddMeteors(40);
         }
 
     }

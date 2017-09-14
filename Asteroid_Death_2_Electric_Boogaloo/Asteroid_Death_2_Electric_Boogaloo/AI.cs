@@ -47,7 +47,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             else if (currentState == State.FollowPlayer)
             {
                 _enemy.Rotation = MathHelper.LookAt(_enemy.Position, player.Position);
-                _enemy.Shoot(typeof(Enemy));
+                if (!_enemy.IsWeaponOverheated())
+                    _enemy.Shoot(typeof(Enemy));
                 _enemy.AccelerateForward(0.05f);
                 _enemy.Move();
             }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -22,7 +23,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public GameObjectManager(AsteroidsGame game)
         {
             _game = game;
-            AddNewPlayer();
+            AddThePlayer();
         }
 
         public void AddEnemyFactory(EnemyFactory factory)
@@ -36,7 +37,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 GameObjects.Add(_enemyFactory.GetRandomEnemy());
         }
 
-        public void AddNewPlayer()
+        public void AddThePlayer()
         {
             this.Player = new Player(_game)
             {
@@ -101,34 +102,30 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             }
         }
 
-        public void GenerateRandomNewMeteor(GameTime gameTime, int intervalInMilliseconds)
+        public void AddNewMeteors(GameTime gameTime, int amountOfMeteorsToAdd, int intervalInMilliseconds)
         {
-            var currentGameTimeModInterval = (int)gameTime.TotalGameTime.TotalMilliseconds % intervalInMilliseconds;
-            if (currentGameTimeModInterval != 0) return;
-
-            const int a = 100;
-            var respawnArea = new Rectangle(
-                (int)Player.Position.X - Player.Width / 2 - a,
-                (int)Player.Position.Y - Player.Height / 2 - a,
-                Player.Width + 2 * a,
-                Player.Height + 2 * a
-            );
-
-            Meteor meteor;
-            do
+            int currentGameTimeModInterval = (int) gameTime.TotalGameTime.TotalMilliseconds % intervalInMilliseconds;
+            if (currentGameTimeModInterval != 0 ||
+                GameObjects.Count(obj => obj is Meteor) >= 100)
+                return;
+            int hypothenuseSquared = (Globals.ScreenWidth * Globals.ScreenWidth) / 4 + (Globals.ScreenHeight * Globals.ScreenHeight) / 4;
+            for (int i = 0; i < amountOfMeteorsToAdd; i++)
             {
-                meteor = new Meteor(
-                    _game,
-                    new Vector2(
-                        Globals.RNG.Next(0, Globals.ScreenWidth),
-                        Globals.RNG.Next(0, Globals.ScreenHeight)
-                    ),
-                    (MeteorSize)Globals.RNG.Next(0, 3),
-                    (MeteorColour)Globals.RNG.Next(0, 2)
-                );
+                Meteor meteor;
+                do
+                {
+                    meteor = new Meteor(
+                        _game,
+                        new Vector2(
+                            Globals.RNG.Next(0, _game.Level.SizeX),
+                            Globals.RNG.Next(0, _game.Level.SizeY)
+                        ),
+                        (MeteorSize) Globals.RNG.Next(1, 3),
+                        (MeteorColour) Globals.RNG.Next(0, 2)
+                    );
+                } while (Player.DistanceToSquared(meteor) <= hypothenuseSquared);
+                GameObjects.Add(meteor);
             }
-            while (respawnArea.Contains(meteor.Bounds));
-            GameObjects.Add(meteor);
         }
         
         internal void LoadContent()
@@ -153,7 +150,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             foreach (var otherGameObject in GameObjects)
             {
-                if (thisObject == otherGameObject || !thisObject.CollidesWith(otherGameObject))
+                if (thisObject == otherGameObject ||
+                    !thisObject.CollidesWith(otherGameObject))
                     continue;
                 Debug.WriteLine($"{thisObject} collided with {otherGameObject}");
                 return;
