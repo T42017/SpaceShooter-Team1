@@ -37,7 +37,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             
             string path = @"Content/Highscore.txt";
 
-            Mainmenu = "Return to main menu";
+            Mainmenu = "Return";
             startgame = "Start";
             
             //highscoreReader = new StreamReader("Highscore.txt");
@@ -157,32 +157,32 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 
             if (highlight == 0)
             {
-                SpriteBatch.Draw(button1, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 6) - 180, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Red);
+                SpriteBatch.Draw(button1, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 8) - 180, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Red);
             }
 
             else
             {
-                SpriteBatch.Draw(button1, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 6) - 180, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Cyan);
+                SpriteBatch.Draw(button1, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 8) - 180, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Cyan);
             }
 
             if (highlight == 1)
             {
-                SpriteBatch.Draw(button2, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 6) + 600, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Red);
+                SpriteBatch.Draw(button2, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 8) + 600, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Red);
             }
 
             else
             {
-                SpriteBatch.Draw(button2, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 6) + 600, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Cyan);
+                SpriteBatch.Draw(button2, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 8) + 600, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Cyan);
             }
 
             if (highlight == 2)
             {
-                SpriteBatch.Draw(button2, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 6) + 1300, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Red);
+                SpriteBatch.Draw(button2, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 8) + 1300, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Red);
             }
 
             else
             {
-                SpriteBatch.Draw(button2, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 6) + 1300, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Cyan);
+                SpriteBatch.Draw(button2, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 8) + 1300, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Cyan);
             }
 
             SpriteBatch.DrawString(menuFont, Mainmenu, new Vector2((pGame.Graphics.PreferredBackBufferWidth / 6) - 180, (pGame.Graphics.PreferredBackBufferHeight) - (pGame.Graphics.PreferredBackBufferHeight / 8)),Color.Black);
