@@ -15,8 +15,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
 {
     class MenuComponent : AstroidsComponent
     {
+        public static SpriteFont menuFont, buttonFont;
+
         private SpriteBatch batch;
-        private SpriteFont menuFont, buttonFont;
         private Texture2D Button, texture;
         private AsteroidsGame pGame;
         private MouseState oldState;

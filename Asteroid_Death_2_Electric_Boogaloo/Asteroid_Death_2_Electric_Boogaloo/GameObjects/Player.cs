@@ -1,7 +1,9 @@
 ﻿using System;
 using Asteroid_Death_2_Electric_Boogaloo.Devices;
+using Asteroid_Death_2_Electric_Boogaloo.Components;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
@@ -9,17 +11,23 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
     public class Player : Ship
     {
-        private KeyboardState lastKeyboardState;
-        private GamePadState lastGamePadState;
-        private SoundEffect pewEffect;
+        private KeyboardState _lastKeyboardState;
+        private GamePadState _lastGamePadState;
+        private SoundEffect _pewEffect;
         private DateTime _timeSenceLastShot = DateTime.Today;
-        public Player(AsteroidsGame game) : base(game, Laser.Color.Red) { }
-      
+        private Texture2D _lifeTexture;
+
+        public Player(AsteroidsGame game) : base(game, Laser.Color.Red)
+        {
+            Health = 3;
+            ShootingSpeed = 200;
+        }
+        
         public override void LoadContent()
         {
             Texture = TextureManager.Instance.PlayerShipTexture;
-            pewEffect = TextureManager.Instance.PlayerShootSoundEffect;
-            ShootingSpeed = 200;
+            _lifeTexture = Game.Content.Load<Texture2D>("playerLife2_red");
+            _pewEffect = Game.Content.Load<SoundEffect>("Blaster");
         }
 
         public override void Update()
@@ -57,25 +65,33 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
             Speed += new Vector2(-Speed.X * 0.015f, -Speed.Y * 0.015f);
             Move();
-
-            // Fire all lasers!
+            
             base.Update();
             
-            if ((gamePadState.Buttons.A == ButtonState.Pressed)
+            if (((gamePadState.Buttons.A == ButtonState.Pressed)
                 || (state.IsKeyDown(Keys.Space))
-                || (gamePadState.Triggers.Right > 0.2))
+                || (gamePadState.Triggers.Right > 0.2)) && 
+                (DateTime.Now - _timeSenceLastShot).TotalMilliseconds >= ShootingSpeed)
             {
-                if (!((DateTime.Now - _timeSenceLastShot).TotalMilliseconds >= ShootingSpeed))
-                    return;
                 Shoot(typeof(Player));
-                pewEffect.Play();
+                _pewEffect.Play();
                 _timeSenceLastShot = DateTime.Now;
             }
 
-            lastKeyboardState = state;
-            lastGamePadState = gamePadState;
+            _lastKeyboardState = state;
+            _lastGamePadState = gamePadState;
             
             StayInsideLevel();
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            base.Draw(spriteBatch);
+            spriteBatch.DrawString(MenuComponent.menuFont, Health + " x ", Position,
+                Color.HotPink, Rotation + MathHelper.DegreesToRadians(90), new Vector2(Globals.ScreenWidth / 2, Globals.ScreenHeight / 2 + 13), 1f, SpriteEffects.None, 0);
+
+            spriteBatch.Draw(_lifeTexture, Position, null, Color.White, Rotation + MathHelper.DegreesToRadians(90),
+                new Vector2(Globals.ScreenWidth / 2 - 70, Globals.ScreenHeight / 2), 1.0f, SpriteEffects.None, 0);
         }
 
         public override bool CollidesWith(GameObject otherGameObject)
@@ -83,10 +99,18 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             bool collides = base.CollidesWith(otherGameObject) && (otherGameObject is Meteor || otherGameObject is Enemy || otherGameObject is Laser laser && laser.ParentType == typeof(Enemy));
             if (collides)
             {
-                IsDead = true;
+                if (otherGameObject is Laser)
+                {
+                    Health--;
+                    otherGameObject.IsDead = true;
+                }
+                if (ShouldBeDead() || !(otherGameObject is Laser))
+                {
+                    IsDead = true;
                 MediaPlayer.Stop();
-                Game.ChangeGameState(GameState.gameover);
+                    Game.ChangeGameState(GameState.gameover);
                 IngameComponent.playing = false;
+                }
             }
             return collides;
         }
