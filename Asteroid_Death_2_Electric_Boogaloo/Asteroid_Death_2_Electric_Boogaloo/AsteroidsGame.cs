@@ -91,9 +91,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             
            //Debug.WriteLine(GameObjectManager.GameObjects.Count);
-            
-           
-               
 
             Globals.ScreenWidth = Graphics.PreferredBackBufferWidth;
             if(_gameState == GameState.ingame)

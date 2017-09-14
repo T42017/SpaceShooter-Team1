@@ -81,7 +81,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            //DrawBounds(spriteBatch);
+            DrawBounds(spriteBatch);
             spriteBatch.Draw(Texture, Position, null, Color.White, Rotation - Microsoft.Xna.Framework.MathHelper.PiOver2,
                 new Vector2(Texture.Width / 2f, Texture.Height / 2f), 1.0f, SpriteEffects.None, 0f);
         }
