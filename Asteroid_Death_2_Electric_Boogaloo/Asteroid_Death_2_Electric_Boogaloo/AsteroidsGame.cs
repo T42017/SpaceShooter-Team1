@@ -9,6 +9,7 @@ using System.Windows.Forms.VisualStyles;
 using Asteroid_Death_2_Electric_Boogaloo.Components;
 
 using Asteroid_Death_2_Electric_Boogaloo.Devices;
+using Asteroid_Death_2_Electric_Boogaloo.GameObjects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -30,7 +31,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public int WindowWidth, Windowheight;
         public GameObjectManager GameObjectManager;
         public Level Level;
-        
+
+        public int AmountOfEnemys = 10;
+
         public AsteroidsGame()
         {
             Graphics = new GraphicsDeviceManager(this);
@@ -98,6 +101,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 GameObjectManager.UpdateGameObjects();
                 _camera.FollowPlayer(GameObjectManager.Player);
                 GameObjectManager.AddNewMeteors(gameTime, 10, 1000);
+                ControlMaxEnemies();
             }
             base.Update(gameTime);
         }
@@ -131,12 +135,21 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Windowheight = Graphics.PreferredBackBufferHeight;
         }
 
+        public void ControlMaxEnemies()
+        {
+            Enemy[] enemys = GameObjectManager.GetEnemys();
+
+            if (enemys.Length < AmountOfEnemys)
+            {
+                GameObjectManager.AddEnemys(AmountOfEnemys - enemys.Length);
+            }
+        }
+
         public void Start()
         {
             Level = new Level(this, 20, 20);
             GameObjectManager = new GameObjectManager(this);
             GameObjectManager.AddEnemyFactory(new EnemyFactory(this));
-            GameObjectManager.AddEnemys(10);
         }
 
     }
