@@ -182,7 +182,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
                 Player.score = 0;
             }
             time++;
-            if (time == 30)
+            if (time == 15)
             {
                 
            
