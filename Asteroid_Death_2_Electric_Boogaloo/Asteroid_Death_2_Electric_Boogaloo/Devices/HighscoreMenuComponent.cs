@@ -139,6 +139,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
                 pGame.ChangeGameState(GameState.Menu);
                 playing = false;
                 hasloaded = false;
+                highlight = 1;
             }
 
             if (gamePadState.Buttons.A == ButtonState.Pressed && lastGamePadState.Buttons.A == ButtonState.Released && highlight == 1
@@ -180,6 +181,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
                 pGame.ChangeGameState(GameState.ingame);
                 playing = false;
                 hasloaded = false;
+                highlight = 1;
             }
            
 

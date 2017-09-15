@@ -115,6 +115,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
                 pGame.GameObjectManager.LoadContent();
                 pGame.ChangeGameState(GameState.ingame);
                 playing = false;
+                choice = 0;
             }
 
             if (gamePadState.Buttons.A == ButtonState.Pressed && lastPadState.Buttons.A == ButtonState.Released && choice == 1
@@ -122,6 +123,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
             {
                 pGame.ChangeGameState(GameState.highscoremenu);
                 playing = false;
+                choice = 0;
             }
 
             if (gamePadState.Buttons.A == ButtonState.Pressed && lastPadState.Buttons.A == ButtonState.Released && choice == 2
@@ -129,6 +131,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
             {
                 pGame.Exit();
                 playing = false;
+                choice = 0;
             }
 
             lastPadState = gamePadState;
