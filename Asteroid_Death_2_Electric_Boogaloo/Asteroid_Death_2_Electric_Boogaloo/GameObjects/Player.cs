@@ -18,9 +18,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         private Texture2D _lifeTexture;
         public static int score = 0;
 
-        public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Blue))
+        public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Missile, Weapon.Color.Blue))
         {
-            Health = 3;
+            Health = 10;
             ShootingSpeed = 200;
         }
         
