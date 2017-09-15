@@ -23,7 +23,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         private bool playing,hasloaded;
         private String Mainmenu,startgame,Highscores;
         private String[] highscore1;
-        private int highlight,size, rand;
+        private int highlight,size, rand,blink;
         private KeyboardState lastKeyboardState;
         private GamePadState lastGamePadState;
         private SpriteFont Text;
@@ -50,7 +50,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             // This text is always added, making the file longer over time unless the text is deleted manually
             string appendText = "" + Environment.NewLine;
             File.AppendAllText(path, appendText);
-
+            blink = 0;
             highlight = 1;
 
             // Open the file to read from.
@@ -181,7 +181,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
                 playing = false;
                 hasloaded = false;
             }
-
+           
 
            
             lastGamePadState = gamePadState;
