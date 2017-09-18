@@ -18,7 +18,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         private Texture2D _lifeTexture;
         public static int score = 0;
 
-        public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Missile, Weapon.Color.Blue))
+        public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Blue))
         {
             Health = 10;
             ShootingSpeed = 200;
@@ -111,19 +111,20 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             if (collides)
             {
                 if (otherGameObject is Powerup)
-                if (otherGameObject is Projectile pro)
                 {
                     otherGameObject.IsDead = true;
                     ((Powerup) otherGameObject).DoEffect(this); 
                 }
 
+                if (otherGameObject is Projectile pro)
                 {
                     Health -= pro.Damage;
                     pro.IsDead = true;
                    
                 }
-                if (Health <= 0 || !(otherGameObject is Projectile))
-                if (ShouldBeDead() || !(otherGameObject is Projectile || otherGameObject is Powerup))
+
+                if (Health <= 0 || !(otherGameObject is Projectile
+                || otherGameObject is Powerup))
                 {
                     IsDead = true;
                     MediaPlayer.Stop();

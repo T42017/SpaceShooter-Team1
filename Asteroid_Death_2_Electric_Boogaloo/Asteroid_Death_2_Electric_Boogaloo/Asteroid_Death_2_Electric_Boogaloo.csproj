@@ -48,6 +48,7 @@
     <Compile Include="Devices\DeathComponent.cs" />
     <Compile Include="Devices\PauseComponent.cs" />
     <Compile Include="Enums\PowerupType.cs" />
+    <Compile Include="Factorys\Powerupfactory.cs" />
     <Compile Include="GameObjects\Enemy.cs" />
     <Compile Include="Factorys\EnemyFactory.cs" />
     <Compile Include="Devices\HighscoreMenuComponent.cs" />
