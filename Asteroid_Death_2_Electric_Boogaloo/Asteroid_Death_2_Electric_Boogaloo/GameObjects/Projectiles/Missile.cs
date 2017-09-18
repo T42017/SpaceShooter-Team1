@@ -1,23 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 
-namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
+namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles
 {
     public class Missile : Projectile
     {
 
-        public Missile(AsteroidsGame game, Vector2 position, float rotation, Weapon.Color color, Type paren) : base(game, position, rotation, color, paren, 3)
+        public Missile(AsteroidsGame game, Vector2 position, float rotation, Weapon.Color color, Type paren) 
+            : base(game, position, rotation, color, paren, 3)
         {
             Texture = TextureManager.Instance.MissileTextures[(int) color];
-        }
-
-        public override void LoadContent()
-        {
-            
         }
 
         public override void Update()

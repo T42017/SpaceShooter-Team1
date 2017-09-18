@@ -112,7 +112,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
                 || Keyboardstate.IsKeyDown(Keys.Space) && lastkState.IsKeyUp(Keys.Space) && choice== 0)
             {
                 pGame.Start();
-                pGame.GameObjectManager.LoadContent();
                 pGame.ChangeGameState(GameState.ingame);
                 playing = false;
             }

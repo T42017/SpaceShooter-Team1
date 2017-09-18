@@ -1,6 +1,7 @@
 ﻿using System;
 using Asteroid_Death_2_Electric_Boogaloo.Devices;
 using Asteroid_Death_2_Electric_Boogaloo.Components;
+using Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
@@ -22,13 +23,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         {
             Health = 30000;
             ShootingSpeed = 200;
-        }
-        
-        public override void LoadContent()
-        {
             Texture = TextureManager.Instance.PlayerShipTexture;
-            _lifeTexture = Game.Content.Load<Texture2D>("playerLife2_red");
-            _pewEffect = Game.Content.Load<SoundEffect>("Blaster");
+            _lifeTexture = TextureManager.Instance.PlayerLifeTexture;
+            _pewEffect = TextureManager.Instance.ShootSoundEffect;
         }
 
         public override void Update()
@@ -83,6 +80,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             _lastGamePadState = gamePadState;
             
             StayInsideLevel();
+
+            if (EnemyKills > 200)
+            {
+                EnemyKills -= 200;
+                Game.GameObjectManager.AddEnemyBosses(Globals.RNG.Next(3) + 1);
+            }
         }
 
         public override void Draw(SpriteBatch spriteBatch)

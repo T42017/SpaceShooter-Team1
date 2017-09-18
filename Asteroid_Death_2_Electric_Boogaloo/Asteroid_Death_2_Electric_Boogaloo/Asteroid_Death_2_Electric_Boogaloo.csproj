@@ -41,7 +41,10 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AI.cs" />
+    <Compile Include="AI\BaseAi.cs" />
+    <Compile Include="AI\BasicEnemyAi.cs" />
+    <Compile Include="AI\BossAi.cs" />
+    <Compile Include="AI\FollowPlayerAi.cs" />
     <Compile Include="AsteroidsGame.cs" />
     <Compile Include="Devices\AstroidsComponent.cs" />
     <Compile Include="Camera.cs" />

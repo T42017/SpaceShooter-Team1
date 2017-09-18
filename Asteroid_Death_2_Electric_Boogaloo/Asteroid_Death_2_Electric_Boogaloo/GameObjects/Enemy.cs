@@ -1,4 +1,6 @@
 ﻿using System;
+using Asteroid_Death_2_Electric_Boogaloo.AI;
+using Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
@@ -30,25 +32,23 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             enemyBlack5
         }
 
+        public BaseAi Ai;
+
         public Type enemyType;
-        private readonly AI _ai;
         
         public Enemy(AsteroidsGame game, Type enemyType) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Green))
         {
             this.enemyType = enemyType;
-            _ai = new AI(game, this);
+            Ai = new BasicEnemyAI(game, this);
             ShootingSpeed = 500;
             Texture = TextureManager.Instance.EnemyTexures[(int) enemyType];
         }
 
-        public override void LoadContent()
-        {
-        }
-
         public override void Update()
         {
-            _ai.Update();
             base.Update();
+            if (Ai != null)
+                Ai.Update();
         }
 
         public override bool CollidesWith(GameObject otherGameObject)

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
+using Asteroid_Death_2_Electric_Boogaloo.AI;
+using Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -7,29 +9,28 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
     public class EnemyBoss : Ship
     {
+
+        public BaseAi Ai;
         
-        public EnemyBoss(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Missile, Weapon.Color.Green))
+        public EnemyBoss(AsteroidsGame game) : base(game)
         {
             Health = 1;
+            Ai = new BossAi(game, this);
             Texture = TextureManager.Instance.BossTexture;
         }
-
-        public override void LoadContent()
-        {
-        }
-
+        
         public override void Update()
         {
             base.Update();
-            Vector2 playerPositioon = Game.GameObjectManager.Player.Position;
+            Ai.Update();
 
-            if (Vector2.Distance(playerPositioon, Position) < 600 &&
-                !IsWeaponOverheated())
-            {
-                Rotation = MathHelper.LookAt(Position, playerPositioon);
-                Shoot(typeof(Enemy));
-                Rotation = MathHelper.DegreesToRadians(-90);
-            }
+            //if (Vector2.Distance(playerPositioon, Position) < 600 &&
+            //    !IsWeaponOverheated())
+            //{
+            //    Rotation = MathHelper.LookAt(Position, playerPositioon);
+            //    Shoot(typeof(Enemy));
+            //    Rotation = MathHelper.DegreesToRadians(-90);
+            //}
         }
 
         public override bool CollidesWith(GameObject otherGameObject)

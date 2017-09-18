@@ -18,13 +18,15 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public Texture2D PlayerShipTexture;
         public Texture2D BackGroundTexture;
         public Texture2D BossTexture;
+        public Texture2D PlayerLifeTexture;
+
 
         public Texture2D[] PixelExplosionTextures;
         public Texture2D[] EnemyTexures;
         public Texture2D[] LaserTextures;
         public Texture2D[] MissileTextures;
-
-        public SoundEffect PlayerShootSoundEffect;
+        
+        public SoundEffect ShootSoundEffect;
 
         public static TextureManager Instance
         {
@@ -49,6 +51,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             BackGroundTexture = content.Load<Texture2D>("background");
             BossTexture = content.Load<Texture2D>("enemyBoss");
 
+            PlayerLifeTexture = content.Load<Texture2D>("playerLife2_red");
+
             PixelExplosionTextures = GetTextures(content, "pixelExplosion", 9);
 
             List<Texture2D> enemyTexture2Ds = new List<Texture2D>();
@@ -70,8 +74,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             missileTexture2Ds.Add(content.Load<Texture2D>("missileGreen"));
             MissileTextures = missileTexture2Ds.ToArray();
 
-
-            PlayerShootSoundEffect = content.Load<SoundEffect>("Blaster");
+            
+            ShootSoundEffect = content.Load<SoundEffect>("Blaster");
         }
 
         public Texture2D LoadByName(ContentManager content, string name)

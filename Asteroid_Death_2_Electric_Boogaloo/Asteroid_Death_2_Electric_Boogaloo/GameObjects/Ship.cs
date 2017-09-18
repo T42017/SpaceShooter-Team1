@@ -1,4 +1,5 @@
 ﻿using System;
+using Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 
@@ -36,7 +37,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             shootPoint = MathHelper.RotateAroundPoint(shootPoint, shipCenterPoint, Rotation);
 
             Projectile projectile = Weapon.GetProjectile(shootPoint, Rotation, parentType);
-            Game.GameObjectManager.GameObjects.Add(projectile);
+            Game.GameObjectManager.Add(projectile);
 
             ShootLefCannon = !ShootLefCannon;
             _timeSenceLastShot = DateTime.Now;

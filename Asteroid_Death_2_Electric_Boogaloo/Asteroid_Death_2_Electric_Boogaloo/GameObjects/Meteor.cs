@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 
@@ -89,11 +90,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         }
 
-        public override void LoadContent()
-        {
-            
-        }
-
         public override void Update()
         {
             //requires further work to add a randomly generated speed of the meteors instead of a static speed
@@ -112,11 +108,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 if (smallerMeteors != null)
                 {
                     foreach (var meteor in smallerMeteors)
-                        Game.GameObjectManager.GameObjects.Add(meteor);
+                        Game.GameObjectManager.Add(meteor);
                 }
-               
+                
                 IsDead = true;
-                Game.GameObjectManager.GameObjects.Remove(otherGameObject); // To remove laser at correct time
+                //Game.GameObjectManager._gameObjects.Remove(otherGameObject); // To remove laser at correct time
             }
             return collides;
         }
