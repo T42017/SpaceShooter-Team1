@@ -23,7 +23,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 (float) Globals.RNG.NextDouble()
             );
             Rotation = (float) Globals.RNG.NextDouble();
-            RotationSpeed =(float) Globals.RNG.Next(12)/100;
+            RotationSpeed = (float) Globals.RNG.Next(12)/100;
             MaxSpeed = Globals.RNG.Next(250);
             MeteorSize = meteorSize;
             MeteorColour = meteorColour;
@@ -39,7 +39,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         {
             string colour = string.Empty;
             string fileSuffix = string.Empty;
-
+            
             switch (MeteorColour)
             {
                 case MeteorColour.Gray:

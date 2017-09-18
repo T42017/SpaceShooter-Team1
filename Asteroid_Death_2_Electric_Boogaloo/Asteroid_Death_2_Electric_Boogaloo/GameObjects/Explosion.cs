@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -27,19 +28,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         }
         #endregion
 
-        #region Static methods
+        #region Public methods
         public bool NoExplosionsNearby()
         {
-            foreach (var explosion in Game.GameObjectManager.Explosions)
-            {
-                if (DistanceToSquared(explosion) < 50)
-                    return false;
-            }
-            return true;
+            return Game.GameObjectManager.Explosions.All(explosion => DistanceToSquared(explosion) > 50 * 50);
         }
         #endregion
 
-        #region Overrides
+        #region Public overrides
         public override void LoadContent() {}
 
         public override void Update()
@@ -58,11 +54,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            float scale;
-            if (_collidedGameObject == null)
-                scale = 1f;
-            else
-                scale = 1.2f;
+            float scale = _collidedGameObject == null ? 1f : 1.2f;
             spriteBatch.Draw(Texture, Position, null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
         }
 

@@ -51,7 +51,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             bool collides = base.CollidesWith(otherGameObject) && ParentType != otherGameObject.GetType() && !(otherGameObject is Laser);
             if (collides)
             {
-                var explosion = new Explosion(Game, Position);
+                var explosion = new Explosion(Game, otherGameObject.Position);
                 if (explosion.NoExplosionsNearby())
                     Game.GameObjectManager.Explosions.Add(explosion);
             }

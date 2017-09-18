@@ -38,7 +38,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             this.enemyType = enemyType;
             _ai = new AI(game, this);
             this.enemyType = enemyType;
-            ShootingSpeed = 500;
+            ShootingSpeed = 5000; //500;
             Weapon = new Weapon(game, Weapon.Type.Laser, Weapon.Color.Green);
         }
 
@@ -57,7 +57,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         {
             bool collides = base.CollidesWith(otherGameObject) && (otherGameObject is Meteor || (otherGameObject is Projectile projectile && projectile.ParentType == typeof(Player)));
             if (collides)
+            {
                 IsDead = true;
+                if (otherGameObject is Projectile)
+                    Game.GameObjectManager.GameObjects.Remove(otherGameObject);
+            }
             return collides;
         }
     }

@@ -129,7 +129,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                         (MeteorSize) Globals.RNG.Next(1, 3),
                         (MeteorColour) Globals.RNG.Next(0, 2)
                     );
-                } while (Player.DistanceToSquared(meteor) <= hypothenuseSquared);
+                }
+                while (Player.DistanceToSquared(meteor) <= hypothenuseSquared);
                 GameObjects.Add(meteor);
             }
         }
