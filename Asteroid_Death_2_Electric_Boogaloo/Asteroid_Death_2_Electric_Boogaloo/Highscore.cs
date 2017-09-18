@@ -12,11 +12,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     {
 
         public static string FileLocation { get; private set; } = ".\\Content\\Highscore.xml";
+        public static int MaxPlayers = 10;
 
         public static string[] GetHighScores()
         {
             XmlDocument xDoc = GetXmlDoc();
-            
+
             XmlNodeList players = xDoc.GetElementsByTagName("Player");
             XmlNodeList score = xDoc.GetElementsByTagName("Score");
             
@@ -31,10 +32,25 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             return strings;
         }
 
-        public static void SaveScore(String playerName, int score)
+        public static void SaveScore(String playerName, long score)
         {
             XmlDocument xDoc = GetXmlDoc();
             XmlNode root = xDoc.GetElementsByTagName("root")[0];
+            XmlNodeList rootChildList = root.ChildNodes;
+            XmlNode refNode = null;
+            
+            for (int i = 0; i < rootChildList.Count; i++)
+            {
+                if (rootChildList[i].Name.Equals("Score"))
+                {
+                    long childScore = long.Parse(rootChildList[i].InnerText);
+                    if (score >= childScore)
+                    {
+                        break;
+                    }
+                    refNode = rootChildList[i];
+                }
+            }
 
             XmlNode playerNode = xDoc.CreateElement("Player");
             playerNode.InnerText = playerName;
@@ -42,8 +58,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             XmlNode scoreNode = xDoc.CreateElement("Score");
             scoreNode.InnerText = score + "";
 
-            root.AppendChild(playerNode);
-            root.AppendChild(scoreNode);
+            root.InsertAfter(playerNode, refNode);
+            root.InsertAfter(scoreNode, playerNode);
+
+            if (root.ChildNodes.Count > MaxPlayers * 2)
+            {
+                rootChildList[MaxPlayers * 2 - 1].ParentNode.RemoveChild(rootChildList[MaxPlayers * 2 - 1]);
+                rootChildList[MaxPlayers * 2 - 2].ParentNode.RemoveChild(rootChildList[MaxPlayers * 2 - 2]);
+            }
             
             xDoc.Save(FileLocation);
         }
@@ -54,6 +76,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             xDoc.Load(FileLocation);
             return xDoc;
         }
-
+        
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
+using Asteroid_Death_2_Electric_Boogaloo.Devices;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
@@ -40,11 +42,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             this.enemyType = enemyType;
             ShootingSpeed = 500;
             Weapon = new Weapon(game, Weapon.Type.Laser, Weapon.Color.Green);
+            Texture = TextureManager.Instance.EnemyTexures[(int) enemyType];
         }
 
         public override void LoadContent()
         {
-            Texture = TextureManager.Instance.EnemyTexures[(int) enemyType];
         }
 
         public override void Update()
@@ -57,7 +59,20 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         {
             bool collides = base.CollidesWith(otherGameObject) && (otherGameObject is Meteor || (otherGameObject is Projectile projectile && projectile.ParentType == typeof(Player)));
             if (collides)
-                IsDead = true;
+            {
+                if (otherGameObject is Projectile pro)
+                {
+                    Player.score = Player.score + 100;
+                    Health -= pro.Damage;
+                    pro.IsDead = true;
+                }
+
+                if (Health <= 0)
+                {
+                    IsDead = true;
+                }
+                
+            }
             return collides;
         }
     }

@@ -42,10 +42,5 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             ShootLefCannon = !ShootLefCannon;
             _timeSenceLastShot = DateTime.Now;
         }
-
-        public bool ShouldBeDead()
-        {
-            return Health <= 0;
-        }
     }
 }

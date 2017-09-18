@@ -12,7 +12,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     {
 
         public static string FileLocation { get; private set; } = ".\\Content\\Highscore.xml";
+<<<<<<< HEAD
         public static int MaxPlayers = 10;
+=======
+>>>>>>> Added HighScore class
 
         public static string[] GetHighScores()
         {
@@ -32,6 +35,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             return strings;
         }
 
+<<<<<<< HEAD
         public static void SaveScore(String playerName, long score)
         {
             XmlDocument xDoc = GetXmlDoc();
@@ -51,6 +55,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                     refNode = rootChildList[i];
                 }
             }
+=======
+        public static void SaveScore(String playerName, int score)
+        {
+            XmlDocument xDoc = GetXmlDoc();
+            XmlNode root = xDoc.GetElementsByTagName("root")[0];
+>>>>>>> Added HighScore class
 
             XmlNode playerNode = xDoc.CreateElement("Player");
             playerNode.InnerText = playerName;
@@ -58,6 +68,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             XmlNode scoreNode = xDoc.CreateElement("Score");
             scoreNode.InnerText = score + "";
 
+<<<<<<< HEAD
             root.InsertAfter(playerNode, refNode);
             root.InsertAfter(scoreNode, playerNode);
 
@@ -66,6 +77,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 rootChildList[MaxPlayers * 2 - 1].ParentNode.RemoveChild(rootChildList[MaxPlayers * 2 - 1]);
                 rootChildList[MaxPlayers * 2 - 2].ParentNode.RemoveChild(rootChildList[MaxPlayers * 2 - 2]);
             }
+=======
+            root.AppendChild(playerNode);
+            root.AppendChild(scoreNode);
+>>>>>>> Added HighScore class
             
             xDoc.Save(FileLocation);
         }
@@ -76,6 +91,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             xDoc.Load(FileLocation);
             return xDoc;
         }
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> Added HighScore class
     }
 }
