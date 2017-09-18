@@ -27,7 +27,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         private KeyboardState lastKeyboardState;
         private GamePadState lastGamePadState;
         private SpriteFont Text;
-        public static StreamReader highscoreReader;
+        
         private bool hasMovedStick;
 
         public HighscoreMenuComponent(Game game) : base(game)
@@ -46,6 +46,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             startgame = "Start";
             
             //highscoreReader = new StreamReader("Highscore.txt");
+
             //highscore = highscoreReader.ReadToEnd();
             // This text is always added, making the file longer over time unless the text is deleted manually
             string appendText = "" + Environment.NewLine;
