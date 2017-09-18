@@ -1,6 +1,8 @@
 ﻿using System;
 using Asteroid_Death_2_Electric_Boogaloo.AI;
+using Asteroid_Death_2_Electric_Boogaloo.Components;
 using Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
@@ -35,20 +37,33 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         public BaseAi Ai;
 
         public Type enemyType;
-        
+        private Texture2D _lifeTexture;
+
         public Enemy(AsteroidsGame game, Type enemyType) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Green))
         {
             this.enemyType = enemyType;
             Ai = new BasicEnemyAI(game, this);
             ShootingSpeed = 500;
             Texture = TextureManager.Instance.EnemyTexures[(int) enemyType];
+            _lifeTexture = TextureManager.Instance.PlayerLifeTexture;
+            Health = 2;
         }
 
         public override void Update()
         {
             base.Update();
-            if (Ai != null)
-                Ai.Update();
+            Ai?.Update();
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            base.Draw(spriteBatch);
+
+            spriteBatch.Draw(_lifeTexture, Position, null, Color.White, Game.GameObjectManager.Player.Rotation + MathHelper.DegreesToRadians(90),
+                new Vector2(15, 80), 1.0f, SpriteEffects.None, 0);
+
+            spriteBatch.DrawString(MenuComponent.menuFont, "" + Health, Position, Color.OrangeRed,
+                Game.GameObjectManager.Player.Rotation + MathHelper.DegreesToRadians(90), new Vector2(-15, 90), 1f, SpriteEffects.None, 0);
         }
 
         public override bool CollidesWith(GameObject otherGameObject)

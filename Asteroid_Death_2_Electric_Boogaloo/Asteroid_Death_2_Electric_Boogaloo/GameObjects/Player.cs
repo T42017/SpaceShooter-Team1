@@ -81,9 +81,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             
             StayInsideLevel();
 
-            if (EnemyKills > 200)
+            if (EnemyKills > 30)
             {
-                EnemyKills -= 200;
+                EnemyKills -= 30;
                 Game.GameObjectManager.AddEnemyBosses(Globals.RNG.Next(3) + 1);
             }
         }
