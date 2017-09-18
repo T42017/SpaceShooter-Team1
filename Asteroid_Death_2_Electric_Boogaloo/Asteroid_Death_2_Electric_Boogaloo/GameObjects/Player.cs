@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using  DPSF;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
@@ -99,6 +100,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             //Draw score
             spriteBatch.DrawString(MenuComponent.menuFont, "Score: " + score, Position,
                 Color.OrangeRed, Rotation + MathHelper.DegreesToRadians(90), new Vector2(-Globals.ScreenWidth / 2, Globals.ScreenHeight / 2 + 13), 1f, SpriteEffects.None, 0);
+
         }
 
         public override bool CollidesWith(GameObject otherGameObject)
