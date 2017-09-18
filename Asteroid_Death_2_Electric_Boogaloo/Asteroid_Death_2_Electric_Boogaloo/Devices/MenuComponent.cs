@@ -1,4 +1,8 @@
-﻿using Asteroid_Death_2_Electric_Boogaloo.Devices;
+﻿using System;
+using System.Collections.Generic;
+using System.Runtime.Remoting.Messaging;
+using Asteroid_Death_2_Electric_Boogaloo.Devices;
+using Asteroid_Death_2_Electric_Boogaloo.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -9,45 +13,64 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
     internal class MenuComponent : AstroidsComponent
     {
         public static SpriteFont menuFont, buttonFont;
-
-        private SpriteBatch batch;
-        private Texture2D Button, texture;
-        private int choice;
-        private bool hasMovedStick;
-        private GamePadState lastGamePadState, lastPadState;
-        private KeyboardState lastState, lastkState;
+        
+        private Texture2D _backGroundtexture;
+        private int _highlightedUiComponent;
         
         
-        private readonly AsteroidsGame pGame;
+        private readonly AsteroidsGame Game;
         private bool playing;
         private Song song;
+        
+        private List<BaseUiComponent> UiComponents;
 
-        public MenuComponent(Game game) : base(game)
+        public MenuComponent(AsteroidsGame game) : base(game)
         {
-            batch = SpriteBatch;
-            pGame = (AsteroidsGame) game;
+            Game = (AsteroidsGame) game;
 
             DrawableStates = GameState.Menu;
             UpdatableStates = GameState.Menu;
 
             playing = false;
             MediaPlayer.IsRepeating = true;
-            choice = 0;
         }
 
         protected override void LoadContent()
         {
             menuFont = Game.Content.Load<SpriteFont>("GameState");
             buttonFont = Game.Content.Load<SpriteFont>("Text");
-            Button = Game.Content.Load<Texture2D>("ButtonBlue");
             song = Game.Content.Load<Song>("Best");
-            texture = Game.Content.Load<Texture2D>("background");
+            _backGroundtexture = Game.Content.Load<Texture2D>("background");
+
+            UiComponents = new List<BaseUiComponent>();
+            UiComponents.Add(new UiLabel(Game, new Vector2(0, -260), Game.Window.Title, menuFont));
+            UiComponents.Add(new UiButton(Game, new Vector2(0, -150), "Play", buttonFont, ButtonStartEvent));
+            UiComponents.Add(new UiButton(Game, new Vector2(0, -90), "Highscore", buttonFont, ButtonHghiscoreEvent));
+            UiComponents.Add(new UiButton(Game, new Vector2(0, -30), "Quit", buttonFont, (sender, args) => Game.Exit()));
+
+            UiComponents[_highlightedUiComponent].IsHighlighted = true;
 
             base.LoadContent();
         }
 
+        private void ButtonHghiscoreEvent(object sender, EventArgs eventArgs)
+        {
+            Game.ChangeGameState(GameState.highscoremenu);
+            playing = false;
+        }
+
+        private void ButtonStartEvent(object sender, EventArgs eventArgs)
+        {
+            Game.Start();
+            Game.GameObjectManager.LoadContent();
+            Game.ChangeGameState(GameState.ingame);
+            playing = false;
+        }
+
         public override void Update(GameTime gameTime)
         {
+            UpdateHighlightedComponent();
+
             if (playing == false)
             {
                 MediaPlayer.Stop();
@@ -56,160 +79,48 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
                 playing = true;
             }
 
-            var gamePadState = GamePad.GetState(PlayerIndex.One);
-            var Keyboardstate = Keyboard.GetState();
+            if (Input.Instance.ClickUp())
+                _highlightedUiComponent--;
 
-            if (gamePadState.DPad.Up == ButtonState.Pressed && lastGamePadState.DPad.Up == ButtonState.Released
-                || gamePadState.ThumbSticks.Left.Y >= 0.3f && !hasMovedStick
-                || Keyboardstate.IsKeyDown(Keys.Up) && lastState.IsKeyUp(Keys.Up)
-                || Keyboardstate.IsKeyDown(Keys.W) && lastState.IsKeyUp(Keys.W))
-            {
-                hasMovedStick = true;
+            if (Input.Instance.ClickDown())
+                _highlightedUiComponent++;
+            
+            if (Input.Instance.ClickSelect())
+                UiComponents[_highlightedUiComponent].ClickEvent?.Invoke(null, null);
 
-                if (choice == 0)
-                {
-                }
-
-                else
-                {
-                    choice--;
-                }
-            }
-
-            if (gamePadState.DPad.Down == ButtonState.Pressed && lastGamePadState.DPad.Down == ButtonState.Released
-                || gamePadState.ThumbSticks.Left.Y <= -0.3f && !hasMovedStick
-                || Keyboardstate.IsKeyDown(Keys.Down) && lastState.IsKeyUp(Keys.Down)
-                || Keyboardstate.IsKeyDown(Keys.S) && lastState.IsKeyUp(Keys.S))
-            {
-                hasMovedStick = true;
-
-                if (choice == 2)
-                {
-                }
-
-                else
-                {
-                    choice++;
-                }
-            }
-
-            if (gamePadState.ThumbSticks.Left.Y <= 0.2 && gamePadState.ThumbSticks.Left.Y >= -0.2)
-                hasMovedStick = false;
-
-            lastState = Keyboardstate;
-            lastGamePadState = gamePadState;
-
-            if (gamePadState.Buttons.A == ButtonState.Pressed && lastPadState.Buttons.A == ButtonState.Released &&
-                choice == 0
-                || Keyboardstate.IsKeyDown(Keys.Space) && lastkState.IsKeyUp(Keys.Space) && choice == 0)
-            {
-                pGame.Start();
-                pGame.GameObjectManager.LoadContent();
-                pGame.ChangeGameState(GameState.ingame);
-                playing = false;
-                choice = 0;
-            }
-
-            if (gamePadState.Buttons.A == ButtonState.Pressed && lastPadState.Buttons.A == ButtonState.Released &&
-                choice == 1
-                || Keyboardstate.IsKeyDown(Keys.Space) && lastkState.IsKeyUp(Keys.Space) && choice == 1)
-            {
-                pGame.ChangeGameState(GameState.highscoremenu);
-                playing = false;
-                choice = 0;
-            }
-
-            if (gamePadState.Buttons.A == ButtonState.Pressed && lastPadState.Buttons.A == ButtonState.Released &&
-                choice == 2
-                || Keyboardstate.IsKeyDown(Keys.Space) && lastkState.IsKeyUp(Keys.Space) && choice == 2)
-            {
-                pGame.Exit();
-                playing = false;
-                choice = 0;
-            }
-
-            lastPadState = gamePadState;
-            lastkState = Keyboardstate;
+            foreach (BaseUiComponent component in UiComponents)
+                component.Update();
 
             base.Update(gameTime);
         }
-
         
-
         public override void Draw(GameTime gameTime)
         {
             SpriteBatch.Begin();
 
-            for (var x = 0; x < 2000; x += texture.Width)
-            for (var y = 0; y < 2000; y += texture.Height)
-                SpriteBatch.Draw(texture, new Vector2(x, y), Color.White);
-
-            string
-                Name = "Asteroid Death 2 Electric Boogaloo",
-                button1 = "Start",
-                button2 = "Highscore",
-                button3 = "Quit";
-
-            SpriteBatch.DrawString(menuFont, Name,
-                new Vector2(pGame.Graphics.PreferredBackBufferWidth / 2 - pGame.Graphics.PreferredBackBufferWidth / 6,
-                    pGame.Graphics.PreferredBackBufferHeight / 4), Color.Fuchsia);
-            if (choice == 0)
-                SpriteBatch.Draw(Button,
-                    new Vector2(
-                        pGame.Graphics.PreferredBackBufferWidth / 4 + pGame.Graphics.PreferredBackBufferWidth / 6 + 10,
-                        pGame.Graphics.PreferredBackBufferHeight / 4 +
-                        pGame.Graphics.PreferredBackBufferHeight / 8), Color.Red);
-            else
-                SpriteBatch.Draw(Button,
-                    new Vector2(
-                        pGame.Graphics.PreferredBackBufferWidth / 4 + pGame.Graphics.PreferredBackBufferWidth / 6 + 10,
-                        pGame.Graphics.PreferredBackBufferHeight / 4 +
-                        pGame.Graphics.PreferredBackBufferHeight / 8), Color.Cyan);
-
-            SpriteBatch.DrawString(buttonFont, button1,
-                new Vector2(
-                    pGame.Graphics.PreferredBackBufferWidth / 4 + pGame.Graphics.PreferredBackBufferWidth / 6 + 90,
-                    pGame.Graphics.PreferredBackBufferHeight / 4 +
-                    pGame.Graphics.PreferredBackBufferHeight / 8), Color.Black);
-            if (choice == 1)
-                SpriteBatch.Draw(Button,
-                    new Vector2(
-                        pGame.Graphics.PreferredBackBufferWidth / 4 + pGame.Graphics.PreferredBackBufferWidth / 6 +
-                        10,
-                        pGame.Graphics.PreferredBackBufferHeight / 4 +
-                        pGame.Graphics.PreferredBackBufferHeight / 8 + 50), Color.Red);
-            else
-                SpriteBatch.Draw(Button,
-                    new Vector2(
-                        pGame.Graphics.PreferredBackBufferWidth / 4 + pGame.Graphics.PreferredBackBufferWidth / 6 + 10,
-                        pGame.Graphics.PreferredBackBufferHeight / 4 +
-                        pGame.Graphics.PreferredBackBufferHeight / 8 + 50), Color.Cyan);
-            SpriteBatch.DrawString(buttonFont, button2,
-                new Vector2(
-                    pGame.Graphics.PreferredBackBufferWidth / 4 + pGame.Graphics.PreferredBackBufferWidth / 6 + 60,
-                    pGame.Graphics.PreferredBackBufferHeight / 4 +
-                    pGame.Graphics.PreferredBackBufferHeight / 8 + 50), Color.Black);
-            if (choice == 2)
-                SpriteBatch.Draw(Button,
-                    new Vector2(
-                        pGame.Graphics.PreferredBackBufferWidth / 4 + pGame.Graphics.PreferredBackBufferWidth / 6 +
-                        10,
-                        pGame.Graphics.PreferredBackBufferHeight / 4 +
-                        pGame.Graphics.PreferredBackBufferHeight / 8 + 100), Color.Red);
-            else
-                SpriteBatch.Draw(Button,
-                    new Vector2(
-                        pGame.Graphics.PreferredBackBufferWidth / 4 + pGame.Graphics.PreferredBackBufferWidth / 6 + 10,
-                        pGame.Graphics.PreferredBackBufferHeight / 4 +
-                        pGame.Graphics.PreferredBackBufferHeight / 8 + 100), Color.Cyan);
-            SpriteBatch.DrawString(buttonFont, button3,
-                new Vector2(
-                    pGame.Graphics.PreferredBackBufferWidth / 4 + pGame.Graphics.PreferredBackBufferWidth / 6 + 90,
-                    pGame.Graphics.PreferredBackBufferHeight / 4 +
-                    pGame.Graphics.PreferredBackBufferHeight / 8 + 100), Color.Black);
+            for (var x = 0; x < 2000; x += _backGroundtexture.Width)
+                for (var y = 0; y < 2000; y += _backGroundtexture.Height)
+                    SpriteBatch.Draw(_backGroundtexture, new Vector2(x, y), Color.White);
+            
+            foreach (BaseUiComponent component in UiComponents)
+                component.Draw(SpriteBatch);
 
             SpriteBatch.End();
             base.Draw(gameTime);
+        }
+
+        public void UpdateHighlightedComponent()
+        {
+            if (_highlightedUiComponent > UiComponents.Count - 1)
+                _highlightedUiComponent = UiComponents.Count - 1;
+
+            for (int i = 0; i < UiComponents.Count; i++)
+            {
+                if (i == _highlightedUiComponent && !UiComponents[i].CanBeHighLighted)
+                    _highlightedUiComponent++;
+
+                UiComponents[i].IsHighlighted = i == _highlightedUiComponent;
+            }
         }
     }
 }

@@ -55,15 +55,17 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                astroidsComponent.Visible = astroidsComponent.DrawableStates.HasFlag(_gameState);
                astroidsComponent.Enabled = astroidsComponent.UpdatableStates.HasFlag(_gameState);
            }
-           
-          
         }
         
         protected override void Initialize()
         {
             // center window
-            Window.Position = new Point((GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / 2) - (Graphics.PreferredBackBufferWidth / 2), 
-                                        (GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height / 2) - (Graphics.PreferredBackBufferHeight / 2));
+            //Window.Position = new Point((GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / 2) - (Graphics.PreferredBackBufferWidth / 2), 
+            //                            (GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height / 2) - (Graphics.PreferredBackBufferHeight / 2));
+
+            // maximaize window
+            var form = (Form)Form.FromHandle(Window.Handle);
+            form.WindowState = FormWindowState.Maximized;
 
             // allow resizing
             //Window.AllowUserResizing = true;
@@ -94,7 +96,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         
         protected override void Update(GameTime gameTime)
         {
-            Globals.ScreenWidth = Graphics.PreferredBackBufferWidth;
+            Input.Instance.Update();
             if(_gameState == GameState.ingame)
             {
                 GameObjectManager.RemoveDeadGameObjects();

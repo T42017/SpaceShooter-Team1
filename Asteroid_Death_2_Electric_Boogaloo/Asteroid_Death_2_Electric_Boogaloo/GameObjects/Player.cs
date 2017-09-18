@@ -11,8 +11,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
     public class Player : Ship
     {
-        private KeyboardState _lastKeyboardState;
-        private GamePadState _lastGamePadState;
+        
         private SoundEffect _pewEffect;
         private DateTime _timeSenceLastShot = DateTime.Today;
         private Texture2D _lifeTexture;
@@ -22,10 +21,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         {
             Health = 10;
             ShootingSpeed = 200;
-        }
-        
-        public override void LoadContent()
-        {
             Texture = TextureManager.Instance.PlayerShipTexture;
             _lifeTexture = Game.Content.Load<Texture2D>("playerLife2_red");
             _pewEffect = Game.Content.Load<SoundEffect>("Blaster");
@@ -33,35 +28,17 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         public override void Update()
         {
-            var gamePadState = GamePad.GetState(PlayerIndex.One);
             
-            KeyboardState state = Keyboard.GetState();
-            
-            //Movement using the left, right joystick and the Dpad on the Xbox controller or the arrows or WASD on the keyboard
-            if ((gamePadState.ThumbSticks.Left.Y >= 0.3f)
-                || (gamePadState.DPad.Up == ButtonState.Pressed)
-                || (state.IsKeyDown(Keys.Up))
-                || (state.IsKeyDown(Keys.W))) 
+            if (Input.Instance.HoldUp()) 
                 AccelerateForward(0.45f);
            
-            if ((gamePadState.ThumbSticks.Left.Y <= -0.3f) 
-                || (gamePadState.DPad.Down == ButtonState.Pressed)
-                || (state.IsKeyDown(Keys.Down)) 
-                || (state.IsKeyDown(Keys.S)))
+            if (Input.Instance.HoldDown())
                 AccelerateForward(-0.07f);
 
-            if ((gamePadState.ThumbSticks.Left.X <= -0.3f)
-                || (gamePadState.ThumbSticks.Right.X <= -0.3f)
-                || (gamePadState.DPad.Left == ButtonState.Pressed)
-                || (state.IsKeyDown(Keys.Left))
-                || (state.IsKeyDown(Keys.A))) 
+            if (Input.Instance.HoldLeft()) 
                 Rotation -= 0.026f;
 
-            if ((gamePadState.ThumbSticks.Left.X >= 0.3f) 
-                || (gamePadState.ThumbSticks.Right.X >= 0.3f)
-                || (gamePadState.DPad.Right == ButtonState.Pressed)
-                || (state.IsKeyDown(Keys.Right)) 
-                || (state.IsKeyDown(Keys.D)))
+            if (Input.Instance.HoldRight())
                 Rotation += 0.026f;
 
             Speed += new Vector2(-Speed.X * 0.015f, -Speed.Y * 0.015f);
@@ -69,18 +46,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             
             base.Update();
             
-            if (((gamePadState.Buttons.A == ButtonState.Pressed) ||
-                (state.IsKeyDown(Keys.Space)) ||
-                (gamePadState.Triggers.Right > 0.2)) &&
-                !IsWeaponOverheated())
+            if (Input.Instance.HoldSelect() && !IsWeaponOverheated())
             {
                 Shoot(typeof(Player));
                 _pewEffect.Play();
                 _timeSenceLastShot = DateTime.Now;
             }
-
-            _lastKeyboardState = state;
-            _lastGamePadState = gamePadState;
             
             StayInsideLevel();
         }

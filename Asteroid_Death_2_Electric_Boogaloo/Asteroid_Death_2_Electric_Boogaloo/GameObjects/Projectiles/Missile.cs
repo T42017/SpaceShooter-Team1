@@ -15,11 +15,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             Texture = TextureManager.Instance.MissileTextures[(int) color];
         }
 
-        public override void LoadContent()
-        {
-            
-        }
-
         public override void Update()
         {
             DieIfOutSideMap();

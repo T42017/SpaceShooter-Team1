@@ -16,6 +16,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public Texture2D PlayerShipTexture;
         public Texture2D BackGroundTexture;
+        public Texture2D ButtonUnpressedTexture, ButtonPressedTexture;
 
         public Texture2D[] PixelExplosionTextures;
         public Texture2D[] EnemyTexures;
@@ -45,6 +46,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             PlayerShipTexture = content.Load<Texture2D>("shipPlayer");
             BackGroundTexture = content.Load<Texture2D>("background");
+
+            //ButtonPressedTexture = content.Load<Texture2D>("buttonPressed");
+            //ButtonUnpressedTexture = content.Load<Texture2D>("buttonUnpressed");
 
             PixelExplosionTextures = GetTextures(content, "pixelExplosion", 9);
 

@@ -55,6 +55,7 @@
     <Compile Include="GameObjects\Projectiles\Missile.cs" />
     <Compile Include="GameObjects\Projectiles\Projectile.cs" />
     <Compile Include="Highscore.cs" />
+    <Compile Include="Input.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="Devices\MenuComponent.cs" />
     <Compile Include="MathHelper.cs" />
@@ -71,6 +72,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GameObjects\Ship.cs" />
     <Compile Include="TextureManager.cs" />
+    <Compile Include="UI\BaseUiComponent.cs" />
+    <Compile Include="UI\UiButton.cs" />
+    <Compile Include="UI\UiLabel.cs" />
     <Compile Include="Weapon.cs" />
   </ItemGroup>
   <ItemGroup>
