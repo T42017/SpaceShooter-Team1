@@ -112,6 +112,19 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             }
         }
 
+        public Enemy[] GetEnemys()
+        {
+            List<Enemy> enemys = new List<Enemy>();
+
+            for (int i = 0; i < GameObjects.Count; i++)
+            {
+                if (GameObjects[i] is Enemy)
+                    enemys.Add((Enemy)GameObjects[i]);
+            }
+
+            return enemys.ToArray();
+        }
+
         internal void LoadContent()
         {
             for (int i = 0; i < GameObjects.Count; i++)
