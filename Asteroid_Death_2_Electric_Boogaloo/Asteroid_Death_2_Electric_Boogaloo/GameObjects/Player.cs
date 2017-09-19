@@ -16,10 +16,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         private SoundEffect _pewEffect;
         private DateTime _timeSenceLastShot = DateTime.Today;
         private Texture2D _lifeTexture;
+        public static int score = 0;
 
-        public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Red))
+        public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Blue))
         {
-            Health = 3;
+            Health = 10;
             ShootingSpeed = 200;
         }
         
@@ -88,11 +89,16 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         {
             base.Draw(spriteBatch);
 
+            //Draw player health
             spriteBatch.DrawString(MenuComponent.menuFont, Health + " x ", Position,
-                Color.HotPink, Rotation + MathHelper.DegreesToRadians(90), new Vector2(Globals.ScreenWidth / 2, Globals.ScreenHeight / 2 + 13), 1f, SpriteEffects.None, 0);
+                Color.OrangeRed, Rotation + MathHelper.DegreesToRadians(90), new Vector2(Globals.ScreenWidth / 2, Globals.ScreenHeight / 2 + 13), 1f, SpriteEffects.None, 0);
 
             spriteBatch.Draw(_lifeTexture, Position, null, Color.White, Rotation + MathHelper.DegreesToRadians(90),
                 new Vector2(Globals.ScreenWidth / 2 - 70, Globals.ScreenHeight / 2), 1.0f, SpriteEffects.None, 0);
+
+            //Draw score
+            spriteBatch.DrawString(MenuComponent.menuFont, "Score: " + score, Position,
+                Color.OrangeRed, Rotation + MathHelper.DegreesToRadians(90), new Vector2(-Globals.ScreenWidth / 2, Globals.ScreenHeight / 2 + 13), 1f, SpriteEffects.None, 0);
         }
 
         public override bool CollidesWith(GameObject otherGameObject)
@@ -110,18 +116,20 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                     ((Powerup) otherGameObject).DoEffect(this); 
                 }
 
-                if (otherGameObject is Projectile)
+                if (otherGameObject is Projectile pro)
                 {
-                    Health--;
-                    otherGameObject.IsDead = true;
+                    Health -= pro.Damage;
+                    pro.IsDead = true;
+                   
                 }
 
-                if (ShouldBeDead() || !(otherGameObject is Projectile || otherGameObject is Powerup))
+                if (Health <= 0 || !(otherGameObject is Projectile
+                || otherGameObject is Powerup))
                 {
                     IsDead = true;
-                MediaPlayer.Stop();
+                    MediaPlayer.Stop();
                     Game.ChangeGameState(GameState.gameover);
-                IngameComponent.playing = false;
+                    IngameComponent.playing = false;
                 }
             }
             return collides;

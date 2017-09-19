@@ -1,5 +1,6 @@
 ﻿using Asteroid_Death_2_Electric_Boogaloo.Components;
 using Asteroid_Death_2_Electric_Boogaloo.Devices;
+using Asteroid_Death_2_Electric_Boogaloo.GameObjects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -22,6 +23,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         #endregion
 
         #region Constructors
+        public int AmountOfEnemys = 10;
+
         public AsteroidsGame()
         {
             Graphics = new GraphicsDeviceManager(this)
@@ -47,6 +50,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 astroidsComponent.Visible = astroidsComponent.DrawableStates.HasFlag(_gameState);
                 astroidsComponent.Enabled = astroidsComponent.UpdatableStates.HasFlag(_gameState);
             }
+           
+          
         }
 
         public void UpdateWindowSize()
@@ -109,6 +114,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 GameObjectManager.UpdateExplosions();
                 _camera.FollowPlayer(GameObjectManager.Player);
                 GameObjectManager.AddNewMeteors(gameTime, 10, 1000);
+                ControlMaxEnemies();
             }
             base.Update(gameTime);
         }
@@ -137,5 +143,15 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             base.Draw(gameTime);
         } 
         #endregion
+        public void ControlMaxEnemies()
+        {
+            Enemy[] enemys = GameObjectManager.GetEnemys();
+
+            if (enemys.Length < AmountOfEnemys)
+            {
+                GameObjectManager.AddEnemys(AmountOfEnemys - enemys.Length);
+            }
+        }
+
     }
 }

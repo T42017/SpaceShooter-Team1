@@ -73,9 +73,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                     Globals.RNG.Next(_game.Level.SizeX),
                     Globals.RNG.Next(_game.Level.SizeY)
                 );
-                Powerup powerup = new PowerupMissile(_game, position);
-                powerup = new PowerupHealth(_game, position);
-                GameObjects.Add(powerup);
+
+                Powerup powerupMissile = new PowerupMissile(_game, position);
+                Powerup powerupHealth = new PowerupHealth(_game, position);
+                GameObjects.Add(powerupMissile);
+                GameObjects.Add(powerupHealth);
             }
         }
 
@@ -135,6 +137,19 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             }
         }
         
+        public Enemy[] GetEnemys()
+        {
+            List<Enemy> enemys = new List<Enemy>();
+
+            for (int i = 0; i < GameObjects.Count; i++)
+            {
+                if (GameObjects[i] is Enemy)
+                    enemys.Add((Enemy)GameObjects[i]);
+            }
+
+            return enemys.ToArray();
+        }
+
         internal void LoadContent()
         {
             for (int i = 0; i < GameObjects.Count; i++)

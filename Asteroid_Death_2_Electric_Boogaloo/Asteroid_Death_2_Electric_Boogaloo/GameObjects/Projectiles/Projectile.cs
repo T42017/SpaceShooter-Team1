@@ -17,18 +17,20 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             Green
         }
 
-        protected Weapon.Color color;
-
+        public int Damage;
         public Type ParentType { get; set; }
 
-        protected Projectile(AsteroidsGame game, Vector2 position, float rotation, Weapon.Color color, Type parenType) : base(game)
+        protected Weapon.Color color;
+
+        protected Projectile(AsteroidsGame game, Vector2 position, float rotation, Weapon.Color color, Type parenType, int damage) : base(game)
         {
             this.Position = position;
             this.Rotation = rotation;
             this.color = color;
-            Texture = TextureManager.Instance.LaserTextures[(int) color];
             MaxSpeed = 200;
             ParentType = parenType;
+            Damage = damage;
+            Texture = TextureManager.Instance.LaserTextures[(int) color];
         }
 
         protected void DieIfOutSideMap()
@@ -40,8 +42,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         public override void Update()
         {
             DieIfOutSideMap();
-            Speed = Forward() * 11;
-            AccelerateForward(9);
+            Speed = Forward() * 1;
+            AccelerateForward(1);
             Move();
 
             base.Update();
