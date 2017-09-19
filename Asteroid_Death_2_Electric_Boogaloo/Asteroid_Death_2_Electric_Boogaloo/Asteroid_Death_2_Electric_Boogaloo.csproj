@@ -54,6 +54,7 @@
     <Compile Include="Devices\HighscoreMenuComponent.cs" />
     <Compile Include="Devices\IngameComponent.cs" />
     <Compile Include="GameObjectManager.cs" />
+    <Compile Include="GameObjects\Hitmarker.cs" />
     <Compile Include="GameObjects\Powerups\Powerup.cs" />
     <Compile Include="GameObjects\Powerups\PowerupHealth.cs" />
     <Compile Include="GameObjects\Powerups\PowerupMissile.cs" />

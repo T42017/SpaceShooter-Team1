@@ -51,8 +51,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         public override bool CollidesWith(GameObject otherGameObject)
         {
-            bool collides = base.CollidesWith(otherGameObject) && ParentType != otherGameObject.GetType() && !(otherGameObject is Laser);
-            if (collides)
+            bool collides = base.CollidesWith(otherGameObject) && ParentType != otherGameObject.GetType() && !(otherGameObject is Projectile);
+            if (this is Missile && collides)
             {
                 var position = new Vector2(Position.X + .25f * Width, Position.Y + .25f * Height);
                 var explosion = new Explosion(Game, position);
