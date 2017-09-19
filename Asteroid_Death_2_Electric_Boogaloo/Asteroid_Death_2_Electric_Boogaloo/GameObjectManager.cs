@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Linq;
 using Asteroid_Death_2_Electric_Boogaloo.Factorys;
+using System.Runtime.CompilerServices;
 using Asteroid_Death_2_Electric_Boogaloo.GameObjects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -10,6 +11,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     public class GameObjectManager
     {
+        public Player Player { get; private set; }
+        public List<GameObject> GameObjects { get; } = new List<GameObject>();
+        public List<Explosion> Explosions { get; set; } = new List<Explosion>();
+        public List<Hitmarker> Hitmarkers { get; set; } = new List<Hitmarker>();
+
         private readonly AsteroidsGame _game;
         private EnemyFactory _enemyFactory;
         private PowerupFactory _powerupFactory;
@@ -81,27 +87,40 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             var meteors = new List<Meteor>();
 
-            for (var i = 0; i < GameObjects.Count; i++)
+            for (int i = 0; i < GameObjects.Count; i++)
+            {
                 if (GameObjects[i] is Meteor meteor)
                     meteors.Add(meteor);
+            }
 
             return meteors;
         }
 
         internal void RemoveDeadGameObjects()
         {
-            for (var i = 0; i < GameObjects.Count; i++)
+            for (int i = 0; i < GameObjects.Count; i++)
+            {
                 if (GameObjects[i].IsDead)
+                {
                     GameObjects.Remove(GameObjects[i]);
+        }
+
+        public void RemoveDeadExplosions()
+        {
+            Explosions.RemoveAll(explosion => explosion.IsDead);
+        }
+
+        public void RemoveDeadHitmarkers()
+        {
+            Hitmarkers.RemoveAll(hitmarker => hitmarker.IsDead);
         }
 
         public void AddNewMeteors(GameTime gameTime, int amountOfMeteorsToAdd, int intervalInMilliseconds)
         {
-            var currentGameTimeModInterval = (int) gameTime.TotalGameTime.TotalMilliseconds % intervalInMilliseconds;
-            if (currentGameTimeModInterval != 0 ||
-                GameObjects.Count(obj => obj is Meteor) >= 100)
+            int currentGameTimeModInterval = (int) gameTime.TotalGameTime.TotalMilliseconds % intervalInMilliseconds;
+            if (currentGameTimeModInterval != 0 || GameObjects.Count(obj => obj is Meteor) >= 100)
                 return;
-            var hypothenuseSquared = Globals.ScreenWidth * Globals.ScreenWidth / 4 +
+
                                      Globals.ScreenHeight * Globals.ScreenHeight / 4;
             for (var i = 0; i < amountOfMeteorsToAdd; i++)
             {
@@ -127,9 +146,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             var enemys = new List<Enemy>();
 
-            for (var i = 0; i < GameObjects.Count; i++)
+            for (int i = 0; i < GameObjects.Count; i++)
+            {
                 if (GameObjects[i] is Enemy)
-                    enemys.Add((Enemy) GameObjects[i]);
+                    enemys.Add((Enemy)GameObjects[i]);
+            }
 
             return enemys.ToArray();
         }
@@ -142,6 +163,18 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 gameObject.Update();
                 CheckForCollisionWith(gameObject);
             }
+        }
+
+        public void UpdateExplosions()
+        {
+            foreach (var explosion in Explosions)
+                explosion.Update();
+        }
+
+        public void UpdateHitmarkers()
+        {
+            foreach (var hitmarker in Hitmarkers)
+                hitmarker.Update();
         }
 
         public void CheckForCollisionWith(GameObject thisObject)
@@ -157,8 +190,21 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         internal void DrawGameObjects(SpriteBatch spriteBatch)
         {
-            for (var i = 0; i < GameObjects.Count; i++)
+            for (int i = 0; i < GameObjects.Count; i++)
+            {
                 GameObjects[i].Draw(spriteBatch);
         }
+        }
+
+        public void DrawExplosions(SpriteBatch spriteBatch)
+        {
+            foreach (var explosion in Explosions)
+                explosion.Draw(spriteBatch);
+        }
+
+        public void DrawHitmarkers(SpriteBatch spriteBatch)
+        {
+            foreach (var hitmarker in Hitmarkers)
+                hitmarker.Draw(spriteBatch);
     }
 }

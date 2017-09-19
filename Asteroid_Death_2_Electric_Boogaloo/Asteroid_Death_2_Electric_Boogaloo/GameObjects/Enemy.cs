@@ -40,7 +40,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             this.enemyType = enemyType;
             _ai = new AI(game, this);
             this.enemyType = enemyType;
-            ShootingSpeed = 500;
+            ShootingSpeed = 5000; //500;
             Weapon = new Weapon(game, Weapon.Type.Laser, Weapon.Color.Green);
             Texture = TextureManager.Instance.EnemyTexures[(int) enemyType];
         }
@@ -66,6 +66,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 if (Health <= 0)
                 {
                     IsDead = true;
+                if (otherGameObject is Projectile)
+                    Game.GameObjectManager.GameObjects.Remove(otherGameObject);
                 }
                 
             }

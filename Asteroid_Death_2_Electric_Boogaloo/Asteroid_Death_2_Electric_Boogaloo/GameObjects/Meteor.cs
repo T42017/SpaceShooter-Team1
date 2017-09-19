@@ -1,16 +1,21 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
-    // TODO: make brown and gray meteors have different health
+    /// <summary>
+    /// Represents a meteor as a <see cref="GameObject"/> (TODO: make brown and gray meteors have different health)
+    /// </summary>
     public class Meteor : GameObject
     {
-        public MeteorSize   MeteorSize   { get; }
+        #region Public properties
+        public MeteorSize MeteorSize { get; }
         public MeteorColour MeteorColour { get; }
         public float RotationSpeed { get; }
-        private SoundEffect yea;
+        #endregion
+
+        #region Constructors
         public Meteor(AsteroidsGame game, Vector2 position, MeteorSize meteorSize, MeteorColour meteorColour) : base(game)
         {
             Position = position;
@@ -19,21 +24,23 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 (float) Globals.RNG.NextDouble()
             );
             Rotation = (float) Globals.RNG.NextDouble();
-            RotationSpeed =(float) Globals.RNG.Next(12)/100;
+            RotationSpeed = (float) Globals.RNG.Next(12)/100;
             MaxSpeed = Globals.RNG.Next(250);
             MeteorSize = meteorSize;
             MeteorColour = meteorColour;
             SetAppropriateTexture();
         }
+        #endregion
 
+        #region Private methods
         /// <summary>
-        /// Calls LoadTexture from parent with a filename according to meteor's size and colour.
+        /// Sets a filename appropriate to the meteor's size and colour, then loads it via the <see cref="TextureManager"/>
         /// </summary>
         private void SetAppropriateTexture()
         {
             string colour = string.Empty;
             string fileSuffix = string.Empty;
-
+            
             switch (MeteorColour)
             {
                 case MeteorColour.Gray:
@@ -61,38 +68,46 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             Texture = TextureManager.Instance.LoadByName(Game.Content, fileName);
         }
 
+        private IEnumerable<Meteor> ShatterIntoSmallerMeteors()
+        {
+            int amountOfSmallerMeteors = MeteorColour == MeteorColour.Gray ? 5 : 3;
+
+            for (int i = 0; i < amountOfSmallerMeteors; i++)
+            {
+                var offset = new Vector2(
+                    Globals.RNG.Next(-20, 20),
+                    Globals.RNG.Next(-20, 20));
+
+                var speed = new Vector2(
+                    Speed.X * Globals.RNG.Next(2, 3) * (Globals.RNG.Next(-1, 2) < 0 ? -1 : 1) + 5 * (float) Globals.RNG.NextDouble() * (Globals.RNG.Next(-1, 2) < 0 ? -1 : 1),
+                    Speed.Y * Globals.RNG.Next(2, 3) * (Globals.RNG.Next(-1, 2) < 0 ? -1 : 1) + 5 * (float) Globals.RNG.NextDouble() * (Globals.RNG.Next(-1, 2) < 0 ? -1 : 1)
+                );
+
+                yield return new Meteor(Game, Position + offset, MeteorSize - 1, MeteorColour)
+                {
+                    Speed = MeteorColour == MeteorColour.Brown ? speed : speed * 2
+                };
+            }
+        }
+        #endregion
+
+        #region Public methods
         public IEnumerable<Meteor> SpawnChildren()
         {
             if (MeteorSize == MeteorSize.Small)
                 return null;
             return ShatterIntoSmallerMeteors();
         }
+        #endregion
 
-        private IEnumerable<Meteor> ShatterIntoSmallerMeteors()
-        {
-            int amountOfSmallerMeteors = MeteorColour == MeteorColour.Gray ? 5 : 3;
-            
-            for (int i = 0; i < amountOfSmallerMeteors; i++)
-            {
-                var offset = new Vector2(
-                    Globals.RNG.Next(10, 20),
-                    Globals.RNG.Next(10, 20));
-            
-                yield return new Meteor(Game, Position + offset, MeteorSize - 1, MeteorColour)
-                {
-                    Speed = new Vector2(
-                        Speed.X * Globals.RNG.Next(2, 3) * (Globals.RNG.Next(-1, 2) < 0 ? -1 : 1),
-                        Speed.Y * Globals.RNG.Next(2, 3) * (Globals.RNG.Next(-1, 2) < 0 ? -1 : 1)
-                    )
-                };
-            }
-
-        }
+        #region Overrides
+        public override void LoadContent() {}
 
         public override void Update()
         {
             //requires further work to add a randomly generated speed of the meteors instead of a static speed
             Rotation += RotationSpeed;
+            StayInsideLevel();
             Move();
             base.Update();
         }
@@ -109,11 +124,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                     foreach (var meteor in smallerMeteors)
                         Game.GameObjectManager.GameObjects.Add(meteor);
                 }
-               
                 IsDead = true;
                 Game.GameObjectManager.GameObjects.Remove(otherGameObject); // To remove laser at correct time
             }
             return collides;
         }
+        #endregion
     }
 }
