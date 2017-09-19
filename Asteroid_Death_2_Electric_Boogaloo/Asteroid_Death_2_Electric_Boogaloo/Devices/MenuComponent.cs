@@ -9,16 +9,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
     internal class MenuComponent : AstroidsComponent
     {
         public static SpriteFont menuFont, buttonFont;
-
+        private readonly AsteroidsGame pGame;
         private SpriteBatch batch;
         private Texture2D Button, texture;
         private int choice;
         private bool hasMovedStick;
         private GamePadState lastGamePadState, lastPadState;
         private KeyboardState lastState, lastkState;
-        
-        
-        private readonly AsteroidsGame pGame;
         private bool playing;
         private Song song;
 
@@ -104,7 +101,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
                 || Keyboardstate.IsKeyDown(Keys.Space) && lastkState.IsKeyUp(Keys.Space) && choice == 0)
             {
                 pGame.Start();
-                pGame.GameObjectManager.LoadContent();
                 pGame.ChangeGameState(GameState.ingame);
                 playing = false;
                 choice = 0;
@@ -133,8 +129,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
 
             base.Update(gameTime);
         }
-
-        
 
         public override void Draw(GameTime gameTime)
         {

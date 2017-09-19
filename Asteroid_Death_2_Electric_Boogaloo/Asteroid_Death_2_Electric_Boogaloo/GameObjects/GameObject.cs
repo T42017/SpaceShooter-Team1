@@ -13,7 +13,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         public float Radius { get; set; }
         public Vector2 Speed { get; set; }
         public float Rotation { get; set; } = MathHelper.DegreesToRadians(-90);
-        public int MaxSpeed = 9;
+        public int MaxSpeed = 10;
         public Texture2D Texture { get; set; }
         public float Scale { get; set; } = 1;
 
@@ -26,7 +26,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         {
             get { return Texture.Height; }
         }
-
 
         public Rectangle Bounds
         {
@@ -68,8 +67,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             rectangle.SetData(data);
             spriteBatch.Draw(rectangle, Position - new Vector2(Bounds.Width / 2f, Bounds.Height / 2f), Color.Red);
         }
-
-        public abstract void LoadContent();
 
         public virtual void Update()
         {
@@ -144,10 +141,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 Speed = Vector2.Normalize(Speed) * MaxSpeed;
             }
         }
-
         
-        
-
         public override string ToString()
         {
             return $"{GetType().Name} at position ({Position.X}, {Position.Y})";

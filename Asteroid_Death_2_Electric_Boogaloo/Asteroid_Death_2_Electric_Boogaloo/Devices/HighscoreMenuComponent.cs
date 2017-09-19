@@ -27,7 +27,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         private KeyboardState lastKeyboardState;
         private GamePadState lastGamePadState;
         private SpriteFont Text;
-        
         private bool hasMovedStick;
 
         public HighscoreMenuComponent(Game game) : base(game)
@@ -75,7 +74,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             button1 = Game.Content.Load<Texture2D>("buttonBlue");
             button2 = Game.Content.Load<Texture2D>("buttonRed");
             base.LoadContent();
-           
         }
 
         public override void Update(GameTime gameTime)
@@ -146,8 +144,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             if (gamePadState.Buttons.A == ButtonState.Pressed && lastGamePadState.Buttons.A == ButtonState.Released && highlight == 1
                 || keyboardstate.IsKeyDown(Keys.Space) && lastKeyboardState.IsKeyUp(Keys.Space) && highlight == 1)
             {
-                
-               rand=Globals.RNG.Next(4);
+                rand=Globals.RNG.Next(4);
                 switch (rand)
                 {
                     case 0:
@@ -168,24 +165,19 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 
                     case 4:
                         Tyrone.Play(1.0f, 0.0f, 0.0f);
-                        break;
-                        
+                        break;                      
                 }
-
             }
 
             if (gamePadState.Buttons.A == ButtonState.Pressed && lastGamePadState.Buttons.A == ButtonState.Released && highlight == 2
                 || keyboardstate.IsKeyDown(Keys.Space) && lastKeyboardState.IsKeyUp(Keys.Space) && highlight == 2)
             {
                 pGame.Start();
-                pGame.GameObjectManager.LoadContent();
                 pGame.ChangeGameState(GameState.ingame);
                 playing = false;
                 hasloaded = false;
                 highlight = 1;
             }
-           
-
            
             lastGamePadState = gamePadState;
             lastKeyboardState = keyboardstate;
@@ -243,12 +235,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
                 for (int i = 0;
                     i < highscore1.Length; i++)
                 {
-                    
                     SpriteBatch.DrawString(menuFont, highscore1[i], new Vector2(pGame.Graphics.PreferredBackBufferWidth / 4, (pGame.Graphics.PreferredBackBufferHeight / 8)+size), Color.Gold);
                     size = size + 30;
                 }
             }
-            
 
             SpriteBatch.End();
             base.Draw(gameTime);

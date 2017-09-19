@@ -1,5 +1,6 @@
 ﻿using Asteroid_Death_2_Electric_Boogaloo.Components;
 using Asteroid_Death_2_Electric_Boogaloo.Devices;
+using Asteroid_Death_2_Electric_Boogaloo.Factorys;
 using Asteroid_Death_2_Electric_Boogaloo.GameObjects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -50,8 +51,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 astroidsComponent.Visible = astroidsComponent.DrawableStates.HasFlag(_gameState);
                 astroidsComponent.Enabled = astroidsComponent.UpdatableStates.HasFlag(_gameState);
             }
-           
-          
         }
 
         public void UpdateWindowSize()
@@ -66,6 +65,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             GameObjectManager = new GameObjectManager(this);
             GameObjectManager.AddEnemyFactory(new EnemyFactory(this));
             GameObjectManager.AddEnemys(10);
+            GameObjectManager.AddPowerupFactory(new PowerupFactory(this));
             GameObjectManager.AddPowerups(20);
         }
 
