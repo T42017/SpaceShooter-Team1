@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Asteroid_Death_2_Electric_Boogaloo.GameObjects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -15,9 +17,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
         private SpriteFont font;
         private int highlight;
         private String difficulty;
-    
+        private AsteroidsGame Game;
+
         public UiArrow(AsteroidsGame game, Vector2 position) : base(game, position, false, null)
         {
+            Game = (AsteroidsGame) game;
             font = Game.Content.Load<SpriteFont>("diff");
             textureLeft = Game.Content.Load<Texture2D>("Left");
             textureRight = Game.Content.Load<Texture2D>("Right");
@@ -56,19 +60,34 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
             {
                 case 0:
                     difficulty = "Normal";
-
+                    Game.AmountOfEnemys = 10;
+                    Globals.Health = 30;
+                    Globals.Maxmeteors = 50;
+                    Globals.perSecMeteors = 5;
                     break;
 
                 case 1:
                     difficulty = "Overkill";
+                    Game.AmountOfEnemys = 15;
+                    Globals.Health = 25;
+                    Globals.Maxmeteors = 100;
+                    Globals.perSecMeteors = 10;
                     break;
 
                 case 2:
                     difficulty = "Insane";
+                    Game.AmountOfEnemys = 20;
+                    Globals.Health = 20;
+                    Globals.Maxmeteors = 200;
+                    Globals.perSecMeteors =15;
                     break;
 
                 case 3:
                     difficulty = "GodTier";
+                    Game.AmountOfEnemys = 30;
+                    Globals.Health = 15;
+                    Globals.Maxmeteors = 300;
+                    Globals.perSecMeteors =30;
                     break;
             }
 

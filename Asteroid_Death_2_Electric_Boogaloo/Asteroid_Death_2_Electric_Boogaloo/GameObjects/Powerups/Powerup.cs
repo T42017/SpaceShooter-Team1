@@ -53,9 +53,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             base.Update();
         }
 
-        public override void LoadContent()
-        {
+        //public override void LoadContent()
+        //{
 
-        }
+        //}
     }
 }
