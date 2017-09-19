@@ -155,11 +155,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public void CheckForCollisionWith(GameObject thisObject)
         {
-            foreach (var otherGameObject in GameObjects)
+            for (int i = 0; i < GameObjects.Count; i++)
             {
-                if (thisObject == otherGameObject ||
-                    //!thisObject.CollidesWith(otherGameObject) ||
-                    Player.DistanceToSquared(otherGameObject) >= ((Globals.ScreenWidth * Globals.ScreenWidth) / 4 + (Globals.ScreenHeight * Globals.ScreenHeight) / 4))
+                if (thisObject == GameObjects[i] ||
+                    !thisObject.CollidesWith(GameObjects[i]) ||
+                    Player.DistanceToSquared(GameObjects[i]) >= ((Globals.ScreenWidth * Globals.ScreenWidth) / 2 + (Globals.ScreenHeight * Globals.ScreenHeight) / 2))
                     continue;
                 return;
             }

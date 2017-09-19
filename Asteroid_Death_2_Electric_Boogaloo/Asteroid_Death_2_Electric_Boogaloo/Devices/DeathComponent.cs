@@ -69,8 +69,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
                 for (var y = 0; y < 2000; y += _backgroundTexture.Height)
                     SpriteBatch.Draw(_backgroundTexture, new Vector2(x, y), Color.White);
 
-            SpriteBatch.End();
             base.Draw(gameTime);
+            SpriteBatch.End();
         }
     }
 }

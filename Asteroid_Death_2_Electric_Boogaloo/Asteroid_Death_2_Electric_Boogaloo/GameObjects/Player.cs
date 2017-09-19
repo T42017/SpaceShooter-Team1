@@ -156,19 +156,18 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 {
                     otherGameObject.IsDead = true;
                     //((Powerup) otherGameObject).DoEffect(this); 
-                    Powerups.Add(otherGameObject as Powerup);
-                    Debug.WriteLine("added powerup " + otherGameObject);
+                    Powerups.Add((Powerup) otherGameObject);
                 }
 
                 if (otherGameObject is Projectile pro)
                 {
                     Health -= pro.Damage;
                     pro.IsDead = true;
-                   
                 }
 
-                if (Health <= 0 || !(otherGameObject is Projectile
-                || otherGameObject is Powerup))
+                if (Health <= 0 
+                    || !(otherGameObject is Projectile
+                    || otherGameObject is Powerup))
                 {
                     IsDead = true;
                     MediaPlayer.Stop();
