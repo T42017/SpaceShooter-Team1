@@ -111,8 +111,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             {
                 GameObjectManager.RemoveDeadGameObjects();
                 GameObjectManager.RemoveDeadExplosions();
+                GameObjectManager.RemoveDeadHitmarkers();
                 GameObjectManager.UpdateGameObjects();
                 GameObjectManager.UpdateExplosions();
+                GameObjectManager.UpdateHitmarkers();
                 _camera.FollowPlayer(GameObjectManager.Player);
                 GameObjectManager.AddNewMeteors(gameTime, 10, 1000);
                 ControlMaxEnemies();
@@ -138,6 +140,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 Level.DrawBackground(_spriteBatch);
                 GameObjectManager.DrawGameObjects(_spriteBatch);
                 GameObjectManager.DrawExplosions(_spriteBatch);
+                GameObjectManager.DrawHitmarkers(_spriteBatch);
             }
 
             _spriteBatch.End();

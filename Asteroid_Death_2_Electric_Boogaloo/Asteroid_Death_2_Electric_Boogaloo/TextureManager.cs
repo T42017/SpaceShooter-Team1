@@ -21,6 +21,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public Texture2D[] EnemyTexures;
         public Texture2D[] LaserTextures;
         public Texture2D[] MissileTextures;
+        public Texture2D[] HitmarkerTextures { get; set; }
 
         public SoundEffect PlayerShootSoundEffect;
 
@@ -75,6 +76,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             powerupTexture2Ds.Add(content.Load<Texture2D>("powerupImprovedLaser"));
             powerupTexture2Ds.Add(content.Load<Texture2D>("powerupRandom"));
             PowerUpTextures = powerupTexture2Ds.ToArray();
+
+            var hitmarkerTexture2Ds = new List<Texture2D>();
+            hitmarkerTexture2Ds.AddRange(GetTextures(content, "hitmarker", 9));
+            HitmarkerTextures = hitmarkerTexture2Ds.ToArray();
+            
             
             PlayerShootSoundEffect = content.Load<SoundEffect>("Blaster");
         }
