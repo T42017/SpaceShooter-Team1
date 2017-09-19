@@ -140,7 +140,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             if (Input.Instance.ClickSelect())
             {
                 Game.Start();
-                Game.GameObjectManager.LoadContent();
                 Game.ChangeGameState(GameState.ingame);
                 playing = false;
                 hasloaded = false;
