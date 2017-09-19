@@ -62,7 +62,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
         private void ButtonStartEvent(object sender, EventArgs eventArgs)
         {
             Game.Start();
-            Game.GameObjectManager.LoadContent();
+          
             Game.ChangeGameState(GameState.ingame);
             playing = false;
         }

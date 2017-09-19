@@ -20,10 +20,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             Texture = _textures[_textures.Length - 1];
         }
 
-        public override void LoadContent()
-        {
-            
-        }
+       
 
         public override void Update()
         {
