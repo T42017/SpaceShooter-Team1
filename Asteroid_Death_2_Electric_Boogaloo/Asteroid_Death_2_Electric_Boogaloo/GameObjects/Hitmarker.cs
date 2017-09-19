@@ -31,8 +31,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             _aliveTimeInFrames = (int) ((1.0/3) * 60);
         }
 
-        public override void LoadContent() {}
-
         public override void Update()
         {
             if (_aliveTimeInFrames > 0)

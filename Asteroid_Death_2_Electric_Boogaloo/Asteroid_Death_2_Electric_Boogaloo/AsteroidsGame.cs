@@ -51,8 +51,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 astroidsComponent.Visible = astroidsComponent.DrawableStates.HasFlag(_gameState);
                 astroidsComponent.Enabled = astroidsComponent.UpdatableStates.HasFlag(_gameState);
             }
-           
-          
         }
 
         public void UpdateWindowSize()
@@ -67,6 +65,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             GameObjectManager = new GameObjectManager(this);
             GameObjectManager.AddEnemyFactory(new EnemyFactory(this));
             GameObjectManager.AddEnemys(10);
+            GameObjectManager.AddPowerupFactory(new PowerupFactory(this));
             GameObjectManager.AddPowerups(20);
         } 
         #endregion
@@ -157,13 +156,5 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 GameObjectManager.AddEnemys(AmountOfEnemys - enemys.Length);
             }
         }
-
-        public void Start()
-        {
-            Level = new Level(this, 20, 20);
-            GameObjectManager = new GameObjectManager(this);
-            GameObjectManager.AddEnemyFactory(new EnemyFactory(this));
-            GameObjectManager.AddPowerupFactory(new PowerupFactory(this));
-            GameObjectManager.AddPowerups(20);
     }
 }
