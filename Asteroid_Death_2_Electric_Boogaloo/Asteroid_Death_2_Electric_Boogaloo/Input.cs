@@ -150,6 +150,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                    _lastKeyboardState.IsKeyUp(Keys.Escape);
         }
 
+        public bool Boost()
+        {
+            return _gamePadState.Buttons.RightShoulder == ButtonState.Pressed &&
+                    _lastGamePadState.Buttons.Start == ButtonState.Released
+                   ||
+                   _keyboardState.IsKeyDown(Keys.E) &&
+                   _lastKeyboardState.IsKeyUp(Keys.E);
+        }
         public void Update()
         {
             _lastGamePadState = _gamePadState;
