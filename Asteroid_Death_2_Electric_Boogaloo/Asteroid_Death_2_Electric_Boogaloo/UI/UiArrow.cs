@@ -98,7 +98,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
         {
 
             spriteBatch.Draw(_texture, Position - new Vector2(_texture.Width / 2f, _texture.Height / 2f), Color.White);
-            spriteBatch.DrawString(font, difficulty, Position - new Vector2((textureLeft.Width / 2f) +35f,(textureLeft.Height / 2f)-5f), Color.Black, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+            spriteBatch.DrawString(font, difficulty, Position - new Vector2((textureLeft.Width / 2f) +25f,(textureLeft.Height / 2f)), Color.Black, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
             spriteBatch.Draw(textureLeft, Position - new Vector2((textureLeft.Width / 2f)+120f, textureLeft.Height / 2f), Color.White);
             spriteBatch.Draw(textureRight, Position - new Vector2((textureRight.Width / 2f)-120f, textureRight.Height / 2f), Color.White);
 
