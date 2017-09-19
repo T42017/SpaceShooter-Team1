@@ -158,6 +158,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                    _keyboardState.IsKeyDown(Keys.E) &&
                    _lastKeyboardState.IsKeyUp(Keys.E);
         }
+
         public void Update()
         {
             _lastGamePadState = _gamePadState;
@@ -168,6 +169,19 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
             if (_gamePadState.ThumbSticks.Left.Y <= 0.2 && _gamePadState.ThumbSticks.Left.Y >= -0.2)
                 _hasMovedLeftStick = false;
+        }
+
+        public char[] GetKeyboardCharacters()
+        {
+            Keys[] keys = _keyboardState.GetPressedKeys();
+            char[] characters = new char[keys.Length];
+
+            for (int i = 0; i < keys.Length; i++)
+            {
+                characters[i] = char.Parse(keys[i].ToString());
+            }
+
+            return characters;
         }
     }
 }

@@ -10,14 +10,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
 {
     class UiTextbox : BaseUiComponent
     {
-        public UiTextbox(AsteroidsGame game, Vector2 position, string startText) : base(game, position, true, null, startText)
-        {
-
-        }
-
+        private Texture2D _texture;
+        
         public UiTextbox(AsteroidsGame game, Vector2 position) : base(game, position, true, null)
         {
-
+            _texture = Game.Content.Load<Texture2D>("button");
         }
 
         public override void Update()
@@ -27,7 +24,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            
+            spriteBatch.Draw(_texture, Position - new Vector2(_texture.Width / 2f, _texture.Height / 2f), Color.White);
         }
     }
 }

@@ -161,7 +161,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                     //!thisObject.CollidesWith(otherGameObject) ||
                     Player.DistanceToSquared(otherGameObject) >= ((Globals.ScreenWidth * Globals.ScreenWidth) / 4 + (Globals.ScreenHeight * Globals.ScreenHeight) / 4))
                     continue;
-                Debug.WriteLine($"{thisObject} collided with {otherGameObject}");
                 return;
             }
         }

@@ -29,14 +29,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         List<Powerup> Powerups = new List<Powerup>();
 
-
-
-        public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Blue),Globals.Health)
+        public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Blue), Globals.Health)
         {
-            Health = 10;
             boost = 180;
             
-
             ShootingSpeed = 200;
             textures.Add(Game.Content.Load<Texture2D>("blackSmoke00"));
             textures.Add(Game.Content.Load<Texture2D>("blackSmoke01"));
@@ -47,9 +43,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             _pewEffect = Game.Content.Load<SoundEffect>("shot");
             particleEngine = new ParticleEngine(textures, new Vector2(400, 240));
         }
-
-
-
+        
         public override void Update()
         {
             var gamePadState = GamePad.GetState(PlayerIndex.One);
@@ -58,9 +52,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
             particleEngine.EmitterLocation = Position;
             particleEngine.Update();
-
-            
-                
             
             //Movement using the left, right joystick and the Dpad on the Xbox controller or the arrows or WASD on the keyboard
             if ((gamePadState.ThumbSticks.Left.Y >= 0.3f)
@@ -98,8 +89,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 boost--;
                 MaxSpeed = 10; 
             }
-
-            
 
             Speed += new Vector2(-Speed.X * 0.015f, -Speed.Y * 0.015f);
             Move();
@@ -142,7 +131,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             base.Draw(spriteBatch);
 
             //Draw player health
-            spriteBatch.DrawString(MenuComponent.menuFont, Health + " x ", Position,
+            spriteBatch.DrawString(MenuComponent.menuFont, Health + "", Position,
                 Color.OrangeRed, Rotation + MathHelper.DegreesToRadians(90), new Vector2((Globals.ScreenWidth / 2)+35, Globals.ScreenHeight / 2 + 13), 1f, SpriteEffects.None, 0);
 
             spriteBatch.Draw(_lifeTexture, Position, null, Color.White, Rotation + MathHelper.DegreesToRadians(90),

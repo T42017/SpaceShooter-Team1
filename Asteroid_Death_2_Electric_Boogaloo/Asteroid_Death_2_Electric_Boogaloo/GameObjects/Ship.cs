@@ -13,7 +13,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         private bool ShootLefCannon = false;
         private DateTime _timeSenceLastShot = DateTime.Today;
 
-        public int Health = 1;
+        public int Health;
         public int BaseHealth;
         public int boost = 1;
         protected Ship(AsteroidsGame game,int baseHealth) : base(game)
