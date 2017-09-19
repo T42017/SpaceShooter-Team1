@@ -77,6 +77,8 @@
     <Compile Include="UI\BaseUiComponent.cs" />
     <Compile Include="UI\UiButton.cs" />
     <Compile Include="UI\UiLabel.cs" />
+    <Compile Include="UI\UiList.cs" />
+    <Compile Include="UI\UiTextbox.cs" />
     <Compile Include="Weapon.cs" />
   </ItemGroup>
   <ItemGroup>

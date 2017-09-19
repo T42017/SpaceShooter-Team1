@@ -17,8 +17,21 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
         public bool IsHighlighted = false;
         public bool CanBeHighLighted = false;
         public bool HasClickEvent = false;
+        public string Text;
 
         public EventHandler ClickEvent;
+
+        protected BaseUiComponent(AsteroidsGame game, Vector2 position, bool canBeHighlighted, EventHandler clickEvent, string text)
+        {
+            Game = game;
+            Position = position + new Vector2(Globals.ScreenWidth / 2f, Globals.ScreenHeight / 2f);
+            CanBeHighLighted = canBeHighlighted;
+            ClickEvent = clickEvent;
+            Text = text;
+
+            if (ClickEvent != null)
+                HasClickEvent = true;
+        }
 
         protected BaseUiComponent(AsteroidsGame game, Vector2 position, bool canBeHighlighted, EventHandler clickEvent)
         {
@@ -29,6 +42,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
 
             if (ClickEvent != null)
                 HasClickEvent = true;
+        }
+
+        protected BaseUiComponent(AsteroidsGame game, Vector2 position)
+        {
+            Game = game;
+            Position = position + new Vector2(Globals.ScreenWidth / 2f, Globals.ScreenHeight / 2f);
+            CanBeHighLighted = false;
+            HasClickEvent = false;
         }
 
         public abstract void Update();

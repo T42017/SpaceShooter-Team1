@@ -50,10 +50,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
            foreach (var component in Components)
             {
-                if(!(component is AstroidsComponent astroidsComponent))
+                if (!(component is AstroidsComponent astroidsComponent))
                     continue;
-               astroidsComponent.Visible = astroidsComponent.DrawableStates.HasFlag(_gameState);
-               astroidsComponent.Enabled = astroidsComponent.UpdatableStates.HasFlag(_gameState);
+
+                astroidsComponent.Reset();
+                astroidsComponent.Visible = astroidsComponent.DrawableStates.HasFlag(_gameState);
+                astroidsComponent.Enabled = astroidsComponent.UpdatableStates.HasFlag(_gameState);
            }
         }
         
@@ -120,7 +122,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 null,
                 null,
                 _camera.get_transformation(GraphicsDevice, WindowWidth, Windowheight));
-           
+            
             if (_gameState==GameState.ingame ||_gameState==GameState.paused)
             {
                 Level.DrawBackground(_spriteBatch);
@@ -149,6 +151,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public void Start()
         {
+            ChangeGameState(GameState.ingame);
             Level = new Level(this, 20, 20);
             GameObjectManager = new GameObjectManager(this);
             GameObjectManager.AddEnemyFactory(new EnemyFactory(this));

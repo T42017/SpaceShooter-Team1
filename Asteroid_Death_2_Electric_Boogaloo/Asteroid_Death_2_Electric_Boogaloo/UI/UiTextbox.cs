@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
@@ -9,14 +8,16 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.UI
 {
-    public class UiLabel : BaseUiComponent
+    class UiTextbox : BaseUiComponent
     {
-
-        private SpriteFont _font;
-
-        public UiLabel(AsteroidsGame game, Vector2 position, string text, SpriteFont font) : base(game, position, false, null, text)
+        public UiTextbox(AsteroidsGame game, Vector2 position, string startText) : base(game, position, true, null, startText)
         {
-            _font = font;
+
+        }
+
+        public UiTextbox(AsteroidsGame game, Vector2 position) : base(game, position, true, null)
+        {
+
         }
 
         public override void Update()
@@ -26,7 +27,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(_font, Text, Position - (_font.MeasureString(Text) / 2), Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+            
         }
     }
 }
