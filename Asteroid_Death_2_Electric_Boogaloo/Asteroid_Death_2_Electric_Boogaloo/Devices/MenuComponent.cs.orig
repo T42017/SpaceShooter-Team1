@@ -50,13 +50,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
             UiComponents.Add(new UiButton(Game, new Vector2(0, -150), "Play", buttonFont, (sender, args) => Game.Start()));
             UiComponents.Add(new UiButton(Game, new Vector2(0, -90), "Highscore", buttonFont, ButtonHghiscoreEvent));
             UiComponents.Add(new UiButton(Game, new Vector2(0, -30), "Quit", buttonFont, (sender, args) => Game.Exit()));
-<<<<<<< HEAD
-
-            HighlightNextComponent();
-=======
             UiComponents.Add(new UiArrow(Game, new Vector2(0,30)));
-            //*/UiComponents[_highlightedUiComponent].IsHighlighted = true;*/
->>>>>>> 94394633c7d8fac0299ddcfd95113a34b0ae3f6f
+            HighlightNextComponent();
 
             base.LoadContent();
         }
@@ -82,15 +77,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
 
             if (Input.Instance.ClickDown())
 <<<<<<< HEAD
-                HighlightNextComponent();
-
+               if(_highlightedUiComponent<3) _highlightedUiComponent++;
 =======
-                _highlightedUiComponent++;
+                HighlightNextComponent();
+>>>>>>> origin/Feature_menu
                 
           
               
-            
->>>>>>> 94394633c7d8fac0299ddcfd95113a34b0ae3f6f
+
             if (Input.Instance.ClickSelect())
                 UiComponents[_highlightedUiComponent].ClickEvent?.Invoke(null, null);
 
