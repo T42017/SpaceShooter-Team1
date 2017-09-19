@@ -80,6 +80,7 @@
     <Compile Include="GameObjects\Ship.cs" />
     <Compile Include="TextureManager.cs" />
     <Compile Include="UI\BaseUiComponent.cs" />
+    <Compile Include="UI\UiArrow.cs" />
     <Compile Include="UI\UiButton.cs" />
     <Compile Include="UI\UiLabel.cs" />
     <Compile Include="Weapon.cs" />

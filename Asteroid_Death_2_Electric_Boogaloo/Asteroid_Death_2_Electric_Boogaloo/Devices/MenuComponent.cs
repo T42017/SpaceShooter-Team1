@@ -14,8 +14,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
     {
         public static SpriteFont menuFont, buttonFont;
         
-        private Texture2D _backGroundtexture;
-        private int _highlightedUiComponent;
+        private Texture2D _backGroundtexture, left, right;
+        private int _highlightedUiComponent, difficulty;
         
         
         private readonly AsteroidsGame Game;
@@ -37,18 +37,21 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
 
         protected override void LoadContent()
         {
+            left = Game.Content.Load<Texture2D>("Left");
+            right = Game.Content.Load<Texture2D>("Right");
             menuFont = Game.Content.Load<SpriteFont>("GameState");
             buttonFont = Game.Content.Load<SpriteFont>("Text");
             song = Game.Content.Load<Song>("Best");
             _backGroundtexture = Game.Content.Load<Texture2D>("background");
+            difficulty = 0;
 
             UiComponents = new List<BaseUiComponent>();
             UiComponents.Add(new UiLabel(Game, new Vector2(0, -260), Game.Window.Title, menuFont));
             UiComponents.Add(new UiButton(Game, new Vector2(0, -150), "Play", buttonFont, ButtonStartEvent));
             UiComponents.Add(new UiButton(Game, new Vector2(0, -90), "Highscore", buttonFont, ButtonHghiscoreEvent));
             UiComponents.Add(new UiButton(Game, new Vector2(0, -30), "Quit", buttonFont, (sender, args) => Game.Exit()));
-
-            UiComponents[_highlightedUiComponent].IsHighlighted = true;
+            UiComponents.Add(new UiArrow(Game, new Vector2(0,30)));
+            //UiComponents[_highlightedUiComponent].IsHighlighted = true;
 
             base.LoadContent();
         }
@@ -82,7 +85,17 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
                 _highlightedUiComponent--;
 
             if (Input.Instance.ClickDown())
-                _highlightedUiComponent++;
+            {
+                if (_highlightedUiComponent == 2)
+                {
+                    
+                }
+                else
+                {
+                    _highlightedUiComponent++;
+                }
+            }
+              
             
             if (Input.Instance.ClickSelect())
                 UiComponents[_highlightedUiComponent].ClickEvent?.Invoke(null, null);
