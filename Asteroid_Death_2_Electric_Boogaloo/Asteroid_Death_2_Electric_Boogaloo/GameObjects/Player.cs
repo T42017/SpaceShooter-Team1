@@ -27,7 +27,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Missile, Weapon.Color.Blue))
         {
-            Health = 10;
+            Health = 12;
             
             ShootingSpeed = 200;
            
