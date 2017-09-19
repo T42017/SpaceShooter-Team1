@@ -47,11 +47,16 @@
     <Compile Include="Camera.cs" />
     <Compile Include="Devices\DeathComponent.cs" />
     <Compile Include="Devices\PauseComponent.cs" />
+    <Compile Include="Enums\PowerupType.cs" />
+    <Compile Include="Factorys\Powerupfactory.cs" />
     <Compile Include="GameObjects\Enemy.cs" />
     <Compile Include="Factorys\EnemyFactory.cs" />
     <Compile Include="Devices\HighscoreMenuComponent.cs" />
     <Compile Include="Devices\IngameComponent.cs" />
     <Compile Include="GameObjectManager.cs" />
+    <Compile Include="GameObjects\Powerups\Powerup.cs" />
+    <Compile Include="GameObjects\Powerups\PowerupHealth.cs" />
+    <Compile Include="GameObjects\Powerups\PowerupMissile.cs" />
     <Compile Include="GameObjects\Projectiles\Missile.cs" />
     <Compile Include="GameObjects\Projectiles\Projectile.cs" />
     <Compile Include="Highscore.cs" />

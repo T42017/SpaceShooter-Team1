@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Diagnostics;
 using Asteroid_Death_2_Electric_Boogaloo.Devices;
 using Asteroid_Death_2_Electric_Boogaloo.Components;
 using Microsoft.Xna.Framework;
@@ -26,7 +27,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         private List<Texture2D> textures = new List<Texture2D>();
         public static int score = 0;
 
-        public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Missile, Weapon.Color.Blue))
+        List<Powerup> Powerups = new List<Powerup>();
+
+
+
+        public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Blue))
         {
             Health = 4;
             
@@ -98,6 +103,18 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             _lastGamePadState = gamePadState;
             
             StayInsideLevel();
+
+            foreach (var powerup in Powerups)
+            {
+                powerup.DoEffect(this);
+                powerup.Update();
+                if (powerup.Timer <= 0)
+                {
+                    powerup.Remove(this);
+                }
+            }
+            Powerups.RemoveAll(p => p.Timer <=0);
+
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -122,16 +139,30 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         public override bool CollidesWith(GameObject otherGameObject)
         {
-            bool collides = base.CollidesWith(otherGameObject) && (otherGameObject is Meteor || otherGameObject is Enemy || otherGameObject is Projectile projectile && projectile.ParentType == typeof(Enemy));
+            bool collides = base.CollidesWith(otherGameObject) && (otherGameObject is Meteor
+            || otherGameObject is Enemy
+            || otherGameObject is Powerup
+            || otherGameObject is Projectile projectile && projectile.ParentType == typeof(Enemy));
+
             if (collides)
             {
+                if (otherGameObject is Powerup)
+                {
+                    otherGameObject.IsDead = true;
+                    //((Powerup) otherGameObject).DoEffect(this); 
+                    Powerups.Add(otherGameObject as Powerup);
+                    Debug.WriteLine("added powerup " + otherGameObject);
+                }
+
                 if (otherGameObject is Projectile pro)
                 {
                     Health -= pro.Damage;
                     pro.IsDead = true;
                    
                 }
-                if (Health <= 0 || !(otherGameObject is Projectile))
+
+                if (Health <= 0 || !(otherGameObject is Projectile
+                || otherGameObject is Powerup))
                 {
                     IsDead = true;
                     MediaPlayer.Stop();

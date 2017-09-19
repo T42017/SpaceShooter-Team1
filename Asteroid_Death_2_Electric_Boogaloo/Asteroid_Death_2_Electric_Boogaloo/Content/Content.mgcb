@@ -1134,6 +1134,7 @@
 /build:Tyrone.mp3
 
 #begin button.png
+#begin PowerupMissile.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1144,8 +1145,10 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:button.png
+/build:PowerupMissile.png
 
 #begin blackSmoke01.png
+#begin powerupImprovedLaser.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1156,8 +1159,10 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:blackSmoke01.png
+/build:powerupImprovedLaser.png
 
 #begin blackSmoke02.png
+#begin powerupHealth.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1168,8 +1173,10 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:blackSmoke02.png
+/build:powerupHealth.png
 
 #begin blackSmoke03.png
+#begin powerupLightsaber.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1180,8 +1187,10 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:blackSmoke03.png
+/build:powerupLightsaber.png
 
 #begin blackSmoke00.png
+#begin powerupRandom.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1192,4 +1201,17 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:blackSmoke00.png
+/build:powerupRandom.png
+
+#begin powerupStar.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:powerupStar.png
 
