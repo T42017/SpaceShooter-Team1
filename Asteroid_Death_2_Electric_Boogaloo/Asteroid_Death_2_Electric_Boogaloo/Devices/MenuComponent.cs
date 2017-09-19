@@ -85,7 +85,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
                 _highlightedUiComponent--;
 
             if (Input.Instance.ClickDown())
-                _highlightedUiComponent++;
+               if(_highlightedUiComponent<3) _highlightedUiComponent++;
                 
           
               

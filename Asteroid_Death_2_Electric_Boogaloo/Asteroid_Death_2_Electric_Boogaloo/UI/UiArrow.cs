@@ -13,7 +13,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
     class UiArrow : BaseUiComponent
     {
 
-        private Texture2D textureLeft,textureRight;
+        private Texture2D textureLeft, textureRight, _texture;
         private SpriteFont font;
         private int highlight;
         private String difficulty;
@@ -25,6 +25,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
             font = Game.Content.Load<SpriteFont>("diff");
             textureLeft = Game.Content.Load<Texture2D>("Left");
             textureRight = Game.Content.Load<Texture2D>("Right");
+            _texture = game.Content.Load<Texture2D>("button");
             highlight = 0;
         }
 
@@ -87,7 +88,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
                     Game.AmountOfEnemys = 30;
                     Globals.Health = 15;
                     Globals.Maxmeteors = 300;
-                    Globals.perSecMeteors =30;
+                    Globals.perSecMeteors =15;
                     break;
             }
 
@@ -95,11 +96,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            
 
+            spriteBatch.Draw(_texture, Position - new Vector2(_texture.Width / 2f, _texture.Height / 2f), Color.White);
             spriteBatch.DrawString(font, difficulty, Position - new Vector2((textureLeft.Width / 2f) +35f,(textureLeft.Height / 2f)-5f), Color.Black, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
-            spriteBatch.Draw(textureLeft, Position - new Vector2((textureLeft.Width / 2f)+80f, textureLeft.Height / 2f), Color.White);
-            spriteBatch.Draw(textureRight, Position - new Vector2((textureRight.Width / 2f)-80f, textureRight.Height / 2f), Color.White);
+            spriteBatch.Draw(textureLeft, Position - new Vector2((textureLeft.Width / 2f)+120f, textureLeft.Height / 2f), Color.White);
+            spriteBatch.Draw(textureRight, Position - new Vector2((textureRight.Width / 2f)-120f, textureRight.Height / 2f), Color.White);
 
         }
     }

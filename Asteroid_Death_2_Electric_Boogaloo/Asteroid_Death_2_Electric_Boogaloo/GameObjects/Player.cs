@@ -42,7 +42,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             textures.Add(Game.Content.Load<Texture2D>("blackSmoke03"));
             Texture = TextureManager.Instance.PlayerShipTexture;
             _lifeTexture = Game.Content.Load<Texture2D>("playerLife2_red");
-            _pewEffect = Game.Content.Load<SoundEffect>("Blaster");
+            _pewEffect = Game.Content.Load<SoundEffect>("shot");
             particleEngine = new ParticleEngine(textures, new Vector2(400, 240));
         }
         
@@ -119,7 +119,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if(Health<=4)
+            if(Health<=5)
             particleEngine.Draw(spriteBatch);
 
             base.Draw(spriteBatch);
