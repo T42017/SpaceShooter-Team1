@@ -52,10 +52,5 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             //if (Timer == 0) player.Weapon = previousWeapon;
             base.Update();
         }
-
-        //public override void LoadContent()
-        //{
-
-        //}
     }
 }

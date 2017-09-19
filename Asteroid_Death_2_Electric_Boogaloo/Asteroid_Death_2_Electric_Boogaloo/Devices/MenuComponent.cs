@@ -47,11 +47,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
 
             UiComponents = new List<BaseUiComponent>();
             UiComponents.Add(new UiLabel(Game, new Vector2(0, -260), Game.Window.Title, menuFont));
-            UiComponents.Add(new UiButton(Game, new Vector2(0, -150), "Play", buttonFont, ButtonStartEvent));
+            UiComponents.Add(new UiButton(Game, new Vector2(0, -150), "Play", buttonFont, (sender, args) => Game.Start()));
             UiComponents.Add(new UiButton(Game, new Vector2(0, -90), "Highscore", buttonFont, ButtonHghiscoreEvent));
             UiComponents.Add(new UiButton(Game, new Vector2(0, -30), "Quit", buttonFont, (sender, args) => Game.Exit()));
             UiComponents.Add(new UiArrow(Game, new Vector2(0,30)));
-            //*/UiComponents[_highlightedUiComponent].IsHighlighted = true;*/
+            HighlightNextComponent();
 
             base.LoadContent();
         }
@@ -62,17 +62,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
             playing = false;
         }
 
-        private void ButtonStartEvent(object sender, EventArgs eventArgs)
-        {
-            Game.Start();
-            Game.ChangeGameState(GameState.ingame);
-            playing = false;
-        }
-
         public override void Update(GameTime gameTime)
         {
-            UpdateHighlightedComponent();
-
             if (playing == false)
             {
                 MediaPlayer.Stop();
@@ -82,20 +73,21 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
             }
 
             if (Input.Instance.ClickUp())
-                _highlightedUiComponent--;
+                HighlightPreviusComponent();
 
             if (Input.Instance.ClickDown())
-               if(_highlightedUiComponent<3) _highlightedUiComponent++;
+                HighlightNextComponent();
                 
           
               
-            
+
             if (Input.Instance.ClickSelect())
                 UiComponents[_highlightedUiComponent].ClickEvent?.Invoke(null, null);
 
             foreach (BaseUiComponent component in UiComponents)
                 component.Update();
 
+            UpdateHighlightMarker();
             base.Update(gameTime);
         }
         
@@ -107,24 +99,44 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
                 for (var y = 0; y < 2000; y += _backGroundtexture.Height)
                     SpriteBatch.Draw(_backGroundtexture, new Vector2(x, y), Color.White);
             
-            foreach (BaseUiComponent component in UiComponents)
+            foreach (var component in UiComponents)
                 component.Draw(SpriteBatch);
 
             SpriteBatch.End();
             base.Draw(gameTime);
         }
 
-        public void UpdateHighlightedComponent()
+        public void UpdateHighlightMarker()
         {
-            if (_highlightedUiComponent > UiComponents.Count - 1)
-                _highlightedUiComponent = UiComponents.Count - 1;
-
             for (int i = 0; i < UiComponents.Count; i++)
             {
-                if (i == _highlightedUiComponent && !UiComponents[i].CanBeHighLighted)
-                    _highlightedUiComponent++;
-
                 UiComponents[i].IsHighlighted = i == _highlightedUiComponent;
+            }
+        }
+
+        public void HighlightPreviusComponent()
+        {
+            int previusComponent = _highlightedUiComponent;
+            for (int i = _highlightedUiComponent; i > 0; i--)
+            {
+                previusComponent--;
+                if (UiComponents[previusComponent].CanBeHighLighted)
+                {
+                    _highlightedUiComponent = previusComponent;
+                    return;
+                }
+            }
+        }
+
+        public void HighlightNextComponent()
+        {
+            for (int nextComponent = _highlightedUiComponent + 1; nextComponent < UiComponents.Count; nextComponent++)
+            {
+                if (UiComponents[nextComponent].CanBeHighLighted)
+                {
+                    _highlightedUiComponent = nextComponent;
+                    return;
+                }
             }
         }
     }

@@ -55,7 +55,9 @@
     <Compile Include="Devices\IngameComponent.cs" />
     <Compile Include="GameObjectManager.cs" />
     <Compile Include="GameObjects\Powerups\Powerup.cs" />
+    <Compile Include="GameObjects\Powerups\PowerupBoost.cs" />
     <Compile Include="GameObjects\Powerups\PowerupHealth.cs" />
+    <Compile Include="GameObjects\Powerups\PowerupMariostar.cs" />
     <Compile Include="GameObjects\Powerups\PowerupMissile.cs" />
     <Compile Include="GameObjects\Projectiles\Missile.cs" />
     <Compile Include="GameObjects\Projectiles\Projectile.cs" />
@@ -83,6 +85,8 @@
     <Compile Include="UI\UiArrow.cs" />
     <Compile Include="UI\UiButton.cs" />
     <Compile Include="UI\UiLabel.cs" />
+    <Compile Include="UI\UiList.cs" />
+    <Compile Include="UI\UiTextbox.cs" />
     <Compile Include="Weapon.cs" />
   </ItemGroup>
   <ItemGroup>

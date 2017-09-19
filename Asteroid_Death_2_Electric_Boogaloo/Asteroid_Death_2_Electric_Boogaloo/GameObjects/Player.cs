@@ -33,8 +33,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Blue),Globals.Health)
         {
-           
+            Health = 10;
+            boost = 180;
             
+
             ShootingSpeed = 200;
             textures.Add(Game.Content.Load<Texture2D>("blackSmoke00"));
             textures.Add(Game.Content.Load<Texture2D>("blackSmoke01"));
@@ -45,18 +47,21 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             _pewEffect = Game.Content.Load<SoundEffect>("shot");
             particleEngine = new ParticleEngine(textures, new Vector2(400, 240));
         }
-        
-       
+
+
 
         public override void Update()
         {
             var gamePadState = GamePad.GetState(PlayerIndex.One);
-            
+
             KeyboardState state = Keyboard.GetState();
 
             particleEngine.EmitterLocation = Position;
             particleEngine.Update();
 
+            
+                
+            
             //Movement using the left, right joystick and the Dpad on the Xbox controller or the arrows or WASD on the keyboard
             if ((gamePadState.ThumbSticks.Left.Y >= 0.3f)
                 || (gamePadState.DPad.Up == ButtonState.Pressed)
@@ -83,6 +88,18 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 || (state.IsKeyDown(Keys.Right)) 
                 || (state.IsKeyDown(Keys.D)))
                 Rotation += 0.026f;
+
+            if ((gamePadState.Buttons.RightShoulder == ButtonState.Pressed)
+                || (state.IsKeyDown(Keys.E))
+                && (boost > 0))
+            {
+                MaxSpeed = 50;
+                AccelerateForward(50f);
+                boost--;
+                MaxSpeed = 10; 
+            }
+
+            
 
             Speed += new Vector2(-Speed.X * 0.015f, -Speed.Y * 0.015f);
             Move();

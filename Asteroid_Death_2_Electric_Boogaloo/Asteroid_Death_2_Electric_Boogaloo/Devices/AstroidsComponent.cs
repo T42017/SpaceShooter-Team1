@@ -32,5 +32,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             base.LoadContent();
         }
 
+        public virtual void Reset()
+        {
+            
+        }
+
     }
 }
