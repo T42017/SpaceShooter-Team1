@@ -31,7 +31,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
 
 
-        public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Blue))
+        public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Blue),Globals.Health)
         {
             Health = 10;
             boost = 180;

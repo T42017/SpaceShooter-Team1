@@ -14,14 +14,18 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         private DateTime _timeSenceLastShot = DateTime.Today;
 
         public int Health = 1;
+        public int BaseHealth;
         public int boost = 1;
-
-        protected Ship(AsteroidsGame game) : base(game)
+        protected Ship(AsteroidsGame game,int baseHealth) : base(game)
         {
+            BaseHealth = baseHealth;
+            Health = baseHealth;
         }
 
-        protected Ship(AsteroidsGame game, Weapon weapon) : base(game)
+        protected Ship(AsteroidsGame game, Weapon weapon,int baseHealth) : base(game)
         {
+            BaseHealth = baseHealth;
+            Health = baseHealth;
             this.Weapon = weapon;
         }
 

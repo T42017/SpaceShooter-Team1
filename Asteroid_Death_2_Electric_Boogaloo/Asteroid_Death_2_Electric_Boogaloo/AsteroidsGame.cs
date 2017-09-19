@@ -102,7 +102,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 GameObjectManager.RemoveDeadGameObjects();
                 GameObjectManager.UpdateGameObjects();
                 _camera.FollowPlayer(GameObjectManager.Player);
-                GameObjectManager.AddNewMeteors(gameTime, 10, 1000);
+                GameObjectManager.AddNewMeteors(gameTime, Globals.perSecMeteors, 1000);
                 ControlMaxEnemies();
             }
             base.Update(gameTime);
