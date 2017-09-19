@@ -19,6 +19,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         private DateTime _timeSenceLastShot = DateTime.Today;
         private Texture2D _lifeTexture;
         public static int score = 0;
+        public bool HasMariostar { get; set; }
 
         List<Powerup> Powerups = new List<Powerup>();
         
@@ -125,6 +126,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         public override bool CollidesWith(GameObject otherGameObject)
         {
+            if (HasMariostar)
+            {
+                return false;
+            }
+
             bool collides = base.CollidesWith(otherGameObject) && (otherGameObject is Meteor
             || otherGameObject is Enemy
             || otherGameObject is Powerup

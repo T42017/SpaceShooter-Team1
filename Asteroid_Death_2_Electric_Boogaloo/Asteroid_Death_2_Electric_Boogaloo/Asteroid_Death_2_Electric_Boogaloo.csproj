@@ -55,6 +55,7 @@
     <Compile Include="Devices\IngameComponent.cs" />
     <Compile Include="GameObjectManager.cs" />
     <Compile Include="GameObjects\Powerups\Powerup.cs" />
+    <Compile Include="GameObjects\Powerups\PowerupBoost.cs" />
     <Compile Include="GameObjects\Powerups\PowerupHealth.cs" />
     <Compile Include="GameObjects\Powerups\PowerupMariostar.cs" />
     <Compile Include="GameObjects\Powerups\PowerupMissile.cs" />

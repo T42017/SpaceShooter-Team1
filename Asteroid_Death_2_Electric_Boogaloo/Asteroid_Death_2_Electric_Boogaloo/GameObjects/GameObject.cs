@@ -141,10 +141,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 Speed = Vector2.Normalize(Speed) * MaxSpeed;
             }
         }
-
         
-        
-
         public override string ToString()
         {
             return $"{GetType().Name} at position ({Position.X}, {Position.Y})";

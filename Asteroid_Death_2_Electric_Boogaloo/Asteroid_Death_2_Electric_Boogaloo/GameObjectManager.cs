@@ -11,7 +11,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     public class GameObjectManager
     {
         private readonly AsteroidsGame _game;
-
         private EnemyFactory _enemyFactory;
         private PowerupFactory _powerupFactory;
 
@@ -73,7 +72,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                     Globals.RNG.Next(_game.Level.SizeX),
                     Globals.RNG.Next(_game.Level.SizeY)
                 );
-
                 var powerup = _powerupFactory.GetRandomPowerup();
                 GameObjects.Add(powerup);
             }
@@ -119,7 +117,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                         (MeteorSize) Globals.RNG.Next(1, 3),
                         (MeteorColour) Globals.RNG.Next(0, 2)
                     );
-                } while (Player.DistanceToSquared(meteor) <= hypothenuseSquared);
+                }
+                while (Player.DistanceToSquared(meteor) <= hypothenuseSquared);
                 GameObjects.Add(meteor);
             }
         }
@@ -152,7 +151,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 if (thisObject == otherGameObject ||
                     !thisObject.CollidesWith(otherGameObject))
                     continue;
-                Debug.WriteLine($"{thisObject} collided with {otherGameObject}");
                 return;
             }
         }
