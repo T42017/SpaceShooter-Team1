@@ -1,0 +1,60 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+
+namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
+{
+    public abstract class BaseCollisionEffect : GameObject
+    {
+        #region Private fields
+        private readonly Texture2D[] _textures;
+        private readonly int _amountOfPictures;
+        private readonly int _timeBetweenFramesMs;
+        private DateTime _timeLastFrame;
+        private int _currentTextureIndex;
+        private GameObject _collidedGameObject;
+        #endregion
+
+        #region Protected constructors
+        protected BaseCollisionEffect(AsteroidsGame game, Vector2 position) : base(game)
+        {
+            Position = position;
+            _amountOfPictures = 9;
+            _timeBetweenFramesMs = 100;
+            _timeLastFrame = DateTime.Now;
+            _textures = TextureManager.Instance.HitmarkerTextures;
+            Texture = _textures[_textures.Length - 1];
+        }
+        #endregion
+
+<<<<<<< HEAD:Asteroid_Death_2_Electric_Boogaloo/Asteroid_Death_2_Electric_Boogaloo/GameObjects/Collision Effects/BaseCollisionEffect.cs
+        #region Public overrides
+=======
+>>>>>>> origin/Feature_MovementOfPlayer:Asteroid_Death_2_Electric_Boogaloo/Asteroid_Death_2_Electric_Boogaloo/GameObjects/Hitmarker.cs
+        public override void Update()
+        {
+            if ((DateTime.Now - _timeLastFrame).TotalMilliseconds <= _timeBetweenFramesMs)
+                return;
+
+            _currentTextureIndex++;
+            if (_currentTextureIndex > _amountOfPictures - 1)
+                IsDead = true;
+            else
+                Texture = _textures[_currentTextureIndex];
+
+            _timeLastFrame = DateTime.Now;
+        }
+
+        public override bool CollidesWith(GameObject otherGameObject)
+        {
+            _collidedGameObject = otherGameObject;
+            return false; // TODO (?) Make explosions hurt other GameObjects.
+        }
+
+        #endregion
+    }
+}

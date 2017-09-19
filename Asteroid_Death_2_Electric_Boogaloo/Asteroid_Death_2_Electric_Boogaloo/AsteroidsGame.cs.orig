@@ -1,6 +1,6 @@
 ﻿using Asteroid_Death_2_Electric_Boogaloo.Components;
-
 using Asteroid_Death_2_Electric_Boogaloo.Devices;
+using Asteroid_Death_2_Electric_Boogaloo.Factorys;
 using Asteroid_Death_2_Electric_Boogaloo.GameObjects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -51,8 +51,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 astroidsComponent.Visible = astroidsComponent.DrawableStates.HasFlag(_gameState);
                 astroidsComponent.Enabled = astroidsComponent.UpdatableStates.HasFlag(_gameState);
             }
-           
-          
         }
 
         public void UpdateWindowSize()
@@ -67,7 +65,19 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             GameObjectManager = new GameObjectManager(this);
             GameObjectManager.AddEnemyFactory(new EnemyFactory(this));
             GameObjectManager.AddEnemys(10);
-        } 
+            GameObjectManager.AddPowerupFactory(new PowerupFactory(this));
+            GameObjectManager.AddPowerups(20);
+        }
+
+        public void ControlMaxEnemies()
+        {
+            Enemy[] enemys = GameObjectManager.GetEnemys();
+
+            if (enemys.Length < AmountOfEnemys)
+            {
+                GameObjectManager.AddEnemys(AmountOfEnemys - enemys.Length);
+            }
+        }
         #endregion
 
         #region Protected overrides
@@ -111,8 +121,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             {
                 GameObjectManager.RemoveDeadGameObjects();
                 GameObjectManager.RemoveDeadExplosions();
+                GameObjectManager.RemoveDeadHitmarkers();
                 GameObjectManager.UpdateGameObjects();
                 GameObjectManager.UpdateExplosions();
+                GameObjectManager.UpdateHitmarkers();
                 _camera.FollowPlayer(GameObjectManager.Player);
                 GameObjectManager.AddNewMeteors(gameTime, 10, 1000);
                 ControlMaxEnemies();
@@ -138,22 +150,15 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 Level.DrawBackground(_spriteBatch);
                 GameObjectManager.DrawGameObjects(_spriteBatch);
                 GameObjectManager.DrawExplosions(_spriteBatch);
+                GameObjectManager.DrawHitmarkers(_spriteBatch);
             }
 
             _spriteBatch.End();
             base.Draw(gameTime);
-<<<<<<< HEAD
         } 
         #endregion
+<<<<<<< HEAD
 =======
-        }
-
-        public void UpdateWindowSize()
-        {
-            WindowWidth = Graphics.PreferredBackBufferWidth;
-            Windowheight = Graphics.PreferredBackBufferHeight;
-        }
-
         public void ControlMaxEnemies()
         {
             Enemy[] enemys = GameObjectManager.GetEnemys();
@@ -163,18 +168,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 GameObjectManager.AddEnemys(AmountOfEnemys - enemys.Length);
             }
         }
-
-        public void Start()
-        {
-            Level = new Level(this, 20, 20);
-            GameObjectManager = new GameObjectManager(this);
-            GameObjectManager.AddEnemyFactory(new EnemyFactory(this));
-            GameObjectManager.AddEnemys(10);
-            GameObjectManager.AddPowerups(12);
-=======
->>>>>>> origin/develop
-        }
-
 >>>>>>> origin/Feature_MovementOfPlayer
     }
 }

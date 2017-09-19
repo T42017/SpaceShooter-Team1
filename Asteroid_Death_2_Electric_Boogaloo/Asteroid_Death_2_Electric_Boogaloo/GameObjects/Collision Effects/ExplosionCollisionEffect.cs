@@ -20,9 +20,5 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             return Game.GameObjectManager.Explosions.All(explosion => DistanceToSquared(explosion) > 25 * 25);
         }
         #endregion
-
-        #region Public overrides
-        public override void LoadContent() {}
-        #endregion
     }
 }

@@ -15,7 +15,5 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         {
             Texture = TextureManager.Instance.LoadByName(Game.Content, "hitmarker");
         }
-
-        public override void LoadContent() {}
     }
 }

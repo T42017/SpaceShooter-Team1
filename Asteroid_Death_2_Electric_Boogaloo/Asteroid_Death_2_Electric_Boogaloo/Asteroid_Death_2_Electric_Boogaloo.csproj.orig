@@ -48,21 +48,30 @@
     <Compile Include="Devices\DeathComponent.cs" />
     <Compile Include="Devices\PauseComponent.cs" />
     <Compile Include="Enums\PowerupType.cs" />
+<<<<<<< HEAD
+    <Compile Include="Factorys\Powerupfactory.cs" />
+    <Compile Include="GameObjects\Collision Effects\BaseCollisionEffect.cs" />
+=======
+    <Compile Include="Factorys\PowerupFactory.cs" />
+>>>>>>> origin/Feature_MovementOfPlayer
     <Compile Include="GameObjects\Enemy.cs" />
     <Compile Include="Factorys\EnemyFactory.cs" />
     <Compile Include="Devices\HighscoreMenuComponent.cs" />
     <Compile Include="Devices\IngameComponent.cs" />
     <Compile Include="GameObjectManager.cs" />
-<<<<<<< HEAD
-    <Compile Include="GameObjects\Powerup.cs" />
-=======
+    <Compile Include="GameObjects\Collision Effects\HitmarkerCollisionEffect.cs" />
+    <Compile Include="GameObjects\Powerups\Powerup.cs" />
+    <Compile Include="GameObjects\Powerups\PowerupBoost.cs" />
+    <Compile Include="GameObjects\Powerups\PowerupHealth.cs" />
+    <Compile Include="GameObjects\Powerups\PowerupMariostar.cs" />
+    <Compile Include="GameObjects\Powerups\PowerupMissile.cs" />
     <Compile Include="GameObjects\Projectiles\Missile.cs" />
     <Compile Include="GameObjects\Projectiles\Projectile.cs" />
->>>>>>> origin/Feature_MovementOfPlayer
+    <Compile Include="Highscore.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="Devices\MenuComponent.cs" />
     <Compile Include="MathHelper.cs" />
-    <Compile Include="GameObjects\PixelExplosion.cs" />
+    <Compile Include="GameObjects\Collision Effects\ExplosionCollisionEffect.cs" />
     <Compile Include="GameObjects\GameObject.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="Devices\GameState.cs" />
@@ -87,6 +96,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Highscore.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
