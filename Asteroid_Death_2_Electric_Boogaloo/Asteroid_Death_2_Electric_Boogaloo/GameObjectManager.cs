@@ -18,8 +18,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     {
         public Player Player { get; private set; }
         public List<GameObject> GameObjects { get; } = new List<GameObject>();
-        public List<Explosion> Explosions { get; set; } = new List<Explosion>();
-        public List<Hitmarker> Hitmarkers { get; set; } = new List<Hitmarker>();
+        public List<ExplosionCollisionEffect> Explosions { get; set; } = new List<ExplosionCollisionEffect>();
+        public List<HitmarkerCollisionEffect> Hitmarkers { get; set; } = new List<HitmarkerCollisionEffect>();
 
         private EnemyFactory _enemyFactory;
         private readonly AsteroidsGame _game;
@@ -191,7 +191,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             foreach (var otherGameObject in GameObjects)
             {
-                if (thisObject == otherGameObject ||
+                if (Player.DistanceToSquared(otherGameObject) > 1000 * 1000 ||
+                    thisObject == otherGameObject ||
                     !thisObject.CollidesWith(otherGameObject))
                     continue;
                 //Debug.WriteLine($"{thisObject} collided with {otherGameObject}");

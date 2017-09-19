@@ -81,7 +81,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 var speed = new Vector2(
                     Speed.X * Globals.RNG.Next(2, 3) * (Globals.RNG.Next(-1, 2) < 0 ? -1 : 1) + 5 * (float) Globals.RNG.NextDouble() * (Globals.RNG.Next(-1, 2) < 0 ? -1 : 1),
                     Speed.Y * Globals.RNG.Next(2, 3) * (Globals.RNG.Next(-1, 2) < 0 ? -1 : 1) + 5 * (float) Globals.RNG.NextDouble() * (Globals.RNG.Next(-1, 2) < 0 ? -1 : 1)
-                );
+                ); // lol
 
                 yield return new Meteor(Game, Position + offset, MeteorSize - 1, MeteorColour)
                 {

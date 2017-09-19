@@ -49,7 +49,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             base.Update();
         }
 
-        protected abstract Type GetClassType();
+        protected abstract Type GetClassType(); // To be able do differentiate between different subclasses
 
         public override bool CollidesWith(GameObject otherGameObject)
         {
@@ -60,14 +60,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
                 if (GetClassType() == typeof(Missile))
                 {
-                    var explosion = new Explosion(Game, position);
+                    var explosion = new ExplosionCollisionEffect(Game, position);
                     Debug.WriteLine($"{GetType().Name}: ({Position})\r\nExplosion: ({explosion.Position})");
                     if (explosion.NoExplosionsNearby())
                         Game.GameObjectManager.Explosions.Add(explosion);
                 }
                 else
                 {
-                    var hitmarker = new Hitmarker(Game, Position);
+                    var hitmarker = new HitmarkerCollisionEffect(Game, Position);
                     Game.GameObjectManager.Hitmarkers.Add(hitmarker);
                 }
             }

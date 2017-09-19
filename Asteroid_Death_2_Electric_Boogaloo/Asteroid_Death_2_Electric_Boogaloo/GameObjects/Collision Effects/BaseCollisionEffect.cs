@@ -4,42 +4,36 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
-    public class Hitmarker : GameObject
+    public abstract class BaseCollisionEffect : GameObject
     {
-        private int _aliveTimeInFrames;
+        #region Private fields
         private readonly Texture2D[] _textures;
         private readonly int _amountOfPictures;
         private readonly int _timeBetweenFramesMs;
         private DateTime _timeLastFrame;
         private int _currentTextureIndex;
+        private GameObject _collidedGameObject;
+        #endregion
 
-        public Hitmarker(AsteroidsGame game, Vector2 position) : base(game)
+        #region Protected constructors
+        protected BaseCollisionEffect(AsteroidsGame game, Vector2 position) : base(game)
         {
             Position = position;
-            Texture = TextureManager.Instance.LoadByName(Game.Content, "hitmarker");
             _amountOfPictures = 9;
             _timeBetweenFramesMs = 100;
             _timeLastFrame = DateTime.Now;
             _textures = TextureManager.Instance.HitmarkerTextures;
             Texture = _textures[_textures.Length - 1];
-
-            _aliveTimeInFrames = (int) ((1.0/3) * 60);
         }
+        #endregion
 
-        public override void LoadContent() {}
-
+        #region Public overrides
         public override void Update()
         {
-            if (_aliveTimeInFrames > 0)
-                _aliveTimeInFrames--;
-            if (_aliveTimeInFrames == 0)
-                IsDead = true;
-
             if ((DateTime.Now - _timeLastFrame).TotalMilliseconds <= _timeBetweenFramesMs)
                 return;
 
@@ -50,7 +44,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 Texture = _textures[_currentTextureIndex];
 
             _timeLastFrame = DateTime.Now;
-            base.Update();
         }
+
+        public override bool CollidesWith(GameObject otherGameObject)
+        {
+            _collidedGameObject = otherGameObject;
+            return false; // TODO (?) Make explosions hurt other GameObjects.
+        }
+
+        #endregion
     }
 }
