@@ -8,21 +8,21 @@ using Microsoft.Xna.Framework;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups
 {
-    class PowerupMissile : Powerup
+    class PowerupMariostar: Powerup
     {
-        public PowerupMissile(AsteroidsGame game, Vector2 position) : base(game, position, PowerupType.Missile)
+        public PowerupMariostar(AsteroidsGame game, Vector2 position) : base(game, position, PowerupType.Mariostar)
         {
 
         }
 
         public override void Remove(Player player)
         {
-            player.Weapon=new Weapon(Game, Weapon.Type.Laser, Weapon.Color.Red);
+
         }
 
         public override void DoEffect(Player player)
         {
-            player.Weapon=new Weapon(Game, Weapon.Type.Missile, Weapon.Color.Red);
+            player.Health = player.Health + 3;
         }
     }
 }

@@ -178,7 +178,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
                 || keyboardstate.IsKeyDown(Keys.Space) && lastKeyboardState.IsKeyUp(Keys.Space) && highlight == 2)
             {
                 pGame.Start();
-                pGame.GameObjectManager.LoadContent();
                 pGame.ChangeGameState(GameState.ingame);
                 playing = false;
                 hasloaded = false;

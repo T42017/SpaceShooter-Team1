@@ -24,14 +24,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
 
 
-        public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Blue))
+        public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Red))
         {
             Health = 10;
             ShootingSpeed = 200;
-        }
-        
-        public override void LoadContent()
-        {
             Texture = TextureManager.Instance.PlayerShipTexture;
             _lifeTexture = Game.Content.Load<Texture2D>("playerLife2_red");
             _pewEffect = Game.Content.Load<SoundEffect>("Blaster");
@@ -100,7 +96,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 }
             }
             Powerups.RemoveAll(p => p.Timer <=0);
-
         }
 
         public override void Draw(SpriteBatch spriteBatch)

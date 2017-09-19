@@ -11,9 +11,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Enums
     {
         Missile,
         Health,
-        Lightsaber,
+        //Lightsaber,
         Mariostar,
-        ImprovedLaser,
-        Random,
+        //ImprovedLaser,
+        //Random,
     }
 }

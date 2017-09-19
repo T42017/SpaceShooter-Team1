@@ -9,6 +9,7 @@ using System.Windows.Forms.VisualStyles;
 using Asteroid_Death_2_Electric_Boogaloo.Components;
 
 using Asteroid_Death_2_Electric_Boogaloo.Devices;
+using Asteroid_Death_2_Electric_Boogaloo.Factorys;
 using Asteroid_Death_2_Electric_Boogaloo.GameObjects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -150,7 +151,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Level = new Level(this, 20, 20);
             GameObjectManager = new GameObjectManager(this);
             GameObjectManager.AddEnemyFactory(new EnemyFactory(this));
-            GameObjectManager.AddPowerups(12);
+            GameObjectManager.AddPowerupFactory(new PowerupFactory(this));
+            GameObjectManager.AddPowerups(20);
         }
 
     }
