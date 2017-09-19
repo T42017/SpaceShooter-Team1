@@ -19,11 +19,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
         private Texture2D _highlightTexture;
         private SpriteFont _font;
 
-        public string Text;
-
-        public UiButton(AsteroidsGame game, Vector2 position, string text, SpriteFont font, EventHandler clickEvent) : base(game, position, true, clickEvent)
+        public UiButton(AsteroidsGame game, Vector2 position, string text, SpriteFont font, EventHandler clickEvent) : base(game, position, true, clickEvent, text)
         {
-            Text = text;
             _font = font;
             _texture = Game.Content.Load<Texture2D>("button");
             _highlightTexture = Game.Content.Load<Texture2D>("playerLife2_red");
