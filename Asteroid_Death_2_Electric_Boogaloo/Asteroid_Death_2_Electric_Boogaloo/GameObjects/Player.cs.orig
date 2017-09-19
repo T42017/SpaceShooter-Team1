@@ -30,9 +30,15 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         List<Powerup> Powerups = new List<Powerup>();
 
 
-
         public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Blue),Globals.Health)
         {
+            Health = 10;
+            boost = 180;
+
+>>>>>>> 94394633c7d8fac0299ddcfd95113a34b0ae3f6f
+            
+
+            ShootingSpeed = 200;
             Health = 10;
             boost = 180;
             
@@ -136,7 +142,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-<<<<<<< HEAD
+            if(Health<=3)
             if(Health<=5)
 =======
             if(Health<=3)
