@@ -70,7 +70,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 
             SpriteBatch.DrawString(font, text2,
                 new Vector2(
-                    pGame.Graphics.PreferredBackBufferWidth / 2 - (pGame.Graphics.PreferredBackBufferWidth / 12),
+                    pGame.Graphics.PreferredBackBufferWidth / 2 - (pGame.Graphics.PreferredBackBufferWidth / 3),
                     (pGame.Graphics.PreferredBackBufferHeight / 4) +
                     (pGame.Graphics.PreferredBackBufferHeight / 8) + 30), Color.Goldenrod );
             SpriteBatch.End();

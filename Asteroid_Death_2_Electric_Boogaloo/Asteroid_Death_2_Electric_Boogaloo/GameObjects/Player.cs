@@ -28,7 +28,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Missile, Weapon.Color.Blue))
         {
-            Health = 12;
+            Health = 4;
             
             ShootingSpeed = 200;
             textures.Add(Game.Content.Load<Texture2D>("blackSmoke00"));
@@ -109,7 +109,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
             //Draw player health
             spriteBatch.DrawString(MenuComponent.menuFont, Health + " x ", Position,
-                Color.OrangeRed, Rotation + MathHelper.DegreesToRadians(90), new Vector2(Globals.ScreenWidth / 2, Globals.ScreenHeight / 2 + 13), 1f, SpriteEffects.None, 0);
+                Color.OrangeRed, Rotation + MathHelper.DegreesToRadians(90), new Vector2((Globals.ScreenWidth / 2)+35, Globals.ScreenHeight / 2 + 13), 1f, SpriteEffects.None, 0);
 
             spriteBatch.Draw(_lifeTexture, Position, null, Color.White, Rotation + MathHelper.DegreesToRadians(90),
                 new Vector2(Globals.ScreenWidth / 2 - 70, Globals.ScreenHeight / 2), 1.0f, SpriteEffects.None, 0);
