@@ -38,13 +38,17 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Factorys
                     powerup = new PowerupHealth(_game, position);
                     break;
 
-                case PowerupType.Mariostar:
-                    powerup = new PowerupMariostar(_game, position);
+                //case PowerupType.Mariostar:
+                //    powerup = new PowerupMariostar(_game, position);
                     break;
 
-                    //case PowerupType.Random:
-                    //    powerup = new PowerupRandom(_game, position);
-                    //    break;
+                //case PowerupType.Boost:
+                //    powerup = new PowerupBoost(_game, position);
+                //    break;
+
+                //case PowerupType.Random:
+                //    powerup = new PowerupRandom(_game, position);
+                //    break;
             }
             return powerup;
         }

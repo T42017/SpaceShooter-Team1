@@ -13,7 +13,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         public float Radius { get; set; }
         public Vector2 Speed { get; set; }
         public float Rotation { get; set; } = MathHelper.DegreesToRadians(-90);
-        public int MaxSpeed = 9;
+        public int MaxSpeed = 10;
         public Texture2D Texture { get; set; }
         public float Scale { get; set; } = 1;
 
