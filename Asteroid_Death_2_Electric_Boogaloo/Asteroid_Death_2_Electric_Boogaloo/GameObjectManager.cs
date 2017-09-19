@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Asteroid_Death_2_Electric_Boogaloo.GameObjects;
+using Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -62,6 +63,23 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             }
         }
 
+        public void AddPowerups(int amount)
+        {
+            for (int i = 0; i < amount; i++)
+            {
+                var position = new Vector2(
+                    Globals.RNG.Next(_game.Level.SizeX),
+                    Globals.RNG.Next(_game.Level.SizeY)
+                );
+
+                Powerup powerupMissile = new PowerupMissile(_game, position);
+                Powerup powerupHealth = new PowerupHealth(_game, position);
+                GameObjects.Add(powerupMissile);
+                GameObjects.Add(powerupHealth);
+                
+            }
+        }
+
         public List<Meteor> GetMeteors()
         {
             List<Meteor> meteors = new List<Meteor>();
@@ -90,7 +108,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             int currentGameTimeModInterval = (int) gameTime.TotalGameTime.TotalMilliseconds % intervalInMilliseconds;
             if (currentGameTimeModInterval != 0 ||
-                GameObjects.Count(obj => obj is Meteor) >= 100)
+                GameObjects.Count(obj => obj is Meteor) >= Globals.Maxmeteors)
                 return;
             int hypothenuseSquared = (Globals.ScreenWidth * Globals.ScreenWidth) / 4 + (Globals.ScreenHeight * Globals.ScreenHeight) / 4;
             for (int i = 0; i < amountOfMeteorsToAdd; i++)
@@ -111,7 +129,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 GameObjects.Add(meteor);
             }
         }
-
+        
         public Enemy[] GetEnemys()
         {
             List<Enemy> enemys = new List<Enemy>();

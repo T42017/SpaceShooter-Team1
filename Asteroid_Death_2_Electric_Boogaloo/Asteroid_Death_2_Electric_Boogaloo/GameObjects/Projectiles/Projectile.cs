@@ -41,8 +41,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         public override void Update()
         {
             DieIfOutSideMap();
-            Speed = Forward() * 11;
-            AccelerateForward(9);
+            Speed = Forward() * 1;
+            AccelerateForward(1);
             Move();
 
             base.Update();

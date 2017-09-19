@@ -21,11 +21,16 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         private SoundEffect _pewEffect;
         private DateTime _timeSenceLastShot = DateTime.Today;
         private Texture2D _lifeTexture;
+        public static int score = 0;
         ParticleEngine particleEngine;
         private List<Texture2D> textures = new List<Texture2D>();
         public static int score = 0;
 
+        public Player(AsteroidsGame game) : base(game, Laser.Color.Red)
+        public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Red))
+=======
         public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Missile, Weapon.Color.Blue))
+>>>>>>> origin/develop
         {
             Health = 10;
             
@@ -84,6 +89,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             base.Update();
             
             if (Input.Instance.HoldSelect() && !IsWeaponOverheated())
+            if (((gamePadState.Buttons.A == ButtonState.Pressed)
+                || (state.IsKeyDown(Keys.Space))
+                || (gamePadState.Triggers.Right > 0.2)) && 
+                (DateTime.Now - _timeSenceLastShot).TotalMilliseconds >= ShootingSpeed)
             {
                 Shoot(typeof(Player));
                 _pewEffect.Play();
@@ -114,16 +123,40 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         public override bool CollidesWith(GameObject otherGameObject)
         {
-            bool collides = base.CollidesWith(otherGameObject) && (otherGameObject is Meteor || otherGameObject is Enemy || otherGameObject is Projectile projectile && projectile.ParentType == typeof(Enemy));
+            bool collides = base.CollidesWith(otherGameObject) && (otherGameObject is Meteor
+            || otherGameObject is Enemy
+            || otherGameObject is Powerup
+            || otherGameObject is Projectile projectile && projectile.ParentType == typeof(Enemy));
+
             if (collides)
             {
                 if (otherGameObject is Projectile pro)
+                IsDead = true;
+                if (otherGameObject is Powerup)
+                {
+                    Health--;
+                    Health -= pro.Damage;
+                    pro.IsDead = true;
+                    ((Powerup) otherGameObject).DoEffect(this); 
+                }
+                if (Health <= 0 || !(otherGameObject is Projectile))
+                if (ShouldBeDead() || !(otherGameObject is Laser))
+
+                if (otherGameObject is Projectile)
+=======
+                if (otherGameObject is Projectile pro)
+>>>>>>> origin/develop
                 {
                     Health -= pro.Damage;
                     pro.IsDead = true;
                    
                 }
+<<<<<<< HEAD
+
+                if (ShouldBeDead() || !(otherGameObject is Projectile || otherGameObject is Powerup))
+=======
                 if (Health <= 0 || !(otherGameObject is Projectile))
+>>>>>>> origin/develop
                 {
                     IsDead = true;
                     MediaPlayer.Stop();
