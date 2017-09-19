@@ -1254,3 +1254,9 @@
 /processorParam:Quality=Best
 /build:Shot.wav
 
+#begin Alarm.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Alarm.ogg
+

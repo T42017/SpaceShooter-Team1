@@ -20,7 +20,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
     {
         private KeyboardState _lastKeyboardState;
         private GamePadState _lastGamePadState;
-        private SoundEffect _pewEffect;
+        private SoundEffect _pewEffect,alarm;
+        private SoundEffectInstance alarm2;
         private DateTime _timeSenceLastShot = DateTime.Today;
         private Texture2D _lifeTexture;
         ParticleEngine particleEngine;
@@ -32,7 +33,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Blue), Globals.Health)
         {
             boost = 180;
-            
+         
             ShootingSpeed = 200;
             textures.Add(Game.Content.Load<Texture2D>("blackSmoke00"));
             textures.Add(Game.Content.Load<Texture2D>("blackSmoke01"));
@@ -41,6 +42,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             Texture = TextureManager.Instance.PlayerShipTexture;
             _lifeTexture = Game.Content.Load<Texture2D>("playerLife2_red");
             _pewEffect = Game.Content.Load<SoundEffect>("shot");
+            alarm = game.Content.Load<SoundEffect>("Alarm");
+            alarm2 = alarm.CreateInstance();
+            alarm2.IsLooped = true;
+        
             particleEngine = new ParticleEngine(textures, new Vector2(400, 240));
         }
         
@@ -49,10 +54,17 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             var gamePadState = GamePad.GetState(PlayerIndex.One);
 
             KeyboardState state = Keyboard.GetState();
-
-            particleEngine.EmitterLocation = Position;
+            if (Health <= 5) {
+                particleEngine.EmitterLocation = Position;
             particleEngine.Update();
+                alarm2.Play();
+            }
+            else
+            {
+               alarm2.Stop(); 
+            }
             
+           
             //Movement using the left, right joystick and the Dpad on the Xbox controller or the arrows or WASD on the keyboard
             if ((gamePadState.ThumbSticks.Left.Y >= 0.3f)
                 || (gamePadState.DPad.Up == ButtonState.Pressed)
@@ -171,6 +183,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 {
                     IsDead = true;
                     MediaPlayer.Stop();
+                    alarm2.Stop();
                     Game.ChangeGameState(GameState.gameover);
                     IngameComponent.playing = false;
                 }
