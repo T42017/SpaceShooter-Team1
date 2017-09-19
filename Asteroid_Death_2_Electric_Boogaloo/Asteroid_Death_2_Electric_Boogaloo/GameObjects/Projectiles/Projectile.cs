@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,7 +52,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             bool collides = base.CollidesWith(otherGameObject) && ParentType != otherGameObject.GetType() && !(otherGameObject is Laser);
             if (collides)
             {
-                var explosion = new Explosion(Game, otherGameObject.Position);
+                var position = new Vector2(Position.X + .25f * Width, Position.Y + .25f * Height);
+                var explosion = new Explosion(Game, position);
+                Debug.WriteLine($"{GetType().Name}: ({Position})\r\nExplosion: ({explosion.Position})");
                 if (explosion.NoExplosionsNearby())
                     Game.GameObjectManager.Explosions.Add(explosion);
             }

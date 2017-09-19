@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using Microsoft.Xna.Framework;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
@@ -77,12 +78,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                     Globals.RNG.Next(-20, 20),
                     Globals.RNG.Next(-20, 20));
 
+                var speed = new Vector2(
+                    Speed.X * Globals.RNG.Next(2, 3) * (Globals.RNG.Next(-1, 2) < 0 ? -1 : 1) + 5 * (float) Globals.RNG.NextDouble() * (Globals.RNG.Next(-1, 2) < 0 ? -1 : 1),
+                    Speed.Y * Globals.RNG.Next(2, 3) * (Globals.RNG.Next(-1, 2) < 0 ? -1 : 1) + 5 * (float) Globals.RNG.NextDouble() * (Globals.RNG.Next(-1, 2) < 0 ? -1 : 1)
+                );
+
                 yield return new Meteor(Game, Position + offset, MeteorSize - 1, MeteorColour)
                 {
-                    Speed = new Vector2(
-                        Speed.X * Globals.RNG.Next(2, 3) * (Globals.RNG.Next(-1, 2) < 0 ? -1 : 1),
-                        Speed.Y * Globals.RNG.Next(2, 3) * (Globals.RNG.Next(-1, 2) < 0 ? -1 : 1)
-                    )
+                    Speed = MeteorColour == MeteorColour.Brown ? speed : speed * 2
                 };
             }
         }
@@ -114,14 +117,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             bool collides = base.CollidesWith(otherGameObject) && otherGameObject is Projectile;
             if (collides)
             {
-               
                 var smallerMeteors = SpawnChildren();
                 if (smallerMeteors != null)
                 {
                     foreach (var meteor in smallerMeteors)
                         Game.GameObjectManager.GameObjects.Add(meteor);
                 }
-               
                 IsDead = true;
                 Game.GameObjectManager.GameObjects.Remove(otherGameObject); // To remove laser at correct time
             }

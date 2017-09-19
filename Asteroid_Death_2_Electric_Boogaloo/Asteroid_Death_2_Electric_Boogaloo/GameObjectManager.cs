@@ -166,7 +166,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 if (thisObject == otherGameObject ||
                     !thisObject.CollidesWith(otherGameObject))
                     continue;
-                Debug.WriteLine($"{thisObject} collided with {otherGameObject}");
+                //Debug.WriteLine($"{thisObject} collided with {otherGameObject}");
                 return;
             }
         }

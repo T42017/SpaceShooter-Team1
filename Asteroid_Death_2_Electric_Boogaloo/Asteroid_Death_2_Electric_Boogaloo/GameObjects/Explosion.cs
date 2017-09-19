@@ -31,7 +31,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         #region Public methods
         public bool NoExplosionsNearby()
         {
-            return Game.GameObjectManager.Explosions.All(explosion => DistanceToSquared(explosion) > 50 * 50);
+            return Game.GameObjectManager.Explosions.All(explosion => DistanceToSquared(explosion) > 25 * 25);
         }
         #endregion
 
@@ -52,11 +52,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             _timeLastFrame = DateTime.Now;
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            float scale = _collidedGameObject == null ? 1f : 1.2f;
-            spriteBatch.Draw(Texture, Position, null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
-        }
+        //public override void Draw(SpriteBatch spriteBatch)
+        //{
+        //    float scale = _collidedGameObject == null ? 1f : 1.2f;
+        //    spriteBatch.Draw(Texture, Position, null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+        //}
 
         public override bool CollidesWith(GameObject otherGameObject)
         {
@@ -64,6 +64,5 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             return false; // TODO (?) Make explosions hurt other GameObjects.
         }
         #endregion
-
     }
 }
