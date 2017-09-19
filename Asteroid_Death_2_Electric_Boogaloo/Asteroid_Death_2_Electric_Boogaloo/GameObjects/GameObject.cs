@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -143,6 +144,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 Speed = Vector2.Normalize(Speed) * MaxSpeed;
             }
         }
+
+        
+        
 
         public override string ToString()
         {

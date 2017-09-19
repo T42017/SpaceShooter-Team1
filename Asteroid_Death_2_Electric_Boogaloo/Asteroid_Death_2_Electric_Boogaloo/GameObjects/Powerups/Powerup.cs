@@ -12,6 +12,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
     {
         public PowerupType PowerupType { get; }
 
+        public float Timer { get; set; }
+        
         public Powerup(AsteroidsGame game, Vector2 position, PowerupType powerupType) : base(game)
         {
             Position = position;
@@ -20,12 +22,37 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 (float)Globals.RNG.NextDouble()
             );
             PowerupType = powerupType;
-
             Texture = TextureManager.Instance.PowerUpTextures[(int) powerupType];
+
+            if (powerupType == PowerupType.Missile)
+            {
+                Timer = 900;
+            }
         }
 
-        public abstract void DoEffect(Player player);
+        public Powerup(AsteroidsGame game, PowerupType powerupType) : base(game)
+        {
+            this.PowerupType = PowerupType;
+            Texture = TextureManager.Instance.PowerUpTextures[(int)powerupType];
+
+            if (powerupType == PowerupType.Missile)
+            {
+                Timer = 900;
+            }
+        }
+
+        public abstract void Remove(Player player);
         
+        public abstract void DoEffect(Player player);
+
+        public override void Update()
+        {
+            //var previousWeapon = player.Weapon = new Weapon(Game, Weapon.Type.Laser, Weapon.Color.Blue);
+            Timer--;
+            //if (Timer == 0) player.Weapon = previousWeapon;
+            base.Update();
+        }
+
         public override void LoadContent()
         {
 

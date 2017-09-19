@@ -76,6 +76,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 Powerup powerupHealth = new PowerupHealth(_game, position);
                 GameObjects.Add(powerupMissile);
                 GameObjects.Add(powerupHealth);
+                
             }
         }
 
