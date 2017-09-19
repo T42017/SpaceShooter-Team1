@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-<<<<<<< HEAD
 using System.Windows.Forms;
-=======
 using System.Diagnostics;
->>>>>>> origin/Feature_MovementOfPlayer
 using Asteroid_Death_2_Electric_Boogaloo.Devices;
 using Asteroid_Death_2_Electric_Boogaloo.Components;
 using Microsoft.Xna.Framework;
@@ -34,10 +31,21 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
 
 
-        public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Blue))
+        public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Blue),Globals.Health)
         {
-            Health = 4;
+<<<<<<< HEAD
+            Health = 10;
+            boost = 180;
+=======
+<<<<<<< HEAD
+            Health = 10;
+            boost = 180;
+=======
+           
+>>>>>>> 94394633c7d8fac0299ddcfd95113a34b0ae3f6f
+>>>>>>> origin/Feature_menu
             
+
             ShootingSpeed = 200;
             textures.Add(Game.Content.Load<Texture2D>("blackSmoke00"));
             textures.Add(Game.Content.Load<Texture2D>("blackSmoke01"));
@@ -45,21 +53,24 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             textures.Add(Game.Content.Load<Texture2D>("blackSmoke03"));
             Texture = TextureManager.Instance.PlayerShipTexture;
             _lifeTexture = Game.Content.Load<Texture2D>("playerLife2_red");
-            _pewEffect = Game.Content.Load<SoundEffect>("Blaster");
+            _pewEffect = Game.Content.Load<SoundEffect>("shot");
             particleEngine = new ParticleEngine(textures, new Vector2(400, 240));
         }
-        
-       
+
+
 
         public override void Update()
         {
             var gamePadState = GamePad.GetState(PlayerIndex.One);
-            
+
             KeyboardState state = Keyboard.GetState();
 
             particleEngine.EmitterLocation = Position;
             particleEngine.Update();
 
+            
+                
+            
             //Movement using the left, right joystick and the Dpad on the Xbox controller or the arrows or WASD on the keyboard
             if ((gamePadState.ThumbSticks.Left.Y >= 0.3f)
                 || (gamePadState.DPad.Up == ButtonState.Pressed)
@@ -86,6 +97,18 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 || (state.IsKeyDown(Keys.Right)) 
                 || (state.IsKeyDown(Keys.D)))
                 Rotation += 0.026f;
+
+            if ((gamePadState.Buttons.RightShoulder == ButtonState.Pressed)
+                || (state.IsKeyDown(Keys.E))
+                && (boost > 0))
+            {
+                MaxSpeed = 50;
+                AccelerateForward(50f);
+                boost--;
+                MaxSpeed = 10; 
+            }
+
+            
 
             Speed += new Vector2(-Speed.X * 0.015f, -Speed.Y * 0.015f);
             Move();
@@ -122,7 +145,15 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if(Health<=4)
+<<<<<<< HEAD
+<<<<<<< HEAD
+            if(Health<=5)
+=======
+            if(Health<=3)
+>>>>>>> origin/Feature_menu
+=======
+            if(Health<=3)
+>>>>>>> origin/Feature_menu
             particleEngine.Draw(spriteBatch);
 
             base.Draw(spriteBatch);
