@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using Asteroid_Death_2_Electric_Boogaloo.Devices;
 using Asteroid_Death_2_Electric_Boogaloo.Components;
 using Microsoft.Xna.Framework;
@@ -17,6 +19,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         private DateTime _timeSenceLastShot = DateTime.Today;
         private Texture2D _lifeTexture;
         public static int score = 0;
+
+        List<Powerup> Powerups = new List<Powerup>();
+
+
 
         public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Blue))
         {
@@ -83,6 +89,18 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             _lastGamePadState = gamePadState;
             
             StayInsideLevel();
+
+            foreach (var powerup in Powerups)
+            {
+                powerup.DoEffect(this);
+                powerup.Update();
+                if (powerup.Timer <= 0)
+                {
+                    powerup.Remove(this);
+                }
+            }
+            Powerups.RemoveAll(p => p.Timer <=0);
+
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -113,7 +131,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 if (otherGameObject is Powerup)
                 {
                     otherGameObject.IsDead = true;
-                    ((Powerup) otherGameObject).DoEffect(this); 
+                    //((Powerup) otherGameObject).DoEffect(this); 
+                    Powerups.Add(otherGameObject as Powerup);
+                    Debug.WriteLine("added powerup " + otherGameObject);
                 }
 
                 if (otherGameObject is Projectile pro)

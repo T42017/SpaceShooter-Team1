@@ -15,6 +15,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups
 
         }
 
+        public override void Remove(Player player)
+        {
+
+        }
+
         public override void DoEffect(Player player)
         {
             player.Health = player.Health + 1;
