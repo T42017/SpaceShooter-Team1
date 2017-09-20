@@ -10,7 +10,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
 {
     public abstract class BaseUiComponent
     {
-
         protected AsteroidsGame Game;
 
         public Vector2 Position;
@@ -19,7 +18,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
         public bool HasClickEvent = false;
         public string Text = "";
         public SpriteFont Font;
-
         public EventHandler ClickEvent;
 
         protected BaseUiComponent(AsteroidsGame game, Vector2 position, bool canBeHighlighted, EventHandler clickEvent, string text, SpriteFont font)
@@ -68,6 +66,5 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
 
         public abstract void Update();
         public abstract void Draw(SpriteBatch spriteBatch);
-
     }
 }

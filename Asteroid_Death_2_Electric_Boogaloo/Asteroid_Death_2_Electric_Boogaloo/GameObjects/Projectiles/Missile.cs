@@ -8,8 +8,7 @@ using Microsoft.Xna.Framework;
 namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
     public class Missile : Projectile
-    {
-        
+    {       
         public Missile(AsteroidsGame game, Vector2 position, float rotation, Weapon.Color color, Type parenType) : base(game, position, rotation, color, parenType, 3)
         {
             Texture = TextureManager.Instance.MissileTextures[(int) color];

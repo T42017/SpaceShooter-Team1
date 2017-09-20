@@ -12,7 +12,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups
     {
         public PowerupMissile(AsteroidsGame game, Vector2 position) : base(game, position, PowerupType.Missile)
         {
-
         }
 
         public override void Remove(Player player)

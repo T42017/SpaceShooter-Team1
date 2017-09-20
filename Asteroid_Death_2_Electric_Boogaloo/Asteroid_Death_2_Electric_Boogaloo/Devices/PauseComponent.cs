@@ -17,6 +17,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         private bool playing;
         private SpriteFont font;
         private AsteroidsGame pGame;
+
         public PauseComponent(Game game) : base(game)
         {
             pGame = (AsteroidsGame) game;
@@ -63,7 +64,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         public override void Draw(GameTime gameTime)
         {
             SpriteBatch.Begin();
-
             base.Draw(gameTime);
             SpriteBatch.End();
         }

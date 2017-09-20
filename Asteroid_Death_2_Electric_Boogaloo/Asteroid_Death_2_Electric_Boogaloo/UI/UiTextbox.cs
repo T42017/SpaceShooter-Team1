@@ -99,7 +99,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
                 new Vector2(0, 0), // point in line about which to rotate
                 SpriteEffects.None,
                 0);
-
         }
     }
 }

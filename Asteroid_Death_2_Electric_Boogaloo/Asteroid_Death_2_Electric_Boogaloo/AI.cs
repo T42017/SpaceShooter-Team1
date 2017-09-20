@@ -17,7 +17,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         private State currentState;
         private readonly AsteroidsGame _game;
         private Enemy _enemy;
-
         private Vector2 _positionGoTO = new Vector2();
 
         public AI(AsteroidsGame game, Enemy enemy)
@@ -52,7 +51,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 _enemy.AccelerateForward(0.05f);
                 _enemy.Move();
             }
-
             _enemy.StayInsideLevel();
         }
 
@@ -64,9 +62,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             {
                 vec = new Vector2(Globals.RNG.Next(_game.Level.SizeX), Globals.RNG.Next(_game.Level.SizeY));
             }
-
             return vec;
         }
-
     }
 }

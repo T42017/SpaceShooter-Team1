@@ -26,8 +26,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         private SoundEffectInstance alarm2;
         private DateTime _timeSenceLastShot = DateTime.Today;
         private Texture2D _lifeTexture;
-        ParticleEngine particleEngine;
+        private ParticleEngine particleEngine;
         private List<Texture2D> textures = new List<Texture2D>();
+
         public static int score = 0;
         public bool HasMariostar { get; set; }
 
@@ -36,7 +37,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Red), Globals.Health)
         {
             Boost = 180;
-         
             ShootingSpeed = 200;
             textures.Add(Game.Content.Load<Texture2D>("blackSmoke00"));
             textures.Add(Game.Content.Load<Texture2D>("blackSmoke01"));
@@ -57,6 +57,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             var gamePadState = GamePad.GetState(PlayerIndex.One);
 
             KeyboardState state = Keyboard.GetState();
+
             if (Health <= 5) {
                 particleEngine.EmitterLocation = Position;
             particleEngine.Update();
@@ -67,7 +68,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                alarm2.Stop(); 
             }
             
-
             //Movement using the left, right joystick and the Dpad on the Xbox controller or the arrows or WASD on the keyboard
             if ((gamePadState.ThumbSticks.Left.Y >= 0.3f)
                 || (gamePadState.DPad.Up == ButtonState.Pressed)
