@@ -57,19 +57,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             if (collides)
             {
                 var position = new Vector2(Position.X + .25f * Width, Position.Y + .25f * Height);
-
-                if (GetClassType() == typeof(Missile))
-                {
-                    var explosion = new Explosion(Game, position);
-                    Debug.WriteLine($"{GetType().Name}: ({Position})\r\nExplosion: ({explosion.Position})");
-                    if (explosion.NoExplosionsNearby())
-                        Game.GameObjectManager.Explosions.Add(explosion);
-                }
-                else
-                {
-                    var hitmarker = new Hitmarker(Game, Position);
-                    Game.GameObjectManager.Hitmarkers.Add(hitmarker);
-                }
+                var collisionEffectType = GetClassType() == typeof(Missile) 
+                    ? CollisionEffectType.Explosion 
+                    : CollisionEffectType.Hitmarker;
+                var collisionEffect = new CollisionEffect(Game, position, collisionEffectType);
+                if (collisionEffect.NoCollisionEffectsNearby())
+                    Game.GameObjectManager.CollisionEffects.Add(collisionEffect);
             }
             return collides;
         }
