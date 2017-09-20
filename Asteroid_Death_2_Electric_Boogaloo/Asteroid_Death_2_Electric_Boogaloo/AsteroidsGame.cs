@@ -67,7 +67,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Level = new Level(this, 20, 20);
             GameObjectManager = new GameObjectManager(this);
             GameObjectManager.AddEnemyFactory(new EnemyFactory(this));
-            GameObjectManager.AddEnemys(10);
+            GameObjectManager.AddEnemies(10);
             GameObjectManager.AddPowerupFactory(new PowerupFactory(this));
             GameObjectManager.AddPowerups(20);
         } 
@@ -121,7 +121,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 GameObjectManager.UpdateGameObjects();
                 GameObjectManager.UpdateCollisionEffects();
                 _camera.FollowPlayer(GameObjectManager.Player);
-                GameObjectManager.AddNewMeteors(gameTime, Globals.perSecMeteors, 1000);
+                GameObjectManager.AddMeteors(gameTime, Globals.perSecMeteors, 1000);
                 ControlMaxEnemies();
             }
             base.Update(gameTime);
@@ -154,14 +154,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         
         public void ControlMaxEnemies()
         {
-            Enemy[] enemys = GameObjectManager.GetEnemys();
+            Enemy[] enemys = GameObjectManager.GetEnemies();
 
             if (enemys.Length < AmountOfEnemys)
             {
-                GameObjectManager.AddEnemys(AmountOfEnemys - enemys.Length);
+                GameObjectManager.AddEnemies(AmountOfEnemys - enemys.Length);
             }
         }
-
-        
     }
 }

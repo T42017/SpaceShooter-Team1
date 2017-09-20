@@ -1,25 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
     public class Missile : Projectile
     {
-        
+        #region Public constructors
         public Missile(AsteroidsGame game, Vector2 position, float rotation, Weapon.Color color, Type parenType) : base(game, position, rotation, color, parenType, 3)
         {
-            Texture = TextureManager.Instance.MissileTextures[(int) color];
+            Texture = TextureManager.Instance.MissileTextures[(int)color];
         }
+        #endregion
 
+        #region Protected overrides
         protected override Type GetClassType()
         {
             return typeof(Missile);
         }
+        #endregion
 
+        #region Public overrides
         public override void Update()
         {
             DieIfOutSideMap();
@@ -29,6 +29,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             Move();
 
             base.Update();
-        }
+        } 
+        #endregion
     }
 }
