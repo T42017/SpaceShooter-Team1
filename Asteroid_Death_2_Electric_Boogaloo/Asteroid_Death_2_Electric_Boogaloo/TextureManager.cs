@@ -71,9 +71,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             List<Texture2D> powerupTexture2Ds = new List<Texture2D>();
             powerupTexture2Ds.Add(content.Load<Texture2D>("PowerupMissile"));
             powerupTexture2Ds.Add(content.Load<Texture2D>("powerupHealth"));
-            powerupTexture2Ds.Add(content.Load<Texture2D>("powerupLightsaber"));
-            powerupTexture2Ds.Add(content.Load<Texture2D>("powerupStar"));
-            powerupTexture2Ds.Add(content.Load<Texture2D>("powerupImprovedLaser"));
+            powerupTexture2Ds.Add(content.Load<Texture2D>("powerupBoost"));
+            powerupTexture2Ds.Add(content.Load<Texture2D>("powerupMariostar"));
             powerupTexture2Ds.Add(content.Load<Texture2D>("powerupRandom"));
             PowerUpTextures = powerupTexture2Ds.ToArray();
 

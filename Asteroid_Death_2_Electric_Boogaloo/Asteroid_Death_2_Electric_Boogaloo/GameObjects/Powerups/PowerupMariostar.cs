@@ -10,7 +10,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups
 {
     class PowerupMariostar : Powerup
     {
-        public PowerupMariostar(AsteroidsGame game, Vector2 position) : base(game, position, PowerupType.Health)
+        public PowerupMariostar(AsteroidsGame game, Vector2 position) : base(game, position, PowerupType.Mariostar)
         {
 
         }
@@ -22,7 +22,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups
 
         public override void DoEffect(Player player)
         {
-            player.Health = player.Health + 3;
+            
         }
     }
 }
