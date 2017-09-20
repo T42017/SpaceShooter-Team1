@@ -613,230 +613,6 @@
 /processorParam:TextureFormat=Color
 /build:buttonRed.png
 
-#begin laserRed.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:laserRed.png
-
-#begin shot.mp3
-/importer:Mp3Importer
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:shot.mp3
-
-#begin Deus.mp3
-/importer:Mp3Importer
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Deus.mp3
-
-#begin roasted.mp3
-/importer:Mp3Importer
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:roasted.mp3
-
-#begin Combat.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Combat.mp3
-
-#begin CantinaBand.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:CantinaBand.mp3
-
-#begin Blaster.mp3
-/importer:Mp3Importer
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Blaster.mp3
-
-#begin Best.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Best.mp3
-
-#begin GameState.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:GameState.spritefont
-
-#begin Text.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:Text.spritefont
-
-#begin Chameleon.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Chameleon.mp3
-
-#begin Laugh.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Laugh.mp3
-
-#begin laserBlue.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:laserBlue.png
-
-#begin laserGreen.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:laserGreen.png
-
-#begin pixelExplosion0.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:pixelExplosion0.png
-
-#begin pixelExplosion1.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:pixelExplosion1.png
-
-#begin pixelExplosion2.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:pixelExplosion2.png
-
-#begin pixelExplosion3.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:pixelExplosion3.png
-
-#begin pixelExplosion4.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:pixelExplosion4.png
-
-#begin pixelExplosion5.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:pixelExplosion5.png
-
-#begin pixelExplosion6.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:pixelExplosion6.png
-
-#begin pixelExplosion7.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:pixelExplosion7.png
-
-#begin pixelExplosion8.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:pixelExplosion8.png
-
-#begin enemyBlack0.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:enemyBlack0.png
-
 #begin enemyBlack1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -885,7 +661,7 @@
 /processorParam:TextureFormat=Color
 /build:enemyBlack4.png
 
-#begin enemyBlue0.png
+#begin enemyBlack5.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -895,7 +671,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:enemyBlue0.png
+/build:enemyBlack5.png
 
 #begin enemyBlue1.png
 /importer:TextureImporter
@@ -934,6 +710,7 @@
 /build:enemyBlue3.png
 
 #begin enemyBlue4.png
+#begin laserRed.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -944,8 +721,182 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:enemyBlue4.png
+/build:laserRed.png
 
-#begin enemyGreen0.png
+#begin enemyBlue5.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+#begin shot.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:shot.mp3
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:enemyBlue5.png
+#begin enemyGreen1.png
+#begin Deus.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Deus.mp3
+/build:enemyGreen1.png
+/build:laserRed.png
+
+#begin enemyGreen2.png
+#begin shot.mp3
+#begin roasted.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:ColorKeyEnabled=True
+/build:shot.mp3
+/build:roasted.mp3
+
+#begin enemyGreen3.png
+#begin Deus.mp3
+#begin Combat.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processor:SongProcessor
+/processor:TextureProcessor
+/processorParam:Quality=Best
+/build:Deus.mp3
+/build:Combat.mp3
+/processorParam:ColorKeyEnabled=True
+
+#begin roasted.mp3
+#begin CantinaBand.mp3
+#begin enemyGreen4.png
+/importer:Mp3Importer
+/processor:TextureProcessor
+/processorParam:Quality=Best
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/build:roasted.mp3
+/build:CantinaBand.mp3
+
+#begin Blaster.mp3
+#begin Combat.mp3
+#begin enemyGreen5.png
+/importer:Mp3Importer
+/processor:SongProcessor
+/processor:SoundEffectProcessor
+/processor:TextureProcessor
+/processorParam:Quality=Best
+/build:Combat.mp3
+/build:Blaster.mp3
+/processorParam:ColorKeyEnabled=True
+
+#begin CantinaBand.mp3
+#begin Best.mp3
+#begin enemyRed1.png
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:CantinaBand.mp3
+/build:Best.mp3
+/processorParam:ColorKeyEnabled=True
+
+#begin Blaster.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Blaster.mp3
+#begin GameState.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+#begin enemyRed2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Compressed
+/build:GameState.spritefont
+
+#begin Best.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Best.mp3
+#begin Text.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+#begin enemyRed3.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:TextureFormat=Compressed
+/build:Text.spritefont
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+
+#begin GameState.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+#begin Chameleon.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Chameleon.mp3
+#begin enemyRed4.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:TextureFormat=Compressed
+/build:GameState.spritefont
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+
+#begin Text.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+#begin Laugh.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Laugh.mp3
+#begin enemyRed5.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:TextureFormat=Compressed
+/build:Text.spritefont
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+
+#begin Chameleon.mp3
+#begin laserGreen06.png
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Chameleon.mp3
+/build:laserBlue.png
+/build:laserGreen06.png
+
+#begin Laugh.mp3
+#begin laserGreen.png
+#begin laserGreen07.png
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Laugh.mp3
+/build:laserGreen.png
+/build:laserGreen07.png
+
+#begin laserGreen08.png
+#begin laserBlue.png
+#begin pixelExplosion0.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -955,9 +906,317 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/build:laserGreen08.png
+/build:laserBlue.png
+/build:pixelExplosion0.png
+
+#begin laserGreen09.png
+#begin laserGreen.png
+#begin pixelExplosion1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:laserGreen09.png
+/build:laserGreen.png
+/build:pixelExplosion1.png
+
+#begin laserGreen10.png
+#begin pixelExplosion0.png
+#begin pixelExplosion2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:laserGreen10.png
+/build:pixelExplosion0.png
+/build:pixelExplosion2.png
+
+#begin pixelExplosion1.png
+#begin laserGreen11.png
+#begin pixelExplosion3.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:laserGreen11.png
+/build:pixelExplosion1.png
+/build:pixelExplosion3.png
+
+#begin laserGreen12.png
+#begin pixelExplosion2.png
+#begin pixelExplosion4.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:laserGreen12.png
+/build:pixelExplosion2.png
+/build:pixelExplosion4.png
+
+#begin laserGreen13.png
+#begin pixelExplosion3.png
+#begin pixelExplosion5.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:laserGreen13.png
+/build:pixelExplosion3.png
+/build:pixelExplosion5.png
+
+#begin laserRed01.png
+#begin pixelExplosion4.png
+#begin pixelExplosion6.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:laserRed01.png
+/build:pixelExplosion4.png
+/build:pixelExplosion6.png
+
+#begin laserRed02.png
+#begin pixelExplosion5.png
+#begin pixelExplosion7.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:laserRed02.png
+/build:pixelExplosion5.png
+/build:pixelExplosion7.png
+
+#begin laserRed03.png
+#begin pixelExplosion6.png
+#begin pixelExplosion8.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:laserRed03.png
+/build:pixelExplosion6.png
+/build:pixelExplosion8.png
+
+#begin laserRed04.png
+#begin pixelExplosion7.png
+#begin enemyBlack0.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:laserRed04.png
+/build:pixelExplosion7.png
+/build:enemyBlack0.png
+
+#begin laserRed05.png
+#begin pixelExplosion8.png
+#begin enemyBlack1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:laserRed05.png
+/build:pixelExplosion8.png
+/build:enemyBlack1.png
+
+#begin laserRed06.png
+#begin enemyBlack0.png
+#begin enemyBlack2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:laserRed06.png
+/build:enemyBlack0.png
+/build:enemyBlack2.png
+
+#begin laserRed07.png
+#begin enemyBlack1.png
+#begin enemyBlack3.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:laserRed07.png
+/build:enemyBlack1.png
+/build:enemyBlack3.png
+
+#begin enemyBlack4.png
+#begin enemyBlack2.png
+#begin laserRed12.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:enemyBlack4.png
+/build:enemyBlack2.png
+/build:laserRed12.png
+
+#begin laserRed13.png
+#begin enemyBlack3.png
+#begin enemyBlue0.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:laserRed13.png
+/build:enemyBlack3.png
+/build:enemyBlue0.png
+
+#begin laserRed14.png
+#begin enemyBlack4.png
+#begin enemyBlue1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:laserRed14.png
+/build:enemyBlack4.png
+/build:enemyBlue1.png
+
+#begin laserRed15.png
+#begin enemyBlue0.png
+#begin enemyBlue2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:enemyBlue2.png
+/build:enemyBlue0.png
+/build:laserRed15.png
+
+#begin laserRed16.png
+#begin enemyBlue3.png
+#begin enemyBlue1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:laserRed16.png
+/build:enemyBlue1.png
+/build:enemyBlue3.png
+
+#begin enemyBlue4.png
+#begin enemyBlue2.png
+#begin laserBlue01.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:enemyBlue4.png
+/build:enemyBlue2.png
+/build:laserBlue01.png
+
+#begin enemyGreen0.png
+#begin enemyBlue3.png
+#begin laserBlue02.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:laserBlue02.png
+/build:enemyBlue3.png
 /build:enemyGreen0.png
 
 #begin enemyGreen1.png
+#begin enemyBlue4.png
+#begin laserBlue03.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -967,8 +1226,12 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/build:laserBlue03.png
+/build:enemyBlue4.png
 /build:enemyGreen1.png
 
+#begin laserBlue04.png
+#begin enemyGreen0.png
 #begin enemyGreen2.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -979,8 +1242,12 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/build:laserBlue04.png
+/build:enemyGreen0.png
 /build:enemyGreen2.png
 
+#begin laserBlue05.png
+#begin enemyGreen1.png
 #begin enemyGreen3.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -992,7 +1259,11 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:enemyGreen3.png
+/build:enemyGreen1.png
+/build:laserBlue05.png
 
+#begin laserBlue06.png
+#begin enemyGreen2.png
 #begin enemyGreen4.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1003,8 +1274,12 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/build:laserBlue06.png
+/build:enemyGreen2.png
 /build:enemyGreen4.png
 
+#begin laserBlue07.png
+#begin enemyGreen3.png
 #begin enemyRed0.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1015,8 +1290,12 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/build:laserBlue07.png
+/build:enemyGreen3.png
 /build:enemyRed0.png
 
+#begin laserBlue12.png
+#begin enemyGreen4.png
 #begin enemyRed1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1027,8 +1306,12 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/build:laserBlue12.png
+/build:enemyGreen4.png
 /build:enemyRed1.png
 
+#begin laserBlue13.png
+#begin enemyRed0.png
 #begin enemyRed2.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1039,8 +1322,12 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/build:laserBlue13.png
+/build:enemyRed0.png
 /build:enemyRed2.png
 
+#begin laserBlue14.png
+#begin enemyRed1.png
 #begin enemyRed3.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1051,8 +1338,12 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/build:laserBlue14.png
+/build:enemyRed1.png
 /build:enemyRed3.png
 
+#begin laserBlue15.png
+#begin enemyRed2.png
 #begin enemyRed4.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1063,8 +1354,12 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/build:laserBlue15.png
+/build:enemyRed2.png
 /build:enemyRed4.png
 
+#begin laserBlue16.png
+#begin enemyRed3.png
 #begin MissileBlue.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1075,8 +1370,12 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/build:laserBlue16.png
+/build:enemyRed3.png
 /build:MissileBlue.png
 
+#begin laserGreen02.png
+#begin enemyRed4.png
 #begin MissileGreen.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1087,8 +1386,12 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/build:laserGreen02.png
+/build:enemyRed4.png
 /build:MissileGreen.png
 
+#begin laserGreen03.png
+#begin MissileBlue.png
 #begin MissileRed.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1099,8 +1402,12 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/build:laserGreen03.png
+/build:MissileBlue.png
 /build:MissileRed.png
 
+#begin laserGreen04.png
+#begin MissileGreen.png
 <<<<<<< HEAD
 #begin PowerupMissile.png
 /importer:TextureImporter
@@ -1112,9 +1419,13 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/build:laserGreen04.png
+/build:MissileGreen.png
 /build:PowerupMissile.png
 
+#begin laserGreen05.png
 #begin powerupImprovedLaser.png
+#begin MissileRed.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1124,86 +1435,117 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/build:laserGreen05.png
+/build:MissileRed.png
 /build:powerupImprovedLaser.png
 
-#begin powerupHealth.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:powerupHealth.png
-
-#begin powerupLightsaber.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:powerupLightsaber.png
-
-#begin powerupRandom.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:powerupRandom.png
-
-#begin powerupStar.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:powerupStar.png
-=======
+#begin pixelExplosion03.png
 #begin File.spritefont
+#begin powerupHealth.png
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:File.spritefont
+/build:pixelExplosion03.png
+/build:powerupHealth.png
 
+#begin pixelExplosion04.png
 #begin Font.spritefont
+#begin powerupLightsaber.png
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:Font.spritefont
+/build:pixelExplosion04.png
+/build:powerupLightsaber.png
 
+#begin pixelExplosion05.png
+#begin RE.mp3
+#begin powerupRandom.png
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:RE.mp3
+/build:pixelExplosion05.png
+/build:powerupRandom.png
+
+#begin pixelExplosion06.png
+#begin man.mp3
+#begin powerupStar.png
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:man.mp3
+/build:pixelExplosion06.png
+/build:powerupStar.png
+=======
+#begin pixelExplosion07.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+#begin Tyrone.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Tyrone.mp3
+#begin File.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Compressed
+/build:File.spritefont
+
+#begin pixelExplosion08.png
+<<<<<<< HEAD
+#begin button.png
+=======
+#begin Font.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+#begin blackSmoke00.png
+>>>>>>> 7f0d8aeac8869bee9dcf73679037b3bdd31f7324
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Font.spritefont
+/build:pixelExplosion08.png
+<<<<<<< HEAD
+/build:button.png
+=======
+/build:blackSmoke00.png
+
+#begin pixelExplosion00.png
+#begin blackSmoke01.png
 #begin RE.mp3
 /importer:Mp3Importer
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:RE.mp3
+/build:pixelExplosion00.png
+/build:blackSmoke01.png
 
+#begin pixelExplosion01.png
+#begin blackSmoke02.png
 #begin man.mp3
 /importer:Mp3Importer
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:man.mp3
+/build:pixelExplosion01.png
+/build:blackSmoke02.png
 
+#begin pixelExplosion02.png
+#begin blackSmoke03.png
 #begin Tyrone.mp3
 /importer:Mp3Importer
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Tyrone.mp3
 >>>>>>> origin/develop
+/build:pixelExplosion02.png
+/build:blackSmoke03.png
+>>>>>>> 7f0d8aeac8869bee9dcf73679037b3bdd31f7324
 

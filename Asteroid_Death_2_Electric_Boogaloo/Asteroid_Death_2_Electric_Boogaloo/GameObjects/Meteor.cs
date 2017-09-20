@@ -68,6 +68,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             Texture = TextureManager.Instance.LoadByName(Game.Content, fileName);
         }
 
+        public IEnumerable<Meteor> SpawnChildren()
+        {
+            if (MeteorSize == MeteorSize.Small)
+                return null;
+            return ShatterIntoSmallerMeteors();
+        }
+
         private IEnumerable<Meteor> ShatterIntoSmallerMeteors()
         {
             int amountOfSmallerMeteors = MeteorColour == MeteorColour.Gray ? 5 : 3;
@@ -92,16 +99,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         #endregion
 
         #region Public methods
-        public IEnumerable<Meteor> SpawnChildren()
-        {
-            if (MeteorSize == MeteorSize.Small)
-                return null;
-            return ShatterIntoSmallerMeteors();
-        }
         #endregion
 
         #region Overrides
-
         public override void Update()
         {
             //requires further work to add a randomly generated speed of the meteors instead of a static speed

@@ -63,8 +63,20 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             }
         }
 
+        public List<Meteor> GetMeteors()
         public void AddPowerups(int amount)
         {
+            List<Meteor> meteors = new List<Meteor>();
+
+            for (int i = 0; i < GameObjects.Count; i++)
+            {
+                if (GameObjects[i] is Meteor meteor)
+                    meteors.Add(meteor);
+            }
+
+            return meteors;
+        }
+
             for (int i = 0; i < amount; i++)
             {
                 var position = new Vector2(
@@ -141,18 +153,28 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                     enemys.Add((Enemy)GameObjects[i]);
             }
 
+        public Enemy[] GetEnemys()
             return enemys.ToArray();
         }
 
 >>>>>>> origin/develop
-        internal void LoadContent()
         {
+            List<Enemy> enemys = new List<Enemy>();
+
             for (int i = 0; i < GameObjects.Count; i++)
             {
-                GameObjects[i].LoadContent();
+                if (GameObjects[i] is Enemy)
+                    enemys.Add((Enemy)GameObjects[i]);
             }
+
+            return enemys.ToArray();
         }
 
+<<<<<<< HEAD
+=======
+       
+
+>>>>>>> f05ae998f153692d7e99616ea7a1118ee13b38da
         internal void UpdateGameObjects()
         {
             for (int i = 0; i < GameObjects.Count; i++)
