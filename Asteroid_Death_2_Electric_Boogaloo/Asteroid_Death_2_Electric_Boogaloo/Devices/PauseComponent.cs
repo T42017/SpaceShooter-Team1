@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Asteroid_Death_2_Electric_Boogaloo.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -14,10 +15,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
     {
         private Song song;
         private bool playing;
-        private KeyboardState lastKeyboardState;
         private SpriteFont font;
         private AsteroidsGame pGame;
-        private GamePadState lastGamePadState,laststate;
         public PauseComponent(Game game) : base(game)
         {
             pGame = (AsteroidsGame) game;
@@ -31,6 +30,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             song = Game.Content.Load<Song>("Chameleon");
             font = Game.Content.Load<SpriteFont>("Text");
 
+            UiComponents.Add(new UiLabel(pGame, new Vector2(0, -120), "Paused", font));
+            UiComponents.Add(new UiButton(pGame, new Vector2(0, -60), "Resume", font, (sender, args) => pGame.ChangeGameState(GameState.ingame)));
+            UiComponents.Add(new UiButton(pGame, new Vector2(), "Main menu", font, (sender, args) => pGame.ChangeGameState(GameState.Menu)));
+
             base.LoadContent();
         }
 
@@ -38,44 +41,31 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         {
             if(playing==false)
                 MediaPlayer.Volume = 0.05f; playing = true;
-              
-            var gamePadState = GamePad.GetState(PlayerIndex.One);
-            var KeyboardState = Keyboard.GetState();
-            if (gamePadState.Buttons.Start==ButtonState.Pressed && laststate.Buttons.Start== ButtonState.Released || KeyboardState.IsKeyDown(Keys.Escape) && lastKeyboardState.IsKeyUp(Keys.Escape))
-                pGame.ChangeGameState(GameState.ingame); playing = false;
-            laststate = gamePadState;
 
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed && lastGamePadState.Buttons.Back==ButtonState.Released
-                || KeyboardState.IsKeyDown(Keys.M) && lastKeyboardState.IsKeyUp(Keys.M))
-                pGame.ChangeGameState(GameState.Menu); playing = false;
+            if (Input.Instance.ClickPause())
+            {
+                pGame.ChangeGameState(GameState.ingame);
+                playing = false;
+            }
 
-            lastGamePadState = gamePadState;
+            if (Input.Instance.ClickUp())
+                HighlightPreviusComponent();
 
-            lastKeyboardState = KeyboardState;
+            if (Input.Instance.ClickDown())
+                HighlightNextComponent();
+
+            if (Input.Instance.ClickSelect())
+                UiComponents[HighlightedUiComponent].ClickEvent.Invoke(null, null);
+
             base.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime)
         {
-            String Text1,text2;
-            Text1 = "Game is paused";
-            text2 = "Return to the main menu by pressing M on the keyboard or Back on your gamepad";
-
             SpriteBatch.Begin();
 
-            SpriteBatch.DrawString(font, Text1,
-                new Vector2((pGame.Graphics.PreferredBackBufferWidth / 2) - (pGame.Graphics.PreferredBackBufferWidth / 16),
-                    (pGame.Graphics.PreferredBackBufferHeight / 4) +
-                    (pGame.Graphics.PreferredBackBufferHeight / 8)), Color.Gold);
-
-            SpriteBatch.DrawString(font, text2,
-                new Vector2(
-                    pGame.Graphics.PreferredBackBufferWidth / 2 - (pGame.Graphics.PreferredBackBufferWidth / 3),
-                    (pGame.Graphics.PreferredBackBufferHeight / 4) +
-                    (pGame.Graphics.PreferredBackBufferHeight / 8) + 30), Color.Goldenrod );
-            SpriteBatch.End();
-
             base.Draw(gameTime);
+            SpriteBatch.End();
         }
     }
 }

@@ -12,11 +12,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
     public class UiLabel : BaseUiComponent
     {
 
-        private SpriteFont _font;
-
-        public UiLabel(AsteroidsGame game, Vector2 position, string text, SpriteFont font) : base(game, position, false, null, text)
+        public UiLabel(AsteroidsGame game, Vector2 position, string text, SpriteFont font) : base(game, position, false, null, text, font)
         {
-            _font = font;
+            
         }
 
         public override void Update()
@@ -26,7 +24,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(_font, Text, Position - (_font.MeasureString(Text) / 2), Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+            spriteBatch.DrawString(Font, Text, Position - (Font.MeasureString(Text) / 2), Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
         }
     }
 }

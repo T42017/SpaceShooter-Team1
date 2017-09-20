@@ -18,7 +18,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
         private Texture2D _backGroundtexture, left, right;
         private int difficulty;
         
-        
         private readonly AsteroidsGame Game;
         private bool playing;
         private Song song;

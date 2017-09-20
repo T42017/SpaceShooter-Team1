@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,11 +27,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
         public void UpdateList(string[] list)
         {
             _labels = new List<UiLabel>();
-
             for (int i = 0; i < list.Length; i++)
-            {
                 _labels.Add(new UiLabel(Game, Position + new Vector2(0, _spaceBetweenLabels * i) - Globals.HalfScreenSize, list[i], _font));
-            }
         }
 
         public override void Update()

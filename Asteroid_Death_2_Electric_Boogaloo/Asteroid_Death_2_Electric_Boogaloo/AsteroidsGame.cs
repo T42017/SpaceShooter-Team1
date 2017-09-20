@@ -52,7 +52,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             {
                 if (!(component is AstroidsComponent astroidsComponent))
                     continue;
-                
+                astroidsComponent.ChangedState(desiredState);
                 astroidsComponent.Visible = astroidsComponent.DrawableStates.HasFlag(_gameState);
                 astroidsComponent.Enabled = astroidsComponent.UpdatableStates.HasFlag(_gameState);
            }
@@ -65,7 +65,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             //                            (GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height / 2) - (Graphics.PreferredBackBufferHeight / 2));
 
             // maximaize window
-            var form = (Form)Form.FromHandle(Window.Handle);
+            var form = (Form) Control.FromHandle(Window.Handle);
             form.WindowState = FormWindowState.Maximized;
 
             // allow resizing

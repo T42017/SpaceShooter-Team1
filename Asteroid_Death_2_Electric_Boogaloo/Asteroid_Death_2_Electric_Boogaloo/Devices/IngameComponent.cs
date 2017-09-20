@@ -54,15 +54,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
                 playing =true;
             }
 
-            if (Input.Instance.Pause())
+            if (Input.Instance.ClickPause())
             {
                 _Game.ChangeGameState(GameState.paused);
                 volume= false;
-
             }
             
-          
-
             //for (int i = _Game.Components.Count - 1; i >= 0; i--)
             //{
             //    if (!(_Game.Components[i] is GameObject gameObject))

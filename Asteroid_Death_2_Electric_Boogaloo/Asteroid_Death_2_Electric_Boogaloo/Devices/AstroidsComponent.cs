@@ -36,8 +36,16 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             base.LoadContent();
         }
 
+        public virtual void ChangedState(GameState newState)
+        {
+            HighlightedUiComponent = 0;
+            HighlightNextComponent();
+        }
+
         public override void Update(GameTime gameTime)
         {
+            UpdateHighlightMarker();
+
             foreach (BaseUiComponent component in UiComponents)
                 component.Update();
 

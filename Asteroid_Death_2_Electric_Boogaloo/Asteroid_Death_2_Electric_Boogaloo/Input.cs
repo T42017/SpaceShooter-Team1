@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
@@ -20,6 +22,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         private GamePadState _gamePadState = GamePad.GetState(PlayerIndex.One);
         private GamePadState _lastGamePadState;
+
+        private Keys[] specialKeys =
+        {
+            
+        };
 
         private bool _hasMovedLeftStick;
         
@@ -90,10 +97,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                    !_hasMovedLeftStick
                    || 
                    _keyboardState.IsKeyDown(Keys.Left) &&
-                   _lastKeyboardState.IsKeyUp(Keys.Left)
-                   || 
-                   _keyboardState.IsKeyDown(Keys.A) &&
-                   _lastKeyboardState.IsKeyUp(Keys.A);
+                   _lastKeyboardState.IsKeyUp(Keys.Left);
         }
 
         public bool ClickRight()
@@ -105,10 +109,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                    !_hasMovedLeftStick
                    || 
                    _keyboardState.IsKeyDown(Keys.Right) && 
-                   _lastKeyboardState.IsKeyUp(Keys.Right)
-                   || 
-                   _keyboardState.IsKeyDown(Keys.D) && 
-                   _lastKeyboardState.IsKeyUp(Keys.D);
+                   _lastKeyboardState.IsKeyUp(Keys.Right);
         }
 
         public bool ClickDown()
@@ -120,10 +121,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                    !_hasMovedLeftStick
                    ||
                    _keyboardState.IsKeyDown(Keys.Down) &&
-                   _lastKeyboardState.IsKeyUp(Keys.Down)
-                   ||
-                   _keyboardState.IsKeyDown(Keys.S) &&
-                   _lastKeyboardState.IsKeyUp(Keys.S);
+                   _lastKeyboardState.IsKeyUp(Keys.Down);
         }
 
         public bool ClickUp()
@@ -135,19 +133,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                    !_hasMovedLeftStick
                    ||
                    _keyboardState.IsKeyDown(Keys.Up) &&
-                   _lastKeyboardState.IsKeyUp(Keys.Up)
-                   ||
-                   _keyboardState.IsKeyDown(Keys.W) &&
-                   _lastKeyboardState.IsKeyUp(Keys.W);
-        }
-
-        public bool Pause()
-        {
-            return _gamePadState.Buttons.Start == ButtonState.Pressed &&
-                    _lastGamePadState.Buttons.Start == ButtonState.Released
-                   || 
-                   _keyboardState.IsKeyDown(Keys.Escape) &&
-                   _lastKeyboardState.IsKeyUp(Keys.Escape);
+                   _lastKeyboardState.IsKeyUp(Keys.Up);
         }
 
         public bool Boost()
@@ -157,6 +143,21 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                    ||
                    _keyboardState.IsKeyDown(Keys.E) &&
                    _lastKeyboardState.IsKeyUp(Keys.E);
+        }
+
+        public bool ClickBackSpace()
+        {
+            return _keyboardState.IsKeyDown(Keys.Back) &&
+                    _lastKeyboardState.IsKeyUp(Keys.Back);
+        }
+
+        public bool ClickPause()
+        {
+            return _gamePadState.Buttons.Start == ButtonState.Pressed &&
+                   _gamePadState.Buttons.Start == ButtonState.Released
+                   ||
+                   _keyboardState.IsKeyDown(Keys.Escape) &&
+                   _lastKeyboardState.IsKeyUp(Keys.Escape);
         }
 
         public void Update()
@@ -171,17 +172,25 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 _hasMovedLeftStick = false;
         }
 
-        public char[] GetKeyboardCharacters()
+        public string[] GetKeyboardCharacters()
         {
-            Keys[] keys = _keyboardState.GetPressedKeys();
-            char[] characters = new char[keys.Length];
+            List<Keys> keys = new List<Keys>(_keyboardState.GetPressedKeys());
+            List<Keys> lastKeys = new List<Keys>(_lastKeyboardState.GetPressedKeys());
 
-            for (int i = 0; i < keys.Length; i++)
+            keys.RemoveAll(key => ((int) key) < 65 || ((int) key) > 90);
+            lastKeys.RemoveAll(key => ((int) key) < 65 || ((int) key) > 90);
+
+            List<string> characters = new List<string>();
+            for (int i = 0; i < keys.Count; i++)
             {
-                characters[i] = char.Parse(keys[i].ToString());
+                if (!lastKeys.Exists(key => key.Equals(keys[i])))
+                {
+                    string character = keys[i].ToString();
+                    characters.Add(character);
+                }
             }
 
-            return characters;
+            return characters.ToArray();
         }
     }
 }
