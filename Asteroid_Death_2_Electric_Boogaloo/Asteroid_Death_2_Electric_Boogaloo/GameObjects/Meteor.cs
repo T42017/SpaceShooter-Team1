@@ -92,10 +92,16 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         #endregion
 
         #region Public methods
+
         public IEnumerable<Meteor> SpawnChildren()
+        {
             if (MeteorSize == MeteorSize.Small)
+            {
                 return null;
+            }
             return ShatterIntoSmallerMeteors();
+        }
+
         #endregion
 
         #region Overrides

@@ -13,7 +13,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             Texture = TextureManager.Instance.LaserTextures[(int) color];
         }
 
-            return typeof(Laser);
+           
         public override void Update()
         {
             DieIfOutSideMap();
@@ -23,6 +23,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             Move();
 
             base.Update();
+        }
+
+        protected override Type GetClassType()
+        {
+            return typeof(Laser);
         }
     }
 }

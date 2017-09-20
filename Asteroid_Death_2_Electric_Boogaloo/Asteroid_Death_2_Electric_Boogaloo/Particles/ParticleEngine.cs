@@ -26,7 +26,7 @@ namespace ParticleAsteroid_Death_2_Electric_Boogaloo.ParticlesEngine2D
         
         public void Update()
         {
-            int total = 10;
+            int total = 100;
 
             for (int i = 0; i < total; i++)
             {

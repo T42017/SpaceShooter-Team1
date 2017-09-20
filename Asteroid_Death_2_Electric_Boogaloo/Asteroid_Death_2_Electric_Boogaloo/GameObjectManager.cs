@@ -117,11 +117,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public void AddNewMeteors(GameTime gameTime, int amountOfMeteorsToAdd, int intervalInMilliseconds)
         {
             int currentGameTimeModInterval = (int) gameTime.TotalGameTime.TotalMilliseconds % intervalInMilliseconds;
-            if (currentGameTimeModInterval != 0 || GameObjects.Count(obj => obj is Meteor) >= 100)
-                GameObjects.Count(obj => obj is Meteor) >= Globals.Maxmeteors)
+            if (currentGameTimeModInterval != 0 || (GameObjects.Count(obj => obj is Meteor) >= Globals.Maxmeteors))
                 return;
 
-            int hypothenuseSquared = (Globals.ScreenWidth * Globals.ScreenWidth) / 4 +
+
+        int hypothenuseSquared = (Globals.ScreenWidth * Globals.ScreenWidth) / 4 +
                                      (Globals.ScreenHeight * Globals.ScreenHeight) / 4;
             for (var i = 0; i < amountOfMeteorsToAdd; i++)
             {
@@ -182,8 +182,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             for (int i = 0; i < GameObjects.Count; i++)
             {
                 if (thisObject == GameObjects[i] ||
-                    !thisObject.CollidesWith(GameObjects[i]) ||
-                    Player.DistanceToSquared(GameObjects[i]) >= ((Globals.ScreenWidth * Globals.ScreenWidth) / 2 + (Globals.ScreenHeight * Globals.ScreenHeight) / 2))
+                     Player.DistanceToSquared(GameObjects[i]) >= ((Globals.ScreenWidth * Globals.ScreenWidth) / 4 + (Globals.ScreenHeight * Globals.ScreenHeight) / 4) || 
+                      !thisObject.CollidesWith(GameObjects[i])
+                   )
                     continue;
                 return;
             }

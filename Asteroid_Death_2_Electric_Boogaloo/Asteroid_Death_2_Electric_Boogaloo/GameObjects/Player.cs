@@ -30,29 +30,30 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         public bool HasMariostar { get; set; }
 
         List<Powerup> Powerups = new List<Powerup>();
-        
-        public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Blue), Globals.Health)
+
+        public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Blue),
+            Globals.Health)
         {
-            boost = 180;
             Boost = 180;
-        
-         
+
+
+
             ShootingSpeed = 200;
             textures.Add(Game.Content.Load<Texture2D>("blackSmoke00"));
-        public override void LoadContent()
-        {
             textures.Add(Game.Content.Load<Texture2D>("blackSmoke01"));
             textures.Add(Game.Content.Load<Texture2D>("blackSmoke02"));
             textures.Add(Game.Content.Load<Texture2D>("blackSmoke03"));
             Texture = TextureManager.Instance.PlayerShipTexture;
             _lifeTexture = Game.Content.Load<Texture2D>("playerLife2_red");
             _pewEffect = Game.Content.Load<SoundEffect>("shot");
-            alarm = game.Content.Load<SoundEffect>("Alarm");
+            alarm = Game.Content.Load<SoundEffect>("Alarm");
             alarm2 = alarm.CreateInstance();
             alarm2.IsLooped = true;
-        
+
             particleEngine = new ParticleEngine(textures, new Vector2(400, 240));
         }
+
+       
         
         public override void Update()
         {
@@ -99,11 +100,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
             if ((gamePadState.Buttons.RightShoulder == ButtonState.Pressed)
                 || (state.IsKeyDown(Keys.E))
-                && (boost > 0))
+                && (Boost > 0))
             {
                 MaxSpeed = 50;
                 AccelerateForward(50f);
-                boost--;
+                Boost--;
                 MaxSpeed = 10; 
             }
 

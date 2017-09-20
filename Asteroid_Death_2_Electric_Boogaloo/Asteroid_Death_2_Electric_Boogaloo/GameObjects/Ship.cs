@@ -17,7 +17,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         public int Health;
         public int BaseHealth;
-        public int boost = 1;
+        public int Boost = 1;
         protected Ship(AsteroidsGame game,int baseHealth) : base(game)
         {
             BaseHealth = baseHealth;
