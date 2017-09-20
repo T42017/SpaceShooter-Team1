@@ -48,12 +48,13 @@
     <Compile Include="Devices\DeathComponent.cs" />
     <Compile Include="Devices\PauseComponent.cs" />
     <Compile Include="Enums\PowerupType.cs" />
-    <Compile Include="Factorys\Powerupfactory.cs" />
+    <Compile Include="Factorys\PowerupFactory.cs" />
     <Compile Include="GameObjects\Enemy.cs" />
     <Compile Include="Factorys\EnemyFactory.cs" />
     <Compile Include="Devices\HighscoreMenuComponent.cs" />
     <Compile Include="Devices\IngameComponent.cs" />
     <Compile Include="GameObjectManager.cs" />
+    <Compile Include="GameObjects\Hitmarker.cs" />
     <Compile Include="GameObjects\Powerups\Powerup.cs" />
     <Compile Include="GameObjects\Powerups\PowerupBoost.cs" />
     <Compile Include="GameObjects\Powerups\PowerupHealth.cs" />
@@ -66,7 +67,7 @@
     <Compile Include="Level.cs" />
     <Compile Include="Devices\MenuComponent.cs" />
     <Compile Include="MathHelper.cs" />
-    <Compile Include="GameObjects\PixelExplosion.cs" />
+    <Compile Include="GameObjects\Explosion.cs" />
     <Compile Include="GameObjects\GameObject.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="Devices\GameState.cs" />

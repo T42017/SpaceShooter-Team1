@@ -3,14 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+<<<<<<< HEAD
+
+namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups
+{
+    class PowerupBoost
+    {
+=======
 using Asteroid_Death_2_Electric_Boogaloo.Enums;
 using Microsoft.Xna.Framework;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups
 {
-    class PowerupMariostar : Powerup
+    class PowerupBoost : Powerup
     {
-        public PowerupMariostar(AsteroidsGame game, Vector2 position) : base(game, position, PowerupType.Health)
+        public PowerupBoost(AsteroidsGame game, Vector2 position) : base(game, position, PowerupType.Boost)
         {
 
         }
@@ -22,7 +29,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups
 
         public override void DoEffect(Player player)
         {
-            player.Health = player.Health + 3;
+            player.Boost = player.Boost + 360;
         }
+>>>>>>> origin/develop
     }
 }

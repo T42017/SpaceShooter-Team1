@@ -27,15 +27,20 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         ParticleEngine particleEngine;
         private List<Texture2D> textures = new List<Texture2D>();
         public static int score = 0;
+        public bool HasMariostar { get; set; }
 
         List<Powerup> Powerups = new List<Powerup>();
-
+        
         public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Blue), Globals.Health)
         {
             boost = 180;
+            Boost = 180;
+        
          
             ShootingSpeed = 200;
             textures.Add(Game.Content.Load<Texture2D>("blackSmoke00"));
+        public override void LoadContent()
+        {
             textures.Add(Game.Content.Load<Texture2D>("blackSmoke01"));
             textures.Add(Game.Content.Load<Texture2D>("blackSmoke02"));
             textures.Add(Game.Content.Load<Texture2D>("blackSmoke03"));
@@ -69,12 +74,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             if ((gamePadState.ThumbSticks.Left.Y >= 0.3f)
                 || (gamePadState.DPad.Up == ButtonState.Pressed)
                 || (state.IsKeyDown(Keys.Up))
-                || (state.IsKeyDown(Keys.W))) 
+                || (state.IsKeyDown(Keys.W)))
                 AccelerateForward(0.45f);
-           
-            if ((gamePadState.ThumbSticks.Left.Y <= -0.3f) 
+
+            if ((gamePadState.ThumbSticks.Left.Y <= -0.3f)
                 || (gamePadState.DPad.Down == ButtonState.Pressed)
-                || (state.IsKeyDown(Keys.Down)) 
+                || (state.IsKeyDown(Keys.Down))
                 || (state.IsKeyDown(Keys.S)))
                 AccelerateForward(-0.07f);
 
@@ -82,13 +87,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 || (gamePadState.ThumbSticks.Right.X <= -0.3f)
                 || (gamePadState.DPad.Left == ButtonState.Pressed)
                 || (state.IsKeyDown(Keys.Left))
-                || (state.IsKeyDown(Keys.A))) 
+                || (state.IsKeyDown(Keys.A)))
                 Rotation -= 0.026f;
 
-            if ((gamePadState.ThumbSticks.Left.X >= 0.3f) 
+            if ((gamePadState.ThumbSticks.Left.X >= 0.3f)
                 || (gamePadState.ThumbSticks.Right.X >= 0.3f)
                 || (gamePadState.DPad.Right == ButtonState.Pressed)
-                || (state.IsKeyDown(Keys.Right)) 
+                || (state.IsKeyDown(Keys.Right))
                 || (state.IsKeyDown(Keys.D)))
                 Rotation += 0.026f;
 
@@ -132,7 +137,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 }
             }
             Powerups.RemoveAll(p => p.Timer <=0);
-
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -157,6 +161,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         public override bool CollidesWith(GameObject otherGameObject)
         {
+            if (HasMariostar)
+            {
+                return false;
+            }
+
             bool collides = base.CollidesWith(otherGameObject) && (otherGameObject is Meteor
             || otherGameObject is Enemy
             || otherGameObject is Powerup

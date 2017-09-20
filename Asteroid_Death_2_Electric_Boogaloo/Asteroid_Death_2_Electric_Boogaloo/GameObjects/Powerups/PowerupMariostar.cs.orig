@@ -8,6 +8,10 @@ using Microsoft.Xna.Framework;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups
 {
+<<<<<<< HEAD
+    class PowerupMariostar
+    {
+=======
     class PowerupMariostar : Powerup
     {
         public PowerupMariostar(AsteroidsGame game, Vector2 position) : base(game, position, PowerupType.Health)
@@ -24,5 +28,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups
         {
             player.Health = player.Health + 3;
         }
+>>>>>>> origin/develop
     }
 }
