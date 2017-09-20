@@ -32,7 +32,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         List<Powerup> Powerups = new List<Powerup>();
         
-        public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Red))
+        public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Red), Globals.Health)
         {
             Health = 10;
             Boost = 180;

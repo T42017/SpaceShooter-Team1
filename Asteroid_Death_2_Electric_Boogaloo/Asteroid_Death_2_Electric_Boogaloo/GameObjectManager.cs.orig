@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using Asteroid_Death_2_Electric_Boogaloo.Factorys;
+using System.Runtime.CompilerServices;
 using Asteroid_Death_2_Electric_Boogaloo.GameObjects;
-using Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -16,15 +12,23 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     public class GameObjectManager
     {
         public Player Player { get; private set; }
-        public List<GameObject> GameObjects { get; private set; } = new List<GameObject>();
-        
-        private EnemyFactory _enemyFactory;
+        public List<GameObject> GameObjects { get; } = new List<GameObject>();
+        public List<Explosion> Explosions { get; set; } = new List<Explosion>();
+        public List<Hitmarker> Hitmarkers { get; set; } = new List<Hitmarker>();
+
         private readonly AsteroidsGame _game;
+        private EnemyFactory _enemyFactory;
+        private PowerupFactory _powerupFactory;
 
         public GameObjectManager(AsteroidsGame game)
         {
             _game = game;
             AddThePlayer();
+        }
+
+        public void AddPowerupFactory(PowerupFactory factory)
+        {
+            _powerupFactory = factory;
         }
 
         public void AddEnemyFactory(EnemyFactory factory)
@@ -34,13 +38,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public void AddEnemys(int amount)
         {
-            for (int i = 0; i < amount; i++)
+            for (var i = 0; i < amount; i++)
                 GameObjects.Add(_enemyFactory.GetRandomEnemy());
         }
 
         public void AddThePlayer()
         {
-            this.Player = new Player(_game)
+            Player = new Player(_game)
             {
                 Position = new Vector2(_game.Level.SizeX / 2, _game.Level.SizeY / 2)
             };
@@ -49,50 +53,36 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public void AddMeteors(int amount)
         {
-            for (int i = 0; i < amount; i++)
+            for (var i = 0; i < amount; i++)
             {
                 var position = new Vector2(
                     Globals.RNG.Next(_game.Level.SizeX),
                     Globals.RNG.Next(_game.Level.SizeY)
                 );
-                Meteor meteor = new Meteor(_game, position, MeteorSize.Big, MeteorColour.Brown)
+                var meteor = new Meteor(_game, position, MeteorSize.Big, MeteorColour.Brown)
                 {
-                    Rotation = (float)Globals.RNG.NextDouble()
+                    Rotation = (float) Globals.RNG.NextDouble()
                 };
                 GameObjects.Add(meteor);
             }
         }
 
-        public List<Meteor> GetMeteors()
         public void AddPowerups(int amount)
         {
-            List<Meteor> meteors = new List<Meteor>();
-
-            for (int i = 0; i < GameObjects.Count; i++)
-            {
-                if (GameObjects[i] is Meteor meteor)
-                    meteors.Add(meteor);
-            }
-
-            return meteors;
-        }
-
-            for (int i = 0; i < amount; i++)
+            for (var i = 0; i < amount; i++)
             {
                 var position = new Vector2(
                     Globals.RNG.Next(_game.Level.SizeX),
                     Globals.RNG.Next(_game.Level.SizeY)
                 );
-                Powerup powerupMissile = new PowerupMissile(_game, position);
-                Powerup powerupHealth = new PowerupHealth(_game, position);
-                GameObjects.Add(powerupMissile);
-
+                var powerup = _powerupFactory.GetRandomPowerup();
+                GameObjects.Add(powerup);
             }
         }
 
         public List<Meteor> GetMeteors()
         {
-            List<Meteor> meteors = new List<Meteor>();
+            var meteors = new List<Meteor>();
 
             for (int i = 0; i < GameObjects.Count; i++)
             {
@@ -114,14 +104,30 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             }
         }
 
+        public void RemoveDeadExplosions()
+        {
+            Explosions.RemoveAll(explosion => explosion.IsDead);
+        }
+
+        public void RemoveDeadHitmarkers()
+        {
+            Hitmarkers.RemoveAll(hitmarker => hitmarker.IsDead);
+        }
+
         public void AddNewMeteors(GameTime gameTime, int amountOfMeteorsToAdd, int intervalInMilliseconds)
         {
             int currentGameTimeModInterval = (int) gameTime.TotalGameTime.TotalMilliseconds % intervalInMilliseconds;
+<<<<<<< HEAD
             if (currentGameTimeModInterval != 0 ||
-                GameObjects.Count(obj => obj is Meteor) >= 100)
+                GameObjects.Count(obj => obj is Meteor) >= Globals.Maxmeteors)
+=======
+            if (currentGameTimeModInterval != 0 || GameObjects.Count(obj => obj is Meteor) >= 100)
+>>>>>>> origin/Feature_MovementOfPlayer
                 return;
-            int hypothenuseSquared = (Globals.ScreenWidth * Globals.ScreenWidth) / 4 + (Globals.ScreenHeight * Globals.ScreenHeight) / 4;
-            for (int i = 0; i < amountOfMeteorsToAdd; i++)
+
+            int hypothenuseSquared = (Globals.ScreenWidth * Globals.ScreenWidth) / 4 +
+                                     (Globals.ScreenHeight * Globals.ScreenHeight) / 4;
+            for (var i = 0; i < amountOfMeteorsToAdd; i++)
             {
                 Meteor meteor;
                 do
@@ -139,50 +145,40 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 GameObjects.Add(meteor);
             }
         }
-<<<<<<< HEAD
-        
-=======
 
         public Enemy[] GetEnemys()
         {
-            List<Enemy> enemys = new List<Enemy>();
+            var enemys = new List<Enemy>();
 
             for (int i = 0; i < GameObjects.Count; i++)
             {
                 if (GameObjects[i] is Enemy)
-                    enemys.Add((Enemy)GameObjects[i]);
-            }
-
-        public Enemy[] GetEnemys()
-            return enemys.ToArray();
-        }
-
->>>>>>> origin/develop
-        {
-            List<Enemy> enemys = new List<Enemy>();
-
-            for (int i = 0; i < GameObjects.Count; i++)
-            {
-                if (GameObjects[i] is Enemy)
-                    enemys.Add((Enemy)GameObjects[i]);
+                    enemys.Add((Enemy) GameObjects[i]);
             }
 
             return enemys.ToArray();
         }
 
-<<<<<<< HEAD
-=======
-       
-
->>>>>>> f05ae998f153692d7e99616ea7a1118ee13b38da
         internal void UpdateGameObjects()
         {
-            for (int i = 0; i < GameObjects.Count; i++)
+            for (var i = 0; i < GameObjects.Count; i++)
             {
                 var gameObject = GameObjects[i];
                 gameObject.Update();
                 CheckForCollisionWith(gameObject);
             }
+        }
+
+        public void UpdateExplosions()
+        {
+            foreach (var explosion in Explosions)
+                explosion.Update();
+        }
+
+        public void UpdateHitmarkers()
+        {
+            foreach (var hitmarker in Hitmarkers)
+                hitmarker.Update();
         }
 
         public void CheckForCollisionWith(GameObject thisObject)
@@ -192,17 +188,28 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 if (thisObject == otherGameObject ||
                     !thisObject.CollidesWith(otherGameObject))
                     continue;
-                Debug.WriteLine($"{thisObject} collided with {otherGameObject}");
                 return;
             }
         }
 
         internal void DrawGameObjects(SpriteBatch spriteBatch)
         {
-           for (int i = 0; i < GameObjects.Count; i++)
+            for (int i = 0; i < GameObjects.Count; i++)
             {
                 GameObjects[i].Draw(spriteBatch);
             }
+        }
+
+        public void DrawExplosions(SpriteBatch spriteBatch)
+        {
+            foreach (var explosion in Explosions)
+                explosion.Draw(spriteBatch);
+        }
+
+        public void DrawHitmarkers(SpriteBatch spriteBatch)
+        {
+            foreach (var hitmarker in Hitmarkers)
+                hitmarker.Draw(spriteBatch);
         }
     }
 }

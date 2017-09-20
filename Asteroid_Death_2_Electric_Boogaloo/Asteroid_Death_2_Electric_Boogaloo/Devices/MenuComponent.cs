@@ -13,7 +13,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
     internal class MenuComponent : AstroidsComponent
     {
         public static SpriteFont menuFont, buttonFont;
-        private readonly AsteroidsGame pGame;
+        private readonly AsteroidsGame Game;
         private Texture2D _backGroundtexture, left, right;
         private int _highlightedUiComponent, difficulty;
         private bool playing;
@@ -34,19 +34,19 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
 
         protected override void LoadContent()
         {
-            left = Game.Content.Load<Texture2D>("Left");
-            right = Game.Content.Load<Texture2D>("Right");
-            menuFont = Game.Content.Load<SpriteFont>("GameState");
-            buttonFont = Game.Content.Load<SpriteFont>("Text");
-            song = Game.Content.Load<Song>("Best");
-            _backGroundtexture = Game.Content.Load<Texture2D>("background");
+            left = base.Game.Content.Load<Texture2D>("Left");
+            right = base.Game.Content.Load<Texture2D>("Right");
+            menuFont = base.Game.Content.Load<SpriteFont>("GameState");
+            buttonFont = base.Game.Content.Load<SpriteFont>("Text");
+            song = base.Game.Content.Load<Song>("Best");
+            _backGroundtexture = base.Game.Content.Load<Texture2D>("background");
             difficulty = 0;
 
             UiComponents = new List<BaseUiComponent>();
-            UiComponents.Add(new UiLabel(Game, new Vector2(0, -260), Game.Window.Title, menuFont));
+            UiComponents.Add(new UiLabel(Game, new Vector2(0, -260), base.Game.Window.Title, menuFont));
             UiComponents.Add(new UiButton(Game, new Vector2(0, -150), "Play", buttonFont, (sender, args) => Game.Start()));
             UiComponents.Add(new UiButton(Game, new Vector2(0, -90), "Highscore", buttonFont, ButtonHghiscoreEvent));
-            UiComponents.Add(new UiButton(Game, new Vector2(0, -30), "Quit", buttonFont, (sender, args) => Game.Exit()));
+            UiComponents.Add(new UiButton(Game, new Vector2(0, -30), "Quit", buttonFont, (sender, args) => base.Game.Exit()));
             UiComponents.Add(new UiArrow(Game, new Vector2(0,30)));
             HighlightNextComponent();
 
@@ -125,6 +125,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
             }
         }
 
+
+        public void HighlightNextComponent()
         {
             for (int nextComponent = _highlightedUiComponent + 1; nextComponent < UiComponents.Count; nextComponent++)
             {

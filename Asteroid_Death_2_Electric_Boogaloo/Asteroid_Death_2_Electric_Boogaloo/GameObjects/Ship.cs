@@ -15,6 +15,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         private bool ShootLefCannon = false;
         private DateTime _timeSenceLastShot = DateTime.Today;
 
+        public int BaseHealth;
         public int Health = 1;
         public int Boost = 1;
         public int boost = 1;

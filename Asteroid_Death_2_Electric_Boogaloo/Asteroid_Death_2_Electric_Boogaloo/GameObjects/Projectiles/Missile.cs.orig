@@ -17,9 +17,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
 <<<<<<< HEAD
 =======
-        public override void LoadContent()
+        protected override Type GetClassType()
         {
- 
+            return typeof(Missile);
         }
 
 >>>>>>> origin/Feature_MovementOfPlayer
