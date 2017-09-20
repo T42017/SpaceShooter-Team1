@@ -1386,9 +1386,9 @@
 /processorParam:Quality=Best
 /build:Explo.wav
 
-#begin Hit.mp3
-/importer:Mp3Importer
+#begin Hit.wav
+/importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Hit.mp3
+/build:Hit.wav
 

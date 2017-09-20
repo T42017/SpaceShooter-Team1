@@ -32,6 +32,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             hit1.Volume = 1.0f;
             hit1.Pitch = 0.000001f;
             explo = Game.Content.Load<SoundEffect>("Explo");
+
             this.Position = position;
             this.Rotation = rotation;
             this.color = color;
