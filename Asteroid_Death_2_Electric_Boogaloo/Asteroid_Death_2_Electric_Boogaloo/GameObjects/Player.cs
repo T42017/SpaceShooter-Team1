@@ -76,7 +76,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             MaxSpeed = 10;
             }
 
-        Speed += new Vector2(-Speed.X * 0.015f, -Speed.Y * 0.015f);
+            Speed += new Vector2(-Speed.X * 0.015f, -Speed.Y * 0.015f);
             Move();
             
             base.Update();
