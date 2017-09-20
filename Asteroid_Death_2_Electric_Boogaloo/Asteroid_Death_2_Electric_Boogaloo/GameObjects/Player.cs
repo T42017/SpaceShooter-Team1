@@ -143,7 +143,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                     otherGameObject.IsDead = true;
                     //((Powerup) otherGameObject).DoEffect(this); 
                     Powerups.Add(otherGameObject as Powerup);
-                    Debug.WriteLine("added powerup " + otherGameObject);
+                    //Debug.WriteLine("added powerup " + otherGameObject);
                 }
 
                 if (otherGameObject is Projectile pro)
