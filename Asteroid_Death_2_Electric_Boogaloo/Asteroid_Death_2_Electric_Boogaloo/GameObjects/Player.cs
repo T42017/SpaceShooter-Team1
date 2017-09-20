@@ -20,7 +20,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
     {
         private KeyboardState _lastKeyboardState;
         private GamePadState _lastGamePadState;
-        private SoundEffect _pewEffect,alarm;
+        private SoundEffect alarm;
         private SoundEffectInstance alarm2;
         private DateTime _timeSenceLastShot = DateTime.Today;
         private Texture2D _lifeTexture;
@@ -31,7 +31,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         List<Powerup> Powerups = new List<Powerup>();
 
-        public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Blue),
+        public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Green),
             Globals.Health)
         {
             Boost = 180;
@@ -45,7 +45,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             textures.Add(Game.Content.Load<Texture2D>("blackSmoke03"));
             Texture = TextureManager.Instance.PlayerShipTexture;
             _lifeTexture = Game.Content.Load<Texture2D>("playerLife2_red");
-            _pewEffect = Game.Content.Load<SoundEffect>("shot");
+           
             alarm = Game.Content.Load<SoundEffect>("Alarm");
             alarm2 = alarm.CreateInstance();
             alarm2.IsLooped = true;
@@ -119,7 +119,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 !IsWeaponOverheated())
             {
                 Shoot(typeof(Player));
-                _pewEffect.Play();
+               
                 _timeSenceLastShot = DateTime.Now;
             }
 
