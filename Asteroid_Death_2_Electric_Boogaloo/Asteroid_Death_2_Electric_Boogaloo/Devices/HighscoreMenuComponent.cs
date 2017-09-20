@@ -38,7 +38,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             buttonFont = Game.Content.Load<SpriteFont>("Text");
             song = Game.Content.Load<Song>("CantinaBand");
             _backGroundtexture = Game.Content.Load<Texture2D>("background");
-
             UiComponents = new List<BaseUiComponent>();
             UiComponents.Add(new UiList(Game, new Vector2(0, -300), menuFont, HighScore.GetHighScores(), 40));
             UiComponents.Add(new UiButton(Game, new Vector2(0, 140), "Play", buttonFont, (sender, args) => Game.Start()));
@@ -83,7 +82,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             foreach (var component in UiComponents)
                 component.Draw(SpriteBatch);
 
-
             SpriteBatch.End();
             base.Draw(gameTime);
         }
@@ -116,6 +114,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             {
                 if (UiComponents[nextComponent].CanBeHighLighted)
                 {
+                    
                     _highlightedUiComponent = nextComponent;
                     return;
                 }

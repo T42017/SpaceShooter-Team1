@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,9 +49,29 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             base.Update();
         }
 
+        protected abstract Type GetClassType();
+
         public override bool CollidesWith(GameObject otherGameObject)
         {
-            return base.CollidesWith(otherGameObject) && ParentType != otherGameObject.GetType();
+            bool collides = base.CollidesWith(otherGameObject) && ParentType != otherGameObject.GetType() && !(otherGameObject is Projectile);
+            if (collides)
+            {
+                var position = new Vector2(Position.X + .25f * Width, Position.Y + .25f * Height);
+
+                if (GetClassType() == typeof(Missile))
+                {
+                    var explosion = new Explosion(Game, position);
+                    Debug.WriteLine($"{GetType().Name}: ({Position})\r\nExplosion: ({explosion.Position})");
+                    if (explosion.NoExplosionsNearby())
+                        Game.GameObjectManager.Explosions.Add(explosion);
+                }
+                else
+                {
+                    var hitmarker = new Hitmarker(Game, Position);
+                    Game.GameObjectManager.Hitmarkers.Add(hitmarker);
+                }
+            }
+            return collides;
         }
     }
 }

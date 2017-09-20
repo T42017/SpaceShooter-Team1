@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Linq;
 using Asteroid_Death_2_Electric_Boogaloo.Devices;
 using Asteroid_Death_2_Electric_Boogaloo.Components;
+using Asteroid_Death_2_Electric_Boogaloo.Enums;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
@@ -26,18 +28,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         ParticleEngine particleEngine;
         private List<Texture2D> textures = new List<Texture2D>();
         public static int score = 0;
+        public bool HasMariostar { get; set; }
 
         List<Powerup> Powerups = new List<Powerup>();
-
-
-
-        public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Blue),Globals.Health)
+        
+        public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Red))
         {
             Health = 10;
-            boost = 180;
-            
-
-            ShootingSpeed = 200;
+            Boost = 180;
             textures.Add(Game.Content.Load<Texture2D>("blackSmoke00"));
             textures.Add(Game.Content.Load<Texture2D>("blackSmoke01"));
             textures.Add(Game.Content.Load<Texture2D>("blackSmoke02"));
@@ -66,12 +64,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             if ((gamePadState.ThumbSticks.Left.Y >= 0.3f)
                 || (gamePadState.DPad.Up == ButtonState.Pressed)
                 || (state.IsKeyDown(Keys.Up))
-                || (state.IsKeyDown(Keys.W))) 
+                || (state.IsKeyDown(Keys.W)))
                 AccelerateForward(0.45f);
-           
-            if ((gamePadState.ThumbSticks.Left.Y <= -0.3f) 
+
+            if ((gamePadState.ThumbSticks.Left.Y <= -0.3f)
                 || (gamePadState.DPad.Down == ButtonState.Pressed)
-                || (state.IsKeyDown(Keys.Down)) 
+                || (state.IsKeyDown(Keys.Down))
                 || (state.IsKeyDown(Keys.S)))
                 AccelerateForward(-0.07f);
 
@@ -79,24 +77,24 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 || (gamePadState.ThumbSticks.Right.X <= -0.3f)
                 || (gamePadState.DPad.Left == ButtonState.Pressed)
                 || (state.IsKeyDown(Keys.Left))
-                || (state.IsKeyDown(Keys.A))) 
+                || (state.IsKeyDown(Keys.A)))
                 Rotation -= 0.026f;
 
-            if ((gamePadState.ThumbSticks.Left.X >= 0.3f) 
+            if ((gamePadState.ThumbSticks.Left.X >= 0.3f)
                 || (gamePadState.ThumbSticks.Right.X >= 0.3f)
                 || (gamePadState.DPad.Right == ButtonState.Pressed)
-                || (state.IsKeyDown(Keys.Right)) 
+                || (state.IsKeyDown(Keys.Right))
                 || (state.IsKeyDown(Keys.D)))
                 Rotation += 0.026f;
 
             if ((gamePadState.Buttons.RightShoulder == ButtonState.Pressed)
                 || (state.IsKeyDown(Keys.E))
-                && (boost > 0))
+                && (Boost > 0))
             {
-                MaxSpeed = 50;
-                AccelerateForward(50f);
-                boost--;
-                MaxSpeed = 10; 
+            MaxSpeed = 50;
+            AccelerateForward(50f);
+            Boost--;
+            MaxSpeed = 10;
             }
 
             
@@ -131,7 +129,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 }
             }
             Powerups.RemoveAll(p => p.Timer <=0);
-
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -156,6 +153,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         public override bool CollidesWith(GameObject otherGameObject)
         {
+            if (Powerups.Any(powerup => powerup.PowerupType == PowerupType.Mariostar))
+            {
+                return false;
+            }
+
             bool collides = base.CollidesWith(otherGameObject) && (otherGameObject is Meteor
             || otherGameObject is Enemy
             || otherGameObject is Powerup
@@ -168,14 +170,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                     otherGameObject.IsDead = true;
                     //((Powerup) otherGameObject).DoEffect(this); 
                     Powerups.Add(otherGameObject as Powerup);
-                    Debug.WriteLine("added powerup " + otherGameObject);
+                    //Debug.WriteLine("added powerup " + otherGameObject);
                 }
 
                 if (otherGameObject is Projectile pro)
                 {
                     Health -= pro.Damage;
                     pro.IsDead = true;
-                   
                 }
 
                 if (Health <= 0 || !(otherGameObject is Projectile

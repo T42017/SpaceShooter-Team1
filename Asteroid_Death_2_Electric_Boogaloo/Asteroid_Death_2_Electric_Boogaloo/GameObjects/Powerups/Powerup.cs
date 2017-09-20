@@ -14,28 +14,25 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         public float Timer { get; set; }
         
-        public Powerup(AsteroidsGame game, Vector2 position, PowerupType powerupType) : base(game)
+        public Powerup(AsteroidsGame game, Vector2 position, PowerupType powerupType) : this(game, powerupType)
         {
             Position = position;
             Speed = new Vector2(
                 (float)Globals.RNG.NextDouble(),
                 (float)Globals.RNG.NextDouble()
             );
+        }
+
+        public Powerup(AsteroidsGame game, PowerupType powerupType) : base(game)
+        {
             PowerupType = powerupType;
-            Texture = TextureManager.Instance.PowerUpTextures[(int) powerupType];
+            Texture = TextureManager.Instance.PowerUpTextures[(int)powerupType];
 
             if (powerupType == PowerupType.Missile)
             {
                 Timer = 900;
             }
-        }
-
-        public Powerup(AsteroidsGame game, PowerupType powerupType) : base(game)
-        {
-            this.PowerupType = PowerupType;
-            Texture = TextureManager.Instance.PowerUpTextures[(int)powerupType];
-
-            if (powerupType == PowerupType.Missile)
+            else if (powerupType == PowerupType.Mariostar)
             {
                 Timer = 900;
             }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.CodeDom;
+using System.ComponentModel;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 
@@ -14,7 +16,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         private DateTime _timeSenceLastShot = DateTime.Today;
 
         public int Health = 1;
-        public int BaseHealth;
+        public int Boost = 1;
         public int boost = 1;
         protected Ship(AsteroidsGame game,int baseHealth) : base(game)
         {

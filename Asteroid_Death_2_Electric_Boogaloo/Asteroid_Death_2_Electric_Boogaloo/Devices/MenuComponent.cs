@@ -13,12 +13,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
     internal class MenuComponent : AstroidsComponent
     {
         public static SpriteFont menuFont, buttonFont;
-        
+        private readonly AsteroidsGame pGame;
         private Texture2D _backGroundtexture, left, right;
         private int _highlightedUiComponent, difficulty;
-        
-        
-        private readonly AsteroidsGame Game;
         private bool playing;
         private Song song;
         
@@ -128,7 +125,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
             }
         }
 
-        public void HighlightNextComponent()
         {
             for (int nextComponent = _highlightedUiComponent + 1; nextComponent < UiComponents.Count; nextComponent++)
             {

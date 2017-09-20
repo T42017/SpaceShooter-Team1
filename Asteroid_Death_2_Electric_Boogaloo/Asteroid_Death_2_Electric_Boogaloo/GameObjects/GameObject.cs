@@ -27,7 +27,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             get { return Texture.Height; }
         }
 
-
         public Rectangle Bounds
         {
             get { return _bounds; }
@@ -69,7 +68,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             spriteBatch.Draw(rectangle, Position - new Vector2(Bounds.Width / 2f, Bounds.Height / 2f), Color.Red);
         }
         
-
         public virtual void Update()
         {
             int offset = 20;
@@ -143,10 +141,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 Speed = Vector2.Normalize(Speed) * MaxSpeed;
             }
         }
-
         
-        
-
         public override string ToString()
         {
             return $"{GetType().Name} at position ({Position.X}, {Position.Y})";
