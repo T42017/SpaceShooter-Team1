@@ -1,4 +1,5 @@
-﻿using Asteroid_Death_2_Electric_Boogaloo.Components;
+﻿using System.Windows.Forms;
+using Asteroid_Death_2_Electric_Boogaloo.Components;
 using Asteroid_Death_2_Electric_Boogaloo.Devices;
 using Asteroid_Death_2_Electric_Boogaloo.Factorys;
 using Asteroid_Death_2_Electric_Boogaloo.GameObjects;
@@ -152,13 +153,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             _spriteBatch.End();
             base.Draw(gameTime);
         }
-
-        public void UpdateWindowSize()
-        {
-            WindowWidth = Graphics.PreferredBackBufferWidth;
-            Windowheight = Graphics.PreferredBackBufferHeight;
-        }
-
+        #endregion
+        
         public void ControlMaxEnemies()
         {
             Enemy[] enemys = GameObjectManager.GetEnemys();

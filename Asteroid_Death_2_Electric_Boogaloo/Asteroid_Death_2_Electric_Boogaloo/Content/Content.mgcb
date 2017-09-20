@@ -1109,7 +1109,6 @@
 /processorParam:TextureFormat=Color
 /build:PowerupMissile.png
 
-#begin powerupHealth.png
 #begin blackSmoke01.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1122,6 +1121,7 @@
 /processorParam:TextureFormat=Color
 /build:blackSmoke01.png
 
+#begin powerupHealth.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1133,7 +1133,6 @@
 /processorParam:TextureFormat=Color
 /build:powerupHealth.png
 
-#begin powerupRandom.png
 #begin blackSmoke02.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1146,6 +1145,7 @@
 /processorParam:TextureFormat=Color
 /build:blackSmoke02.png
 
+#begin powerupRandom.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1158,7 +1158,6 @@
 /build:powerupRandom.png
 
 #begin blackSmoke03.png
-#begin hitmarker.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1170,6 +1169,7 @@
 /processorParam:TextureFormat=Color
 /build:blackSmoke03.png
 
+#begin hitmarker.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1181,7 +1181,6 @@
 /processorParam:TextureFormat=Color
 /build:hitmarker.png
 
-#begin hitmarker0.png
 #begin blackSmoke00.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1194,6 +1193,7 @@
 /processorParam:TextureFormat=Color
 /build:blackSmoke00.png
 
+#begin hitmarker0.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1218,7 +1218,6 @@
 /build:hitmarker1.png
 
 #begin hitmarker2.png
-#begin Right.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1229,10 +1228,20 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:hitmarker2.png
+
+#begin Right.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
 /build:Right.png
 
 #begin hitmarker3.png
-#begin Left.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1243,6 +1252,17 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:hitmarker3.png
+
+#begin Left.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
 /build:Left.png
 
 #begin hitmarker4.png
@@ -1257,12 +1277,6 @@
 /processorParam:TextureFormat=Color
 /build:hitmarker4.png
 
-#begin hitmarker5.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
 #begin diff.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -1281,11 +1295,6 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Alarm.ogg
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:hitmarker5.png
 
 #begin hitmarker6.png
 /importer:TextureImporter

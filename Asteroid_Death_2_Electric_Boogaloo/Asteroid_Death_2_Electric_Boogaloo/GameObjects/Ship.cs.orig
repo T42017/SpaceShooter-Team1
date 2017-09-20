@@ -1,4 +1,6 @@
 ﻿using System;
+using System.CodeDom;
+using System.ComponentModel;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 
@@ -13,15 +15,17 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         private bool ShootLefCannon = false;
         private DateTime _timeSenceLastShot = DateTime.Today;
 
-        public int Health = 1;
 <<<<<<< HEAD
-        public int boost = 1;
+        public int Health = 1;
+        public int Boost = 1;
 
         protected Ship(AsteroidsGame game) : base(game)
 =======
+        public int Health;
         public int BaseHealth;
+        public int boost = 1;
         protected Ship(AsteroidsGame game,int baseHealth) : base(game)
->>>>>>> 94394633c7d8fac0299ddcfd95113a34b0ae3f6f
+>>>>>>> origin/Feature_menu
         {
             BaseHealth = baseHealth;
             Health = baseHealth;
