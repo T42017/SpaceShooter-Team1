@@ -70,13 +70,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 || (state.IsKeyDown(Keys.E))
                 && (Boost > 0))
             {
-            MaxSpeed = 50;
-            AccelerateForward(50f);
-            Boost--;
-            MaxSpeed = 10;
+                MaxSpeed = 50;
+                AccelerateForward(50f);
+                Boost--;
+                MaxSpeed = 10;
             }
 
-        Speed += new Vector2(-Speed.X * 0.015f, -Speed.Y * 0.015f);
+            Speed += new Vector2(-Speed.X * 0.015f, -Speed.Y * 0.015f);
             Move();
             
             base.Update();
@@ -132,9 +132,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             }
 
             bool collides = base.CollidesWith(otherGameObject) && (otherGameObject is Meteor
-            || otherGameObject is Enemy
-            || otherGameObject is Powerup
-            || otherGameObject is Projectile projectile && projectile.ParentType == typeof(Enemy));
+                || otherGameObject is Enemy
+                || otherGameObject is Powerup
+                || otherGameObject is Projectile projectile && projectile.ParentType == typeof(Enemy));
 
             if (collides)
             {
@@ -143,7 +143,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                     otherGameObject.IsDead = true;
                     //((Powerup) otherGameObject).DoEffect(this); 
                     Powerups.Add(otherGameObject as Powerup);
-                    Debug.WriteLine("added powerup " + otherGameObject);
                 }
 
                 if (otherGameObject is Projectile pro)
@@ -152,8 +151,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                     pro.IsDead = true;
                 }
 
-                if (Health <= 0 || !(otherGameObject is Projectile
-                || otherGameObject is Powerup))
+                if (Health <= 0 || !(otherGameObject is Projectile || otherGameObject is Powerup))
                 {
                     IsDead = true;
                     MediaPlayer.Stop();

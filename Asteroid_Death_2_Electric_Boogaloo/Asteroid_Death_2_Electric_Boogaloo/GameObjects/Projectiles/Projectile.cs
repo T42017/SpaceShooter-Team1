@@ -61,7 +61,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 if (GetClassType() == typeof(Missile))
                 {
                     var explosion = new ExplosionCollisionEffect(Game, position);
-                    Debug.WriteLine($"{GetType().Name}: ({Position})\r\nExplosion: ({explosion.Position})");
                     if (explosion.NoExplosionsNearby())
                         Game.GameObjectManager.Explosions.Add(explosion);
                 }
