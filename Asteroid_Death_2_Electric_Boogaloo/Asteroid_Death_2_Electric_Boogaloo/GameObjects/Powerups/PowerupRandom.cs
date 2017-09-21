@@ -10,6 +10,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups
 {
     class PowerupRandom : Powerup
     {
+        private int powerupNumber;
+
         public PowerupRandom(AsteroidsGame game, Vector2 position) : base(game, position, PowerupType.Random)
         {
 
@@ -17,7 +19,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups
 
         public override void Remove(Player player)
         {
-
+            if(powerupNumber == 1)
+                player.Weapon = new Weapon(Game, Weapon.Type.Laser, Weapon.Color.Red);
+            //else if(powerupNumber == 4)
+                
         }
 
         public override void DoEffect(Player player)
@@ -26,22 +31,26 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups
             {
 
                 case 1:
-                    player.Weapon = new Weapon(Game, Weapon.Type.Missile, Weapon.Color.Red);
+                    powerupNumber = 1;
                     break;
 
                 case 2:
                     player.Health = player.Health + 1;
+                    powerupNumber = 2;
                     break;
 
                 case 3:
                     player.Boost = player.Boost + 360;
+                    powerupNumber = 3;
                     break;
 
                 case 4:
+                    powerupNumber = 4;
                     break;
 
                 case 5:
                     player.Health = player.Health / 2;
+                    powerupNumber = 5;
                     break;
             }
         }
