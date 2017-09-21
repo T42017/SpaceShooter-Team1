@@ -30,11 +30,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles
 
             base.Update();
         }
-
-        protected override Type GetClassType()
-        {
-            return typeof(Laser);
-        } 
         #endregion
     }
 }

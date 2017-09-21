@@ -10,22 +10,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     public class GameObjectManager
     {
 <<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
         #region Private fields
 =======
-        public Player Player { get; private set; }
-        public List<GameObject> GameObjects => _gameObjects;
 
-        private readonly List<GameObject> _gameObjects = new List<GameObject>();
         private EnemyFactory _enemyFactory;
 >>>>>>> feature-enemy
-=======
-        #region Private fields
->>>>>>> dcaa29908a807acb08043d63be01d1e9689979a2
-=======
-        #region Private fields
->>>>>>> origin/Feature-Powerups
         private readonly AsteroidsGame _game;
         private EnemyFactory _enemyFactory;
         private PowerupFactory _powerupFactory;
@@ -44,7 +33,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             AddThePlayer();
         }
         #endregion
-<<<<<<< HEAD
 
         #region Public adding methods
         public void AddPowerupFactory(PowerupFactory factory)
@@ -53,7 +41,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         }
 
         public void AddPowerups(int amount)
-<<<<<<< HEAD
         {
             for (var i = 0; i < amount; i++)
             {
@@ -66,16 +53,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             }
         }
 
-        public void AddEnemyFactory(EnemyFactory factory)
-        {
-            _enemyFactory = factory;
-        }
-
-<<<<<<< HEAD
         public void AddEnemies(int amount)
-        {
-            for (var i = 0; i < amount; i++)
-                GameObjects.Add(_enemyFactory.GetRandomEnemy());
 =======
         public void Add(GameObject gameObject)
         {
@@ -115,19 +93,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 AddAtRandomPosition(new EnemyBoss(_game));
             }
 >>>>>>> feature-enemy
-        }
-
-        public void AddThePlayer()
-        {
-            Player = new Player(_game)
-            {
-                Position = new Vector2(_game.Level.SizeX / 2, _game.Level.SizeY / 2)
-            };
-            Add(Player);
-        }
         
-        public void AddMeteors(GameTime gameTime, int amountOfMeteorsToAdd, int intervalInMilliseconds)
-        {
             int currentGameTimeModInterval = (int)gameTime.TotalGameTime.TotalMilliseconds % intervalInMilliseconds;
             if (currentGameTimeModInterval != 0 || GameObjects.Count(obj => obj is Meteor) >= Globals.Maxmeteors)
                 return;
@@ -135,10 +101,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             int hypothenuseSquared = (Globals.ScreenWidth * Globals.ScreenWidth) / 4 +
                                      (Globals.ScreenHeight * Globals.ScreenHeight) / 4;
             for (var i = 0; i < amountOfMeteorsToAdd; i++)
-            {
-                Meteor meteor;
-                do
-                {
 <<<<<<< HEAD
                     meteor = new Meteor(
                         _game,
@@ -152,15 +114,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 } while (Player.DistanceToSquared(meteor) <= hypothenuseSquared);
                 GameObjects.Add(meteor);
 =======
-                    Rotation = (float)Globals.RNG.NextDouble()
-                };
+                    Rotation = (float) Globals.RNG.NextDouble()
                 Add(meteor);
-            }
-        }
-
         public Enemy[] GetEnemys()
-=======
->>>>>>> dcaa29908a807acb08043d63be01d1e9689979a2
         {
             List<Enemy> enemys = new List<Enemy>();
 
@@ -185,47 +141,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             }
 
             return bosses.ToArray();
-=======
-
-        #region Public adding methods
-        public void AddPowerupFactory(PowerupFactory factory)
-        {
-            _powerupFactory = factory;
-        }
-
-        public void AddPowerups(int amount)
-        {
-            for (var i = 0; i < amount; i++)
-            {
-                var position = new Vector2(
-                    Globals.RNG.Next(_game.Level.SizeX),
-                    Globals.RNG.Next(_game.Level.SizeY)
-                );
-                var powerup = _powerupFactory.GetRandomPowerup();
-                GameObjects.Add(powerup);
-            }
-        }
-
-        public void AddEnemyFactory(EnemyFactory factory)
-        {
-            _enemyFactory = factory;
->>>>>>> origin/Feature-Powerups
         }
         #endregion
 
-<<<<<<< HEAD
-<<<<<<< HEAD
         #region Public getting methods
-        public List<Meteor> GetMeteors()
-=======
-        public void AddEnemyFactory(EnemyFactory factory)
-        {
-<<<<<<< HEAD
-            _enemyFactory = factory;
-        }
 
         public void AddEnemies(int amount)
->>>>>>> dcaa29908a807acb08043d63be01d1e9689979a2
         {
             for (var i = 0; i < amount; i++)
                 GameObjects.Add(_enemyFactory.GetRandomEnemy());
@@ -241,7 +162,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 >>>>>>> origin/Feature_MovementOfPlayer
         }
 
-<<<<<<< HEAD
 <<<<<<< HEAD
         public Enemy[] GetEnemies()
         {
@@ -265,70 +185,26 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             return enemys.ToArray();
         }
         #endregion
-
+        
         #region Public removing methods
         public void RemoveDeadGameObjects()
-        {
-<<<<<<< HEAD
-            for (int i = 0; i < GameObjects.Count; i++)
-=======
-            int currentGameTimeModInterval = (int) gameTime.TotalGameTime.TotalMilliseconds % intervalInMilliseconds;
-            if (currentGameTimeModInterval != 0 ||
-                _gameObjects.Count(obj => obj is Meteor) >= 100)
-=======
-        public void AddThePlayer()
-        {
-            Player = new Player(_game)
-            {
-                Position = new Vector2(_game.Level.SizeX / 2, _game.Level.SizeY / 2)
-            };
-            GameObjects.Add(Player);
-        }
-        
-        public void AddMeteors(GameTime gameTime, int amountOfMeteorsToAdd, int intervalInMilliseconds)
         {
             int currentGameTimeModInterval = (int)gameTime.TotalGameTime.TotalMilliseconds % intervalInMilliseconds;
             if (currentGameTimeModInterval != 0 || GameObjects.Count(obj => obj is Meteor) >= Globals.Maxmeteors)
 <<<<<<< HEAD
 
 =======
->>>>>>> origin/Feature_MovementOfPlayer
->>>>>>> dcaa29908a807acb08043d63be01d1e9689979a2
+                GameObjects.Count(obj => obj is Meteor) >= Globals.Maxmeteors)
+<<<<<<< HEAD
+=======
+>>>>>>> origin/Feature_menu
+            if (currentGameTimeModInterval != 0 || GameObjects.Count(obj => obj is Meteor) >= 100)
+>>>>>>> origin/develop
+>>>>>>> Feature_Sound
                 return;
             int hypothenuseSquared = (Globals.ScreenWidth * Globals.ScreenWidth) / 4 + (Globals.ScreenHeight * Globals.ScreenHeight) / 4;
             for (int i = 0; i < amountOfMeteorsToAdd; i++)
 >>>>>>> feature-enemy
-=======
-        public void AddEnemies(int amount)
-        {
-            for (var i = 0; i < amount; i++)
-                GameObjects.Add(_enemyFactory.GetRandomEnemy());
-        }
-
-        public void AddThePlayer()
-        {
-            Player = new Player(_game)
-            {
-                Position = new Vector2(_game.Level.SizeX / 2, _game.Level.SizeY / 2)
-            };
-            GameObjects.Add(Player);
-        }
-        
-        public void AddMeteors(GameTime gameTime, int amountOfMeteorsToAdd, int intervalInMilliseconds)
-        {
-<<<<<<< HEAD
-            int currentGameTimeModInterval = (int) gameTime.TotalGameTime.TotalMilliseconds % intervalInMilliseconds;
-            if (currentGameTimeModInterval != 0 || GameObjects.Count(obj => obj is Meteor) >= 100)
-=======
-            int currentGameTimeModInterval = (int)gameTime.TotalGameTime.TotalMilliseconds % intervalInMilliseconds;
-            if (currentGameTimeModInterval != 0 || GameObjects.Count(obj => obj is Meteor) >= Globals.Maxmeteors)
->>>>>>> origin/develop
-                return;
-
-            int hypothenuseSquared = (Globals.ScreenWidth * Globals.ScreenWidth) / 4 +
-                                     (Globals.ScreenHeight * Globals.ScreenHeight) / 4;
-            for (var i = 0; i < amountOfMeteorsToAdd; i++)
->>>>>>> origin/Feature-Powerups
             {
                 if (GameObjects[i].IsDead)
                 {
@@ -357,85 +233,49 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         }
         #endregion
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-        public Vector2 GetRandmPositionWithADistanceFromPlayer(int distance)
-        {
-            Vector2 position = new Vector2(Globals.RNG.Next(Globals.ScreenWidth), Globals.RNG.Next(Globals.ScreenHeight));
-=======
-=======
->>>>>>> origin/Feature-Powerups
         #region Public getting methods
         public List<Meteor> GetMeteors()
         {
             var meteors = new List<Meteor>();
-<<<<<<< HEAD
->>>>>>> dcaa29908a807acb08043d63be01d1e9689979a2
-=======
->>>>>>> origin/Feature-Powerups
+
+            for (int i = 0; i < GameObjects.Count; i++)
+            {
+                if (GameObjects[i] is Meteor meteor)
+                    meteors.Add(meteor);
+            }
+
+            return meteors;
+        }
+
+        public Enemy[] GetEnemies()
+        {
+            Vector2 position = new Vector2(Globals.RNG.Next(Globals.ScreenWidth), Globals.RNG.Next(Globals.ScreenHeight));
 
             while (Vector2.Distance(position, Player.Position) < distance)
             {
-<<<<<<< HEAD
-<<<<<<< HEAD
                 position = new Vector2(Globals.RNG.Next(Globals.ScreenWidth), Globals.RNG.Next(Globals.ScreenHeight));
+                    enemys.Add((Enemy)GameObjects[i]);
             }
-
             return position;
 >>>>>>> feature-enemy
-=======
-                if (GameObjects[i] is Meteor meteor)
-                    meteors.Add(meteor);
-            }
-
-            return meteors;
->>>>>>> dcaa29908a807acb08043d63be01d1e9689979a2
-=======
-                if (GameObjects[i] is Meteor meteor)
-                    meteors.Add(meteor);
-            }
-
-            return meteors;
->>>>>>> origin/Feature-Powerups
         }
         #endregion
 
-<<<<<<< HEAD
-<<<<<<< HEAD
         #region Public updating methods
         public void UpdateGameObjects()
         {
 <<<<<<< HEAD
-            for (var i = 0; i < GameObjects.Count; i++)
 =======
             for (int i = 0; i < _gameObjects.Count; i++)
 >>>>>>> feature-enemy
             {
-                var gameObject = _gameObjects[i];
-                gameObject.Update();
-                CheckForCollisionWith(gameObject);
-=======
-        public Enemy[] GetEnemies()
-        {
-=======
-        public Enemy[] GetEnemies()
-        {
->>>>>>> origin/Feature-Powerups
-            var enemys = new List<Enemy>();
-
-            for (int i = 0; i < GameObjects.Count; i++)
-            {
-                if (GameObjects[i] is Enemy)
-                    enemys.Add((Enemy)GameObjects[i]);
->>>>>>> dcaa29908a807acb08043d63be01d1e9689979a2
+                if (GameObjects[i].IsDead)
+                {
+                    GameObjects.Remove(GameObjects[i]);
+                }
             }
-            return enemys.ToArray();
-        }
         #endregion
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-        public void UpdateCollisionEffects()
+        public void UpdateGameObjects()
         {
 <<<<<<< HEAD
             foreach (var collisionEffect in CollisionEffects)
@@ -445,56 +285,19 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             {
                 if (thisObject == otherGameObject ||
                     !thisObject.CollidesWith(otherGameObject))
-                    continue;
                 Debug.WriteLine($"{thisObject} collided with {otherGameObject}");
-                return;
-=======
-=======
->>>>>>> origin/Feature-Powerups
-        #region Public removing methods
-        public void RemoveDeadGameObjects()
-        {
-            for (int i = 0; i < GameObjects.Count; i++)
-            {
-                if (GameObjects[i].IsDead)
-                {
-                    GameObjects.Remove(GameObjects[i]);
-                }
-            }
-        }
-
-        public void RemoveDeadCollisionEffects()
-        {
-            CollisionEffects.RemoveAll(collisionEffect => collisionEffect.IsDead);
-        }
-        #endregion
-
-        #region Public updating methods
-        public void UpdateGameObjects()
-        {
-            for (var i = 0; i < GameObjects.Count; i++)
-            {
-                var gameObject = GameObjects[i];
-                gameObject.Update();
-                CheckForCollisionWith(gameObject);
->>>>>>> dcaa29908a807acb08043d63be01d1e9689979a2
             }
 >>>>>>> feature-enemy
         }
         #endregion
 
 <<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-        public void UpdateCollisionEffects()
-        {
-            foreach (var collisionEffect in CollisionEffects)
+        #region Public drawing methods
+        public void DrawGameObjects(SpriteBatch spriteBatch)
                 collisionEffect.Update();
         }
         #endregion
 
->>>>>>> dcaa29908a807acb08043d63be01d1e9689979a2
         #region Public drawing methods
         public void DrawGameObjects(SpriteBatch spriteBatch)
         {
@@ -507,40 +310,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             {
                 _gameObjects[i].Draw(spriteBatch);
             }
-=======
-        public void UpdateCollisionEffects()
-        {
-            foreach (var collisionEffect in CollisionEffects)
-                collisionEffect.Update();
->>>>>>> origin/Feature-Powerups
-        }
-        #endregion
-
-<<<<<<< HEAD
-        public void DrawCollisionEffects(SpriteBatch spriteBatch)
-        {
-            foreach (var collisionEffect in CollisionEffects)
-                collisionEffect.Draw(spriteBatch);
-        }
-        #endregion
-
-        #region Public methods
-        public void CheckForCollisionWith(GameObject thisObject)
-=======
-        #region Public drawing methods
-        public void DrawGameObjects(SpriteBatch spriteBatch)
->>>>>>> origin/Feature-Powerups
-        {
-            for (int i = 0; i < GameObjects.Count; i++)
-            {
-                if (i < GameObjects.Count && (thisObject == GameObjects[i] ||
-                    !thisObject.CollidesWith(GameObjects[i]) || i < GameObjects.Count &&
-                    Player.DistanceToSquared(GameObjects[i]) >= ((Globals.ScreenWidth * Globals.ScreenWidth) / 2 + (Globals.ScreenHeight * Globals.ScreenHeight) / 2)))
-                    continue;
-                return;
-            }
-<<<<<<< HEAD
-=======
         }
 
         public void DrawCollisionEffects(SpriteBatch spriteBatch)
@@ -561,7 +330,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                     continue;
                 return;
             }
->>>>>>> origin/Feature-Powerups
         } 
         #endregion
     }

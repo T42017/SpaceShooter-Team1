@@ -21,8 +21,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
     public class Player : Ship
     {
-
-        private SoundEffect alarm, _pewEffect;
+<<<<<<< HEAD
+        private SoundEffect _pewEffect,alarm;
+=======
+        private KeyboardState _lastKeyboardState;
+        private GamePadState _lastGamePadState;
+        private SoundEffect alarm;
+>>>>>>> Feature_Sound
         private SoundEffectInstance alarm2;
         private DateTime _timeSenceLastShot = DateTime.Today;
         private Texture2D _lifeTexture;
@@ -45,21 +50,38 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Red), Globals.Health)
         {
+<<<<<<< HEAD
+            Health = 10;
+            Boost = 60;
+=======
+            Boost = 180;
 
 
+
+>>>>>>> Feature_Sound
             ShootingSpeed = 200;
             _textures.Add(Game.Content.Load<Texture2D>("blackSmoke00"));
             _textures.Add(Game.Content.Load<Texture2D>("blackSmoke01"));
             _textures.Add(Game.Content.Load<Texture2D>("blackSmoke02"));
             _textures.Add(Game.Content.Load<Texture2D>("blackSmoke03"));
             Texture = TextureManager.Instance.PlayerShipTexture;
+<<<<<<< HEAD
             _lifeTexture = TextureManager.Instance.PlayerLifeTexture;
             _pewEffect = TextureManager.Instance.ShootSoundEffect;
+            alarm = game.Content.Load<SoundEffect>("Alarm");
+            alarm2 = alarm.CreateInstance();
+            alarm2.IsLooped = true;
+        
+            particleEngine = new ParticleEngine(_textures, new Vector2(400, 240));
+=======
+            _lifeTexture = Game.Content.Load<Texture2D>("playerLife2_red");
+           
             alarm = Game.Content.Load<SoundEffect>("Alarm");
             alarm2 = alarm.CreateInstance();
             alarm2.IsLooped = true;
 
-            particleEngine = new ParticleEngine(_textures, new Vector2(400, 240));
+            particleEngine = new ParticleEngine(textures, new Vector2(400, 240));
+>>>>>>> Feature_Sound
         }
 
        
@@ -104,10 +126,17 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
             if (Input.Instance.Boost() && (Boost > 0))
             {
+<<<<<<< HEAD
                 Boost--;
                 MaxSpeed = 50;
                 AccelerateForward(50f);
                 MaxSpeed = 10;
+=======
+                MaxSpeed = 50;
+                AccelerateForward(50f);
+                Boost--;
+                MaxSpeed = 10; 
+>>>>>>> Feature_Sound
             }
             
             Speed += new Vector2(-Speed.X * 0.015f, -Speed.Y * 0.015f);
