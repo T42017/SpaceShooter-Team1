@@ -12,7 +12,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups
     {
         private int powerupNumber;
 
-        public PowerupRandom(AsteroidsGame game, Vector2 position) : base(game, position, PowerupType.Random)
+        public PowerupRandom(AsteroidsGame game, Vector2 position) : base(game, position, PowerupType.Random, 0)
         {
 
         }

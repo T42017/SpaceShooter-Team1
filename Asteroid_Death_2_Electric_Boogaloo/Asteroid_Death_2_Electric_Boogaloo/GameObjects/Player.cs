@@ -6,6 +6,7 @@ using System.Linq;
 using Asteroid_Death_2_Electric_Boogaloo.Devices;
 using Asteroid_Death_2_Electric_Boogaloo.Components;
 using Asteroid_Death_2_Electric_Boogaloo.Enums;
+using Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups;
 using Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
@@ -26,7 +27,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         private DateTime _timeSenceLastShot = DateTime.Today;
         private Texture2D _lifeTexture;
         private ParticleEngine particleEngine;
-        public int EnemyKills;
         private List<Texture2D> _textures = new List<Texture2D>();
         private bool _drawPlayerInRed;
         private int _framesBetweenBlick = 50;
@@ -37,8 +37,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         public int EnemyKills;
         public List<Powerup> Powerups = new List<Powerup>();
-        public bool HasMariostar { get; set; }
-        
+
+        public bool HasMariostar
+        {
+            get { return Powerups.Exists(powerup => powerup.PowerupType == PowerupType.Mariostar); }
+        }
+
         public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Red), Globals.Health)
         {
             Health = 10;
@@ -97,7 +101,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
             if (Input.Instance.Boost() && (Boost > 0))
             {
-                Debug.WriteLine(Boost);
                 Boost--;
                 MaxSpeed = 50;
                 AccelerateForward(50f);
@@ -126,11 +129,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             foreach (var powerup in Powerups)
             {
                 powerup.Update();
-
-                if (powerup.Timer <= 0)
-                {
-                    powerup.Remove(this);
-                }
+                if (powerup is PowerupMariostar)
+                    Debug.WriteLine(powerup.Timer);
             }
             Powerups.RemoveAll(p => p.Timer <=0);
         }

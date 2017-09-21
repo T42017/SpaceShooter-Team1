@@ -10,7 +10,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups
 {
     class PowerupMissile : Powerup
     {
-        public PowerupMissile(AsteroidsGame game, Vector2 position) : base(game, position, PowerupType.Missile)
+        public PowerupMissile(AsteroidsGame game, Vector2 position) : base(game, position, PowerupType.Missile, 900)
         {
         }
 

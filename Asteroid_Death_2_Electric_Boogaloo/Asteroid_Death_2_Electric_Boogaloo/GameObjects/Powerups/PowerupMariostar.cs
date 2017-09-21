@@ -5,7 +5,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups
 {
     internal class PowerupMariostar : Powerup
     {
-        public PowerupMariostar(AsteroidsGame game, Vector2 position) : base(game, position, PowerupType.Mariostar)
+        public PowerupMariostar(AsteroidsGame game, Vector2 position) : base(game, position, PowerupType.Mariostar, 900)
         {
         }
 

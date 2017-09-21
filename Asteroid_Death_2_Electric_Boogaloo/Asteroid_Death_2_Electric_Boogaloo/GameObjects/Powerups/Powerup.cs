@@ -12,8 +12,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
     {
         public PowerupType PowerupType { get; }
         public float Timer { get; set; }
+
+        protected AsteroidsGame Game;
         
-        public Powerup(AsteroidsGame game, Vector2 position, PowerupType powerupType) : this(game, powerupType)
+        protected Powerup(AsteroidsGame game, Vector2 position, PowerupType powerupType, int duration) : this(game, powerupType, duration)
         {
             Position = position;
             Speed = new Vector2(
@@ -22,24 +24,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             );
         }
 
-        public Powerup(AsteroidsGame game, PowerupType powerupType) : base(game)
+        protected Powerup(AsteroidsGame game, PowerupType powerupType, int duration) : base(game)
         {
+            Game = game;
             PowerupType = powerupType;
             Texture = TextureManager.Instance.PowerUpTextures[(int)powerupType];
-
-            if (powerupType == PowerupType.Missile)
-            {
-                Timer = 900;
-            }
-            else if (powerupType == PowerupType.Mariostar)
-            {
-                Timer = 900;
-            }
-
-            else if (powerupType == PowerupType.Random)
-            {
-                Timer = 900;
-            }
+            Timer = duration;
         }
 
         public abstract void Remove(Player player);

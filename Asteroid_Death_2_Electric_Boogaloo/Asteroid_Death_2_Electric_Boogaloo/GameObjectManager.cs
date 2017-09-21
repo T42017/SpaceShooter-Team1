@@ -44,10 +44,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             for (var i = 0; i < amount; i++)
             {
-                var position = new Vector2(
-                    Globals.RNG.Next(_game.Level.SizeX),
-                    Globals.RNG.Next(_game.Level.SizeY)
-                );
                 var powerup = _powerupFactory.GetRandomPowerup();
                 Add(powerup);
             }
@@ -66,7 +62,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public void AddAtRandomPosition(GameObject gameObject)
         {
             gameObject.Position = GetRandmPositionWithADistanceFromPlayer(1000);
-            _gameObjects.Add(gameObject);
+            Add(gameObject);
         }
         
         public void AddEnemies(int amount)
