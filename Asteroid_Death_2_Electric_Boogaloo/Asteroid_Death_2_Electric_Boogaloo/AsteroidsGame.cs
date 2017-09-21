@@ -76,16 +76,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         #region Protected overrides
         protected override void Initialize()
         {
-            // center window
-            //Window.Position = new Point((GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / 2) - (Graphics.PreferredBackBufferWidth / 2), 
-            //                            (GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height / 2) - (Graphics.PreferredBackBufferHeight / 2));
-
             // maximaize window
             var form = (Form) Control.FromHandle(Window.Handle);
             form.WindowState = FormWindowState.Maximized;
 
             // allow resizing
-            //Window.AllowUserResizing = true;
+
             UpdateWindowSize();
 
             Components.Add(new MenuComponent(this));
@@ -103,7 +99,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            //GameObjectManager.LoadContent();
             TextureManager.Instance.LoadContent(Content);
         }
 
@@ -130,8 +125,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-
-            // if using XNA 4.0
+            
             _spriteBatch.Begin(SpriteSortMode.Deferred,
                 BlendState.AlphaBlend,
                 null,
@@ -161,7 +155,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 GameObjectManager.AddEnemys(AmountOfEnemys - enemys.Length);
             }
         }
-
         
     }
 }
