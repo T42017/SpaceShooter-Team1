@@ -43,7 +43,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         {
             this.enemyType = enemyType;
             Ai = new BasicEnemyAI(game, this);
-            ShootingSpeed = 5000; //500;
+            ShootingSpeed = 500;
             Texture = TextureManager.Instance.EnemyTexures[(int) enemyType];
             _lifeTexture = TextureManager.Instance.PlayerLifeTexture;
         }

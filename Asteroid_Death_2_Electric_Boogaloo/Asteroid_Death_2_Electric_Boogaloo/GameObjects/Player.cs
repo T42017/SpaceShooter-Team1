@@ -138,7 +138,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if(Health<=5)
+            if(Health <= 5)
             particleEngine.Draw(spriteBatch);
 
             // Draw player
@@ -173,8 +173,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             {
                 if (otherGameObject is Powerup powerup)
                 {
-                    powerup.DoEffect(this);
-                    Powerups.Add(powerup);
+                    AddPowerUp(powerup);
                     otherGameObject.IsDead = true;
                 }
 
@@ -196,6 +195,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 }
             }
             return collides;
+        }
+
+        public void AddPowerUp(Powerup powerup)
+        {
+            powerup.DoEffect(this);
+            Powerups.Add(powerup);
         }
     }
 }
