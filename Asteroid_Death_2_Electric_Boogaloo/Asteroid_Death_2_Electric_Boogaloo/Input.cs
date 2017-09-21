@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
@@ -12,20 +6,24 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     public class Input
     {
+        #region Public instance property
         public static Input Instance => _instance ?? (_instance = new Input());
+        #endregion
 
+        #region Private fields
         private static Input _instance;
         private KeyboardState _keyboardState = Keyboard.GetState();
         private KeyboardState _lastKeyboardState;
         private GamePadState _gamePadState = GamePad.GetState(PlayerIndex.One);
         private GamePadState _lastGamePadState;
-
         private bool _hasMovedLeftStick;
-        
-        private Input()
-        { 
-        }
+        #endregion
 
+        #region Public constructors
+        private Input() { }
+        #endregion
+
+        #region Public hold methods
         public bool HoldUp()
         {
             return (_gamePadState.ThumbSticks.Left.Y >= 0.3f)
@@ -59,14 +57,16 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                     || (_keyboardState.IsKeyDown(Keys.Right))
                     || (_keyboardState.IsKeyDown(Keys.D));
         }
-        
+
         public bool HoldSelect()
         {
             return (_gamePadState.Buttons.A == ButtonState.Pressed)
                    || (_gamePadState.Triggers.Right > 0.2)
                    || (_keyboardState.IsKeyDown(Keys.Space));
         }
+        #endregion
 
+        #region Public click methods
         public bool ClickSelect()
         {
             return _gamePadState.Buttons.A == ButtonState.Pressed &&
@@ -83,10 +83,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             return _gamePadState.DPad.Left == ButtonState.Pressed &&
                     _lastGamePadState.DPad.Left == ButtonState.Released
-                   || 
+                   ||
                    _gamePadState.ThumbSticks.Left.X <= -0.3f &&
                    !_hasMovedLeftStick
-                   || 
+                   ||
                    _keyboardState.IsKeyDown(Keys.Left) &&
                    _lastKeyboardState.IsKeyUp(Keys.Left);
         }
@@ -95,11 +95,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             return _gamePadState.DPad.Right == ButtonState.Pressed &&
                     _lastGamePadState.DPad.Right == ButtonState.Released
-                   || 
-                   _gamePadState.ThumbSticks.Left.X >= 0.3f && 
+                   ||
+                   _gamePadState.ThumbSticks.Left.X >= 0.3f &&
                    !_hasMovedLeftStick
-                   || 
-                   _keyboardState.IsKeyDown(Keys.Right) && 
+                   ||
+                   _keyboardState.IsKeyDown(Keys.Right) &&
                    _lastKeyboardState.IsKeyUp(Keys.Right);
         }
 
@@ -127,15 +127,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                    _lastKeyboardState.IsKeyUp(Keys.Up);
         }
 
-        public bool Boost()
-        {
-            return _gamePadState.Buttons.RightShoulder == ButtonState.Pressed &&
-                    _lastGamePadState.Buttons.RightShoulder == ButtonState.Released
-                   ||
-                   _keyboardState.IsKeyDown(Keys.E) &&
-                   _lastKeyboardState.IsKeyUp(Keys.E);
-        }
-
         public bool ClickBackSpace()
         {
             return _keyboardState.IsKeyDown(Keys.Back) &&
@@ -149,6 +140,17 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                    ||
                    _keyboardState.IsKeyDown(Keys.Escape) &&
                    _lastKeyboardState.IsKeyUp(Keys.Escape);
+        }
+        #endregion
+
+        #region Public methods
+        public bool Boost()
+        {
+            return _gamePadState.Buttons.RightShoulder == ButtonState.Pressed &&
+                    _lastGamePadState.Buttons.RightShoulder == ButtonState.Released
+                   ||
+                   _keyboardState.IsKeyDown(Keys.E) &&
+                   _lastKeyboardState.IsKeyUp(Keys.E);
         }
 
         public void Update()
@@ -167,8 +169,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             List<Keys> keys = new List<Keys>(_keyboardState.GetPressedKeys());
             List<Keys> lastKeys = new List<Keys>(_lastKeyboardState.GetPressedKeys());
 
-            keys.RemoveAll(key => ((int) key) < 65 || ((int) key) > 90);
-            lastKeys.RemoveAll(key => ((int) key) < 65 || ((int) key) > 90);
+            keys.RemoveAll(key => ((int)key) < 65 || ((int)key) > 90);
+            lastKeys.RemoveAll(key => ((int)key) < 65 || ((int)key) > 90);
 
             List<string> characters = new List<string>();
             for (int i = 0; i < keys.Count; i++)
@@ -180,6 +182,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 }
             }
             return characters.ToArray();
-        }
+        } 
+        #endregion
     }
 }

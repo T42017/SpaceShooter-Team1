@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 
 using Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles;
 
@@ -10,6 +11,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         #region Private fields
         private bool _shootLefCannon;
         private DateTime _timeSenceLastShot = DateTime.Today;
+        private SoundEffect _pewEffect;
         #endregion
 
         #region Protected fields
@@ -22,6 +24,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         public int BaseHealth { get; set; }
         public int Boost { get; set; } = 1;
         #endregion
+
         #region Protected constructors
         protected Ship(AsteroidsGame game, int baseHealth) : base(game)
         {

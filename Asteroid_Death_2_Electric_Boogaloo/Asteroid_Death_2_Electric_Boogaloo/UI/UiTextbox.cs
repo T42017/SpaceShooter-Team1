@@ -1,34 +1,34 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.UI
 {
-    class UiTextbox : BaseUiComponent
+    public class UiTextbox : BaseUiComponent
     {
+        #region Private fields
         private readonly Texture2D _texture;
         private readonly Texture2D _t; //base for the line texture
         private readonly StringBuilder _text = new StringBuilder();
-
         private const int _framesBetweenBlicks = 25;
         private int _currentFrame = 0;
         private bool _drawUnderScore = false;
+        #endregion
 
+        #region Public properties
         public string Text
         {
-            get => _text.ToString();
+            get { return _text.ToString(); }
             set
             {
                 _text.Clear();
                 _text.Append(value);
             }
         }
+        #endregion
 
+        #region Public constructors
         public UiTextbox(AsteroidsGame game, Vector2 position, SpriteFont font) : base(game, position, true, null, font)
         {
             _texture = Game.Content.Load<Texture2D>("button");
@@ -37,7 +37,32 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
             _t.SetData<Color>(
                 new Color[] { Color.White });
         }
+        #endregion
 
+        #region Private methods
+        private void DrawLine(SpriteBatch sb, Vector2 start, Vector2 end)
+        {
+            Vector2 edge = end - start;
+            // calculate angle to rotate line
+            float angle =
+                (float)Math.Atan2(edge.Y, edge.X);
+
+            sb.Draw(_t,
+                new Rectangle(// rectangle defines shape of line and position of start of line
+                    (int)start.X,
+                    (int)start.Y,
+                    (int)edge.Length(), //sb will strech the texture to fill this rectangle
+                    1), //width of line, change this to make thicker line
+                null,
+                Color.Black, //colour of line
+                angle,     //angle of line (calulated above)
+                new Vector2(0, 0), // point in line about which to rotate
+                SpriteEffects.None,
+                0);
+        }
+        #endregion
+
+        #region Public overrides
         public override void Update()
         {
             if (!IsHighlighted)
@@ -78,26 +103,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
             DrawLine(spriteBatch, Position + lineDrawPosition + new Vector2(0, -1),
                 Position + lineDrawPosition + new Vector2(30, -1));
         }
-
-        void DrawLine(SpriteBatch sb, Vector2 start, Vector2 end)
-        {
-            Vector2 edge = end - start;
-            // calculate angle to rotate line
-            float angle =
-                (float)Math.Atan2(edge.Y, edge.X);
-
-            sb.Draw(_t,
-                new Rectangle(// rectangle defines shape of line and position of start of line
-                    (int)start.X,
-                    (int)start.Y,
-                    (int)edge.Length(), //sb will strech the texture to fill this rectangle
-                    1), //width of line, change this to make thicker line
-                null,
-                Color.Black, //colour of line
-                angle,     //angle of line (calulated above)
-                new Vector2(0, 0), // point in line about which to rotate
-                SpriteEffects.None,
-                0);
-        }
+        #endregion
     }
 }

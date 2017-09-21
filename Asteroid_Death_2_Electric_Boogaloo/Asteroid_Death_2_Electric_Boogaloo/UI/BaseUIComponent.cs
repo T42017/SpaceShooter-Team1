@@ -6,16 +6,21 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
 {
     public abstract class BaseUiComponent
     {
+        #region Protected fields
         protected AsteroidsGame Game;
+        #endregion
 
-        public Vector2 Position;
-        public bool IsHighlighted = false;
-        public bool CanBeHighLighted = false;
-        public bool HasClickEvent = false;
-        public string Text = "";
-        public SpriteFont Font;
-        public EventHandler ClickEvent;
+        #region Public properties
+        public Vector2 Position { get; }
+        public bool IsHighlighted { get; set; }
+        public bool CanBeHighLighted { get; }
+        public bool HasClickEvent { get; }
+        public string Text { get; set; } = "";
+        public SpriteFont Font { get; }
+        public EventHandler ClickEvent { get; }
+        #endregion
 
+        #region Protected constructors
         protected BaseUiComponent(AsteroidsGame game, Vector2 position, bool canBeHighlighted, EventHandler clickEvent, string text, SpriteFont font)
         {
             Game = game;
@@ -59,7 +64,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
             CanBeHighLighted = false;
             HasClickEvent = false;
         }
+        #endregion
+
+        #region Public abstract methods
         public abstract void Update();
-        public abstract void Draw(SpriteBatch spriteBatch);
+        public abstract void Draw(SpriteBatch spriteBatch); 
+        #endregion
     }
 }

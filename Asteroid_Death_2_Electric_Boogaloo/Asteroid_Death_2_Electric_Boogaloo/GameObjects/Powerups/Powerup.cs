@@ -36,8 +36,5 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups
 
         public abstract void DoEffect(Player player);
         #endregion
-        #region Public overrides
-        } 
-        #endregion
     }
 }

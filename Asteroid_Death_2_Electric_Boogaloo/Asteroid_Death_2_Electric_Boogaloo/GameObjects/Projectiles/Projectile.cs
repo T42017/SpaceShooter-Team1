@@ -18,15 +18,19 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles
             Green
         }
         #endregion
-        
-        public Type ParentType { get; set; }
-        private SoundEffect explo,hit;
+       
+        #region Private fields
+        private SoundEffect explo, hit;
         private SoundEffectInstance hit1;
-        public int Damage { get; }
-        public Type ParentType { get; set; }
+        #endregion
 
         #region Protected fields
         protected Weapon.Color color;
+        #endregion
+
+        #region Public properties
+        public int Damage { get; }
+        public Type ParentType { get; set; }
         #endregion
 
         #region Protected constructors
