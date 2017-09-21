@@ -13,6 +13,5 @@ namespace Asteroid_Death_2_Electric_Boogaloo.AI
         }
 
         public abstract void Update();
-        
     }
 }

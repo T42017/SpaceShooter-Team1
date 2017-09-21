@@ -6,7 +6,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups
     public abstract class Powerup : GameObject
     {
         public PowerupType PowerupType { get; }
-        public int Timer { get; private set; }
+        public int Timer { get; set; }
 
         protected AsteroidsGame Game;
         

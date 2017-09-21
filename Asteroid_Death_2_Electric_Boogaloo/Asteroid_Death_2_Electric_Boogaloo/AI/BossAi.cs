@@ -11,7 +11,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.AI
     class BossAi : BaseAi
     {
         private EnemyBoss _boss;
-
         private Enemy _enemy;
         private int _maxTimeBetweenSpawnsMs = 6000;
         private DateTime _lastSpawnTime = DateTime.Today;
