@@ -1,8 +1,13 @@
+<<<<<<< HEAD
+﻿using System.Collections.Generic;
+=======
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+>>>>>>> feature-enemy
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -11,23 +16,47 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     class TextureManager
     {
+<<<<<<< HEAD
+        #region Private fields
+        private static TextureManager _instance;
+        #endregion
+
+        #region Public properties
+        public Texture2D PlayerShipTexture { get; private set; }
+        public Texture2D BackGroundTexture { get; private set; }
+        public Texture2D ButtonUnpressedTexture { get; private set; }
+        public Texture2D ButtonPressedTexture { get; private set; }
+        public Texture2D[] PowerUpTextures { get; private set; }
+        public Texture2D[] PixelExplosionTextures { get; private set; }
+        public Texture2D[] EnemyTexures { get; private set; }
+        public Texture2D[] LaserTextures { get; private set; }
+        public Texture2D[] MissileTextures { get; private set; }
+        public Texture2D[] HitmarkerTextures { get; private set; }
+        public SoundEffect PlayerShootSoundEffect { get; private set; }
+        public static TextureManager Instance => _instance ?? (_instance = new TextureManager());
+        #endregion
+
+        #region Private constructors
+        private TextureManager() {}
+        #endregion
+
+        #region Public methods
+=======
 
         private static TextureManager instance;
 
         public Texture2D PlayerShipTexture;
         public Texture2D BackGroundTexture;
-<<<<<<< HEAD
-        public Texture2D ButtonUnpressedTexture, ButtonPressedTexture;
+        public Texture2D BossTexture;
+        public Texture2D PlayerLifeTexture;
 
-=======
-        public Texture2D[] PowerUpTextures; 
->>>>>>> origin/Feature_MovementOfPlayer
+
         public Texture2D[] PixelExplosionTextures;
         public Texture2D[] EnemyTexures;
         public Texture2D[] LaserTextures;
         public Texture2D[] MissileTextures;
-
-        public SoundEffect PlayerShootSoundEffect;
+        
+        public SoundEffect ShootSoundEffect;
 
         public static TextureManager Instance
         {
@@ -46,13 +75,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         }
 
+>>>>>>> feature-enemy
         public void LoadContent(ContentManager content)
         {
             PlayerShipTexture = content.Load<Texture2D>("shipPlayer");
             BackGroundTexture = content.Load<Texture2D>("background");
+            BossTexture = content.Load<Texture2D>("enemyBoss");
 
-            //ButtonPressedTexture = content.Load<Texture2D>("buttonPressed");
-            //ButtonUnpressedTexture = content.Load<Texture2D>("buttonUnpressed");
+            PlayerLifeTexture = content.Load<Texture2D>("playerLife2_red");
 
             PixelExplosionTextures = GetTextures(content, "pixelExplosion", 9);
 
@@ -75,16 +105,24 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             missileTexture2Ds.Add(content.Load<Texture2D>("missileGreen"));
             MissileTextures = missileTexture2Ds.ToArray();
 
+<<<<<<< HEAD
             List<Texture2D> powerupTexture2Ds = new List<Texture2D>();
             powerupTexture2Ds.Add(content.Load<Texture2D>("PowerupMissile"));
             powerupTexture2Ds.Add(content.Load<Texture2D>("powerupHealth"));
-            powerupTexture2Ds.Add(content.Load<Texture2D>("powerupLightsaber"));
-            powerupTexture2Ds.Add(content.Load<Texture2D>("powerupStar"));
-            powerupTexture2Ds.Add(content.Load<Texture2D>("powerupImprovedLaser"));
+            powerupTexture2Ds.Add(content.Load<Texture2D>("powerupBoost"));
+            powerupTexture2Ds.Add(content.Load<Texture2D>("powerupMariostar"));
             powerupTexture2Ds.Add(content.Load<Texture2D>("powerupRandom"));
             PowerUpTextures = powerupTexture2Ds.ToArray();
-            
+
+            var hitmarkerTexture2Ds = new List<Texture2D>();
+            hitmarkerTexture2Ds.AddRange(GetTextures(content, "hitmarker", 9));
+            HitmarkerTextures = hitmarkerTexture2Ds.ToArray();
+
             PlayerShootSoundEffect = content.Load<SoundEffect>("Blaster");
+=======
+            
+            ShootSoundEffect = content.Load<SoundEffect>("Blaster");
+>>>>>>> feature-enemy
         }
 
         public Texture2D LoadByName(ContentManager content, string name)
@@ -100,9 +138,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             {
                 textures[i] = content.Load<Texture2D>(name + i);
             }
-
             return textures;
-        }
-
+        } 
+        #endregion
     }
 }

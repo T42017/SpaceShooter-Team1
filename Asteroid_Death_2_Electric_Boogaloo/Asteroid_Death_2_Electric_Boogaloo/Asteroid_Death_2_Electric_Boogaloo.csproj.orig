@@ -41,28 +41,40 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AI.cs" />
+    <Compile Include="AI\BaseAi.cs" />
+    <Compile Include="AI\BasicEnemyAi.cs" />
+    <Compile Include="AI\BossAi.cs" />
+    <Compile Include="AI\FollowPlayerAi.cs" />
     <Compile Include="AsteroidsGame.cs" />
+    <Compile Include="Collision effects\CollisionEffect.cs" />
     <Compile Include="Devices\AstroidsComponent.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="Devices\DeathComponent.cs" />
     <Compile Include="Devices\PauseComponent.cs" />
+    <Compile Include="Enums\CollisionEffectType.cs" />
     <Compile Include="Enums\PowerupType.cs" />
+    <Compile Include="Factorys\PowerupFactory.cs" />
     <Compile Include="GameObjects\Enemy.cs" />
     <Compile Include="Factorys\EnemyFactory.cs" />
     <Compile Include="Devices\HighscoreMenuComponent.cs" />
     <Compile Include="Devices\IngameComponent.cs" />
     <Compile Include="GameObjectManager.cs" />
 <<<<<<< HEAD
-    <Compile Include="GameObjects\Powerup.cs" />
+    <Compile Include="GameObjects\Powerups\Powerup.cs" />
+    <Compile Include="GameObjects\Powerups\PowerupBoost.cs" />
+    <Compile Include="GameObjects\Powerups\PowerupHealth.cs" />
+    <Compile Include="GameObjects\Powerups\PowerupMariostar.cs" />
+    <Compile Include="GameObjects\Powerups\PowerupMissile.cs" />
 =======
+    <Compile Include="GameObjects\EnemyBoss.cs" />
+>>>>>>> feature-enemy
     <Compile Include="GameObjects\Projectiles\Missile.cs" />
     <Compile Include="GameObjects\Projectiles\Projectile.cs" />
->>>>>>> origin/Feature_MovementOfPlayer
+    <Compile Include="Highscore.cs" />
+    <Compile Include="Input.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="Devices\MenuComponent.cs" />
     <Compile Include="MathHelper.cs" />
-    <Compile Include="GameObjects\PixelExplosion.cs" />
     <Compile Include="GameObjects\GameObject.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="Devices\GameState.cs" />
@@ -71,10 +83,18 @@
     <Compile Include="Enums\MeteorColour.cs" />
     <Compile Include="Enums\MeteorSize.cs" />
     <Compile Include="GameObjects\Player.cs" />
+    <Compile Include="Particles\Particle.cs" />
+    <Compile Include="Particles\ParticleEngine.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GameObjects\Ship.cs" />
     <Compile Include="TextureManager.cs" />
+    <Compile Include="UI\BaseUiComponent.cs" />
+    <Compile Include="UI\UiArrow.cs" />
+    <Compile Include="UI\UiButton.cs" />
+    <Compile Include="UI\UiLabel.cs" />
+    <Compile Include="UI\UiList.cs" />
+    <Compile Include="UI\UiTextbox.cs" />
     <Compile Include="Weapon.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -87,6 +107,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Highscore.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,12 @@
 ﻿using System;
+<<<<<<< HEAD
 using Asteroid_Death_2_Electric_Boogaloo.Devices;
+=======
+using Asteroid_Death_2_Electric_Boogaloo.AI;
+using Asteroid_Death_2_Electric_Boogaloo.Components;
+using Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles;
+using Microsoft.Xna.Framework;
+>>>>>>> feature-enemy
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
 
@@ -7,7 +14,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
     public class Enemy : Ship
     {
-
         public enum Type
         {
             enemyRed1,
@@ -32,27 +38,48 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             enemyBlack5
         }
 
+        public BaseAi Ai;
+
         public Type enemyType;
+<<<<<<< HEAD
         private AI _ai;
         
-        public Enemy(AsteroidsGame game, Type enemyType) : base(game)
+        public Enemy(AsteroidsGame game, Type enemyType) : base(game,1)
         {
             this.enemyType = enemyType;
             _ai = new AI(game, this);
             this.enemyType = enemyType;
             ShootingSpeed = 5000; //500;
             Weapon = new Weapon(game, Weapon.Type.Laser, Weapon.Color.Green);
-            Texture = TextureManager.Instance.EnemyTexures[(int) enemyType];
-        }
+=======
+        private Texture2D _lifeTexture;
 
-        public override void LoadContent()
+        public Enemy(AsteroidsGame game, Type enemyType) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Green))
         {
+            this.enemyType = enemyType;
+            Ai = new BasicEnemyAI(game, this);
+            ShootingSpeed = 500;
+>>>>>>> feature-enemy
+            Texture = TextureManager.Instance.EnemyTexures[(int) enemyType];
+            _lifeTexture = TextureManager.Instance.PlayerLifeTexture;
+            Health = 2;
         }
 
         public override void Update()
         {
-            _ai.Update();
             base.Update();
+            Ai?.Update();
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            base.Draw(spriteBatch);
+
+            spriteBatch.Draw(_lifeTexture, Position, null, Color.White, Game.GameObjectManager.Player.Rotation + MathHelper.DegreesToRadians(90),
+                new Vector2(15, 80), 1.0f, SpriteEffects.None, 0);
+
+            spriteBatch.DrawString(MenuComponent.menuFont, "" + Health, Position, Color.OrangeRed,
+                Game.GameObjectManager.Player.Rotation + MathHelper.DegreesToRadians(90), new Vector2(-15, 90), 1f, SpriteEffects.None, 0);
         }
 
         public override bool CollidesWith(GameObject otherGameObject)
@@ -60,13 +87,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             bool collides = base.CollidesWith(otherGameObject) && (otherGameObject is Meteor || (otherGameObject is Projectile projectile && projectile.ParentType == typeof(Player)));
             if (collides)
             {
-<<<<<<< HEAD
-                IsDead = true;
-                if (otherGameObject is Projectile)
-                    Game.GameObjectManager.GameObjects.Remove(otherGameObject);
-=======
                 if (otherGameObject is Projectile pro)
                 {
+<<<<<<< HEAD
                     Player.score = Player.score + 100;
                     Health -= pro.Damage;
                     pro.IsDead = true;
@@ -75,9 +98,22 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 if (Health <= 0)
                 {
                     IsDead = true;
+                if (otherGameObject is Projectile)
+                    Game.GameObjectManager.GameObjects.Remove(otherGameObject);
+                }   
+=======
+                    Health -= pro.Damage;
+                    otherGameObject.IsDead = true;
+                    if (pro.ParentType == typeof(Player))
+                    {
+                        Game.GameObjectManager.Player.EnemyKills++;
+                    }
                 }
-                
->>>>>>> origin/Feature-Powerups
+                if (Health <= 0)
+                {
+                    IsDead = true;
+                }
+>>>>>>> feature-enemy
             }
             return collides;
         }

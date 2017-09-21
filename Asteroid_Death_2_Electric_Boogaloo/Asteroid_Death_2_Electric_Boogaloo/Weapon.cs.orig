@@ -1,14 +1,21 @@
+<<<<<<< HEAD
 ﻿using Asteroid_Death_2_Electric_Boogaloo.GameObjects;
+=======
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Asteroid_Death_2_Electric_Boogaloo.GameObjects;
+using Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles;
+>>>>>>> feature-enemy
 using Microsoft.Xna.Framework;
 
 namespace Asteroid_Death_2_Electric_Boogaloo
 {
     public class Weapon
     {
-<<<<<<< HEAD
         #region Public enums
-=======
->>>>>>> f2b00aec59e5e4528a5ff290f2cbbf264df60519
         public enum Type
         {
             Laser,
@@ -41,22 +48,22 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         }
         #endregion
 
+<<<<<<< HEAD
         #region Public methods
         public Projectile GetProjectile(Vector2 Position, float rotation, System.Type parentType)
+=======
+        public Projectile GetProjectile(Vector2 position, float rotation, System.Type parentType)
+>>>>>>> feature-enemy
         {
             Projectile projectile = null;
 
             if (WeaponType == Type.Laser)
-                projectile = new Laser(_game, Position, rotation, WeaponColor, parentType);
+                projectile = new Laser(_game, position, rotation, WeaponColor, parentType);
             else if (WeaponType == Type.Missile)
-                projectile = new Missile(_game, Position, rotation, WeaponColor, parentType);
+                projectile = new Missile(_game, position, rotation, WeaponColor, parentType);
 
             return projectile;
-<<<<<<< HEAD
         } 
         #endregion
-=======
-        }
->>>>>>> f2b00aec59e5e4528a5ff290f2cbbf264df60519
     }
 }

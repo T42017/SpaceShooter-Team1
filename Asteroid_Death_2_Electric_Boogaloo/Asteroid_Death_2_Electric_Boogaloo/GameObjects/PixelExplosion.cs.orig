@@ -19,12 +19,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             _textures = TextureManager.Instance.PixelExplosionTextures;
             Texture = _textures[_textures.Length - 1];
         }
-
 <<<<<<< HEAD
-=======
-       
 
->>>>>>> f05ae998f153692d7e99616ea7a1118ee13b38da
+=======
+        
+>>>>>>> feature-enemy
         public override void Update()
         {
             if ((DateTime.Now - _timeLastFrame).TotalMilliseconds > _timeBetweenFramesMs)

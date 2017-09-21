@@ -1,6 +1,10 @@
 ﻿using System;
+<<<<<<< HEAD
 using System.CodeDom;
 using System.ComponentModel;
+=======
+using Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles;
+>>>>>>> feature-enemy
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 
@@ -9,23 +13,22 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
     public abstract class Ship : GameObject
     {
         public Weapon Weapon;
-
-        protected int ShootingSpeed = 100;
+        public int Health = 1;
 
         private bool ShootLefCannon = false;
         private DateTime _timeSenceLastShot = DateTime.Today;
 
 <<<<<<< HEAD
-        public int Health = 1;
-        public int Boost = 1;
+        protected int ShootingSpeed = 100;
 
-        protected Ship(AsteroidsGame game) : base(game)
-=======
         public int Health;
         public int BaseHealth;
-        public int boost = 1;
+        public int Boost = 1;
+
         protected Ship(AsteroidsGame game,int baseHealth) : base(game)
->>>>>>> origin/Feature_menu
+=======
+        protected Ship(AsteroidsGame game) : base(game)
+>>>>>>> feature-enemy
         {
             BaseHealth = baseHealth;
             Health = baseHealth;
@@ -51,7 +54,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             shootPoint = MathHelper.RotateAroundPoint(shootPoint, shipCenterPoint, Rotation);
 
             Projectile projectile = Weapon.GetProjectile(shootPoint, Rotation, parentType);
-            Game.GameObjectManager.GameObjects.Add(projectile);
+            Game.GameObjectManager.Add(projectile);
 
             ShootLefCannon = !ShootLefCannon;
             _timeSenceLastShot = DateTime.Now;
