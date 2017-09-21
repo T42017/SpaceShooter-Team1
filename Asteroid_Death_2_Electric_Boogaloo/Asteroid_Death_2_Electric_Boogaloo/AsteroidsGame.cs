@@ -83,6 +83,16 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 GameObjectManager.AddEnemies(AmountOfEnemies - enemies.Length);
             }
         }
+
+        public void ControlMaxEnemyBosses()
+        {
+            EnemyBoss[] bosses = GameObjectManager.GetEnemyBosses();
+
+            if (bosses.Length < AmountOfBosses)
+            {
+                GameObjectManager.AddEnemyBosses(AmountOfBosses - bosses.Length);
+            }
+        }
         #endregion
 
         #region Protected overrides
@@ -152,25 +162,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             _spriteBatch.End();
             base.Draw(gameTime);
         }
-        #endregion          
-        public void ControlMaxEnemies()
-        {
-            Enemy[] enemys = GameObjectManager.GetEnemys();
 
-            if (enemys.Length < AmountOfEnemys)
-            {
-                GameObjectManager.AddEnemys(AmountOfEnemys - enemys.Length);
-            }
-        }
-        
-        public void ControlMaxEnemyBosses()
-        {
-            EnemyBoss[] bosses = GameObjectManager.GetEnemyBosses();
-
-            if (bosses.Length < AmountOfBosses)
-            {
-                GameObjectManager.AddEnemyBosses(AmountOfBosses - bosses.Length);
-            }
-        }
+        #endregion
     }
 }

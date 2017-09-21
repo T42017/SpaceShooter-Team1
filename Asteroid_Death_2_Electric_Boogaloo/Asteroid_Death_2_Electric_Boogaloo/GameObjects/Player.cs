@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using Asteroid_Death_2_Electric_Boogaloo.Devices;
 using Asteroid_Death_2_Electric_Boogaloo.Components;
+using Asteroid_Death_2_Electric_Boogaloo.Enums;
 using Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
@@ -34,6 +35,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         public bool HasMariostar { get; set; }
         
         public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Red), Globals.Health)
+        {
             Boost = 180;
             ShootingSpeed = 200;
             _textures.Add(Game.Content.Load<Texture2D>("blackSmoke00"));

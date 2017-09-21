@@ -8,12 +8,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
     public abstract class Ship : GameObject
     {
-        public Weapon Weapon;
-        public int Health = 1;
-
         private bool ShootLefCannon = false;
         private DateTime _timeSenceLastShot = DateTime.Today;
 
+        protected int ShootingSpeed = 100;
+
+        public Weapon Weapon;
         public int Health;
         public int BaseHealth;
         public int Boost = 1;

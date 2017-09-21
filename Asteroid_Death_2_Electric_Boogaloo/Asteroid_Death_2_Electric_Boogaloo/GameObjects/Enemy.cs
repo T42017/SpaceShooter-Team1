@@ -39,14 +39,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         public Type enemyType;
         private Texture2D _lifeTexture;
 
-        public Enemy(AsteroidsGame game, Type enemyType) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Green))
+        public Enemy(AsteroidsGame game, Type enemyType) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Green), 3)
         {
             this.enemyType = enemyType;
             Ai = new BasicEnemyAI(game, this);
             ShootingSpeed = 5000; //500;
             Texture = TextureManager.Instance.EnemyTexures[(int) enemyType];
             _lifeTexture = TextureManager.Instance.PlayerLifeTexture;
-            Health = 2;
         }
 
         public override void Update()
@@ -77,21 +76,15 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                     Health -= pro.Damage;
                     pro.IsDead = true;
                 }
-
-                if (Health <= 0)
-                {
-                    Health -= pro.Damage;
-                    otherGameObject.IsDead = true;
-                    if (pro.ParentType == typeof(Player))
-                    {
-                        Game.GameObjectManager.Player.EnemyKills++;
-                    }
-                }
+                
                 if (Health <= 0)
                 {
                     IsDead = true;
-                if (otherGameObject is Projectile)
-                    Game.GameObjectManager.GameObjects.Remove(otherGameObject);
+                    Game.GameObjectManager.Player.EnemyKills++;
+                    if (otherGameObject is Projectile)
+                    {
+                        otherGameObject.IsDead = true;
+                    }
                 }   
             }
             return collides;

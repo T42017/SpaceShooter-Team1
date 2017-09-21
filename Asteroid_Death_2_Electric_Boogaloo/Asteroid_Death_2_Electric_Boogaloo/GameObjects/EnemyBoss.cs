@@ -14,7 +14,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         public BaseAi Ai;
         private Texture2D _lifeTexture;
 
-        public EnemyBoss(AsteroidsGame game) : base(game)
+        public EnemyBoss(AsteroidsGame game) : base(game, 30)
         {
             Health = 30;
             Ai = new BossAi(game, this);

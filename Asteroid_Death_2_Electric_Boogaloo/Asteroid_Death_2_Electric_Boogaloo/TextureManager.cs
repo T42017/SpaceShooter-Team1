@@ -24,7 +24,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public Texture2D[] LaserTextures { get; private set; }
         public Texture2D[] MissileTextures { get; private set; }
         public Texture2D[] HitmarkerTextures { get; private set; }
-        public SoundEffect PlayerShootSoundEffect { get; private set; }
+        public Texture2D[] PowerUpTextures { get; private set; }
+        public Texture2D[] PixelExplosionTextures { get; private set; }
+        
         public static TextureManager Instance => _instance ?? (_instance = new TextureManager());
         #endregion
 

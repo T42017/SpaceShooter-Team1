@@ -1,10 +1,7 @@
 ﻿using System.Windows.Forms;
 using Asteroid_Death_2_Electric_Boogaloo.Components;
 using Asteroid_Death_2_Electric_Boogaloo.Devices;
-<<<<<<< HEAD
 using Asteroid_Death_2_Electric_Boogaloo.Factorys;
-=======
->>>>>>> feature-enemy
 using Asteroid_Death_2_Electric_Boogaloo.GameObjects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -30,18 +27,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         #region Constructors
         public int AmountOfEnemies = 10;
 
-<<<<<<< HEAD
-=======
-        
-        public GraphicsDeviceManager Graphics;
-        public int WindowWidth, Windowheight;
-        public GameObjectManager GameObjectManager;
-        public Level Level;
-
         public int AmountOfEnemys = 10;
         public int AmountOfBosses = 0;
         
->>>>>>> feature-enemy
         public AsteroidsGame()
         {
             Graphics = new GraphicsDeviceManager(this)
@@ -99,9 +87,19 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         #region Protected overrides
         protected override void Initialize()
+<<<<<<< HEAD
         {      
             var form = (Form) Control.FromHandle(Window.Handle);
             form.WindowState = FormWindowState.Maximized;
+=======
+        {
+            // maximaize window
+            var form = (Form) Control.FromHandle(Window.Handle);
+            form.WindowState = FormWindowState.Maximized;
+
+            // allow resizing
+
+>>>>>>> Feature_menu
             UpdateWindowSize();
 
             Components.Add(new MenuComponent(this));
@@ -135,13 +133,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 GameObjectManager.UpdateGameObjects();
                 GameObjectManager.UpdateCollisionEffects();
                 _camera.FollowPlayer(GameObjectManager.Player);
-<<<<<<< HEAD
-                GameObjectManager.AddMeteors(gameTime, Globals.perSecMeteors, 1000);
-                ControlMaxEnemies();
-=======
+                GameObjectManager.AddMeteors(gameTime, Globals.MeteorsPerSecond, 1000);
                 ControlMaxEnemies();
                 ControlMaxEnemyBosses();
->>>>>>> feature-enemy
             }
             base.Update(gameTime);
         }
@@ -149,7 +143,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> Feature_menu
             _spriteBatch.Begin(SpriteSortMode.Deferred,
                 BlendState.AlphaBlend,
                 null,
@@ -167,16 +165,17 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             _spriteBatch.End();
             base.Draw(gameTime);
         }
-<<<<<<< HEAD
         #endregion          
-=======
-
-        public void UpdateWindowSize()
+        public void ControlMaxEnemies()
         {
-            WindowWidth = Graphics.PreferredBackBufferWidth;
-            Windowheight = Graphics.PreferredBackBufferHeight;
-        }
+            Enemy[] enemys = GameObjectManager.GetEnemys();
 
+            if (enemys.Length < AmountOfEnemys)
+            {
+                GameObjectManager.AddEnemys(AmountOfEnemys - enemys.Length);
+            }
+        }
+<<<<<<< HEAD
 
         public void ControlMaxEnemyBosses()
         {
@@ -187,5 +186,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 GameObjectManager.AddEnemyBosses(AmountOfBosses - bosses.Length);
             }
         }
+
+=======
+        
+>>>>>>> Feature_menu
     }
 }
