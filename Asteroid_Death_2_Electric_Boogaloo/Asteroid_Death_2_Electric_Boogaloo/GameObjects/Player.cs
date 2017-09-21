@@ -17,7 +17,6 @@ using ParticleAsteroid_Death_2_Electric_Boogaloo.ParticlesEngine2D;
 using ButtonState = Microsoft.Xna.Framework.Input.ButtonState;
 using Keys = Microsoft.Xna.Framework.Input.Keys;
 
-
 namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
     public class Player : Ship
@@ -64,9 +63,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         
         public override void Update()
         {
-            Debug.WriteLine(HasMariostar);
             if (!HasMariostar)
                 _drawPlayerInRed = false;
+
             if (HasMariostar)
             {
                 _currentFrame++;
@@ -76,6 +75,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                     _drawPlayerInRed = !_drawPlayerInRed;
                 }
             }
+
             if (Health <= 5) {
                 particleEngine.EmitterLocation = Position;
                 particleEngine.Update();

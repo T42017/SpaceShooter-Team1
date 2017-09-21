@@ -9,7 +9,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     public class GameObjectManager
     {
-        
         #region Private fields
 
         private readonly List<GameObject> _gameObjects = new List<GameObject>();
@@ -142,7 +141,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 if (_gameObjects[i] is Meteor meteor)
                     meteors.Add(meteor);
             }
-
             return meteors;
         }
 
