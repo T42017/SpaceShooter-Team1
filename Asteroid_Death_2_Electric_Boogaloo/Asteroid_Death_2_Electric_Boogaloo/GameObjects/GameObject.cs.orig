@@ -70,7 +70,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 <<<<<<< HEAD
         
 =======
->>>>>>> origin/Feature_MovementOfPlayer
 
 >>>>>>> feature-enemy
         public virtual void Update()

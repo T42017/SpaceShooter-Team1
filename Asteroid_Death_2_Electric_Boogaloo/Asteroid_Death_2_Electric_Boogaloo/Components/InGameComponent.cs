@@ -38,7 +38,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
         #region Protected overrides
         protected override void LoadContent()
         {
-            song = Game.Content.Load<Song>("Combat");
+            song = Game.Content.Load<Song>("InGame");
             base.LoadContent();
         }
         #endregion
@@ -46,11 +46,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
         #region Public overrides
         public override void Update(GameTime gameTime)
         {
-            if (volume == false)
-            {
-                MediaPlayer.Volume = 0.6f;
-                volume = true;
-            }
+            
             if (Playing == false)
             {
                 MediaPlayer.Stop();

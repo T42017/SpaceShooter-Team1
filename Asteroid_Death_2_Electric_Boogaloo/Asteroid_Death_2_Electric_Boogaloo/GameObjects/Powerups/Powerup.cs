@@ -13,7 +13,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups
 
         #region Public properties
         public PowerupType PowerupType { get; }
-        public int Timer { get; private set; }
+        public int Timer { get; set; }
         #endregion
         
         #region Protected constructors
@@ -36,12 +36,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups
 
         public abstract void DoEffect(Player player);
         #endregion
-
         #region Public overrides
-        public override void Update()
-        {
-            Timer--;
-            base.Update();
         } 
         #endregion
     }

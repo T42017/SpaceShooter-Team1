@@ -45,8 +45,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         #region Public constructors
         public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Red), Globals.Health)
         {
-            Health = 10;
-            Boost = 60;
+
+
             ShootingSpeed = 200;
             _textures.Add(Game.Content.Load<Texture2D>("blackSmoke00"));
             _textures.Add(Game.Content.Load<Texture2D>("blackSmoke01"));
@@ -55,7 +55,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             Texture = TextureManager.Instance.PlayerShipTexture;
             _lifeTexture = TextureManager.Instance.PlayerLifeTexture;
             _pewEffect = TextureManager.Instance.ShootSoundEffect;
-            alarm = game.Content.Load<SoundEffect>("Alarm");
+            alarm = Game.Content.Load<SoundEffect>("Alarm");
             alarm2 = alarm.CreateInstance();
             alarm2.IsLooped = true;
 
@@ -64,6 +64,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         #endregion
 
         #region Public overrides
+        
         public override void Update()
         {
             if (!HasMariostar)
@@ -118,7 +119,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             if (Input.Instance.HoldSelect() && !IsWeaponOverheated())
             {
                 Shoot(typeof(Player));
-                _pewEffect.Play();
+               
                 _timeSinceLastShot = DateTime.Now;
             }
 
@@ -132,10 +133,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
             foreach (var powerup in Powerups)
             {
-                powerup.Update();
-
-                if (powerup is PowerupMariostar)
-                    Debug.WriteLine(powerup.Timer);
+                powerup.Timer--;
             }
             Powerups.RemoveAll(p => p.Timer <= 0);
         }

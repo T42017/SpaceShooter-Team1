@@ -10,7 +10,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.AI
 {
     class FollowPlayerAi : BaseAi
     {
-
         private Enemy _enemy;
 
         public FollowPlayerAi(AsteroidsGame game, Enemy enemy) : base(game)

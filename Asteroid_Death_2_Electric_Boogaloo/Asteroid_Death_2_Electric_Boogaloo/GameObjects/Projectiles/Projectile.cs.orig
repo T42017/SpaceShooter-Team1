@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles
 {
@@ -14,7 +16,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles
         }
 <<<<<<< HEAD
         #endregion
-
         #region Public properties
         public int Damage { get; }
         public Type ParentType { get; set; }
@@ -27,13 +28,20 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles
         #region Protected constructors
 =======
         public Type ParentType { get; set; }
-        public int Damage;
-
+        private SoundEffect explo,hit;
+        private SoundEffectInstance hit1;
         protected Weapon.Color color;
 
 >>>>>>> feature-enemy
         protected Projectile(AsteroidsGame game, Vector2 position, float rotation, Weapon.Color color, Type parenType, int damage) : base(game)
         {
+            
+            hit = Game.Content.Load<SoundEffect>("Hit");
+            hit1 = hit.CreateInstance();
+            hit1.Volume = 1.0f;
+            hit1.Pitch = 0.000001f;
+            explo = Game.Content.Load<SoundEffect>("Explo");
+
             this.Position = position;
             this.Rotation = rotation;
             this.color = color;
@@ -51,7 +59,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles
         #region Protected methods
         protected void DieIfOutSideMap()
         {
-            if (IsOutSideLevel(Game.Level))
+          if (IsOutSideLevel(Game.Level))
                 IsDead = true;
         } 
         #endregion
@@ -71,6 +79,18 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles
             base.Update();
         }
 
+        public override void Update()
+        {
+            DieIfOutSideMap();
+            Speed = Forward() * 1;
+            AccelerateForward(1);
+            Move();
+
+            base.Update();
+        }
+
+        protected abstract Type GetClassType();
+
         public override bool CollidesWith(GameObject otherGameObject)
         {
             bool collides = base.CollidesWith(otherGameObject) && ParentType != otherGameObject.GetType() && !(otherGameObject is Projectile);
@@ -83,6 +103,24 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles
                 var collisionEffect = new CollisionEffect(Game, position, collisionEffectType);
                 if (collisionEffect.NoCollisionEffectsNearby())
                     Game.GameObjectManager.CollisionEffects.Add(collisionEffect);
+            }
+            return collides;
+                    explo.Play();
+                }
+                else
+                {
+                    hit1.Play();
+                    var hitmarker = new Hitmarker(Game, Position);
+                    Game.GameObjectManager.Hitmarkers.Add(hitmarker);
+                }
+=======
+                var collisionEffectType = GetClassType() == typeof(Missile) 
+                    ? CollisionEffectType.Explosion 
+                    : CollisionEffectType.Hitmarker;
+                var collisionEffect = new CollisionEffect(Game, position, collisionEffectType);
+                if (collisionEffect.NoCollisionEffectsNearby())
+                    Game.GameObjectManager.CollisionEffects.Add(collisionEffect);
+>>>>>>> origin/Feature_MovementOfPlayer
             }
             return collides;
         } 

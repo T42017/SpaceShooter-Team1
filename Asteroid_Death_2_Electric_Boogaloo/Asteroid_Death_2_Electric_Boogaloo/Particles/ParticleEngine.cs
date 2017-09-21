@@ -51,7 +51,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Particles
         #region Public methods
         public void Update()
         {
-            int total = 10;
+            int total = 100;
 
             for (int i = 0; i < total; i++)
             {

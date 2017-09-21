@@ -33,7 +33,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
         {
             menuFont = Game.Content.Load<SpriteFont>("GameState");
             buttonFont = Game.Content.Load<SpriteFont>("Text");
-            song = Game.Content.Load<Song>("CantinaBand");
+            song = Game.Content.Load<Song>("HighScore");
             _backGroundtexture = Game.Content.Load<Texture2D>("background");
             _uiList = new UiList(Game, new Vector2(0, -300), menuFont, HighScore.GetHighScores(), 40);
             UiComponents.Add(_uiList);

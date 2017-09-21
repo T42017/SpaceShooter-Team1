@@ -44,6 +44,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         #endregion
 
         #region Public methods
+
         public void ChangeGameState(GameState desiredState)
         {
             _gameState = desiredState;
@@ -63,7 +64,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             WindowWidth = Graphics.PreferredBackBufferWidth;
             WindowHeight = Graphics.PreferredBackBufferHeight;
         }
-
+          
         public void Start()
         {
             ChangeGameState(GameState.InGame);

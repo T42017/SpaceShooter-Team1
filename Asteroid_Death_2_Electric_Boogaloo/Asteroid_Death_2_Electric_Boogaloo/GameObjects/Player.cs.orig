@@ -40,13 +40,20 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         
         public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Red), Globals.Health)
         {
-            Health = 10;
             Boost = 60;
             ShootingSpeed = 200;
             _textures.Add(Game.Content.Load<Texture2D>("blackSmoke00"));
             _textures.Add(Game.Content.Load<Texture2D>("blackSmoke01"));
             _textures.Add(Game.Content.Load<Texture2D>("blackSmoke02"));
             _textures.Add(Game.Content.Load<Texture2D>("blackSmoke03"));
+        }
+        
+        public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Red))
+        {
+            Health = 10;
+            Boost = 180;
+            ShootingSpeed = 200;
+>>>>>>> origin/develop
             Texture = TextureManager.Instance.PlayerShipTexture;
             _lifeTexture = TextureManager.Instance.PlayerLifeTexture;
             _pewEffect = TextureManager.Instance.ShootSoundEffect;
@@ -60,7 +67,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         public override void Update()
         {
 <<<<<<< HEAD
-            Debug.WriteLine(HasMariostar);
             if (!HasMariostar)
                 _drawPlayerInRed = false;
             if (HasMariostar)
@@ -72,7 +78,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                     _drawPlayerInRed = !_drawPlayerInRed;
                 }
             }
-
 =======
 >>>>>>> e85dd2b52ef25af6aa5f85bb2cc6828c211d7958
             if (Health <= 5) {
@@ -100,11 +105,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
             if (Input.Instance.Boost() && (Boost > 0))
             {
-                Debug.WriteLine(Boost);
                 Boost--;
-                MaxSpeed = 50;
-                AccelerateForward(50f);
-                MaxSpeed = 10;
+            MaxSpeed = 50;
+            AccelerateForward(50f);
+
             }
             
             Speed += new Vector2(-Speed.X * 0.015f, -Speed.Y * 0.015f);
@@ -179,6 +183,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                     otherGameObject.IsDead = true;
                     powerup.DoEffect(this);
                     Powerups.Add(powerup);
+                    Powerups.Add((Powerup) otherGameObject);
+=======
                 }
 
                 if (otherGameObject is Projectile pro)

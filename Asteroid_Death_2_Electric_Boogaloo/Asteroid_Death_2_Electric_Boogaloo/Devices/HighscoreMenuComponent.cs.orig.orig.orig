@@ -1,0 +1,203 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Asteroid_Death_2_Electric_Boogaloo.UI;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
+
+namespace Asteroid_Death_2_Electric_Boogaloo.Devices
+{
+    class HighscoreMenuComponent : AstroidsComponent
+    {
+        private Texture2D _backGroundtexture;
+        private SpriteFont menuFont, buttonFont;
+        private AsteroidsGame Game;
+        private Song song;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+        private int _highlightedUiComponent;
+        private List<BaseUiComponent> UiComponents;
+=======
+        private SoundEffect deus,roasted,Tyrone,RE,Man;
+        private bool playing,hasloaded;
+        private String Mainmenu,startgame,Highscores;
+        private String[] highscore1;
+        private int highlight,size, rand,blink;
+        private KeyboardState lastKeyboardState;
+        private GamePadState lastGamePadState;
+        private SpriteFont Text;
+        private bool hasMovedStick;
+=======
+>>>>>>> origin/Feature-Powerups
+        private bool playing, hasloaded;
+        private UiList _uiList;
+=======
+        private bool playing, hasloaded;
+        private UiList _uiList;
+>>>>>>> origin/Feature_MovementOfPlayer
+>>>>>>> Feature_Sound
+
+        public HighscoreMenuComponent(Game game) : base(game)
+        {
+            Game = (AsteroidsGame)game;
+            DrawableStates = GameState.highscoremenu;
+            UpdatableStates = GameState.highscoremenu;
+            MediaPlayer.IsRepeating = true;
+        }
+
+        protected override void LoadContent()
+        {
+            menuFont = Game.Content.Load<SpriteFont>("GameState");
+            buttonFont = Game.Content.Load<SpriteFont>("Text");
+            song = Game.Content.Load<Song>("CantinaBand");
+            _backGroundtexture = Game.Content.Load<Texture2D>("background");
+
+            _uiList = new UiList(Game, new Vector2(0, -300), menuFont, HighScore.GetHighScores(), 40);
+            UiComponents.Add(_uiList);
+            UiComponents.Add(new UiButton(Game, new Vector2(0, 140), "Play", buttonFont, (sender, args) => Game.Start()));
+            UiComponents.Add(new UiButton(Game, new Vector2(0, 200), "Back", buttonFont, (sender, args) => Game.ChangeGameState(GameState.Menu)));
+
+            HighlightNextComponent();
+            base.LoadContent();
+        }
+
+        public override void ChangedState(GameState newState)
+        {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+            if (Input.Instance.ClickUp())
+                HighlightPreviusComponent();
+=======
+>>>>>>> Feature_Sound
+            if (newState == GameState.highscoremenu)
+            {
+                HighlightedUiComponent = 0;
+                HighlightNextComponent();
+                _uiList.UpdateList(HighScore.GetHighScores());
+            }
+            base.ChangedState(newState);
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            if (playing == false)
+            {
+                MediaPlayer.Stop();
+                MediaPlayer.Play(song);
+                MediaPlayer.Volume = 0.4f;
+                playing = true;
+            }
+
+            if (Input.Instance.ClickUp())
+                HighlightPreviusComponent();
+
+<<<<<<< HEAD
+            if (Input.Instance.ClickDown())
+                HighlightNextComponent();
+
+<<<<<<< HEAD
+            if (Input.Instance.ClickSelect())
+                UiComponents[HighlightedUiComponent].ClickEvent?.Invoke(null, null);
+=======
+                else
+                {
+                    highlight--;
+                }
+            }
+
+            if (gamePadState.DPad.Right == ButtonState.Pressed && lastGamePadState.DPad.Right == ButtonState.Released
+                || gamePadState.ThumbSticks.Left.X >= 0.3f && !hasMovedStick
+                || keyboardstate.IsKeyDown(Keys.Right) && lastKeyboardState.IsKeyUp(Keys.Right)
+                || keyboardstate.IsKeyDown(Keys.D) && lastKeyboardState.IsKeyUp(Keys.D))
+            {
+                hasMovedStick = true;
+                if (highlight == 2)
+                {
+                }
+
+                else
+                {
+                    highlight++;
+                }
+            }
+
+            if (gamePadState.ThumbSticks.Left.X <=0.2 && gamePadState.ThumbSticks.Left.X >=-0.2)
+            {
+                hasMovedStick = false;
+            }
+            
+            if (gamePadState.Buttons.A == ButtonState.Pressed && lastGamePadState.Buttons.A ==ButtonState.Released && highlight == 0
+                || keyboardstate.IsKeyDown(Keys.Space) && lastKeyboardState.IsKeyUp(Keys.Space) && highlight==0)
+            {
+                pGame.ChangeGameState(GameState.Menu);
+                playing = false;
+            }
+
+            if (gamePadState.Buttons.A == ButtonState.Pressed && lastGamePadState.Buttons.A == ButtonState.Released && highlight == 1
+                || keyboardstate.IsKeyDown(Keys.Space) && lastKeyboardState.IsKeyUp(Keys.Space) && highlight == 1)
+            {
+               
+            }
+
+            if (gamePadState.Buttons.A == ButtonState.Pressed && lastGamePadState.Buttons.A == ButtonState.Released && highlight == 2
+                || keyboardstate.IsKeyDown(Keys.Space) && lastKeyboardState.IsKeyUp(Keys.Space) && highlight == 2)
+            {
+                pGame.Start();
+                pGame.ChangeGameState(GameState.ingame);
+                playing = false;
+            }
+
+            lastGamePadState = gamePadState;
+            lastKeyboardState = keyboardstate;
+>>>>>>> feature-enemy
+            
+>>>>>>> origin/Feature_MovementOfPlayer
+=======
+>>>>>>> origin/Feature_MovementOfPlayer
+            if (Input.Instance.ClickDown())
+                HighlightNextComponent();
+
+            if (Input.Instance.ClickSelect())
+                UiComponents[HighlightedUiComponent].ClickEvent?.Invoke(null, null);
+            
+>>>>>>> Feature_Sound
+            base.Update(gameTime);
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            SpriteBatch.Begin();
+
+            for (int x = 0; x < 2000; x += _backGroundtexture.Width)
+            {
+                for (int y = 0; y < 2000; y += _backGroundtexture.Height)
+                {
+                    SpriteBatch.Draw(_backGroundtexture, new Vector2(x, y), Color.White);
+<<<<<<< HEAD
+<<<<<<< HEAD
+                }
+            }
+=======
+>>>>>>> origin/Feature_menu
+>>>>>>> origin/Feature-Powerups
+=======
+                }
+            }
+>>>>>>> Feature_Sound
+            base.Draw(gameTime);
+            SpriteBatch.End();
+        }
+    }
+}

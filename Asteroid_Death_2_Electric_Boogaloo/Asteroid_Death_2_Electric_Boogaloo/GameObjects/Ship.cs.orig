@@ -19,16 +19,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         private DateTime _timeSenceLastShot = DateTime.Today;
 
 <<<<<<< HEAD
-        protected int ShootingSpeed = 100;
+        public int BaseHealth;
         protected Ship(AsteroidsGame game,int baseHealth) : base(game)
 =======
         public int Boost = 1;
 
         public int Health;
-        public int BaseHealth;
         public int Boost = 1;
 
-        protected Ship(AsteroidsGame game,int baseHealth) : base(game)
 =======
         protected Ship(AsteroidsGame game) : base(game)
 >>>>>>> feature-enemy
