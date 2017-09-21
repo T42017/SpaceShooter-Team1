@@ -14,16 +14,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
     internal class MenuComponent : AstroidsComponent
     {
         public static SpriteFont menuFont, buttonFont;
-<<<<<<< HEAD
-        private readonly AsteroidsGame Game;
-        private Texture2D _backGroundtexture, left, right;
-        private int _highlightedUiComponent, difficulty;
-=======
         
         private Texture2D _backGroundtexture, left, right;
         private int difficulty;     
         private readonly AsteroidsGame Game;
->>>>>>> origin/develop
         private bool playing;
         private Song song;
 
@@ -38,24 +32,18 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
 
         protected override void LoadContent()
         {
-            left = base.Game.Content.Load<Texture2D>("Left");
-            right = base.Game.Content.Load<Texture2D>("Right");
-            menuFont = base.Game.Content.Load<SpriteFont>("GameState");
-            buttonFont = base.Game.Content.Load<SpriteFont>("Text");
-            song = base.Game.Content.Load<Song>("Best");
-            _backGroundtexture = base.Game.Content.Load<Texture2D>("background");
+            left = Game.Content.Load<Texture2D>("Left");
+            right = Game.Content.Load<Texture2D>("Right");
+            menuFont = Game.Content.Load<SpriteFont>("GameState");
+            buttonFont = Game.Content.Load<SpriteFont>("Text");
+            song = Game.Content.Load<Song>("Best");
+            _backGroundtexture = Game.Content.Load<Texture2D>("background");
             difficulty = 0;
-<<<<<<< HEAD
-
-            UiComponents = new List<BaseUiComponent>();
-            UiComponents.Add(new UiLabel(Game, new Vector2(0, -260), base.Game.Window.Title, menuFont));
-=======
             
             UiComponents.Add(new UiLabel(Game, new Vector2(0, -260), Game.Window.Title, menuFont));
->>>>>>> origin/develop
             UiComponents.Add(new UiButton(Game, new Vector2(0, -150), "Play", buttonFont, (sender, args) => Game.Start()));
             UiComponents.Add(new UiButton(Game, new Vector2(0, -90), "Highscore", buttonFont, ButtonHghiscoreEvent));
-            UiComponents.Add(new UiButton(Game, new Vector2(0, -30), "Quit", buttonFont, (sender, args) => base.Game.Exit()));
+            UiComponents.Add(new UiButton(Game, new Vector2(0, -30), "Quit", buttonFont, (sender, args) => Game.Exit()));
             UiComponents.Add(new UiArrow(Game, new Vector2(0,30)));
 
             HighlightNextComponent();
@@ -78,11 +66,82 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
                 playing = true;
             }
 
+<<<<<<< HEAD
             if (Input.Instance.ClickUp())
                 HighlightPreviusComponent();
+=======
+            var gamePadState = GamePad.GetState(PlayerIndex.One);
+            var Keyboardstate = Keyboard.GetState();
+
+            if (gamePadState.DPad.Up == ButtonState.Pressed && lastGamePadState.DPad.Up == ButtonState.Released
+                || gamePadState.ThumbSticks.Left.Y >= 0.3f && !hasMovedStick
+                || Keyboardstate.IsKeyDown(Keys.Up) && lastState.IsKeyUp(Keys.Up)
+                || Keyboardstate.IsKeyDown(Keys.W) && lastState.IsKeyUp(Keys.W))
+            {
+                hasMovedStick = true;
+
+                if (choice == 0)
+                {
+                }
+
+                else
+                {
+                    choice--;
+                }
+            }
+
+            if (gamePadState.DPad.Down == ButtonState.Pressed && lastGamePadState.DPad.Down == ButtonState.Released
+                || gamePadState.ThumbSticks.Left.Y <= -0.3f && !hasMovedStick
+                || Keyboardstate.IsKeyDown(Keys.Down) && lastState.IsKeyUp(Keys.Down)
+                || Keyboardstate.IsKeyDown(Keys.S) && lastState.IsKeyUp(Keys.S))
+            {
+                hasMovedStick = true;
+
+                if (choice == 2)
+                {
+                }
+
+                else
+                {
+                    choice++;
+                }
+            }
+
+            if (gamePadState.ThumbSticks.Left.Y <= 0.2 && gamePadState.ThumbSticks.Left.Y >= -0.2)
+            {
+                hasMovedStick = false;
+            }
+
+<<<<<<< HEAD
+            lastState = Keyboardstate;
+            lastGamePadState = gamePadState;
+
+            if (gamePadState.Buttons.A==ButtonState.Pressed && lastPadState.Buttons.A == ButtonState.Released && choice == 0
+                || Keyboardstate.IsKeyDown(Keys.Space) && lastkState.IsKeyUp(Keys.Space) && choice== 0)
+            {
+                pGame.Start();
+                pGame.ChangeGameState(GameState.ingame);
+                playing = false;
+            }
+
+            if (gamePadState.Buttons.A == ButtonState.Pressed && lastPadState.Buttons.A == ButtonState.Released && choice == 1
+                || Keyboardstate.IsKeyDown(Keys.Space) && lastkState.IsKeyUp(Keys.Space) && choice == 1)
+            {
+                pGame.ChangeGameState(GameState.highscoremenu);
+                playing = false;
+            }
+>>>>>>> feature-enemy
 
             if (Input.Instance.ClickDown())
                 HighlightNextComponent();
+=======
+<<<<<<< HEAD
+                HighlightNextComponent();
+                
+
+          
+              
+>>>>>>> origin/Feature-Powerups
 
             if (Input.Instance.ClickSelect())
                 UiComponents[HighlightedUiComponent].ClickEvent.Invoke(null, null);
@@ -98,48 +157,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
                 for (var y = 0; y < 2000; y += _backGroundtexture.Height)
                     SpriteBatch.Draw(_backGroundtexture, new Vector2(x, y), Color.White);
 
+            base.Draw(gameTime);
+            SpriteBatch.End();
 <<<<<<< HEAD
-            SpriteBatch.End();
-            base.Draw(gameTime);
-        }
-
-        public void UpdateHighlightMarker()
-        {
-            for (int i = 0; i < UiComponents.Count; i++)
-            {
-                UiComponents[i].IsHighlighted = i == _highlightedUiComponent;
-            }
-        }
-
-        public void HighlightPreviusComponent()
-        {
-            int previusComponent = _highlightedUiComponent;
-            for (int i = _highlightedUiComponent; i > 0; i--)
-            {
-                previusComponent--;
-                if (UiComponents[previusComponent].CanBeHighLighted)
-                {
-                    _highlightedUiComponent = previusComponent;
-                    return;
-                }
-            }
-        }
-
-
-        public void HighlightNextComponent()
-        {
-            for (int nextComponent = _highlightedUiComponent + 1; nextComponent < UiComponents.Count; nextComponent++)
-            {
-                if (UiComponents[nextComponent].CanBeHighLighted)
-                {
-                    _highlightedUiComponent = nextComponent;
-                    return;
-                }
-            }
 =======
-            base.Draw(gameTime);
-            SpriteBatch.End();
->>>>>>> origin/develop
+        public override void Draw(GameTime gameTime)
+>>>>>>> origin/Feature_MovementOfPlayer
         }
     }
 }

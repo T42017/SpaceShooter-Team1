@@ -68,16 +68,15 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             spriteBatch.Draw(rectangle, Position - new Vector2(Bounds.Width / 2f, Bounds.Height / 2f), Color.Red);
         }
 <<<<<<< HEAD
+        
 <<<<<<< HEAD
-        
-=======
->>>>>>> origin/Feature_MovementOfPlayer
 =======
 =======
-        
 >>>>>>> origin/Feature_menu
->>>>>>> origin/develop
+>>>>>>> origin/Feature_MovementOfPlayer
+>>>>>>> origin/Feature-Powerups
 
+>>>>>>> feature-enemy
         public virtual void Update()
         {
             int offset = 20;
@@ -91,7 +90,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            //DrawBounds(spriteBatch);
             spriteBatch.Draw(Texture, Position, null, Color.White, Rotation - Microsoft.Xna.Framework.MathHelper.PiOver2,
                 new Vector2(Texture.Width / 2f, Texture.Height / 2f), Scale, SpriteEffects.None, 0f);
         }
