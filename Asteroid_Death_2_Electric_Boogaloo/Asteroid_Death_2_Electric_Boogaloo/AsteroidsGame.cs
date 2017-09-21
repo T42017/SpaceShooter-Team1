@@ -22,14 +22,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public int WindowHeight { get; set; }
         public GameObjectManager GameObjectManager { get; set; }
         public Level Level { get; set; }
-        #endregion
 
-        #region Constructors
         public int AmountOfEnemies = 10;
-
-        public int AmountOfEnemys = 10;
         public int AmountOfBosses = 0;
+        #endregion
         
+        #region Constructors
         public AsteroidsGame()
         {
             Graphics = new GraphicsDeviceManager(this)
