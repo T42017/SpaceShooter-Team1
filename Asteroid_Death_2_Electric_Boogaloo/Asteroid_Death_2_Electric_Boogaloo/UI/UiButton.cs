@@ -14,7 +14,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
 {
     public class UiButton : BaseUiComponent
     {
-
         private Texture2D _texture;
         private Texture2D _highlightTexture;
 

@@ -10,7 +10,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     public class Weapon
     {
-
         public enum Type
         {
             Laser,
@@ -47,6 +46,5 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
             return projectile;
         }
-
     }
 }

@@ -12,80 +12,75 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     public class Input
     {
-
         public static Input Instance => _instance ?? (_instance = new Input());
 
         private static Input _instance;
-
         private KeyboardState _keyboardState = Keyboard.GetState();
         private KeyboardState _lastKeyboardState;
-
         private GamePadState _gamePadState = GamePad.GetState(PlayerIndex.One);
         private GamePadState _lastGamePadState;
 
         private Keys[] specialKeys =
-        {
-            
+        {          
         };
 
         private bool _hasMovedLeftStick;
         
         private Input()
-        {
-            
+        { 
         }
 
         public bool HoldUp()
         {
             return (_gamePadState.ThumbSticks.Left.Y >= 0.3f)
-                   || (_gamePadState.DPad.Up == ButtonState.Pressed)
-                   || (_keyboardState.IsKeyDown(Keys.Up))
-                   || (_keyboardState.IsKeyDown(Keys.W));
+                    || (_gamePadState.DPad.Up == ButtonState.Pressed)
+                    || (_keyboardState.IsKeyDown(Keys.Up))
+                    || (_keyboardState.IsKeyDown(Keys.W));
         }
 
         public bool HoldDown()
         {
             return (_gamePadState.ThumbSticks.Left.Y <= -0.3f)
-                || (_gamePadState.DPad.Down == ButtonState.Pressed)
-                || (_keyboardState.IsKeyDown(Keys.Down))
-                || (_keyboardState.IsKeyDown(Keys.S));
+                    || (_gamePadState.DPad.Down == ButtonState.Pressed)
+                    || (_keyboardState.IsKeyDown(Keys.Down))
+                    || (_keyboardState.IsKeyDown(Keys.S));
         }
 
         public bool HoldLeft()
         {
             return (_gamePadState.ThumbSticks.Left.X <= -0.3f)
-                   || (_gamePadState.ThumbSticks.Right.X <= -0.3f)
-                   || (_gamePadState.DPad.Left == ButtonState.Pressed)
-                   || (_keyboardState.IsKeyDown(Keys.Left))
-                   || (_keyboardState.IsKeyDown(Keys.A));
+                    || (_gamePadState.ThumbSticks.Right.X <= -0.3f)
+                    || (_gamePadState.DPad.Left == ButtonState.Pressed)
+                    || (_keyboardState.IsKeyDown(Keys.Left))
+                    || (_keyboardState.IsKeyDown(Keys.A));
         }
 
         public bool HoldRight()
         {
             return (_gamePadState.ThumbSticks.Left.X >= 0.3f)
-                   || (_gamePadState.ThumbSticks.Right.X >= 0.3f)
-                   || (_gamePadState.DPad.Right == ButtonState.Pressed)
-                   || (_keyboardState.IsKeyDown(Keys.Right))
-                   || (_keyboardState.IsKeyDown(Keys.D));
+                    || (_gamePadState.ThumbSticks.Right.X >= 0.3f)
+                    || (_gamePadState.DPad.Right == ButtonState.Pressed)
+                    || (_keyboardState.IsKeyDown(Keys.Right))
+                    || (_keyboardState.IsKeyDown(Keys.D));
         }
         
         public bool HoldSelect()
         {
-            return ((_gamePadState.Buttons.A == ButtonState.Pressed) ||
-             (_keyboardState.IsKeyDown(Keys.Space)) ||
-             (_gamePadState.Triggers.Right > 0.2));
+            return (_gamePadState.Buttons.A == ButtonState.Pressed)
+                   || (_gamePadState.Triggers.Right > 0.2)
+                   || (_keyboardState.IsKeyDown(Keys.Space));
         }
 
         public bool ClickSelect()
         {
             return _gamePadState.Buttons.A == ButtonState.Pressed &&
                     _lastGamePadState.Buttons.A == ButtonState.Released
-                    ||
-                    _gamePadState.Triggers.Right > 0.2 &&
-                    _lastGamePadState.Triggers.Right <= 0.2
-                    ||
-                    _keyboardState.IsKeyDown(Keys.Space) &&
-                    _lastKeyboardState.IsKeyUp(Keys.Space);
+                   ||
+                   _gamePadState.Triggers.Right > 0.2 &&
+                   _lastGamePadState.Triggers.Right <= 0.2
+                   ||
+                   _keyboardState.IsKeyDown(Keys.Space) &&
+                   _lastKeyboardState.IsKeyUp(Keys.Space);
         }
 
         public bool ClickLeft()
@@ -164,7 +159,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             _lastGamePadState = _gamePadState;
             _lastKeyboardState = _keyboardState;
-
             _gamePadState = GamePad.GetState(PlayerIndex.One);
             _keyboardState = Keyboard.GetState();
 
@@ -189,7 +183,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                     characters.Add(character);
                 }
             }
-
             return characters.ToArray();
         }
     }

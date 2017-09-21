@@ -25,7 +25,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         public IngameComponent(Game game) : base(game)
         {
             _Game = (AsteroidsGame) game;
-
             DrawableStates = GameState.ingame;
             UpdatableStates = GameState.ingame;
             volume = false;
@@ -58,15 +57,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             {
                 _Game.ChangeGameState(GameState.paused);
                 volume= false;
-            }
-            
-            //for (int i = _Game.Components.Count - 1; i >= 0; i--)
-            //{
-            //    if (!(_Game.Components[i] is GameObject gameObject))
-            //        continue;
-            //    _Game.CheckForCollisionWith(gameObject);
-            //}
-            //_Game.GenerateRandomNewMeteor(gameTime, 5);
+            }           
             base.Update(gameTime);
         }
     }

@@ -10,7 +10,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     public class EnemyFactory
     {
-        
         private AsteroidsGame _game;
 
         public EnemyFactory(AsteroidsGame game)
@@ -30,7 +29,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             {
                 Position = position
             };
-
             return enemy;
         }
 

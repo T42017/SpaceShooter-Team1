@@ -14,7 +14,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
     internal class DeathComponent : AstroidsComponent
     {
         private SpriteFont font, buttonFont;
-        
         private readonly AsteroidsGame Game;
         private bool playing;
         private Song song;
@@ -35,7 +34,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             font = Game.Content.Load<SpriteFont>("Text");
             song = Game.Content.Load<Song>("Laugh");
             _backgroundTexture = Game.Content.Load<Texture2D>("background");
-
             _textBox = new UiTextbox(Game, new Vector2(), font);
 
             UiComponents = new List<BaseUiComponent>();
@@ -47,7 +45,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             }));
 
             HighlightNextComponent();
-
             base.LoadContent();
         }
 

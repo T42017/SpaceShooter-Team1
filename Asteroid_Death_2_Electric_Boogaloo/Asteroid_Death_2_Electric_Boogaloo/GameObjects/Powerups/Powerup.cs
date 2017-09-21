@@ -11,7 +11,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
     public abstract class Powerup : GameObject
     {
         public PowerupType PowerupType { get; }
-
         public float Timer { get; set; }
         
         public Powerup(AsteroidsGame game, Vector2 position, PowerupType powerupType) : this(game, powerupType)
@@ -44,9 +43,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         public override void Update()
         {
-            //var previousWeapon = player.Weapon = new Weapon(Game, Weapon.Type.Laser, Weapon.Color.Blue);
             Timer--;
-            //if (Timer == 0) player.Weapon = previousWeapon;
             base.Update();
         }
     }

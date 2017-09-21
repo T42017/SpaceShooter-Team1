@@ -44,7 +44,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             UiComponents.Add(new UiButton(Game, new Vector2(0, 200), "Back", buttonFont, (sender, args) => Game.ChangeGameState(GameState.Menu)));
 
             HighlightNextComponent();
-
             base.LoadContent();
         }
 
@@ -92,7 +91,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
                     SpriteBatch.Draw(_backGroundtexture, new Vector2(x, y), Color.White);
                 }
             }
-
             base.Draw(gameTime);
             SpriteBatch.End();
         }

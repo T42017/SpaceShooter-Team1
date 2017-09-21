@@ -9,7 +9,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     class MathHelper
     {
-
         public static float DegreesToRadians(int angle)
         {
             return (float) (Math.PI * angle / 180.0);
@@ -35,6 +34,5 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             return (float) Math.Atan2(point.Y - lookAtpoint.Y, point.X - lookAtpoint.X) - DegreesToRadians(180);
         }
-
     }
 }

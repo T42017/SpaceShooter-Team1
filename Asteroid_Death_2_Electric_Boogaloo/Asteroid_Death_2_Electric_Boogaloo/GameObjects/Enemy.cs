@@ -7,7 +7,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
     public class Enemy : Ship
     {
-
         public enum Type
         {
             enemyRed1,
@@ -68,8 +67,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                     IsDead = true;
                 if (otherGameObject is Projectile)
                     Game.GameObjectManager.GameObjects.Remove(otherGameObject);
-                }
-                
+                }   
             }
             return collides;
         }

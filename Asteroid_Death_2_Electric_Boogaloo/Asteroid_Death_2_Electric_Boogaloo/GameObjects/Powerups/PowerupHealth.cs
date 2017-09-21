@@ -12,12 +12,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups
     {
         public PowerupHealth(AsteroidsGame game, Vector2 position) : base(game, position, PowerupType.Health)
         {
-
         }
 
         public override void Remove(Player player)
         {
-
         }
 
         public override void DoEffect(Player player)

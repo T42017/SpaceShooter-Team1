@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
     public class Laser : Projectile
-    {
+    {      
         #region Public constructors
         public Laser(AsteroidsGame game, Vector2 position, float rotation, Weapon.Color color, Type parentType) : base(game, position, rotation, color, parentType, 1)
         {
