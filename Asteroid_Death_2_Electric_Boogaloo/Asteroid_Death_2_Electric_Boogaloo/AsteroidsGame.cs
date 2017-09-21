@@ -73,11 +73,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public void ControlMaxEnemies()
         {
-            Enemy[] enemys = GameObjectManager.GetEnemys();
+            Enemy[] enemies = GameObjectManager.GetEnemies();
 
-            if (enemys.Length < AmountOfEnemys)
+            if (enemies.Length < AmountOfEnemys)
             {
-                GameObjectManager.AddEnemys(AmountOfEnemys - enemys.Length);
+                GameObjectManager.AddEnemies(AmountOfEnemys - enemies.Length);
             }
         }
         #endregion
