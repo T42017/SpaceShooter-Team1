@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles;
 using System.Runtime.InteropServices;
 using Microsoft.Xna.Framework;
 
@@ -92,13 +93,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         #region Public methods
         public IEnumerable<Meteor> SpawnChildren()
-        {
             if (MeteorSize == MeteorSize.Small)
                 return null;
             return ShatterIntoSmallerMeteors();
-        }
         #endregion
-
         #region Overrides
         public override void Update()
         {
@@ -118,10 +116,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 if (smallerMeteors != null)
                 {
                     foreach (var meteor in smallerMeteors)
-                        Game.GameObjectManager.GameObjects.Add(meteor);
+                        Game.GameObjectManager.Add(meteor);
                 }
                 IsDead = true;
-                Game.GameObjectManager.GameObjects.Remove(otherGameObject);
             }
             return collides;
         }

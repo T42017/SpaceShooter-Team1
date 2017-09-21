@@ -9,7 +9,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     public class GameObjectManager
     {
+        
+        public List<GameObject> GameObjects => _gameObjects;
         #region Private fields
+
+        private readonly List<GameObject> _gameObjects = new List<GameObject>();
         private readonly AsteroidsGame _game;
         private EnemyFactory _enemyFactory;
         private PowerupFactory _powerupFactory;
@@ -53,10 +57,42 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             _enemyFactory = factory;
         }
 
-        public void AddEnemies(int amount)
+        public void Add(GameObject gameObject)
+        {
+            _gameObjects.Add(gameObject);
+        }
+
+        public void AddAtRandomPosition(GameObject gameObject)
+        {
+            gameObject.Position = GetRandmPositionWithADistanceFromPlayer(1000);
+            _gameObjects.Add(gameObject);
+        }
+
         {
             for (var i = 0; i < amount; i++)
-                GameObjects.Add(_enemyFactory.GetRandomEnemy());
+            {
+                Enemy enemy = _enemyFactory.GetRandomEnemy();
+                enemy.Position = GetRandmPositionWithADistanceFromPlayer(1000);
+                Add(enemy);
+            }
+        }
+
+        public void AddEnemies(int amount, Vector2 position)
+        {
+            for (int i = 0; i < amount; i++)
+            {
+                Enemy enemy = _enemyFactory.GetRandomEnemy();
+                enemy.Position = position;
+                Add(enemy);
+            }
+        }
+
+        public void AddEnemyBosses(int amount)
+        {
+            for (int i = 0; i < amount; i++)
+            {
+                AddAtRandomPosition(new EnemyBoss(_game));
+            }
         }
 
         public void AddThePlayer()
@@ -65,7 +101,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             {
                 Position = new Vector2(_game.Level.SizeX / 2, _game.Level.SizeY / 2)
             };
-            GameObjects.Add(Player);
+            Add(Player);
         }
         
         public void AddMeteors(GameTime gameTime, int amountOfMeteorsToAdd, int intervalInMilliseconds)
@@ -91,8 +127,26 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                         (MeteorColour)Globals.RNG.Next(0, 2)
                     );
                 } while (Player.DistanceToSquared(meteor) <= hypothenuseSquared);
-                GameObjects.Add(meteor);
+            for (int i = 0; i < _gameObjects.Count; i++)
+            {
+                if (_gameObjects[i] is Enemy)
+                    enemys.Add((Enemy) _gameObjects[i]);
             }
+
+            return enemys.ToArray();
+        }
+
+        public EnemyBoss[] GetEnemyBosses()
+        {
+            List<EnemyBoss> bosses = new List<EnemyBoss>();
+
+            for (int i = 0; i < _gameObjects.Count; i++)
+            {
+                if (_gameObjects[i] is EnemyBoss)
+                    bosses.Add((EnemyBoss) _gameObjects[i]);
+            }
+
+            return bosses.ToArray();
         }
         #endregion
 
@@ -101,9 +155,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             var meteors = new List<Meteor>();
 
-            for (int i = 0; i < GameObjects.Count; i++)
+            for (int i = 0; i < _gameObjects.Count; i++)
             {
-                if (GameObjects[i] is Meteor meteor)
+                if (_gameObjects[i] is Meteor meteor)
                     meteors.Add(meteor);
             }
 
@@ -114,7 +168,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             var enemys = new List<Enemy>();
 
-            for (int i = 0; i < GameObjects.Count; i++)
             {
                 if (GameObjects[i] is Enemy)
                     enemys.Add((Enemy)GameObjects[i]);
@@ -127,26 +180,33 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public void RemoveDeadGameObjects()
         {
             for (int i = 0; i < GameObjects.Count; i++)
+                _gameObjects.Count(obj => obj is Meteor) >= 100)
             {
                 if (GameObjects[i].IsDead)
                 {
                     GameObjects.Remove(GameObjects[i]);
                 }
+                _gameObjects.Add(meteor);
             }
         }
 
-        public void RemoveDeadCollisionEffects()
+        public Vector2 GetRandmPositionWithADistanceFromPlayer(int distance)
         {
-            CollisionEffects.RemoveAll(collisionEffect => collisionEffect.IsDead);
+            Vector2 position = new Vector2(Globals.RNG.Next(Globals.ScreenWidth), Globals.RNG.Next(Globals.ScreenHeight));
+
+            while (Vector2.Distance(position, Player.Position) < distance)
+                position = new Vector2(Globals.RNG.Next(Globals.ScreenWidth), Globals.RNG.Next(Globals.ScreenHeight));
+
+            return position;
         }
         #endregion
 
         #region Public updating methods
         public void UpdateGameObjects()
         {
-            for (var i = 0; i < GameObjects.Count; i++)
+            for (int i = 0; i < _gameObjects.Count; i++)
             {
-                var gameObject = GameObjects[i];
+                var gameObject = _gameObjects[i];
                 gameObject.Update();
                 CheckForCollisionWith(gameObject);
             }
@@ -154,7 +214,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public void UpdateCollisionEffects()
         {
-            foreach (var collisionEffect in CollisionEffects)
+            foreach (var otherGameObject in _gameObjects)
                 collisionEffect.Update();
         }
         #endregion
@@ -168,7 +228,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             }
         }
 
-        public void DrawCollisionEffects(SpriteBatch spriteBatch)
+        public void DrawGameObjects(SpriteBatch spriteBatch)
         {
             foreach (var collisionEffect in CollisionEffects)
                 collisionEffect.Draw(spriteBatch);
@@ -178,9 +238,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         #region Public methods
         public void CheckForCollisionWith(GameObject thisObject)
         {
-            for (int i = 0; i < GameObjects.Count; i++)
+           for (int i = 0; i < _gameObjects.Count; i++)
             {
-                if (i < GameObjects.Count && (thisObject == GameObjects[i] ||
+                _gameObjects[i].Draw(spriteBatch);
                     !thisObject.CollidesWith(GameObjects[i]) || i < GameObjects.Count &&
                     Player.DistanceToSquared(GameObjects[i]) >= ((Globals.ScreenWidth * Globals.ScreenWidth) / 2 + (Globals.ScreenHeight * Globals.ScreenHeight) / 2)))
                     continue;

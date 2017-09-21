@@ -27,6 +27,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         #region Constructors
         public int AmountOfEnemys = 10;
 
+        public int AmountOfEnemys = 10;
+        public int AmountOfBosses = 0;
+        
         public AsteroidsGame()
         {
             Graphics = new GraphicsDeviceManager(this)
@@ -122,6 +125,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 _camera.FollowPlayer(GameObjectManager.Player);
                 GameObjectManager.AddMeteors(gameTime, Globals.perSecMeteors, 1000);
                 ControlMaxEnemies();
+                ControlMaxEnemyBosses();
             }
             base.Update(gameTime);
         }
@@ -148,5 +152,25 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             base.Draw(gameTime);
         }
         #endregion          
+        public void ControlMaxEnemies()
+        {
+            Enemy[] enemys = GameObjectManager.GetEnemys();
+
+            if (enemys.Length < AmountOfEnemys)
+            {
+                GameObjectManager.AddEnemys(AmountOfEnemys - enemys.Length);
+            }
+        }
+
+        public void ControlMaxEnemyBosses()
+        {
+            EnemyBoss[] bosses = GameObjectManager.GetEnemyBosses();
+
+            if (bosses.Length < AmountOfBosses)
+            {
+                GameObjectManager.AddEnemyBosses(AmountOfBosses - bosses.Length);
+            }
+        }
+
     }
 }

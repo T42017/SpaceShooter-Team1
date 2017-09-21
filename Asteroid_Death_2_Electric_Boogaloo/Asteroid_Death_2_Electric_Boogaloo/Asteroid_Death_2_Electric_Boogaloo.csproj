@@ -41,7 +41,10 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AI.cs" />
+    <Compile Include="AI\BaseAi.cs" />
+    <Compile Include="AI\BasicEnemyAi.cs" />
+    <Compile Include="AI\BossAi.cs" />
+    <Compile Include="AI\FollowPlayerAi.cs" />
     <Compile Include="AsteroidsGame.cs" />
     <Compile Include="Collision effects\CollisionEffect.cs" />
     <Compile Include="Devices\AstroidsComponent.cs" />
@@ -57,6 +60,7 @@
     <Compile Include="Devices\IngameComponent.cs" />
     <Compile Include="GameObjectManager.cs" />
     <Compile Include="GameObjects\Powerups\Powerup.cs" />
+    <Compile Include="GameObjects\EnemyBoss.cs" />
     <Compile Include="GameObjects\Powerups\PowerupBoost.cs" />
     <Compile Include="GameObjects\Powerups\PowerupHealth.cs" />
     <Compile Include="GameObjects\Powerups\PowerupMariostar.cs" />

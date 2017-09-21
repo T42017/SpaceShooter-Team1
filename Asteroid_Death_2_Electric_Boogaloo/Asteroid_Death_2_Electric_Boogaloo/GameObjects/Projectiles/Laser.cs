@@ -1,17 +1,17 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 
-namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
+namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles
 {
     public class Laser : Projectile
     {      
         #region Public constructors
         public Laser(AsteroidsGame game, Vector2 position, float rotation, Weapon.Color color, Type parentType) : base(game, position, rotation, color, parentType, 1)
+            : base(game, position, rotation, color, parent, 1)
         {
             Texture = TextureManager.Instance.LaserTextures[(int)color];
         }
         #endregion
-
         #region Protected overrides
         protected override Type GetClassType()
         {

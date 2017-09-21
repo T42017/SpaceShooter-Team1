@@ -1,36 +1,37 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Asteroid_Death_2_Electric_Boogaloo.GameObjects;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
-namespace Asteroid_Death_2_Electric_Boogaloo
+namespace Asteroid_Death_2_Electric_Boogaloo.AI
 {
-    public class AI
+    class BasicEnemyAI : BaseAi
     {
         public enum State
         {
             GoToPosition,
-            FollowPlayer
+            MoveToPlayer
         }
 
         private State currentState;
-        private readonly AsteroidsGame _game;
-        private Enemy _enemy;
         private Vector2 _positionGoTO = new Vector2();
 
-        public AI(AsteroidsGame game, Enemy enemy)
+        protected Enemy _enemy;
+
+        public BasicEnemyAI(AsteroidsGame game, Enemy enemy) : base(game)
         {
-            _game = game;
-            this._enemy = enemy;
+            _enemy = enemy;
         }
 
-        public void Update()
+        public override void Update()
         {
             Player player = _game.GameObjectManager.Player;
 
             if (Vector2.Distance(player.Position, _enemy.Position) < 800)
-                currentState = State.FollowPlayer;
+                currentState = State.MoveToPlayer;
             else if (Vector2.Distance(player.Position, _enemy.Position) > 800)
                 currentState = State.GoToPosition;
 
@@ -40,14 +41,16 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                     _positionGoTO = GetRandomPositionInLevel();
 
                 _enemy.Rotation = MathHelper.LookAt(_enemy.Position, _positionGoTO);
-                _enemy.AccelerateForward(0.18f);
+                _enemy.MaxSpeed = 9;
+                _enemy.AccelerateForward(0.2f);
                 _enemy.Move();
             }
-            else if (currentState == State.FollowPlayer)
+            else if (currentState == State.MoveToPlayer)
             {
                 _enemy.Rotation = MathHelper.LookAt(_enemy.Position, player.Position);
-                if (!_enemy.IsWeaponOverheated())
+                if (_enemy.Weapon != null && !_enemy.IsWeaponOverheated())
                     _enemy.Shoot(typeof(Enemy));
+                _enemy.MaxSpeed = 3;
                 _enemy.AccelerateForward(0.05f);
                 _enemy.Move();
             }

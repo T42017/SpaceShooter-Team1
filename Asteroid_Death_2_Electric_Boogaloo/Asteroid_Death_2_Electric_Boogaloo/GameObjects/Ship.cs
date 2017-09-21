@@ -1,5 +1,5 @@
 ﻿using System;
-using System.CodeDom;
+using Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles;
 using System.ComponentModel;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
@@ -9,11 +9,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
     public abstract class Ship : GameObject
     {
         public Weapon Weapon;
+        public int Health = 1;
 
         private bool ShootLefCannon = false;
         private DateTime _timeSenceLastShot = DateTime.Today;
-
-        protected int ShootingSpeed = 100;
 
         public int Health;
         public int BaseHealth;
@@ -45,7 +44,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             shootPoint = MathHelper.RotateAroundPoint(shootPoint, shipCenterPoint, Rotation);
 
             Projectile projectile = Weapon.GetProjectile(shootPoint, Rotation, parentType);
-            Game.GameObjectManager.GameObjects.Add(projectile);
+            Game.GameObjectManager.Add(projectile);
 
             ShootLefCannon = !ShootLefCannon;
             _timeSenceLastShot = DateTime.Now;

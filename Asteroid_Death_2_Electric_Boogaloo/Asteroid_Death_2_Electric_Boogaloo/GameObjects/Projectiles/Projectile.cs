@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 
-namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
+namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles
 {
     public abstract class Projectile : GameObject
     {
@@ -13,12 +13,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             Green
         }
         #endregion
+        public Type ParentType { get; set; }
+        public int Damage;
 
         #region Public properties
         public int Damage { get; }
-        public Type ParentType { get; set; }
+        protected Projectile(AsteroidsGame game, Vector2 position, float rotation, Weapon.Color color, Type parenType, int damage) : base(game)
         #endregion
-
         #region Protected fields
         protected Weapon.Color color;
         #endregion

@@ -1,4 +1,5 @@
 ﻿using Asteroid_Death_2_Electric_Boogaloo.GameObjects;
+using Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles;
 using Microsoft.Xna.Framework;
 
 namespace Asteroid_Death_2_Electric_Boogaloo
@@ -39,14 +40,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         #endregion
 
         #region Public methods
-        public Projectile GetProjectile(Vector2 Position, float rotation, System.Type parentType)
+        public Projectile GetProjectile(Vector2 position, float rotation, System.Type parentType)
         {
             Projectile projectile = null;
 
             if (WeaponType == Type.Laser)
-                projectile = new Laser(_game, Position, rotation, WeaponColor, parentType);
+                projectile = new Laser(_game, position, rotation, WeaponColor, parentType);
             else if (WeaponType == Type.Missile)
-                projectile = new Missile(_game, Position, rotation, WeaponColor, parentType);
+                projectile = new Missile(_game, position, rotation, WeaponColor, parentType);
 
             return projectile;
         } 

@@ -1,58 +1,31 @@
 ﻿using System;
+using System.Diagnostics;
 using Asteroid_Death_2_Electric_Boogaloo.AI;
 using Asteroid_Death_2_Electric_Boogaloo.Components;
 using Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Media;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
-    public class Enemy : Ship
+    public class EnemyBoss : Ship
     {
-        public enum Type
-        {
-            enemyRed1,
-            enemyRed2,
-            enemyRed3,
-            enemyRed4,
-            enemyRed5,
-            enemyBlue1,
-            enemyBlue2,
-            enemyBlue3,
-            enemyBlue4,
-            enemyBlue5,
-            enemyGreen1,
-            enemyGreen2,
-            enemyGreen3,
-            enemyGreen4,
-            enemyGreen5,
-            enemyBlack1,
-            enemyBlack2,
-            enemyBlack3,
-            enemyBlack4,
-            enemyBlack5
-        }
 
         public BaseAi Ai;
-
-        public Type enemyType;
         private Texture2D _lifeTexture;
 
-        public Enemy(AsteroidsGame game, Type enemyType) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Green))
+        public EnemyBoss(AsteroidsGame game) : base(game)
         {
-            this.enemyType = enemyType;
-            Ai = new BasicEnemyAI(game, this);
-            ShootingSpeed = 5000; //500;
-            Texture = TextureManager.Instance.EnemyTexures[(int) enemyType];
+            Health = 30;
+            Ai = new BossAi(game, this);
+            Texture = TextureManager.Instance.BossTexture;
             _lifeTexture = TextureManager.Instance.PlayerLifeTexture;
-            Health = 2;
         }
-
+        
         public override void Update()
         {
             base.Update();
-            Ai?.Update();
+            Ai.Update();
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -73,13 +46,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             {
                 if (otherGameObject is Projectile pro)
                 {
-                    Player.score = Player.score + 100;
-                    Health -= pro.Damage;
-                    pro.IsDead = true;
-                }
-
-                if (Health <= 0)
-                {
                     Health -= pro.Damage;
                     otherGameObject.IsDead = true;
                     if (pro.ParentType == typeof(Player))
@@ -90,11 +56,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 if (Health <= 0)
                 {
                     IsDead = true;
-                if (otherGameObject is Projectile)
-                    Game.GameObjectManager.GameObjects.Remove(otherGameObject);
-                }   
+                }
             }
             return collides;
         }
+
     }
 }
