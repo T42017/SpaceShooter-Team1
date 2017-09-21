@@ -32,6 +32,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups
 
                 case 1:
                     powerupNumber = 1;
+                    player.Weapon = new Weapon(Game, Weapon.Type.Missile, Weapon.Color.Red);
                     break;
 
                 case 2:

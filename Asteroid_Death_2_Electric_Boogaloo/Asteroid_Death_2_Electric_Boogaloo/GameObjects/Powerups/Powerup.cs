@@ -36,7 +36,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             {
                 Timer = 900;
             }
-            
+
+            else if (powerupType == PowerupType.Random)
+            {
+                Timer = 900;
+            }
         }
 
         public abstract void Remove(Player player);
