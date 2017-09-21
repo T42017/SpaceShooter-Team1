@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -11,43 +7,34 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     class TextureManager
     {
-        private static TextureManager instance;
+        #region Private fields
+        private static TextureManager _instance;
+        #endregion
 
-        public Texture2D PlayerShipTexture;
-        public Texture2D BackGroundTexture;
-        public Texture2D ButtonUnpressedTexture, ButtonPressedTexture;
-        public Texture2D[] PowerUpTextures; 
-        public Texture2D[] PixelExplosionTextures;
-        public Texture2D[] EnemyTexures;
-        public Texture2D[] LaserTextures;
-        public Texture2D[] MissileTextures;
-        public Texture2D[] HitmarkerTextures { get; set; }
+        #region Public properties
+        public Texture2D PlayerShipTexture { get; private set; }
+        public Texture2D BackGroundTexture { get; private set; }
+        public Texture2D ButtonUnpressedTexture { get; private set; }
+        public Texture2D ButtonPressedTexture { get; private set; }
+        public Texture2D[] PowerUpTextures { get; private set; }
+        public Texture2D[] PixelExplosionTextures { get; private set; }
+        public Texture2D[] EnemyTexures { get; private set; }
+        public Texture2D[] LaserTextures { get; private set; }
+        public Texture2D[] MissileTextures { get; private set; }
+        public Texture2D[] HitmarkerTextures { get; private set; }
+        public SoundEffect PlayerShootSoundEffect { get; private set; }
+        public static TextureManager Instance => _instance ?? (_instance = new TextureManager());
+        #endregion
 
-        public SoundEffect PlayerShootSoundEffect;
+        #region Private constructors
+        private TextureManager() {}
+        #endregion
 
-        public static TextureManager Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new TextureManager();
-                }
-                return instance;
-            }
-        }
-
-        private TextureManager()
-        {
-        }
-
+        #region Public methods
         public void LoadContent(ContentManager content)
         {
             PlayerShipTexture = content.Load<Texture2D>("shipPlayer");
             BackGroundTexture = content.Load<Texture2D>("background");
-
-            //ButtonPressedTexture = content.Load<Texture2D>("buttonPressed");
-            //ButtonUnpressedTexture = content.Load<Texture2D>("buttonUnpressed");
 
             PixelExplosionTextures = GetTextures(content, "pixelExplosion", 9);
 
@@ -80,8 +67,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
             var hitmarkerTexture2Ds = new List<Texture2D>();
             hitmarkerTexture2Ds.AddRange(GetTextures(content, "hitmarker", 9));
-            HitmarkerTextures = hitmarkerTexture2Ds.ToArray(); 
-            
+            HitmarkerTextures = hitmarkerTexture2Ds.ToArray();
+
             PlayerShootSoundEffect = content.Load<SoundEffect>("Blaster");
         }
 
@@ -99,6 +86,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 textures[i] = content.Load<Texture2D>(name + i);
             }
             return textures;
-        }
+        } 
+        #endregion
     }
 }
