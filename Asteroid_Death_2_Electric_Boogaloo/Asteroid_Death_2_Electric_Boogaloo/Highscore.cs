@@ -10,14 +10,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     public class HighScore
     {
-
         public static string FileLocation { get; private set; } = ".\\Content\\Highscore.xml";
         public static int MaxPlayers = 10;
 
         public static string[] GetHighScores()
         {
             XmlDocument xDoc = GetXmlDoc();
-
             XmlNodeList players = xDoc.GetElementsByTagName("Player");
             XmlNodeList score = xDoc.GetElementsByTagName("Score");
             
@@ -65,8 +63,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             {
                 rootChildList[MaxPlayers * 2 - 1].ParentNode.RemoveChild(rootChildList[MaxPlayers * 2 - 1]);
                 rootChildList[MaxPlayers * 2 - 2].ParentNode.RemoveChild(rootChildList[MaxPlayers * 2 - 2]);
-            }
-            
+            }            
             xDoc.Save(FileLocation);
         }
 
@@ -75,7 +72,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             XmlDocument xDoc = new XmlDocument();
             xDoc.Load(FileLocation);
             return xDoc;
-        }
-        
+        }       
     }
 }

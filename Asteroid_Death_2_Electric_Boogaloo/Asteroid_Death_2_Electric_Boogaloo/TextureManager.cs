@@ -11,7 +11,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     class TextureManager
     {
-
         private static TextureManager instance;
 
         public Texture2D PlayerShipTexture;
@@ -40,7 +39,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         private TextureManager()
         {
-
         }
 
         public void LoadContent(ContentManager content)
@@ -75,16 +73,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             List<Texture2D> powerupTexture2Ds = new List<Texture2D>();
             powerupTexture2Ds.Add(content.Load<Texture2D>("PowerupMissile"));
             powerupTexture2Ds.Add(content.Load<Texture2D>("powerupHealth"));
-            powerupTexture2Ds.Add(content.Load<Texture2D>("powerupLightsaber"));
-            powerupTexture2Ds.Add(content.Load<Texture2D>("powerupStar"));
-            powerupTexture2Ds.Add(content.Load<Texture2D>("powerupImprovedLaser"));
+            powerupTexture2Ds.Add(content.Load<Texture2D>("powerupBoost"));
+            powerupTexture2Ds.Add(content.Load<Texture2D>("powerupMariostar"));
             powerupTexture2Ds.Add(content.Load<Texture2D>("powerupRandom"));
             PowerUpTextures = powerupTexture2Ds.ToArray();
 
             var hitmarkerTexture2Ds = new List<Texture2D>();
             hitmarkerTexture2Ds.AddRange(GetTextures(content, "hitmarker", 9));
-            HitmarkerTextures = hitmarkerTexture2Ds.ToArray();
-            
+            HitmarkerTextures = hitmarkerTexture2Ds.ToArray(); 
             
             PlayerShootSoundEffect = content.Load<SoundEffect>("Blaster");
         }
@@ -102,7 +98,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             {
                 textures[i] = content.Load<Texture2D>(name + i);
             }
-
             return textures;
         }
     }

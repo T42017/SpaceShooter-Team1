@@ -15,9 +15,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public static int ScreenHeight = 1080;
         public static Random RNG = new Random();
         public static int Health=10, Maxmeteors= 100, perSecMeteors=10;
-        public static Vector2 HalfScreenSize
-        {
-            get { return new Vector2(ScreenWidth / 2, ScreenHeight / 2); }
-        }
+        public static Vector2 HalfScreenSize => new Vector2(ScreenWidth / 2f, ScreenHeight / 2f);
     }
 }

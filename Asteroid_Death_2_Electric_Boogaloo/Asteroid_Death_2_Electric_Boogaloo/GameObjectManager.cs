@@ -13,8 +13,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     {
         public Player Player { get; private set; }
         public List<GameObject> GameObjects { get; } = new List<GameObject>();
-        public List<Explosion> Explosions { get; set; } = new List<Explosion>();
-        public List<Hitmarker> Hitmarkers { get; set; } = new List<Hitmarker>();
+        public List<CollisionEffect> CollisionEffects { get; set; } = new List<CollisionEffect>();
 
         private readonly AsteroidsGame _game;
         private EnemyFactory _enemyFactory;
@@ -103,21 +102,17 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 }
             }
         }
-
-        public void RemoveDeadExplosions()
+        
+        public void RemoveDeadCollisionEffects()
         {
-            Explosions.RemoveAll(explosion => explosion.IsDead);
-        }
-
-        public void RemoveDeadHitmarkers()
-        {
-            Hitmarkers.RemoveAll(hitmarker => hitmarker.IsDead);
+            CollisionEffects.RemoveAll(collisionEffect => collisionEffect.IsDead);
         }
 
         public void AddNewMeteors(GameTime gameTime, int amountOfMeteorsToAdd, int intervalInMilliseconds)
         {
             int currentGameTimeModInterval = (int) gameTime.TotalGameTime.TotalMilliseconds % intervalInMilliseconds;
-            if (currentGameTimeModInterval != 0 || (GameObjects.Count(obj => obj is Meteor) >= Globals.Maxmeteors))
+            if (currentGameTimeModInterval != 0 || GameObjects.Count(obj => obj is Meteor) >= Globals.Maxmeteors)
+                
                 return;
 
 
@@ -164,27 +159,20 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 CheckForCollisionWith(gameObject);
             }
         }
-
-        public void UpdateExplosions()
+        
+        public void UpdateCollisionEffects()
         {
-            foreach (var explosion in Explosions)
-                explosion.Update();
-        }
-
-        public void UpdateHitmarkers()
-        {
-            foreach (var hitmarker in Hitmarkers)
-                hitmarker.Update();
+            foreach (var collisionEffect in CollisionEffects)
+                collisionEffect.Update();
         }
 
         public void CheckForCollisionWith(GameObject thisObject)
         {
             for (int i = 0; i < GameObjects.Count; i++)
             {
-                if (thisObject == GameObjects[i] ||
-                     //Player.DistanceToSquared(GameObjects[i]) >= ((Globals.ScreenWidth * Globals.ScreenWidth) / 4 + (Globals.ScreenHeight * Globals.ScreenHeight) / 4) ||
-                      !thisObject.CollidesWith(GameObjects[i])
-                   )
+                if (i < GameObjects.Count && (thisObject == GameObjects[i] ||
+                    !thisObject.CollidesWith(GameObjects[i]) || i < GameObjects.Count &&
+                    Player.DistanceToSquared(GameObjects[i]) >= ((Globals.ScreenWidth * Globals.ScreenWidth) / 2 + (Globals.ScreenHeight * Globals.ScreenHeight) / 2)))
                     continue;
                 return;
             }
@@ -197,17 +185,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 GameObjects[i].Draw(spriteBatch);
             }
         }
-
-        public void DrawExplosions(SpriteBatch spriteBatch)
+        
+        public void DrawCollisionEffects(SpriteBatch spriteBatch)
         {
-            foreach (var explosion in Explosions)
-                explosion.Draw(spriteBatch);
-        }
-
-        public void DrawHitmarkers(SpriteBatch spriteBatch)
-        {
-            foreach (var hitmarker in Hitmarkers)
-                hitmarker.Draw(spriteBatch);
+            foreach (var collisionEffect in CollisionEffects)
+                collisionEffect.Draw(spriteBatch);
         }
     }
 }

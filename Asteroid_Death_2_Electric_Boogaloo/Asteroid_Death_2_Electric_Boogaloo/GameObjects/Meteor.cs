@@ -63,10 +63,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                     fileSuffix = "big1";
                     break;
             }
-
             string fileName = $"meteor{colour}_{fileSuffix}";
             Texture = TextureManager.Instance.LoadByName(Game.Content, fileName);
-        }
+        }      
 
         private IEnumerable<Meteor> ShatterIntoSmallerMeteors()
         {
@@ -107,7 +106,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         #region Overrides
         public override void Update()
         {
-            //requires further work to add a randomly generated speed of the meteors instead of a static speed
             Rotation += RotationSpeed;
             StayInsideLevel();
             Move();
@@ -127,7 +125,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                         Game.GameObjectManager.GameObjects.Add(meteor);
                 }
                 IsDead = true;
-                Game.GameObjectManager.GameObjects.Remove(otherGameObject); // To remove laser at correct time
+                Game.GameObjectManager.GameObjects.Remove(otherGameObject);
             }
             return collides;
         }

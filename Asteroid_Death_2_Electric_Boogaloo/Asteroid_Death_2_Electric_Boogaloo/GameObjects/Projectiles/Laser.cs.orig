@@ -14,13 +14,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         }
 
 <<<<<<< HEAD
-=======
         protected override Type GetClassType()
         {
             return typeof(Laser);
         }
-
+        }
 >>>>>>> origin/develop
+>>>>>>> origin/Feature_menu
         public override void Update()
         {
             DieIfOutSideMap();

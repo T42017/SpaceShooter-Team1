@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Linq;
 using Asteroid_Death_2_Electric_Boogaloo.Devices;
 using Asteroid_Death_2_Electric_Boogaloo.Components;
+using Asteroid_Death_2_Electric_Boogaloo.Enums;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
@@ -31,17 +33,23 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         List<Powerup> Powerups = new List<Powerup>();
 <<<<<<< HEAD
+        
+
+        public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Red), Globals.Health)
+        {
+            Boost = 180;
+=======
 
         public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Blue), Globals.Health)
         {
             boost = 180;
-         
             ShootingSpeed = 200;
             textures.Add(Game.Content.Load<Texture2D>("blackSmoke00"));
             textures.Add(Game.Content.Load<Texture2D>("blackSmoke01"));
             textures.Add(Game.Content.Load<Texture2D>("blackSmoke02"));
             textures.Add(Game.Content.Load<Texture2D>("blackSmoke03"));
-=======
+        }
+>>>>>>> origin/Feature_menu
         
         public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Red))
         {
@@ -66,6 +74,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             KeyboardState state = Keyboard.GetState();
 <<<<<<< HEAD
             if (Health <= 5) {
+=======
+            if (Health <= 5) {
                 particleEngine.EmitterLocation = Position;
             particleEngine.Update();
                 alarm2.Play();
@@ -76,9 +86,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             }
             
            
-=======
-
->>>>>>> origin/develop
+>>>>>>> origin/Feature_menu
             //Movement using the left, right joystick and the Dpad on the Xbox controller or the arrows or WASD on the keyboard
             if ((gamePadState.ThumbSticks.Left.Y >= 0.3f)
                 || (gamePadState.DPad.Up == ButtonState.Pressed)
@@ -115,7 +123,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 AccelerateForward(50f);
                 boost--;
                 MaxSpeed = 10; 
-=======
+>>>>>>> origin/Feature_menu
                 && (Boost > 0))
             {
             MaxSpeed = 50;
@@ -179,7 +187,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         public override bool CollidesWith(GameObject otherGameObject)
         {
-            if (HasMariostar)
+            if (Powerups.Any(powerup => powerup.PowerupType == PowerupType.Mariostar))
             {
                 return false;
             }
@@ -200,7 +208,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 =======
                     Powerups.Add(otherGameObject as Powerup);
                     //Debug.WriteLine("added powerup " + otherGameObject);
->>>>>>> origin/develop
+=======
+                    Powerups.Add((Powerup) otherGameObject);
+>>>>>>> origin/Feature_menu
                 }
 
                 if (otherGameObject is Projectile pro)

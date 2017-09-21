@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -12,7 +12,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
 {
     class UiArrow : BaseUiComponent
     {
-
         private Texture2D textureLeft, textureRight, _texture;
         private SpriteFont font;
         private int highlight;
@@ -41,9 +40,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
                 {
                     highlight--;
                 }
-
             }
-
 
             if (Input.Instance.ClickRight())
             {
@@ -91,17 +88,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
                     Globals.perSecMeteors =30;
                     break;
             }
-
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-
             spriteBatch.Draw(_texture, Position - new Vector2(_texture.Width / 2f, _texture.Height / 2f), Color.White);
             spriteBatch.DrawString(font, difficulty, Position - new Vector2((textureLeft.Width / 2f) +25f,(textureLeft.Height / 2f)), Color.Black, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
             spriteBatch.Draw(textureLeft, Position - new Vector2((textureLeft.Width / 2f)+120f, textureLeft.Height / 2f), Color.White);
             spriteBatch.Draw(textureRight, Position - new Vector2((textureRight.Width / 2f)-120f, textureRight.Height / 2f), Color.White);
-
         }
     }
 }

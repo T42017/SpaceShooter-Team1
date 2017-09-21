@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows.Forms.VisualStyles;
 using Asteroid_Death_2_Electric_Boogaloo.GameObjects;
 using Asteroid_Death_2_Electric_Boogaloo.UI;
 using Microsoft.Xna.Framework;
@@ -11,23 +13,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 {
     internal class DeathComponent : AstroidsComponent
     {
-        private SpriteFont font;
-
-        private readonly Keys[] keysToCheck =
-        {
-            Keys.A, Keys.B, Keys.C, Keys.D, Keys.E,
-            Keys.F, Keys.G, Keys.H, Keys.I, Keys.J,
-            Keys.K, Keys.L, Keys.M, Keys.N, Keys.O,
-            Keys.P, Keys.Q, Keys.R, Keys.S, Keys.T,
-            Keys.U, Keys.V, Keys.W, Keys.X, Keys.Y,
-            Keys.Z, Keys.Back
-        };
-        
+        private SpriteFont font, buttonFont;
         private readonly AsteroidsGame Game;
         private bool playing;
         private Song song;
         private Texture2D _backgroundTexture;
         private SoundEffect yes;
+        private UiTextbox _textBox;
 
         public DeathComponent(Game game) : base(game)
         {
@@ -39,14 +31,30 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 
         protected override void LoadContent()
         {
-            font = Game.Content.Load<SpriteFont>("Font");
+            font = Game.Content.Load<SpriteFont>("Text");
             song = Game.Content.Load<Song>("Laugh");
             _backgroundTexture = Game.Content.Load<Texture2D>("background");
+            _textBox = new UiTextbox(Game, new Vector2(), font);
 
             UiComponents = new List<BaseUiComponent>();
-            UiComponents.Add(new UiTextbox(Game, new Vector2()));
+            UiComponents.Add(new UiLabel(Game, new Vector2(0, -60), "Enter your name", font));
+            UiComponents.Add(_textBox);
+            UiComponents.Add(new UiButton(Game, new Vector2(0, 60), "Done", font, delegate(object sender, EventArgs args) {
+                HighScore.SaveScore(_textBox.Text.Equals("") ? "player" : _textBox.Text, Player.score);
+                Game.ChangeGameState(GameState.highscoremenu);
+            }));
 
+            HighlightNextComponent();
             base.LoadContent();
+        }
+
+        public override void ChangedState(GameState newState)
+        {
+            if (newState == GameState.gameover)
+            {
+                _textBox.Text = "";
+            }
+            base.ChangedState(newState);
         }
 
         public override void Update(GameTime gameTime)
@@ -57,6 +65,15 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
                 MediaPlayer.Play(song);
                 playing = true;
             }
+
+            if (Input.Instance.ClickUp())
+                HighlightPreviusComponent();
+
+            if (Input.Instance.ClickDown())
+                HighlightNextComponent();
+
+            if (Input.Instance.ClickSelect())
+                UiComponents[HighlightedUiComponent].ClickEvent?.Invoke(null, null);
 
             base.Update(gameTime);
         }

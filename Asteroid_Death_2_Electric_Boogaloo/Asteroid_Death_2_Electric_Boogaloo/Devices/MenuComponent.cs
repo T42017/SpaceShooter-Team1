@@ -16,7 +16,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
         public static SpriteFont menuFont, buttonFont;
         
         private Texture2D _backGroundtexture, left, right;
-        private int difficulty;
+        private int difficulty;     
         private readonly AsteroidsGame Game;
         private bool playing;
         private Song song;
@@ -24,10 +24,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
         public MenuComponent(AsteroidsGame game) : base(game)
         {
             Game = (AsteroidsGame) game;
-
             DrawableStates = GameState.Menu;
             UpdatableStates = GameState.Menu;
-
             playing = false;
             MediaPlayer.IsRepeating = true;
         }
@@ -49,7 +47,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
             UiComponents.Add(new UiArrow(Game, new Vector2(0,30)));
 
             HighlightNextComponent();
-
             base.LoadContent();
         }
 

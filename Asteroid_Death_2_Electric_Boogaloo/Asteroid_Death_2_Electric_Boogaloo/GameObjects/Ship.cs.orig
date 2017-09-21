@@ -18,7 +18,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 <<<<<<< HEAD
         public int Health;
         public int BaseHealth;
-        public int boost = 1;
         protected Ship(AsteroidsGame game,int baseHealth) : base(game)
 =======
         public int Health = 1;
@@ -26,6 +25,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         protected Ship(AsteroidsGame game) : base(game)
 >>>>>>> origin/develop
+        public int Health;
+        public int boost = 1;
+>>>>>>> origin/Feature_menu
         {
             BaseHealth = baseHealth;
             Health = baseHealth;
