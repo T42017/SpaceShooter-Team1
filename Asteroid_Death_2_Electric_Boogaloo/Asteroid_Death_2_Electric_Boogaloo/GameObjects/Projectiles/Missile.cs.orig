@@ -7,6 +7,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles
 <<<<<<< HEAD
     {       
         #region Public constructors
+=======
+    {       
+>>>>>>> origin/Feature_MovementOfPlayer
         public Missile(AsteroidsGame game, Vector2 position, float rotation, Weapon.Color color, Type parenType) : base(game, position, rotation, color, parenType, 3)
 =======
     {
@@ -19,7 +22,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles
         }
         #endregion
 
-<<<<<<< HEAD
+        #region Protected overrides
         #region Protected overrides
         protected override Type GetClassType()
         {
@@ -28,8 +31,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles
         #endregion
 
         #region Public overrides
-=======
->>>>>>> feature-enemy
         public override void Update()
         {
             DieIfOutSideMap();

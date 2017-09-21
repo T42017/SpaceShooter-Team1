@@ -1,20 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups;
 using Microsoft.Xna.Framework;
 
 namespace Asteroid_Death_2_Electric_Boogaloo
 {
     public static class Globals
     {
-        public static int ScreenWidth = 1920;
-        public static int ScreenHeight = 1080;
-        public static Random RNG = new Random();
-        public static int Health=10, Maxmeteors= 100, perSecMeteors=10;
-        public static Vector2 HalfScreenSize => new Vector2(ScreenWidth / 2f, ScreenHeight / 2f);
+        #region Public static properties
+        public static int ScreenWidth { get; set; } = 1920;
+        public static int ScreenHeight { get; set; } = 1080;
+        public static Random RNG { get; set; } = new Random();
+        public static int Health { get; set; } = 10;
+        public static int Maxmeteors { get; set; } = 100;
+        public static int MeteorsPerSecond { get; set; } = 10;
+        public static Vector2 HalfScreenSize => new Vector2(ScreenWidth / 2f, ScreenHeight / 2f); 
+        #endregion
     }
 }

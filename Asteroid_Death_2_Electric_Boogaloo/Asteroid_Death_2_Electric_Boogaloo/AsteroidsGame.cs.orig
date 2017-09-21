@@ -28,7 +28,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         #endregion
 
         #region Constructors
-        public int AmountOfEnemys = 10;
+        public int AmountOfEnemies = 10;
 
 <<<<<<< HEAD
 =======
@@ -90,9 +90,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             Enemy[] enemies = GameObjectManager.GetEnemies();
 
-            if (enemies.Length < AmountOfEnemys)
+            if (enemies.Length < AmountOfEnemies)
             {
-                GameObjectManager.AddEnemies(AmountOfEnemys - enemies.Length);
+                GameObjectManager.AddEnemies(AmountOfEnemies - enemies.Length);
             }
         }
         #endregion
@@ -177,15 +177,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Windowheight = Graphics.PreferredBackBufferHeight;
         }
 
-        public void ControlMaxEnemies()
-        {
-            Enemy[] enemys = GameObjectManager.GetEnemys();
-
-            if (enemys.Length < AmountOfEnemys)
-            {
-                GameObjectManager.AddEnemys(AmountOfEnemys - enemys.Length);
-            }
-        }
 
         public void ControlMaxEnemyBosses()
         {
@@ -196,14 +187,5 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 GameObjectManager.AddEnemyBosses(AmountOfBosses - bosses.Length);
             }
         }
-
-        public void Start()
-        {
-            Level = new Level(this, 20, 20);
-            GameObjectManager = new GameObjectManager(this);
-            GameObjectManager.AddEnemyFactory(new EnemyFactory(this));
-        }
-
->>>>>>> feature-enemy
     }
 }
