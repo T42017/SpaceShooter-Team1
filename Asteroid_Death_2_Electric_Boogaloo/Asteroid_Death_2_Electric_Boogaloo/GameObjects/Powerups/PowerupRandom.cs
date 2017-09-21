@@ -14,7 +14,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups
 
         public PowerupRandom(AsteroidsGame game, Vector2 position) : base(game, position, PowerupType.Random, 0)
         {
-
         }
 
         public override void Remove(Player player)
@@ -22,7 +21,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups
             if(powerupNumber == 1)
                 player.Weapon = new Weapon(Game, Weapon.Type.Laser, Weapon.Color.Red);
             //else if(powerupNumber == 4)
-                
         }
 
         public override void DoEffect(Player player)

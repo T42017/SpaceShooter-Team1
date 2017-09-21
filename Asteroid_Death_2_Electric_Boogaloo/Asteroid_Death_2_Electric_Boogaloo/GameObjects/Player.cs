@@ -64,7 +64,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         
         public override void Update()
         {
-            Debug.WriteLine(HasMariostar);
             if (!HasMariostar)
                 _drawPlayerInRed = false;
             if (HasMariostar)
@@ -129,10 +128,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             foreach (var powerup in Powerups)
             {
                 powerup.Update();
+
                 if (powerup is PowerupMariostar)
                     Debug.WriteLine(powerup.Timer);
             }
-            Powerups.RemoveAll(p => p.Timer <=0);
+            Powerups.RemoveAll(p => p.Timer <= 0);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -173,9 +173,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 if (otherGameObject is Powerup powerup)
                 {
                     powerup.DoEffect(this);
-                    otherGameObject.IsDead = true;
-                    powerup.DoEffect(this);
                     Powerups.Add(powerup);
+                    otherGameObject.IsDead = true;
                 }
 
                 if (otherGameObject is Projectile pro)
