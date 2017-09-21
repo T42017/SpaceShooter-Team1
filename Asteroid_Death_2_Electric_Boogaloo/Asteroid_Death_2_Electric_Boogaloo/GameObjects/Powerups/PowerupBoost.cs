@@ -20,7 +20,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups
 
         public override void DoEffect(Player player)
         {
-            player.Boost = player.Boost + 360;
+            player.Boost = player.Boost + 120;
         }
     }
 }

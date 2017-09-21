@@ -56,7 +56,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         
         public override void Update()
         {
-
             if (Health <= 5) {
                 particleEngine.EmitterLocation = Position;
                 particleEngine.Update();
@@ -82,14 +81,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
             if (Input.Instance.Boost() && (Boost > 0))
             {
+                Debug.WriteLine(Boost);
+                Boost--;
                 MaxSpeed = 50;
                 AccelerateForward(50f);
-                Boost--;
                 MaxSpeed = 10;
             }
-
             
-
             Speed += new Vector2(-Speed.X * 0.015f, -Speed.Y * 0.015f);
             Move();          
             base.Update();
@@ -111,8 +109,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
             foreach (var powerup in Powerups)
             {
-                
-                
                 powerup.Update();
 
                 if (powerup.Timer <= 0)

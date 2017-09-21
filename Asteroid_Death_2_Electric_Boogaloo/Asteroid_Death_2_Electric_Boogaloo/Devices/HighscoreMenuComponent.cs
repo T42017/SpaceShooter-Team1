@@ -49,9 +49,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         public override void ChangedState(GameState newState)
         {
             if (newState == GameState.highscoremenu)
+            {
                 HighlightedUiComponent = 0;
                 HighlightNextComponent();
                 _uiList.UpdateList(HighScore.GetHighScores());
+            }
             base.ChangedState(newState);
         }
 
@@ -63,16 +65,17 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
                 MediaPlayer.Play(song);
                 MediaPlayer.Volume = 0.4f;
                 playing = true;
-                if (Input.Instance.ClickUp())
-                    HighlightPreviusComponent();
-
-                if (Input.Instance.ClickDown())
-                    HighlightNextComponent();
-
-                if (Input.Instance.ClickSelect())
-                    UiComponents[HighlightedUiComponent].ClickEvent?.Invoke(null, null);
-                base.Update(gameTime);
             }
+
+            if (Input.Instance.ClickUp())
+                HighlightPreviusComponent();
+
+            if (Input.Instance.ClickDown())
+                HighlightNextComponent();
+
+            if (Input.Instance.ClickSelect())
+                UiComponents[HighlightedUiComponent].ClickEvent?.Invoke(null, null);
+            base.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime)
@@ -87,6 +90,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
                 }
             }
             base.Draw(gameTime);
+            SpriteBatch.End();
         }
     }
 }
