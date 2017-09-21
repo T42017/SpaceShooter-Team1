@@ -19,7 +19,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles
             return typeof(Missile);
         }
         #endregion
-
         #region Public overrides
         public override void Update()
         {

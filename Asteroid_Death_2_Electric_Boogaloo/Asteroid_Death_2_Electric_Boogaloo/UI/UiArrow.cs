@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -60,7 +60,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
                     difficulty = "Normal";
                     Game.AmountOfEnemies = 10;
                     Globals.Health = 30;
-                    Globals.Maxmeteors = 50;
+                    Globals.Maxmeteors = 100;
                     Globals.MeteorsPerSecond = 5;
                     break;
 

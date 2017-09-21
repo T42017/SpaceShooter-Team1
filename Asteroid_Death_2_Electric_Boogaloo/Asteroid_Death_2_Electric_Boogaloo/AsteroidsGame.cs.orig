@@ -51,6 +51,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             {
                 if (!(component is AstroidsComponent astroidsComponent))
                     continue;
+                
+           }
                 astroidsComponent.ChangedState(desiredState);
                 astroidsComponent.Visible = astroidsComponent.DrawableStates.HasFlag(_gameState);
                 astroidsComponent.Enabled = astroidsComponent.UpdatableStates.HasFlag(_gameState);
@@ -91,6 +93,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {      
             var form = (Form) Control.FromHandle(Window.Handle);
             form.WindowState = FormWindowState.Maximized;
+            // maximaize window
+            var form = (Form)Form.FromHandle(Window.Handle);
+            form.WindowState = FormWindowState.Maximized;
+=======
 =======
         {
             // maximaize window
@@ -126,6 +132,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         protected override void Update(GameTime gameTime)
         {
             Input.Instance.Update();
+            if(_gameState == GameState.ingame)
+=======
+            Input.Instance.Update();
             if (_gameState == GameState.ingame)
             {
                 GameObjectManager.RemoveDeadGameObjects();
@@ -154,6 +163,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 null,
                 null,
                 null,
+                _camera.get_transformation(GraphicsDevice, WindowWidth, Windowheight));
+            
+            if (_gameState==GameState.ingame ||_gameState==GameState.paused)
+=======
                 _camera.get_transformation(GraphicsDevice, WindowWidth, WindowHeight));
             
             if (_gameState == GameState.ingame || _gameState == GameState.paused)

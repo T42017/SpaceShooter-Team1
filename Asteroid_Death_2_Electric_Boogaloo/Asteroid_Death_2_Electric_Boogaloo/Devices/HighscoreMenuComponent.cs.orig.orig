@@ -22,24 +22,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         private Song song;
 <<<<<<< HEAD
 =======
-<<<<<<< HEAD
-
-        private int _highlightedUiComponent;
-        private List<BaseUiComponent> UiComponents;
-=======
-        private SoundEffect deus,roasted,Tyrone,RE,Man;
-        private bool playing,hasloaded;
-        private String Mainmenu,startgame,Highscores;
-        private String[] highscore1;
-        private int highlight,size, rand,blink;
-        private KeyboardState lastKeyboardState;
-        private GamePadState lastGamePadState;
-        private SpriteFont Text;
-        private bool hasMovedStick;
-=======
->>>>>>> origin/Feature-Powerups
         private bool playing, hasloaded;
         private UiList _uiList;
+>>>>>>> origin/Feature_MovementOfPlayer
 
         public HighscoreMenuComponent(Game game) : base(game)
         {
@@ -92,63 +77,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             if (Input.Instance.ClickDown())
                 HighlightNextComponent();
 
-<<<<<<< HEAD
             if (Input.Instance.ClickSelect())
                 UiComponents[HighlightedUiComponent].ClickEvent?.Invoke(null, null);
-=======
-                else
-                {
-                    highlight--;
-                }
-            }
-
-            if (gamePadState.DPad.Right == ButtonState.Pressed && lastGamePadState.DPad.Right == ButtonState.Released
-                || gamePadState.ThumbSticks.Left.X >= 0.3f && !hasMovedStick
-                || keyboardstate.IsKeyDown(Keys.Right) && lastKeyboardState.IsKeyUp(Keys.Right)
-                || keyboardstate.IsKeyDown(Keys.D) && lastKeyboardState.IsKeyUp(Keys.D))
-            {
-                hasMovedStick = true;
-                if (highlight == 2)
-                {
-                }
-
-                else
-                {
-                    highlight++;
-                }
-            }
-
-            if (gamePadState.ThumbSticks.Left.X <=0.2 && gamePadState.ThumbSticks.Left.X >=-0.2)
-            {
-                hasMovedStick = false;
-            }
             
-            if (gamePadState.Buttons.A == ButtonState.Pressed && lastGamePadState.Buttons.A ==ButtonState.Released && highlight == 0
-                || keyboardstate.IsKeyDown(Keys.Space) && lastKeyboardState.IsKeyUp(Keys.Space) && highlight==0)
-            {
-                pGame.ChangeGameState(GameState.Menu);
-                playing = false;
-            }
-
-            if (gamePadState.Buttons.A == ButtonState.Pressed && lastGamePadState.Buttons.A == ButtonState.Released && highlight == 1
-                || keyboardstate.IsKeyDown(Keys.Space) && lastKeyboardState.IsKeyUp(Keys.Space) && highlight == 1)
-            {
-               
-            }
-
-            if (gamePadState.Buttons.A == ButtonState.Pressed && lastGamePadState.Buttons.A == ButtonState.Released && highlight == 2
-                || keyboardstate.IsKeyDown(Keys.Space) && lastKeyboardState.IsKeyUp(Keys.Space) && highlight == 2)
-            {
-                pGame.Start();
-                pGame.ChangeGameState(GameState.ingame);
-                playing = false;
-            }
-
-            lastGamePadState = gamePadState;
-            lastKeyboardState = keyboardstate;
->>>>>>> feature-enemy
-            
->>>>>>> origin/Feature_MovementOfPlayer
             base.Update(gameTime);
         }
 
@@ -161,12 +92,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
                 for (int y = 0; y < 2000; y += _backGroundtexture.Height)
                 {
                     SpriteBatch.Draw(_backGroundtexture, new Vector2(x, y), Color.White);
-<<<<<<< HEAD
                 }
             }
-=======
->>>>>>> origin/Feature_menu
->>>>>>> origin/Feature-Powerups
             base.Draw(gameTime);
             SpriteBatch.End();
         }

@@ -28,9 +28,3 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups
         }
     }
 }
-=======
-    class PowerupMariostar
-    {
-    }
-}
->>>>>>> origin/Feature_menu

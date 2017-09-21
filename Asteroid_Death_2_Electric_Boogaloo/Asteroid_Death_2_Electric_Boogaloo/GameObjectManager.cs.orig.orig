@@ -15,9 +15,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 =======
         public Player Player { get; private set; }
         public List<GameObject> GameObjects => _gameObjects;
+        public List<CollisionEffect> CollisionEffects { get; set; } = new List<CollisionEffect>();
 
         private readonly List<GameObject> _gameObjects = new List<GameObject>();
-        private EnemyFactory _enemyFactory;
 >>>>>>> feature-enemy
 =======
         #region Private fields
@@ -61,6 +61,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             }
         }
 
+        public void AddPowerupFactory(PowerupFactory factory)
+        {
+            _powerupFactory = factory;
+        }
+
         public void AddEnemyFactory(EnemyFactory factory)
         {
             _enemyFactory = factory;
@@ -85,7 +90,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public void AddEnemys(int amount)
         {
-            for (int i = 0; i < amount; i++)
+            for (var i = 0; i < amount; i++)
             {
                 Enemy enemy = _enemyFactory.GetRandomEnemy();
                 enemy.Position = GetRandmPositionWithADistanceFromPlayer(1000);
@@ -147,14 +152,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 } while (Player.DistanceToSquared(meteor) <= hypothenuseSquared);
                 GameObjects.Add(meteor);
 =======
-                    Rotation = (float)Globals.RNG.NextDouble()
+                    Rotation = (float) Globals.RNG.NextDouble()
                 };
                 Add(meteor);
             }
         }
 
         public Enemy[] GetEnemys()
-=======
 >>>>>>> dcaa29908a807acb08043d63be01d1e9689979a2
         {
             List<Enemy> enemys = new List<Enemy>();
@@ -167,7 +171,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
             return enemys.ToArray();
         }
-
         public EnemyBoss[] GetEnemyBosses()
         {
             List<EnemyBoss> bosses = new List<EnemyBoss>();
@@ -183,7 +186,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         }
         #endregion
 
-<<<<<<< HEAD
         #region Public getting methods
         public List<Meteor> GetMeteors()
 =======
@@ -234,13 +236,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             return enemys.ToArray();
         }
         #endregion
-
-        #region Public removing methods
-        public void RemoveDeadGameObjects()
+        
+        public void RemoveDeadCollisionEffects()
         {
-<<<<<<< HEAD
-            for (int i = 0; i < GameObjects.Count; i++)
-=======
+            CollisionEffects.RemoveAll(collisionEffect => collisionEffect.IsDead);
+        }
+
+        public void AddNewMeteors(GameTime gameTime, int amountOfMeteorsToAdd, int intervalInMilliseconds)
+        {
             int currentGameTimeModInterval = (int) gameTime.TotalGameTime.TotalMilliseconds % intervalInMilliseconds;
             if (currentGameTimeModInterval != 0 ||
                 _gameObjects.Count(obj => obj is Meteor) >= 100)
@@ -264,9 +267,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 >>>>>>> origin/Feature_MovementOfPlayer
 >>>>>>> dcaa29908a807acb08043d63be01d1e9689979a2
                 return;
-            int hypothenuseSquared = (Globals.ScreenWidth * Globals.ScreenWidth) / 4 + (Globals.ScreenHeight * Globals.ScreenHeight) / 4;
-            for (int i = 0; i < amountOfMeteorsToAdd; i++)
->>>>>>> feature-enemy
+
+
+        int hypothenuseSquared = (Globals.ScreenWidth * Globals.ScreenWidth) / 4 +
+                                     (Globals.ScreenHeight * Globals.ScreenHeight) / 4;
+            for (var i = 0; i < amountOfMeteorsToAdd; i++)
             {
                 if (GameObjects[i].IsDead)
                 {
@@ -292,43 +297,33 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 } while (Player.DistanceToSquared(meteor) <= hypothenuseSquared);
                 _gameObjects.Add(meteor);
             }
-        }
         #endregion
-
-<<<<<<< HEAD
         public Vector2 GetRandmPositionWithADistanceFromPlayer(int distance)
         {
             Vector2 position = new Vector2(Globals.RNG.Next(Globals.ScreenWidth), Globals.RNG.Next(Globals.ScreenHeight));
-=======
         #region Public getting methods
         public List<Meteor> GetMeteors()
         {
             var meteors = new List<Meteor>();
 >>>>>>> dcaa29908a807acb08043d63be01d1e9689979a2
-
-            while (Vector2.Distance(position, Player.Position) < distance)
-            {
-<<<<<<< HEAD
-                position = new Vector2(Globals.RNG.Next(Globals.ScreenWidth), Globals.RNG.Next(Globals.ScreenHeight));
-            }
-
-            return position;
+            for (int i = 0; i < GameObjects.Count; i++)
+                if (GameObjects[i] is Enemy)
+                    enemys.Add((Enemy)GameObjects[i]);
+            return enemys.ToArray();
 >>>>>>> feature-enemy
 =======
                 if (GameObjects[i] is Meteor meteor)
                     meteors.Add(meteor);
-            }
-
-            return meteors;
->>>>>>> dcaa29908a807acb08043d63be01d1e9689979a2
         }
+>>>>>>> origin/develop
+        internal void LoadContent()
+>>>>>>> origin/Feature_MovementOfPlayer
         #endregion
 
 <<<<<<< HEAD
         #region Public updating methods
         public void UpdateGameObjects()
-        {
-<<<<<<< HEAD
+            List<Enemy> enemys = new List<Enemy>();
             for (var i = 0; i < GameObjects.Count; i++)
 =======
             for (int i = 0; i < _gameObjects.Count; i++)
@@ -345,20 +340,18 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             for (int i = 0; i < GameObjects.Count; i++)
             {
                 if (GameObjects[i] is Enemy)
-                    enemys.Add((Enemy)GameObjects[i]);
+                    enemys.Add((Enemy) GameObjects[i]);
 >>>>>>> dcaa29908a807acb08043d63be01d1e9689979a2
             }
             return enemys.ToArray();
         }
         #endregion
 
-<<<<<<< HEAD
         public void UpdateCollisionEffects()
         {
 <<<<<<< HEAD
             foreach (var collisionEffect in CollisionEffects)
                 collisionEffect.Update();
-=======
             foreach (var otherGameObject in _gameObjects)
             {
                 if (thisObject == otherGameObject ||
@@ -378,14 +371,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 }
             }
         }
-
+       
         public void RemoveDeadCollisionEffects()
         {
             CollisionEffects.RemoveAll(collisionEffect => collisionEffect.IsDead);
         }
         #endregion
-
-        #region Public updating methods
+>>>>>>> f05ae998f153692d7e99616ea7a1118ee13b38da
         public void UpdateGameObjects()
         {
             for (var i = 0; i < GameObjects.Count; i++)
@@ -398,13 +390,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 >>>>>>> feature-enemy
         }
         #endregion
+        
+        }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-        public void UpdateCollisionEffects()
         {
-            foreach (var collisionEffect in CollisionEffects)
+            foreach (var otherGameObject in GameObjects)
                 collisionEffect.Update();
         }
         #endregion
@@ -413,14 +403,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         #region Public drawing methods
         public void DrawGameObjects(SpriteBatch spriteBatch)
         {
-            for (int i = 0; i < GameObjects.Count; i++)
-=======
-        public void DrawGameObjects(SpriteBatch spriteBatch)
-        {
-           for (int i = 0; i < _gameObjects.Count; i++)
->>>>>>> feature-enemy
-            {
-                _gameObjects[i].Draw(spriteBatch);
+                if (thisObject == otherGameObject ||
+                    !thisObject.CollidesWith(otherGameObject))
+                    Player.DistanceToSquared(GameObjects[i]) >= ((Globals.ScreenWidth * Globals.ScreenWidth) / 2 + (Globals.ScreenHeight * Globals.ScreenHeight) / 2)))
+>>>>>>> origin/Feature_MovementOfPlayer
             }
         }
 
@@ -443,6 +429,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 return;
             }
         } 
-        #endregion
+        public void DrawCollisionEffects(SpriteBatch spriteBatch)
+        {
+            foreach (var collisionEffect in CollisionEffects)
+                collisionEffect.Draw(spriteBatch);
+        }
     }
 }

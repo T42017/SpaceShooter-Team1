@@ -18,7 +18,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles
             return typeof(Laser);
         } 
         #endregion
-
+           
         #region Public overrides
         public override void Update()
         {
@@ -29,7 +29,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles
             Move();
 
             base.Update();
-        } 
+        }
         #endregion
     }
 }
