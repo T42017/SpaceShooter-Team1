@@ -12,6 +12,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles
             Texture = TextureManager.Instance.MissileTextures[(int)color];
         }
         #endregion
+
         #region Protected overrides
         protected override Type GetClassType()
         {

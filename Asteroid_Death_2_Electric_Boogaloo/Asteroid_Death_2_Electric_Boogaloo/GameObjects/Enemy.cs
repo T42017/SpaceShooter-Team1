@@ -59,10 +59,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             base.Draw(spriteBatch);
 
             spriteBatch.Draw(_lifeTexture, Position, null, Color.White, Game.GameObjectManager.Player.Rotation + MathHelper.DegreesToRadians(90),
-                new Vector2(15, 80), 1.0f, SpriteEffects.None, 0);
+                new Vector2(22, 80), 1.0f, SpriteEffects.None, 0);
 
             spriteBatch.DrawString(MenuComponent.menuFont, "" + Health, Position, Color.OrangeRed,
-                Game.GameObjectManager.Player.Rotation + MathHelper.DegreesToRadians(90), new Vector2(-15, 90), 1f, SpriteEffects.None, 0);
+                Game.GameObjectManager.Player.Rotation + MathHelper.DegreesToRadians(90), new Vector2(-22, 87), 1f, SpriteEffects.None, 0);
         }
 
         public override bool CollidesWith(GameObject otherGameObject)

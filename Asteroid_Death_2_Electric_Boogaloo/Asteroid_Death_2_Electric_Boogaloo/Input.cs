@@ -20,10 +20,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         private GamePadState _gamePadState = GamePad.GetState(PlayerIndex.One);
         private GamePadState _lastGamePadState;
 
-        private Keys[] specialKeys =
-        {          
-        };
-
         private bool _hasMovedLeftStick;
         
         private Input()

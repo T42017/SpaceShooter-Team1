@@ -26,11 +26,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         private DateTime _timeSenceLastShot = DateTime.Today;
         private Texture2D _lifeTexture;
         private ParticleEngine particleEngine;
-        public int EnemyKills;
         private List<Texture2D> _textures = new List<Texture2D>();
+        private bool _drawPlayerInRed;
+        private int _framesBetweenBlick = 50;
+        private int _currentFrame;
 
         public static int Score = 0;
 
+        public int EnemyKills;
         public List<Powerup> Powerups = new List<Powerup>();
         public bool HasMariostar { get; set; }
         
@@ -54,6 +57,18 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         
         public override void Update()
         {
+            Debug.WriteLine(HasMariostar);
+            if (!HasMariostar)
+                _drawPlayerInRed = false;
+            if (HasMariostar)
+            {
+                _currentFrame++;
+                if (_currentFrame > _framesBetweenBlick)
+                {
+                    _currentFrame -= _framesBetweenBlick;
+                    _drawPlayerInRed = !_drawPlayerInRed;
+                }
+            }
 
             if (Health <= 5) {
                 particleEngine.EmitterLocation = Position;
@@ -121,14 +136,17 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         {
             if(Health<=5)
             particleEngine.Draw(spriteBatch);
-            base.Draw(spriteBatch);
+
+            // Draw player
+            spriteBatch.Draw(Texture, Position, null, _drawPlayerInRed ? Color.Red : Color.White, Rotation - Microsoft.Xna.Framework.MathHelper.PiOver2,
+                new Vector2(Texture.Width / 2f, Texture.Height / 2f), Scale, SpriteEffects.None, 0f);
 
             //Draw player health
             spriteBatch.DrawString(MenuComponent.menuFont, Health + "", Position,
-                Color.OrangeRed, Rotation + MathHelper.DegreesToRadians(90), new Vector2((Globals.ScreenWidth / 2)+35, Globals.ScreenHeight / 2 + 13), 1f, SpriteEffects.None, 0);
+                Color.OrangeRed, Rotation + MathHelper.DegreesToRadians(90), new Vector2((Globals.ScreenWidth / 2f), Globals.ScreenHeight / 2 + 13), 1f, SpriteEffects.None, 0);
 
             spriteBatch.Draw(_lifeTexture, Position, null, Color.White, Rotation + MathHelper.DegreesToRadians(90),
-                new Vector2(Globals.ScreenWidth / 2 + 40, Globals.ScreenHeight / 2), 1.0f, SpriteEffects.None, 0);
+                new Vector2(Globals.ScreenWidth / 2f + 45, Globals.ScreenHeight / 2f + 7), 1.0f, SpriteEffects.None, 0);
 
             //Draw score
             spriteBatch.DrawString(MenuComponent.menuFont, "Score: " + Score, Position,
@@ -149,11 +167,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
             if (collides)
             {
-                if (otherGameObject is Powerup)
+                if (otherGameObject is Powerup powerup)
                 {
                     otherGameObject.IsDead = true;
-                    //((Powerup) otherGameObject).DoEffect(this); 
-                    Powerups.Add((Powerup) otherGameObject);
+                    powerup.DoEffect(this);
+                    Powerups.Add(powerup);
                 }
 
                 if (otherGameObject is Projectile pro)
