@@ -1,74 +1,85 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 using System.Diagnostics;
 using System.Linq;
-using Asteroid_Death_2_Electric_Boogaloo.Devices;
-using Asteroid_Death_2_Electric_Boogaloo.Components;
-using Asteroid_Death_2_Electric_Boogaloo.Enums;
-using Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using ParticleAsteroid_Death_2_Electric_Boogaloo.ParticlesEngine2D;
-using ButtonState = Microsoft.Xna.Framework.Input.ButtonState;
-using Keys = Microsoft.Xna.Framework.Input.Keys;
 
+using Asteroid_Death_2_Electric_Boogaloo.Components;
+using Asteroid_Death_2_Electric_Boogaloo.Enums;
+using Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups;
+using Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles;
+using Asteroid_Death_2_Electric_Boogaloo.Managers;
+using Asteroid_Death_2_Electric_Boogaloo.Particles;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
     public class Player : Ship
     {
-        private SoundEffect _pewEffect,alarm;
+<<<<<<< HEAD
+        #region Private fields
+        private SoundEffect _pewEffect, alarm;
+=======
+
+        private SoundEffect alarm, _pewEffect;
+>>>>>>> 0f1158ae13a79813160c454b8afcd4b5592348c6
         private SoundEffectInstance alarm2;
-        private DateTime _timeSenceLastShot = DateTime.Today;
+        private DateTime _timeSinceLastShot = DateTime.Today;
         private Texture2D _lifeTexture;
         private ParticleEngine particleEngine;
         private List<Texture2D> _textures = new List<Texture2D>();
         private bool _drawPlayerInRed;
         private int _framesBetweenBlick = 50;
         private int _currentFrame;
+        #endregion
 
-        public static int Score = 0;
-        public bool hasDonePowerupEffect = false;
+        #region Public properties
+        public static int Score { get; set; } = 0;
+        public bool HasDonePowerupEffect { get; } = false;
+        public int EnemyKills { get; set; }
+        public List<Powerup> Powerups { get; } = new List<Powerup>(); 
 
-        public int EnemyKills;
-        public List<Powerup> Powerups = new List<Powerup>();
-        public bool HasMariostar { get; set; }
-        
+        public bool HasMariostar
+        {
+            get { return Powerups.Exists(powerup => powerup.PowerupType == PowerupType.Mariostar); }
+        }
+        #endregion
+
+        #region Public constructors
         public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Red), Globals.Health)
         {
-            Boost = 60;
+
+
             ShootingSpeed = 200;
             _textures.Add(Game.Content.Load<Texture2D>("blackSmoke00"));
             _textures.Add(Game.Content.Load<Texture2D>("blackSmoke01"));
             _textures.Add(Game.Content.Load<Texture2D>("blackSmoke02"));
             _textures.Add(Game.Content.Load<Texture2D>("blackSmoke03"));
-        }
-        
-        public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Red))
-        {
-            Health = 10;
-            Boost = 180;
-            ShootingSpeed = 200;
->>>>>>> origin/develop
             Texture = TextureManager.Instance.PlayerShipTexture;
             _lifeTexture = TextureManager.Instance.PlayerLifeTexture;
             _pewEffect = TextureManager.Instance.ShootSoundEffect;
-            alarm = game.Content.Load<SoundEffect>("Alarm");
+            alarm = Game.Content.Load<SoundEffect>("Alarm");
             alarm2 = alarm.CreateInstance();
             alarm2.IsLooped = true;
-        
+
             particleEngine = new ParticleEngine(_textures, new Vector2(400, 240));
         }
+<<<<<<< HEAD
+        #endregion
+
+        #region Public overrides
+=======
+
+       
         
+>>>>>>> 0f1158ae13a79813160c454b8afcd4b5592348c6
         public override void Update()
         {
-<<<<<<< HEAD
             if (!HasMariostar)
                 _drawPlayerInRed = false;
+
             if (HasMariostar)
             {
                 _currentFrame++;
@@ -78,9 +89,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                     _drawPlayerInRed = !_drawPlayerInRed;
                 }
             }
-=======
->>>>>>> e85dd2b52ef25af6aa5f85bb2cc6828c211d7958
-            if (Health <= 5) {
+
+            if (Health <= 5)
+            {
                 particleEngine.EmitterLocation = Position;
                 particleEngine.Update();
                 alarm2.Play();
@@ -88,9 +99,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
             else
             {
-               alarm2.Stop(); 
+                alarm2.Stop();
             }
-            
+
             if (Input.Instance.HoldUp())
                 AccelerateForward(0.45f);
 
@@ -106,24 +117,29 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             if (Input.Instance.Boost() && (Boost > 0))
             {
                 Boost--;
-            MaxSpeed = 50;
-            AccelerateForward(50f);
-
+                MaxSpeed = 50;
+                AccelerateForward(50f);
+                MaxSpeed = 10;
             }
-            
+
             Speed += new Vector2(-Speed.X * 0.015f, -Speed.Y * 0.015f);
-            Move();          
+            Move();
             base.Update();
-            
+
             if (Input.Instance.HoldSelect() && !IsWeaponOverheated())
             {
                 Shoot(typeof(Player));
+<<<<<<< HEAD
                 _pewEffect.Play();
+                _timeSinceLastShot = DateTime.Now;
+=======
+               
                 _timeSenceLastShot = DateTime.Now;
+>>>>>>> 0f1158ae13a79813160c454b8afcd4b5592348c6
             }
-            
+
             StayInsideLevel();
-            
+
             if (EnemyKills > 30)
             {
                 EnemyKills -= 30;
@@ -132,34 +148,29 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
             foreach (var powerup in Powerups)
             {
-                powerup.Update();
-
-                if (powerup.Timer <= 0)
-                {
-                    powerup.Remove(this);
-                }
+                powerup.Timer--;
             }
-            Powerups.RemoveAll(p => p.Timer <=0);
+            Powerups.RemoveAll(p => p.Timer <= 0);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if(Health<=5)
-            particleEngine.Draw(spriteBatch);
+            if (Health <= 5)
+                particleEngine.Draw(spriteBatch);
 
             // Draw player
             spriteBatch.Draw(Texture, Position, null, _drawPlayerInRed ? Color.Red : Color.White, Rotation - Microsoft.Xna.Framework.MathHelper.PiOver2,
                 new Vector2(Texture.Width / 2f, Texture.Height / 2f), Scale, SpriteEffects.None, 0f);
 
             //Draw player health
-            spriteBatch.DrawString(MenuComponent.menuFont, Health + "", Position,
+            spriteBatch.DrawString(MenuComponent.MenuFont, Health + "", Position,
                 Color.OrangeRed, Rotation + MathHelper.DegreesToRadians(90), new Vector2((Globals.ScreenWidth / 2f), Globals.ScreenHeight / 2 + 13), 1f, SpriteEffects.None, 0);
 
             spriteBatch.Draw(_lifeTexture, Position, null, Color.White, Rotation + MathHelper.DegreesToRadians(90),
                 new Vector2(Globals.ScreenWidth / 2f + 45, Globals.ScreenHeight / 2f + 7), 1.0f, SpriteEffects.None, 0);
 
             //Draw score
-            spriteBatch.DrawString(MenuComponent.menuFont, "Score: " + Score, Position,
+            spriteBatch.DrawString(MenuComponent.MenuFont, "Score: " + Score, Position,
                 Color.OrangeRed, Rotation + MathHelper.DegreesToRadians(90), new Vector2(-Globals.ScreenWidth / 2, Globals.ScreenHeight / 2 + 13), 1f, SpriteEffects.None, 0);
         }
 
@@ -180,11 +191,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 if (otherGameObject is Powerup powerup)
                 {
                     powerup.DoEffect(this);
-                    otherGameObject.IsDead = true;
-                    powerup.DoEffect(this);
                     Powerups.Add(powerup);
-                    Powerups.Add((Powerup) otherGameObject);
-=======
+                    otherGameObject.IsDead = true;
                 }
 
                 if (otherGameObject is Projectile pro)
@@ -193,18 +201,19 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                     pro.IsDead = true;
                 }
 
-                if (Health <= 0 
+                if (Health <= 0
                     || !(otherGameObject is Projectile
                     || otherGameObject is Powerup))
                 {
                     IsDead = true;
                     MediaPlayer.Stop();
                     alarm2.Stop();
-                    Game.ChangeGameState(GameState.gameover);
-                    IngameComponent.playing = false;
+                    Game.ChangeGameState(GameState.GameOver);
+                    InGameComponent.Playing = false;
                 }
             }
             return collides;
-        }
+        } 
+        #endregion
     }
 }

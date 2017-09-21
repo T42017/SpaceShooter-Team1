@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Asteroid_Death_2_Electric_Boogaloo.Factorys;
-using Asteroid_Death_2_Electric_Boogaloo.GameObjects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Asteroid_Death_2_Electric_Boogaloo
+using Asteroid_Death_2_Electric_Boogaloo.Enums;
+using Asteroid_Death_2_Electric_Boogaloo.Factories;
+using Asteroid_Death_2_Electric_Boogaloo.GameObjects;
+using Asteroid_Death_2_Electric_Boogaloo.Collision_Effects;
+
+namespace Asteroid_Death_2_Electric_Boogaloo.Managers
 {
     public class GameObjectManager
     {
@@ -128,7 +131,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 if (_gameObjects[i] is EnemyBoss)
                     bosses.Add((EnemyBoss) _gameObjects[i]);
             }
-
             return bosses.ToArray();
         }
         #endregion

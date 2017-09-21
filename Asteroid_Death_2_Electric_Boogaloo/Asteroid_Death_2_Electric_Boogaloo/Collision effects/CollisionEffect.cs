@@ -3,7 +3,11 @@ using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
+using Asteroid_Death_2_Electric_Boogaloo.Managers;
+using Asteroid_Death_2_Electric_Boogaloo.Enums;
+using Asteroid_Death_2_Electric_Boogaloo.GameObjects;
+
+namespace Asteroid_Death_2_Electric_Boogaloo.Collision_Effects
 {
     public class CollisionEffect : GameObject
     {

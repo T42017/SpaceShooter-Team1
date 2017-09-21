@@ -1,18 +1,24 @@
-﻿using System;
-using System.Diagnostics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+
 using Asteroid_Death_2_Electric_Boogaloo.AI;
 using Asteroid_Death_2_Electric_Boogaloo.Components;
 using Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+using Asteroid_Death_2_Electric_Boogaloo.Managers;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
     public class EnemyBoss : Ship
     {
-        public BaseAi Ai;
+        #region Private fields
         private Texture2D _lifeTexture;
+        #endregion
 
+        #region Public properties
+        public BaseAi Ai { get; set; }
+        #endregion
+
+        #region Public constructors
         public EnemyBoss(AsteroidsGame game) : base(game, 30)
         {
             Health = 30;
@@ -20,7 +26,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             Texture = TextureManager.Instance.BossTexture;
             _lifeTexture = TextureManager.Instance.PlayerLifeTexture;
         }
-        
+        #endregion
+
+        #region Public overrides
         public override void Update()
         {
             base.Update();
@@ -34,7 +42,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             spriteBatch.Draw(_lifeTexture, Position, null, Color.White, Game.GameObjectManager.Player.Rotation + MathHelper.DegreesToRadians(90),
                 new Vector2(15, 80), 1.0f, SpriteEffects.None, 0);
 
-            spriteBatch.DrawString(MenuComponent.menuFont, "" + Health, Position, Color.OrangeRed,
+            spriteBatch.DrawString(MenuComponent.MenuFont, "" + Health, Position, Color.OrangeRed,
                 Game.GameObjectManager.Player.Rotation + MathHelper.DegreesToRadians(90), new Vector2(-15, 90), 1f, SpriteEffects.None, 0);
         }
 
@@ -58,6 +66,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 }
             }
             return collides;
-        }
+        } 
+        #endregion
     }
 }

@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
-using Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles;
-using System.Runtime.InteropServices;
 using Microsoft.Xna.Framework;
+
+using Asteroid_Death_2_Electric_Boogaloo.Enums;
+using Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles;
+using Asteroid_Death_2_Electric_Boogaloo.Managers;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
@@ -104,7 +106,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         #endregion
 
-        #region Overrides
+        #region Public overrides
         public override void Update()
         {
             Rotation += RotationSpeed;

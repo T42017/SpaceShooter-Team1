@@ -1,19 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+
+using Asteroid_Death_2_Electric_Boogaloo.Atmosphere;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
     public abstract class GameObject
     {
+        #region Private fields
+        private Rectangle _bounds;
+        #endregion
+
+        #region Protected properties
+        protected AsteroidsGame Game { get; }
+        #endregion
+
+        #region Public properties
         public bool IsDead { get; set; }
         public Vector2 Position { get; set; }
         public float Radius { get; set; }
         public Vector2 Speed { get; set; }
         public float Rotation { get; set; } = MathHelper.DegreesToRadians(-90);
-        public int MaxSpeed = 10;
+        public int MaxSpeed { get; set; } = 10;
         public Texture2D Texture { get; set; }
         public float Scale { get; set; } = 1;
 
@@ -32,21 +41,40 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             get { return _bounds; }
             set { _bounds = value; }
         }
+        #endregion
 
-        private Rectangle _bounds;
-
-        protected AsteroidsGame Game { get; }
-        
+        #region Protected constructors
         protected GameObject(AsteroidsGame game)
         {
             Game = game;
         }
+        #endregion
 
+        #region Public virtual methods
         public virtual bool CollidesWith(GameObject otherGameObject)
         {
             return _bounds.Intersects(otherGameObject.Bounds) || otherGameObject.Bounds.Intersects(_bounds);
         }
 
+        public virtual void Update()
+        {
+            int offset = 20;
+            _bounds = new Rectangle(
+                (int)Position.X - Texture.Width / 2 + offset,
+                (int)Position.Y - Texture.Height / 2 + offset,
+                Math.Max(Texture.Width, Texture.Height) - offset,
+                Math.Max(Texture.Width, Texture.Height) - offset
+            );
+        }
+
+        public virtual void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(Texture, Position, null, Color.White, Rotation - Microsoft.Xna.Framework.MathHelper.PiOver2,
+                new Vector2(Texture.Width / 2f, Texture.Height / 2f), Scale, SpriteEffects.None, 0f);
+        }
+        #endregion
+
+        #region Public methods
         public float DistanceToSquared(GameObject otherGameObject)
         {
             if (CollidesWith(otherGameObject))
@@ -67,23 +95,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             rectangle.SetData(data);
             spriteBatch.Draw(rectangle, Position - new Vector2(Bounds.Width / 2f, Bounds.Height / 2f), Color.Red);
         }
-        
-        public virtual void Update()
-        {
-            int offset = 20;
-            _bounds = new Rectangle(
-                (int)Position.X - Texture.Width / 2 + offset,
-                (int)Position.Y - Texture.Height / 2 + offset,
-                Math.Max(Texture.Width, Texture.Height) - offset,
-                Math.Max(Texture.Width, Texture.Height) - offset
-            );
-        }
 
-        public virtual void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(Texture, Position, null, Color.White, Rotation - Microsoft.Xna.Framework.MathHelper.PiOver2,
-                new Vector2(Texture.Width / 2f, Texture.Height / 2f), Scale, SpriteEffects.None, 0f);
-        }
+
 
         public void StayInsideLevel()
         {
@@ -127,8 +140,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         public Vector2 Forward()
         {
-            return new Vector2((float) Math.Cos(Rotation),
-                (float) Math.Sin(Rotation));
+            return new Vector2((float)Math.Cos(Rotation),
+                (float)Math.Sin(Rotation));
         }
 
         public void AccelerateForward(float speed)
@@ -140,10 +153,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 Speed = Vector2.Normalize(Speed) * MaxSpeed;
             }
         }
-        
+        #endregion
+
+        #region Public overrides
         public override string ToString()
         {
             return $"{GetType().Name} at position ({Position.X}, {Position.Y})";
-        }
+        } 
+        #endregion
     }
 }

@@ -1,36 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Asteroid_Death_2_Electric_Boogaloo.UI;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
-namespace Asteroid_Death_2_Electric_Boogaloo.Devices
+using Asteroid_Death_2_Electric_Boogaloo.Enums;
+using Asteroid_Death_2_Electric_Boogaloo.UI;
+
+namespace Asteroid_Death_2_Electric_Boogaloo.Components
 {
-    class HighscoreMenuComponent : AstroidsComponent
+    public class HighscoreMenuComponent : AsteroidsComponent
     {
+        #region Private fields
         private Texture2D _backGroundtexture;
         private SpriteFont menuFont, buttonFont;
         private AsteroidsGame Game;
         private Song song;
         private bool playing, hasloaded;
         private UiList _uiList;
+        #endregion
 
+        #region Public constructors
         public HighscoreMenuComponent(Game game) : base(game)
         {
             Game = (AsteroidsGame)game;
-            DrawableStates = GameState.highscoremenu;
-            UpdatableStates = GameState.highscoremenu;
+            DrawableStates = GameState.HighscoreMenu;
+            UpdatableStates = GameState.HighscoreMenu;
             MediaPlayer.IsRepeating = true;
         }
+        #endregion
 
+        #region Protected overrides
         protected override void LoadContent()
         {
             menuFont = Game.Content.Load<SpriteFont>("GameState");
@@ -44,11 +42,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 
             HighlightNextComponent();
             base.LoadContent();
-        }
+        } 
+        #endregion
 
+        #region Public overrides
         public override void ChangedState(GameState newState)
         {
-            if (newState == GameState.highscoremenu)
+            if (newState == GameState.HighscoreMenu)
             {
                 HighlightedUiComponent = 0;
                 HighlightNextComponent();
@@ -91,6 +91,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             }
             base.Draw(gameTime);
             SpriteBatch.End();
-        }
+        } 
+        #endregion
     }
 }

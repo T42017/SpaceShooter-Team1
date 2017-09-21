@@ -2,6 +2,10 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 
+using Asteroid_Death_2_Electric_Boogaloo.Enums;
+using Asteroid_Death_2_Electric_Boogaloo.Collision_Effects;
+using Asteroid_Death_2_Electric_Boogaloo.Managers;
+
 namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles
 {
     public abstract class Projectile : GameObject
@@ -14,14 +18,19 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles
             Green
         }
         #endregion
-        
-        public Type ParentType { get; set; }
-        private SoundEffect explo,hit;
+       
+        #region Private fields
+        private SoundEffect explo, hit;
         private SoundEffectInstance hit1;
-        public int Damage { get; }
+        #endregion
 
         #region Protected fields
         protected Weapon.Color color;
+        #endregion
+
+        #region Public properties
+        public int Damage { get; }
+        public Type ParentType { get; set; }
         #endregion
 
         #region Protected constructors

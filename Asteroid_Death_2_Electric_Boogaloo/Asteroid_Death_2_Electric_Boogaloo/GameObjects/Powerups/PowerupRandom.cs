@@ -1,22 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Asteroid_Death_2_Electric_Boogaloo.Enums;
 using Asteroid_Death_2_Electric_Boogaloo.Factorys;
 using Microsoft.Xna.Framework;
+
+using Asteroid_Death_2_Electric_Boogaloo.Enums;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups
 {
     class PowerupRandom : Powerup
     {
-        private int powerupNumber;
+        #region Private fields
+        private int _powerupNumber;
+        #endregion
 
-        public PowerupRandom(AsteroidsGame game, Vector2 position) : base(game, position, PowerupType.Random, 0)
-        {
-        }
+        #region Public constructors
+        public PowerupRandom(AsteroidsGame game, Vector2 position) : base(game, position, PowerupType.Random, 0) { }
+        #endregion
 
+        #region Public overrides
         public override void Remove(Player player)
         {
         }
@@ -25,6 +25,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups
         {
             PowerupFactory factory = Game.GameObjectManager.PowerupFactory;
             player.AddPowerUp(factory.GetRandomPowerup());
-        }
+        } 
+        #endregion
     }
 }

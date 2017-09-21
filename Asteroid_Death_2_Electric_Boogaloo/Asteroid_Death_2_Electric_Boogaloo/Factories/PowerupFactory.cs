@@ -1,24 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Asteroid_Death_2_Electric_Boogaloo.Enums;
-using Asteroid_Death_2_Electric_Boogaloo.GameObjects;
-using Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups;
 using Microsoft.Xna.Framework;
 
-namespace Asteroid_Death_2_Electric_Boogaloo.Factorys
+using Asteroid_Death_2_Electric_Boogaloo.Enums;
+using Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups;
+
+namespace Asteroid_Death_2_Electric_Boogaloo.Factories
 {
     public class PowerupFactory
     {
+        #region Private fields
         private AsteroidsGame _game;
+        #endregion
 
+        #region Public constructors
         public PowerupFactory(AsteroidsGame game)
         {
             _game = game;
         }
+        #endregion
 
+        #region Public methods
         public Powerup GetRandomPowerup()
         {
             PowerupType powerupType = (PowerupType)Globals.RNG.Next(Enum.GetNames(typeof(PowerupType)).Length);
@@ -45,12 +46,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Factorys
                 case PowerupType.Mariostar:
                     powerup = new PowerupMariostar(_game, position);
                     break;
-                    
+
                 case PowerupType.Random:
                     powerup = new PowerupRandom(_game, position);
                     break;
             }
             return powerup;
-        }
+        } 
+        #endregion
     }
 }

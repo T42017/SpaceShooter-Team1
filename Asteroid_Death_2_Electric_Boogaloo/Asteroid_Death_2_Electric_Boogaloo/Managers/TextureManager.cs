@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Security.Policy;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Asteroid_Death_2_Electric_Boogaloo
+namespace Asteroid_Death_2_Electric_Boogaloo.Managers
 {
     class TextureManager
     {
