@@ -63,7 +63,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
             CanBeHighLighted = false;
             HasClickEvent = false;
         }
-
         public abstract void Update();
         public abstract void Draw(SpriteBatch spriteBatch);
     }

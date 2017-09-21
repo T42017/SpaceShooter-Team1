@@ -52,7 +52,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
             XmlNode playerNode = xDoc.CreateElement("Player");
             playerNode.InnerText = playerName;
-
             XmlNode scoreNode = xDoc.CreateElement("Score");
             scoreNode.InnerText = score + "";
 

@@ -60,9 +60,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
             if (Health <= 5) {
                 particleEngine.EmitterLocation = Position;
-            particleEngine.Update();
+                particleEngine.Update();
                 alarm2.Play();
             }
+
             else
             {
                alarm2.Stop(); 
@@ -106,8 +107,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             }
 
             Speed += new Vector2(-Speed.X * 0.015f, -Speed.Y * 0.015f);
-            Move();
-            
+            Move();          
             base.Update();
             
             if (((gamePadState.Buttons.A == ButtonState.Pressed) ||
@@ -122,7 +122,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
             _lastKeyboardState = state;
             _lastGamePadState = gamePadState;
-            
             StayInsideLevel();
 
             foreach (var powerup in Powerups)
@@ -141,7 +140,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         {
             if(Health<=5)
             particleEngine.Draw(spriteBatch);
-
             base.Draw(spriteBatch);
 
             //Draw player health
@@ -154,7 +152,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             //Draw score
             spriteBatch.DrawString(MenuComponent.menuFont, "Score: " + score, Position,
                 Color.OrangeRed, Rotation + MathHelper.DegreesToRadians(90), new Vector2(-Globals.ScreenWidth / 2, Globals.ScreenHeight / 2 + 13), 1f, SpriteEffects.None, 0);
-
         }
 
         public override bool CollidesWith(GameObject otherGameObject)

@@ -13,7 +13,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     public class Camera
     {
         protected float _zoom;
+
         public Matrix Transform;
+
         private Vector2 _pos;
         private float _rotation;
 

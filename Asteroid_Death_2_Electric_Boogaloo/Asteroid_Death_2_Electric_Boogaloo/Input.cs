@@ -13,8 +13,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     public class Input
     {
         public static Input Instance => _instance ?? (_instance = new Input());
-        private static Input _instance;
 
+        private static Input _instance;
         private KeyboardState _keyboardState = Keyboard.GetState();
         private KeyboardState _lastKeyboardState;
         private GamePadState _gamePadState = GamePad.GetState(PlayerIndex.One);
@@ -159,7 +159,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             _lastGamePadState = _gamePadState;
             _lastKeyboardState = _keyboardState;
-
             _gamePadState = GamePad.GetState(PlayerIndex.One);
             _keyboardState = Keyboard.GetState();
 
