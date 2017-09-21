@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using Asteroid_Death_2_Electric_Boogaloo.GameObjects;
+﻿using Asteroid_Death_2_Electric_Boogaloo.GameObjects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -12,19 +6,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     public class Camera
     {
-        protected float _zoom;
-
-        public Matrix Transform;
-
+        #region Private fields
+        private float _zoom;
         private Vector2 _pos;
         private float _rotation;
+        #endregion
 
-        public Camera()
-        {
-            _zoom = 0.7f;
-            _rotation = 0.0f;
-            _pos = Vector2.Zero;
-        }
+        #region Public properties
+        public Matrix Transform { get; private set; }
 
         public float Zoom
         {
@@ -37,13 +26,24 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             get { return _rotation; }
             set { _rotation = value; }
         }
-        
+
         public Vector2 Pos
         {
             get { return _pos; }
             set { _pos = value; }
         }
+        #endregion
 
+        #region Public constructors
+        public Camera()
+        {
+            _zoom = 0.7f;
+            _rotation = 0.0f;
+            _pos = Vector2.Zero;
+        }
+        #endregion
+
+        #region Public methods
         public void FollowPlayer(Player player)
         {
             Pos = player.Position;
@@ -58,6 +58,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 Matrix.CreateScale(new Vector3(Zoom, Zoom, 1)) *
                 Matrix.CreateTranslation(new Vector3(windowWidth * 0.5f, windowHeight * 0.5f, 0));
             return Transform;
-        }
+        } 
+        #endregion
     }
 }

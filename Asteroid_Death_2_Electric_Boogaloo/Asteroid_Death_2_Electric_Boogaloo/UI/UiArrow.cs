@@ -61,7 +61,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
                     Game.AmountOfEnemys = 10;
                     Globals.Health = 30;
                     Globals.Maxmeteors = 50;
-                    Globals.perSecMeteors = 5;
+                    Globals.MeteorsPerSecond = 5;
                     break;
 
                 case 1:
@@ -69,7 +69,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
                     Game.AmountOfEnemys = 15;
                     Globals.Health = 25;
                     Globals.Maxmeteors = 100;
-                    Globals.perSecMeteors = 10;
+                    Globals.MeteorsPerSecond = 10;
                     break;
 
                 case 2:
@@ -77,7 +77,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
                     Game.AmountOfEnemys = 20;
                     Globals.Health = 20;
                     Globals.Maxmeteors = 200;
-                    Globals.perSecMeteors =15;
+                    Globals.MeteorsPerSecond =15;
                     break;
 
                 case 3:
@@ -85,7 +85,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
                     Game.AmountOfEnemys = 30;
                     Globals.Health = 15;
                     Globals.Maxmeteors = 300;
-                    Globals.perSecMeteors =15;
+                    Globals.MeteorsPerSecond =15;
                     break;
             }
         }
