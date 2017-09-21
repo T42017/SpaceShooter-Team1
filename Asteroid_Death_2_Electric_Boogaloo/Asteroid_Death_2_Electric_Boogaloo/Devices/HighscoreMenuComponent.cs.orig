@@ -20,6 +20,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         private SpriteFont menuFont, buttonFont;
         private AsteroidsGame Game;
         private Song song;
+
+        private int _highlightedUiComponent;
+        private List<BaseUiComponent> UiComponents;
+=======
         private bool playing, hasloaded;
         private UiList _uiList;
 
@@ -130,6 +134,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             lastKeyboardState = keyboardstate;
 >>>>>>> feature-enemy
             
+>>>>>>> origin/Feature_MovementOfPlayer
             base.Update(gameTime);
         }
 
@@ -142,8 +147,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
                 for (int y = 0; y < 2000; y += _backGroundtexture.Height)
                 {
                     SpriteBatch.Draw(_backGroundtexture, new Vector2(x, y), Color.White);
-                }
-            }
             base.Draw(gameTime);
             SpriteBatch.End();
         }

@@ -65,6 +65,7 @@
     <Compile Include="GameObjects\Powerups\PowerupHealth.cs" />
     <Compile Include="GameObjects\Powerups\PowerupMariostar.cs" />
     <Compile Include="GameObjects\Powerups\PowerupMissile.cs" />
+    <Compile Include="GameObjects\Powerups\PowerupRandom.cs" />
     <Compile Include="GameObjects\Projectiles\Missile.cs" />
     <Compile Include="GameObjects\Projectiles\Projectile.cs" />
     <Compile Include="Highscore.cs" />

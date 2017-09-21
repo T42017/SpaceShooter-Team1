@@ -30,13 +30,15 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         private List<Texture2D> _textures = new List<Texture2D>();
 
         public static int Score = 0;
+        public bool hasDonePowerupEffect = false;
 
         public List<Powerup> Powerups = new List<Powerup>();
         public bool HasMariostar { get; set; }
         
         public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Red), Globals.Health)
         {
-            Boost = 180;
+            Health = 10;
+            Boost = 60;
             ShootingSpeed = 200;
             _textures.Add(Game.Content.Load<Texture2D>("blackSmoke00"));
             _textures.Add(Game.Content.Load<Texture2D>("blackSmoke01"));
@@ -86,6 +88,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 MaxSpeed = 10;
             }
 
+            
+
             Speed += new Vector2(-Speed.X * 0.015f, -Speed.Y * 0.015f);
             Move();          
             base.Update();
@@ -107,8 +111,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
             foreach (var powerup in Powerups)
             {
-                powerup.DoEffect(this);
+                
+                
                 powerup.Update();
+
                 if (powerup.Timer <= 0)
                 {
                     powerup.Remove(this);
@@ -149,8 +155,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
             if (collides)
             {
-                if (otherGameObject is Powerup)
+                if (otherGameObject is Powerup powerup)
                 {
+                    powerup.DoEffect(this);
                     otherGameObject.IsDead = true;
                     //((Powerup) otherGameObject).DoEffect(this); 
                     Powerups.Add((Powerup) otherGameObject);

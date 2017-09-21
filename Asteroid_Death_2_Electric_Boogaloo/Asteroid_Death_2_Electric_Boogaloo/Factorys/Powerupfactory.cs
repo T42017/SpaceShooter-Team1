@@ -46,9 +46,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Factorys
                     powerup = new PowerupMariostar(_game, position);
                     break;
                     
-                //case PowerupType.Random:
-                //    powerup = new PowerupRandom(_game, position);
-                //    break;
+                case PowerupType.Random:
+                    powerup = new PowerupRandom(_game, position);
+                    break;
             }
             return powerup;
         }
