@@ -58,7 +58,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
             {
                 case 0:
                     difficulty = "Normal";
-                    Game.AmountOfEnemys = 10;
+                    Game.AmountOfEnemies = 10;
                     Globals.Health = 30;
                     Globals.Maxmeteors = 50;
                     Globals.MeteorsPerSecond = 5;
@@ -66,7 +66,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
 
                 case 1:
                     difficulty = "Overkill";
-                    Game.AmountOfEnemys = 15;
+                    Game.AmountOfEnemies = 15;
                     Globals.Health = 25;
                     Globals.Maxmeteors = 100;
                     Globals.MeteorsPerSecond = 10;
@@ -74,7 +74,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
 
                 case 2:
                     difficulty = "Insane";
-                    Game.AmountOfEnemys = 20;
+                    Game.AmountOfEnemies = 20;
                     Globals.Health = 20;
                     Globals.Maxmeteors = 200;
                     Globals.MeteorsPerSecond =15;
@@ -82,7 +82,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
 
                 case 3:
                     difficulty = "GodTier";
-                    Game.AmountOfEnemys = 30;
+                    Game.AmountOfEnemies = 30;
                     Globals.Health = 15;
                     Globals.Maxmeteors = 300;
                     Globals.MeteorsPerSecond =15;

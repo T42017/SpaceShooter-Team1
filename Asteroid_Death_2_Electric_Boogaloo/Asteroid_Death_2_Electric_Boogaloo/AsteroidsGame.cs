@@ -25,7 +25,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         #endregion
 
         #region Constructors
-        public int AmountOfEnemys = 10;
+        public int AmountOfEnemies = 10;
 
         public AsteroidsGame()
         {
@@ -75,9 +75,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             Enemy[] enemies = GameObjectManager.GetEnemies();
 
-            if (enemies.Length < AmountOfEnemys)
+            if (enemies.Length < AmountOfEnemies)
             {
-                GameObjectManager.AddEnemies(AmountOfEnemys - enemies.Length);
+                GameObjectManager.AddEnemies(AmountOfEnemies - enemies.Length);
             }
         }
         #endregion
