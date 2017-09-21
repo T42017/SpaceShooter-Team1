@@ -8,7 +8,7 @@ using Asteroid_Death_2_Electric_Boogaloo.Managers;
 namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
     /// <summary>
-    /// Represents a meteor as a <see cref="GameObject"/> (TODO: make brown and gray meteors have different health)
+    /// Represents a meteor as a <see cref="GameObject"/> 
     /// </summary>
     public class Meteor : GameObject
     {
@@ -128,6 +128,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                         Game.GameObjectManager.Add(meteor);
                 }
                 IsDead = true;
+                otherGameObject.IsDead = true;
             }
             return collides;
         }

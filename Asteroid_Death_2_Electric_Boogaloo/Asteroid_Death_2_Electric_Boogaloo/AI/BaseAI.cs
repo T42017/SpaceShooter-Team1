@@ -1,17 +1,20 @@
-﻿using Asteroid_Death_2_Electric_Boogaloo.GameObjects;
-using Microsoft.Xna.Framework;
-
-namespace Asteroid_Death_2_Electric_Boogaloo.AI
+﻿namespace Asteroid_Death_2_Electric_Boogaloo.AI
 {
     public abstract class BaseAi
     {
+        #region Protected fields
         protected readonly AsteroidsGame _game;
+        #endregion
 
+        #region Protected constructors
         protected BaseAi(AsteroidsGame game)
         {
             _game = game;
         }
+        #endregion
 
+        #region Public abstract methods
         public abstract void Update();
+        #endregion
     }
 }

@@ -1,31 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Xna.Framework;
+
 using Asteroid_Death_2_Electric_Boogaloo.GameObjects;
-using Microsoft.Xna.Framework;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.AI
 {
     class BasicEnemyAI : BaseAi
     {
+        #region Public enums
         public enum State
         {
             GoToPosition,
             MoveToPlayer
         }
+        #endregion
 
+        #region Private fields
         private State currentState;
         private Vector2 _positionGoTO = new Vector2();
+        #endregion
 
+        #region Protected fields
         protected Enemy _enemy;
+        #endregion
 
+        #region Public constructors
         public BasicEnemyAI(AsteroidsGame game, Enemy enemy) : base(game)
         {
             _enemy = enemy;
         }
+        #endregion
 
+        #region Private methods
+        private Vector2 GetRandomPositionInLevel()
+        {
+            Vector2 vec = Vector2.Zero;
+
+            while (Vector2.Distance(_enemy.Position, vec) < 100 || vec.Equals(Vector2.Zero))
+            {
+                vec = new Vector2(Globals.RNG.Next(_game.Level.SizeX), Globals.RNG.Next(_game.Level.SizeY));
+            }
+            return vec;
+        } 
+        #endregion
+
+        #region Public overrides
         public override void Update()
         {
             Player player = _game.GameObjectManager.Player;
@@ -56,16 +74,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.AI
             }
             _enemy.StayInsideLevel();
         }
-
-        private Vector2 GetRandomPositionInLevel()
-        {
-            Vector2 vec = Vector2.Zero;
-
-            while (Vector2.Distance(_enemy.Position, vec) < 100 || vec.Equals(Vector2.Zero))
-            {
-                vec = new Vector2(Globals.RNG.Next(_game.Level.SizeX), Globals.RNG.Next(_game.Level.SizeY));
-            }
-            return vec;
-        }
+        #endregion
     }
 }

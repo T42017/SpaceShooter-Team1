@@ -26,7 +26,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
         {
             Vector2 textSize = Font.MeasureString(Text);
             spriteBatch.Draw(_texture, Position - new Vector2(_texture.Width / 2f, _texture.Height / 2f), Color.White);
-
             spriteBatch.DrawString(Font, Text, Position - textSize / 2, Color.Black, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
 
             if (IsHighlighted)
