@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Asteroid_Death_2_Electric_Boogaloo.GameObjects;
+﻿using Asteroid_Death_2_Electric_Boogaloo.GameObjects;
 using Microsoft.Xna.Framework;
 
 namespace Asteroid_Death_2_Electric_Boogaloo
 {
     public class Weapon
     {
-
+        #region Public enums
         public enum Type
         {
             Laser,
@@ -23,19 +18,27 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             Blue,
             Green
         }
+        #endregion
 
+        #region Private fields
+        private AsteroidsGame _game;
+        #endregion
+
+        #region Public properties
         public Type WeaponType;
         public Color WeaponColor;
+        #endregion
 
-        private AsteroidsGame _game;
-
+        #region Public constructors
         public Weapon(AsteroidsGame game, Type type, Color color)
         {
             WeaponType = type;
-            WeaponColor= color;
+            WeaponColor = color;
             _game = game;
         }
+        #endregion
 
+        #region Public methods
         public Projectile GetProjectile(Vector2 Position, float rotation, System.Type parentType)
         {
             Projectile projectile = null;
@@ -46,7 +49,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 projectile = new Missile(_game, Position, rotation, WeaponColor, parentType);
 
             return projectile;
-        }
-
+        } 
+        #endregion
     }
 }
