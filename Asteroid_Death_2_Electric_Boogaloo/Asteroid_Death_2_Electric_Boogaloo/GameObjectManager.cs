@@ -20,7 +20,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         #region Public properties
         public Player Player { get; private set; }
-        public List<GameObject> GameObjects { get; } = new List<GameObject>();
+
+        public List<GameObject> GameObjects => _gameObjects;
+
         public List<CollisionEffect> CollisionEffects { get; set; } = new List<CollisionEffect>();
         #endregion
 
@@ -47,7 +49,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                     Globals.RNG.Next(_game.Level.SizeY)
                 );
                 var powerup = _powerupFactory.GetRandomPowerup();
-                GameObjects.Add(powerup);
+                Add(powerup);
             }
         }
 
@@ -225,9 +227,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                     !thisObject.CollidesWith(GameObjects[i]) || i < GameObjects.Count &&
                     Player.DistanceToSquared(GameObjects[i]) >= ((Globals.ScreenWidth * Globals.ScreenWidth) / 2 + (Globals.ScreenHeight * Globals.ScreenHeight) / 2)))
                     continue;
-                var gameObject = _gameObjects[i];
-                gameObject.Update();
-                CheckForCollisionWith(gameObject);
+                return;
             }
         } 
         #endregion
