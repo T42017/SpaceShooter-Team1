@@ -160,7 +160,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             _spriteBatch.End();
             base.Draw(gameTime);
         }
-
         #endregion
     }
 }

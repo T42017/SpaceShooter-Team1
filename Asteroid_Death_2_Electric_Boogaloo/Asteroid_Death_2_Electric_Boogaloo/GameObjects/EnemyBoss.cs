@@ -10,7 +10,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
     public class EnemyBoss : Ship
     {
-
         public BaseAi Ai;
         private Texture2D _lifeTexture;
 
@@ -60,6 +59,5 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             }
             return collides;
         }
-
     }
 }
