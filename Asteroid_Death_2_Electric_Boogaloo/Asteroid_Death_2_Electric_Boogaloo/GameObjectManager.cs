@@ -97,7 +97,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             if (currentGameTimeModInterval != 0 || GameObjects.Count(obj => obj is Meteor) >= Globals.Maxmeteors)
                 return;
 
-            int hypothenuseSquared = (Globals.ScreenWidth * Globals.ScreenWidth) / 4 +
+
+        int hypothenuseSquared = (Globals.ScreenWidth * Globals.ScreenWidth) / 4 +
                                      (Globals.ScreenHeight * Globals.ScreenHeight) / 4;
             for (var i = 0; i < amountOfMeteorsToAdd; i++)
             {

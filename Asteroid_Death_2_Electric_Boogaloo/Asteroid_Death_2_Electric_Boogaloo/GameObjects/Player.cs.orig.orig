@@ -27,13 +27,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         private Texture2D _lifeTexture;
         private ParticleEngine particleEngine;
         public int EnemyKills;
-        private List<Texture2D> _textures = new List<Texture2D>();
+
 
 <<<<<<< HEAD
-        public static int Score = 0;
-=======
+
+
+
         public static int score = 0;
-        public bool HasMariostar { get; set; }
         public bool hasDonePowerupEffect = false;
 >>>>>>> origin/Feature-Powerups
 
@@ -44,6 +44,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         {
             Health = 10;
             Boost = 60;
+        {
+            Boost = 180;
+>>>>>>> origin/Feature_MovementOfPlayer
             ShootingSpeed = 200;
             _textures.Add(Game.Content.Load<Texture2D>("blackSmoke00"));
             _textures.Add(Game.Content.Load<Texture2D>("blackSmoke01"));
@@ -55,24 +58,28 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             alarm = game.Content.Load<SoundEffect>("Alarm");
             alarm2 = alarm.CreateInstance();
             alarm2.IsLooped = true;
+
         
             particleEngine = new ParticleEngine(_textures, new Vector2(400, 240));
         }
         
         public override void Update()
         {
+<<<<<<< HEAD
+=======
 
             if (Health <= 5) {
                 particleEngine.EmitterLocation = Position;
                 particleEngine.Update();
                 alarm2.Play();
             }
-
             else
             {
                alarm2.Stop(); 
             }
             
+
+           
             if (Input.Instance.HoldUp())
                 AccelerateForward(0.45f);
 
@@ -87,13 +94,18 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
             if (Input.Instance.Boost() && (Boost > 0))
             {
+<<<<<<< HEAD
                 MaxSpeed = 50;
                 AccelerateForward(50f);
                 Boost--;
                 MaxSpeed = 10;
+=======
+            MaxSpeed = 50;
+            AccelerateForward(50f);
+            Boost--;
+            MaxSpeed = 10;
+>>>>>>> origin/Feature_MovementOfPlayer
             }
-
-            
 
             Speed += new Vector2(-Speed.X * 0.015f, -Speed.Y * 0.015f);
             Move();          
@@ -102,7 +114,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             if (Input.Instance.HoldSelect() && !IsWeaponOverheated())
             {
                 Shoot(typeof(Player));
-                _pewEffect.Play();
+               
                 _timeSenceLastShot = DateTime.Now;
             }
             

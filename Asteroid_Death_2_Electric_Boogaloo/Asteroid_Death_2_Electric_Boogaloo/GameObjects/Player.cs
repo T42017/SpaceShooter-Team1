@@ -21,7 +21,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
     public class Player : Ship
     {
-        private SoundEffect _pewEffect,alarm;
+        private SoundEffect alarm;
         private SoundEffectInstance alarm2;
         private DateTime _timeSenceLastShot = DateTime.Today;
         private Texture2D _lifeTexture;
@@ -44,8 +44,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Red), Globals.Health)
         {
-            Health = 10;
-            Boost = 60;
+
+
             ShootingSpeed = 200;
             _textures.Add(Game.Content.Load<Texture2D>("blackSmoke00"));
             _textures.Add(Game.Content.Load<Texture2D>("blackSmoke01"));
@@ -54,12 +54,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             Texture = TextureManager.Instance.PlayerShipTexture;
             _lifeTexture = TextureManager.Instance.PlayerLifeTexture;
             _pewEffect = TextureManager.Instance.ShootSoundEffect;
-            alarm = game.Content.Load<SoundEffect>("Alarm");
+            alarm = Game.Content.Load<SoundEffect>("Alarm");
             alarm2 = alarm.CreateInstance();
             alarm2.IsLooped = true;
-        
+
             particleEngine = new ParticleEngine(_textures, new Vector2(400, 240));
         }
+
+       
         
         public override void Update()
         {
@@ -114,7 +116,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             if (Input.Instance.HoldSelect() && !IsWeaponOverheated())
             {
                 Shoot(typeof(Player));
-                _pewEffect.Play();
+               
                 _timeSenceLastShot = DateTime.Now;
             }
             

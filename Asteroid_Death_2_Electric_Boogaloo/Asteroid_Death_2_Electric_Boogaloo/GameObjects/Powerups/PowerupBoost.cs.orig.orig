@@ -12,7 +12,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups
     {
 =======
 =======
->>>>>>> origin/develop
+>>>>>>> origin/Feature_MovementOfPlayer
 using Asteroid_Death_2_Electric_Boogaloo.Enums;
 using Microsoft.Xna.Framework;
 
@@ -35,7 +35,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups
             player.Boost = player.Boost + 360;
         }
 <<<<<<< HEAD
->>>>>>> origin/Feature_MovementOfPlayer
+>>>>>>> origin/develop
 =======
 =======
 
@@ -44,6 +44,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups
     class PowerupBoost
     {
 >>>>>>> origin/Feature_menu
->>>>>>> origin/develop
+>>>>>>> origin/Feature_MovementOfPlayer
     }
 }

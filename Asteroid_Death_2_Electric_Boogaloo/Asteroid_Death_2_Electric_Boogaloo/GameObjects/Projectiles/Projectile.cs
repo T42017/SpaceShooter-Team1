@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles
 {
@@ -14,8 +15,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles
         }
         #endregion
         public Type ParentType { get; set; }
-
-        #region Public properties
+        private SoundEffect explo,hit;
+        private SoundEffectInstance hit1;
         public int Damage { get; }
         #endregion
 
@@ -26,6 +27,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles
         #region Protected constructors
         protected Projectile(AsteroidsGame game, Vector2 position, float rotation, Weapon.Color color, Type parenType, int damage) : base(game)
         {
+            
+            hit = Game.Content.Load<SoundEffect>("Hit");
+            hit1 = hit.CreateInstance();
+            hit1.Volume = 1.0f;
+            hit1.Pitch = 0.000001f;
+            explo = Game.Content.Load<SoundEffect>("Explo");
+
             this.Position = position;
             this.Rotation = rotation;
             this.color = color;
@@ -71,6 +79,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles
                 var collisionEffect = new CollisionEffect(Game, position, collisionEffectType);
                 if (collisionEffect.NoCollisionEffectsNearby())
                     Game.GameObjectManager.CollisionEffects.Add(collisionEffect);
+                    explo.Play();
+                    hit1.Play();
             }
             return collides;
         } 

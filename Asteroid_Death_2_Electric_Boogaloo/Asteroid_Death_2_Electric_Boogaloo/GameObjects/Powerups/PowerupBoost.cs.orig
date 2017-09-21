@@ -25,12 +25,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups
         {
             player.Boost = player.Boost + 360;
         }
-=======
-
-namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups
-{
-    class PowerupBoost
-    {
->>>>>>> origin/Feature_menu
+>>>>>>> origin/develop
     }
 }
