@@ -18,13 +18,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
     public class Player : Ship
     {
-<<<<<<< HEAD
         #region Private fields
         private SoundEffect _pewEffect, alarm;
-=======
-
-        private SoundEffect alarm, _pewEffect;
->>>>>>> 0f1158ae13a79813160c454b8afcd4b5592348c6
         private SoundEffectInstance alarm2;
         private DateTime _timeSinceLastShot = DateTime.Today;
         private Texture2D _lifeTexture;
@@ -66,15 +61,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
             particleEngine = new ParticleEngine(_textures, new Vector2(400, 240));
         }
-<<<<<<< HEAD
         #endregion
 
         #region Public overrides
-=======
-
-       
         
->>>>>>> 0f1158ae13a79813160c454b8afcd4b5592348c6
         public override void Update()
         {
             if (!HasMariostar)
@@ -129,13 +119,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             if (Input.Instance.HoldSelect() && !IsWeaponOverheated())
             {
                 Shoot(typeof(Player));
-<<<<<<< HEAD
-                _pewEffect.Play();
-                _timeSinceLastShot = DateTime.Now;
-=======
                
-                _timeSenceLastShot = DateTime.Now;
->>>>>>> 0f1158ae13a79813160c454b8afcd4b5592348c6
+                _timeSinceLastShot = DateTime.Now;
             }
 
             StayInsideLevel();
@@ -155,8 +140,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+<<<<<<< HEAD
+            if(Health <= 5)
+            particleEngine.Draw(spriteBatch);
+=======
             if (Health <= 5)
                 particleEngine.Draw(spriteBatch);
+>>>>>>> 4352aa976e17d87a94a83237fceed57a93dadf56
 
             // Draw player
             spriteBatch.Draw(Texture, Position, null, _drawPlayerInRed ? Color.Red : Color.White, Rotation - Microsoft.Xna.Framework.MathHelper.PiOver2,
@@ -190,8 +180,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             {
                 if (otherGameObject is Powerup powerup)
                 {
-                    powerup.DoEffect(this);
-                    Powerups.Add(powerup);
+                    AddPowerUp(powerup);
                     otherGameObject.IsDead = true;
                 }
 
@@ -213,7 +202,17 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 }
             }
             return collides;
+<<<<<<< HEAD
+        }
+
+        public void AddPowerUp(Powerup powerup)
+        {
+            powerup.DoEffect(this);
+            Powerups.Add(powerup);
+        }
+=======
         } 
         #endregion
+>>>>>>> 4352aa976e17d87a94a83237fceed57a93dadf56
     }
 }

@@ -1,19 +1,16 @@
-﻿using System;
-<<<<<<< HEAD
-using Asteroid_Death_2_Electric_Boogaloo.Devices;
-=======
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+
 using Asteroid_Death_2_Electric_Boogaloo.AI;
 using Asteroid_Death_2_Electric_Boogaloo.Components;
 using Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles;
-using Microsoft.Xna.Framework;
->>>>>>> feature-enemy
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Media;
+using Asteroid_Death_2_Electric_Boogaloo.Managers;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
     public class Enemy : Ship
     {
+        #region Public enums
         public enum Type
         {
             enemyRed1,
@@ -37,34 +34,34 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             enemyBlack4,
             enemyBlack5
         }
+        #endregion
 
-        public BaseAi Ai;
-
-        public Type enemyType;
-<<<<<<< HEAD
-        private AI _ai;
-        
-        public Enemy(AsteroidsGame game, Type enemyType) : base(game,1)
-        {
-            this.enemyType = enemyType;
-            _ai = new AI(game, this);
-            this.enemyType = enemyType;
-            ShootingSpeed = 5000; //500;
-            Weapon = new Weapon(game, Weapon.Type.Laser, Weapon.Color.Green);
-=======
+        #region Private fields
         private Texture2D _lifeTexture;
+        #endregion
 
-        public Enemy(AsteroidsGame game, Type enemyType) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Green))
+        #region Public properties
+        public BaseAi Ai { get; set; }
+        public Type EnemyType { get; set; }
+        #endregion
+
+        #region Public constructors
+        public Enemy(AsteroidsGame game, Type enemyType) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Green), 3)
         {
-            this.enemyType = enemyType;
+            this.EnemyType = enemyType;
             Ai = new BasicEnemyAI(game, this);
+<<<<<<< HEAD
             ShootingSpeed = 500;
->>>>>>> feature-enemy
             Texture = TextureManager.Instance.EnemyTexures[(int) enemyType];
+=======
+            ShootingSpeed = 5000; //500;
+            Texture = TextureManager.Instance.EnemyTexures[(int)enemyType];
+>>>>>>> 4352aa976e17d87a94a83237fceed57a93dadf56
             _lifeTexture = TextureManager.Instance.PlayerLifeTexture;
-            Health = 2;
         }
+        #endregion
 
+        #region Public overrides
         public override void Update()
         {
             base.Update();
@@ -76,10 +73,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             base.Draw(spriteBatch);
 
             spriteBatch.Draw(_lifeTexture, Position, null, Color.White, Game.GameObjectManager.Player.Rotation + MathHelper.DegreesToRadians(90),
-                new Vector2(15, 80), 1.0f, SpriteEffects.None, 0);
+                new Vector2(22, 80), 1.0f, SpriteEffects.None, 0);
 
-            spriteBatch.DrawString(MenuComponent.menuFont, "" + Health, Position, Color.OrangeRed,
-                Game.GameObjectManager.Player.Rotation + MathHelper.DegreesToRadians(90), new Vector2(-15, 90), 1f, SpriteEffects.None, 0);
+            spriteBatch.DrawString(MenuComponent.MenuFont, "" + Health, Position, Color.OrangeRed,
+                Game.GameObjectManager.Player.Rotation + MathHelper.DegreesToRadians(90), new Vector2(-22, 87), 1f, SpriteEffects.None, 0);
         }
 
         public override bool CollidesWith(GameObject otherGameObject)
@@ -89,8 +86,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             {
                 if (otherGameObject is Projectile pro)
                 {
-<<<<<<< HEAD
-                    Player.score = Player.score + 100;
+                    Player.Score = Player.Score + 100;
                     Health -= pro.Damage;
                     pro.IsDead = true;
                 }
@@ -98,24 +94,15 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 if (Health <= 0)
                 {
                     IsDead = true;
-                if (otherGameObject is Projectile)
-                    Game.GameObjectManager.GameObjects.Remove(otherGameObject);
-                }   
-=======
-                    Health -= pro.Damage;
-                    otherGameObject.IsDead = true;
-                    if (pro.ParentType == typeof(Player))
+                    Game.GameObjectManager.Player.EnemyKills++;
+                    if (otherGameObject is Projectile)
                     {
-                        Game.GameObjectManager.Player.EnemyKills++;
+                        otherGameObject.IsDead = true;
                     }
                 }
-                if (Health <= 0)
-                {
-                    IsDead = true;
-                }
->>>>>>> feature-enemy
             }
             return collides;
-        }
+        } 
+        #endregion
     }
 }

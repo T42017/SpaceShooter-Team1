@@ -16,7 +16,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Managers
         private readonly List<GameObject> _gameObjects = new List<GameObject>();
         private readonly AsteroidsGame _game;
         private EnemyFactory _enemyFactory;
-        private PowerupFactory _powerupFactory;
         #endregion
 
         #region Public properties
@@ -24,6 +23,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Managers
 
         public List<GameObject> GameObjects => _gameObjects;
 
+        public PowerupFactory PowerupFactory;
         public List<CollisionEffect> CollisionEffects { get; set; } = new List<CollisionEffect>();
         #endregion
 
@@ -38,14 +38,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Managers
         #region Public adding methods
         public void AddPowerupFactory(PowerupFactory factory)
         {
-            _powerupFactory = factory;
+            PowerupFactory = factory;
         }
 
         public void AddPowerups(int amount)
         {
             for (var i = 0; i < amount; i++)
             {
-                var powerup = _powerupFactory.GetRandomPowerup();
+                var powerup = PowerupFactory.GetRandomPowerup();
                 Add(powerup);
             }
         }

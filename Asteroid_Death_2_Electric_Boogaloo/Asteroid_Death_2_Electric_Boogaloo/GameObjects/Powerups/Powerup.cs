@@ -36,5 +36,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups
 
         public abstract void DoEffect(Player player);
         #endregion
+
+        public override void Update()
+        {
+            Rotation = Game.GameObjectManager.Player.Rotation;
+            base.Update();
+        }
     }
 }

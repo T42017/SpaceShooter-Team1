@@ -26,7 +26,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         private ParticleEngine particleEngine;
         private List<Texture2D> _textures = new List<Texture2D>();
         private bool _drawPlayerInRed;
-        private int _framesBetweenBlick = 50;
+        private int _framesBetweenBlick = 20;
         private int _currentFrame;
         #endregion
 
@@ -140,7 +140,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (Health <= 5)
+            if(Health <= 5)
                 particleEngine.Draw(spriteBatch);
 
             // Draw player
@@ -175,8 +175,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             {
                 if (otherGameObject is Powerup powerup)
                 {
-                    powerup.DoEffect(this);
-                    Powerups.Add(powerup);
+                    AddPowerUp(powerup);
                     otherGameObject.IsDead = true;
                 }
 
@@ -198,6 +197,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 }
             }
             return collides;
+        }
+
+        public void AddPowerUp(Powerup powerup)
+        {
+            powerup.DoEffect(this);
+            Powerups.Add(powerup);
         } 
         #endregion
     }
