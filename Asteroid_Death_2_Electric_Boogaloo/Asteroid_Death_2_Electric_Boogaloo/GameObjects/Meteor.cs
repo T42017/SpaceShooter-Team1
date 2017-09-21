@@ -116,7 +116,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             bool collides = base.CollidesWith(otherGameObject) && otherGameObject is Projectile;
             if (collides)
             {
-                Player.score = Player.score + 25;
+                Player.Score = Player.Score + 25;
                 var smallerMeteors = SpawnChildren();
                 if (smallerMeteors != null)
                 {

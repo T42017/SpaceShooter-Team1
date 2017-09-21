@@ -20,17 +20,15 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
     public class Player : Ship
     {
-        private KeyboardState _lastKeyboardState;
-        private GamePadState _lastGamePadState;
         private SoundEffect _pewEffect,alarm;
         private SoundEffectInstance alarm2;
         private DateTime _timeSenceLastShot = DateTime.Today;
         private Texture2D _lifeTexture;
         ParticleEngine particleEngine;
-        private List<Texture2D> textures = new List<Texture2D>();
+        private List<Texture2D> _textures = new List<Texture2D>();
 
 
-        public static int score = 0;
+        public static int Score = 0;
         public bool HasMariostar { get; set; }
 
         public List<Powerup> Powerups = new List<Powerup>();
@@ -40,18 +38,18 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             Boost = 180;
          
             ShootingSpeed = 200;
-            textures.Add(Game.Content.Load<Texture2D>("blackSmoke00"));
-            textures.Add(Game.Content.Load<Texture2D>("blackSmoke01"));
-            textures.Add(Game.Content.Load<Texture2D>("blackSmoke02"));
-            textures.Add(Game.Content.Load<Texture2D>("blackSmoke03"));
+            _textures.Add(Game.Content.Load<Texture2D>("blackSmoke00"));
+            _textures.Add(Game.Content.Load<Texture2D>("blackSmoke01"));
+            _textures.Add(Game.Content.Load<Texture2D>("blackSmoke02"));
+            _textures.Add(Game.Content.Load<Texture2D>("blackSmoke03"));
             Texture = TextureManager.Instance.PlayerShipTexture;
-            _lifeTexture = Game.Content.Load<Texture2D>("playerLife2_red");
-            _pewEffect = Game.Content.Load<SoundEffect>("shot");
+            _lifeTexture = TextureManager.Instance.PlayerLifeTexture;
+            _pewEffect = TextureManager.Instance.ShootSoundEffect;
             alarm = game.Content.Load<SoundEffect>("Alarm");
             alarm2 = alarm.CreateInstance();
             alarm2.IsLooped = true;
         
-            particleEngine = new ParticleEngine(textures, new Vector2(400, 240));
+            particleEngine = new ParticleEngine(_textures, new Vector2(400, 240));
         }
         
         public override void Update()
@@ -128,7 +126,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 new Vector2(Globals.ScreenWidth / 2 - 70, Globals.ScreenHeight / 2), 1.0f, SpriteEffects.None, 0);
 
             //Draw score
-            spriteBatch.DrawString(MenuComponent.menuFont, "Score: " + score, Position,
+            spriteBatch.DrawString(MenuComponent.menuFont, "Score: " + Score, Position,
                 Color.OrangeRed, Rotation + MathHelper.DegreesToRadians(90), new Vector2(-Globals.ScreenWidth / 2, Globals.ScreenHeight / 2 + 13), 1f, SpriteEffects.None, 0);
 
         }

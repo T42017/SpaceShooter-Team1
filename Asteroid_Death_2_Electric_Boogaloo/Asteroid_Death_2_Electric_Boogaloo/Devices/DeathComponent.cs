@@ -44,9 +44,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             UiComponents.Add(new UiLabel(Game, new Vector2(0, -70), "Enter your name", font));
             UiComponents.Add(_textBox);
             UiComponents.Add(new UiButton(Game, new Vector2(0, 60), "Done", font, delegate(object sender, EventArgs args) {
-                HighScore.SaveScore(_textBox.Text.Equals("") ? "player" : _textBox.Text, Player.score);
+                HighScore.SaveScore(_textBox.Text.Equals("") ? "player" : _textBox.Text, Player.Score);
                 Game.ChangeGameState(GameState.highscoremenu);
-                Player.score = 0;
+                Player.Score = 0;
             }));
 
             HighlightNextComponent();
@@ -59,7 +59,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             if (newState == GameState.gameover)
             {
                 _textBox.Text = "";
-                _playerScoreLabel.Text = "Score " + Player.score;
+                _playerScoreLabel.Text = "Score " + Player.Score;
             }
             base.ChangedState(newState);
         }
