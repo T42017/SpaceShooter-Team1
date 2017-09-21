@@ -20,7 +20,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         public int Boost = 1;
         protected Ship(AsteroidsGame game,int baseHealth) : base(game)
         {
-            _pewEffect = Game.Content.Load<SoundEffect>("Deus");
+            _pewEffect = Game.Content.Load<SoundEffect>("AlienShot");
             BaseHealth = baseHealth;
             Health = baseHealth;
         }

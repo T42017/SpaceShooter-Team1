@@ -1392,3 +1392,15 @@
 /processorParam:Quality=Best
 /build:InGame.wav
 
+#begin BossAlarm.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:BossAlarm.wav
+
+#begin AlienShot.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:AlienShot.mp3
+
