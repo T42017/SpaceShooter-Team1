@@ -13,6 +13,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Enums
         Health,
         Boost,
         Mariostar,
-        //Random
+        Random
     }
 }

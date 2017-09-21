@@ -26,12 +26,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         private DateTime _timeSenceLastShot = DateTime.Today;
         private Texture2D _lifeTexture;
         private ParticleEngine particleEngine;
+        public int EnemyKills;
         private List<Texture2D> _textures = new List<Texture2D>();
         private bool _drawPlayerInRed;
         private int _framesBetweenBlick = 50;
         private int _currentFrame;
 
         public static int Score = 0;
+        public bool hasDonePowerupEffect = false;
 
         public int EnemyKills;
         public List<Powerup> Powerups = new List<Powerup>();
@@ -39,7 +41,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         
         public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Red), Globals.Health)
         {
-            Boost = 180;
+            Health = 10;
+            Boost = 60;
             ShootingSpeed = 200;
             _textures.Add(Game.Content.Load<Texture2D>("blackSmoke00"));
             _textures.Add(Game.Content.Load<Texture2D>("blackSmoke01"));
@@ -69,7 +72,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                     _drawPlayerInRed = !_drawPlayerInRed;
                 }
             }
-
             if (Health <= 5) {
                 particleEngine.EmitterLocation = Position;
                 particleEngine.Update();
@@ -95,12 +97,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
             if (Input.Instance.Boost() && (Boost > 0))
             {
+                Debug.WriteLine(Boost);
+                Boost--;
                 MaxSpeed = 50;
                 AccelerateForward(50f);
-                Boost--;
                 MaxSpeed = 10;
             }
-
+            
             Speed += new Vector2(-Speed.X * 0.015f, -Speed.Y * 0.015f);
             Move();          
             base.Update();
@@ -122,8 +125,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
             foreach (var powerup in Powerups)
             {
-                powerup.DoEffect(this);
                 powerup.Update();
+
                 if (powerup.Timer <= 0)
                 {
                     powerup.Remove(this);
@@ -169,6 +172,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             {
                 if (otherGameObject is Powerup powerup)
                 {
+                    powerup.DoEffect(this);
                     otherGameObject.IsDead = true;
                     powerup.DoEffect(this);
                     Powerups.Add(powerup);

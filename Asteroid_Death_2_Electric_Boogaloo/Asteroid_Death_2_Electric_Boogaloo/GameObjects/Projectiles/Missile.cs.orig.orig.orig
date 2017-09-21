@@ -1,0 +1,81 @@
+﻿using System;
+using Microsoft.Xna.Framework;
+
+<<<<<<< HEAD
+namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles
+{
+    public class Missile : Projectile
+<<<<<<< HEAD
+<<<<<<< HEAD
+    {       
+        #region Public constructors
+=======
+    {
+        #region Public constructors
+=======
+    {       
+>>>>>>> origin/Feature_MovementOfPlayer
+>>>>>>> dcaa29908a807acb08043d63be01d1e9689979a2
+        public Missile(AsteroidsGame game, Vector2 position, float rotation, Weapon.Color color, Type parenType) : base(game, position, rotation, color, parenType, 3)
+=======
+    {
+
+        public Missile(AsteroidsGame game, Vector2 position, float rotation, Weapon.Color color, Type paren) 
+            : base(game, position, rotation, color, paren, 3)
+>>>>>>> feature-enemy
+=======
+namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
+{
+    public class Missile : Projectile
+    {       
+        #region Public constructors
+        public Missile(AsteroidsGame game, Vector2 position, float rotation, Weapon.Color color, Type parenType) : base(game, position, rotation, color, parenType, 3)
+>>>>>>> origin/Feature-Powerups
+        {
+            Texture = TextureManager.Instance.MissileTextures[(int)color];
+        }
+        #endregion
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> dcaa29908a807acb08043d63be01d1e9689979a2
+        #region Protected overrides
+=======
+=======
+        #region Protected overrides
+>>>>>>> origin/develop
+>>>>>>> origin/Feature-Powerups
+        protected override Type GetClassType()
+        {
+            return typeof(Missile);
+        }
+        #endregion
+
+<<<<<<< HEAD
+        #region Public overrides
+<<<<<<< HEAD
+=======
+>>>>>>> feature-enemy
+=======
+>>>>>>> dcaa29908a807acb08043d63be01d1e9689979a2
+=======
+<<<<<<< HEAD
+=======
+        #region Public overrides
+>>>>>>> origin/develop
+>>>>>>> origin/Feature-Powerups
+        public override void Update()
+        {
+            DieIfOutSideMap();
+
+            Speed = Forward() * 11;
+            AccelerateForward(9);
+            Move();
+
+            base.Update();
+        } 
+        #endregion
+    }
+}
