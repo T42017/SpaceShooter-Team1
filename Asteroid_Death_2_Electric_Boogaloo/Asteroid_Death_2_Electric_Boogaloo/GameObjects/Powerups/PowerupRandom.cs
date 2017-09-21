@@ -1,8 +1,8 @@
 ﻿using System;
-using Asteroid_Death_2_Electric_Boogaloo.Factorys;
 using Microsoft.Xna.Framework;
 
 using Asteroid_Death_2_Electric_Boogaloo.Enums;
+using Asteroid_Death_2_Electric_Boogaloo.Factories;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups
 {
