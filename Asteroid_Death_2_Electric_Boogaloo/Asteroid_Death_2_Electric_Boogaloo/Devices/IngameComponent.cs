@@ -34,17 +34,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         
         protected override void LoadContent()
         {
-            song = Game.Content.Load<Song>("Combat");
+            song = Game.Content.Load<Song>("InGame");
             base.LoadContent();
         }
 
         public override void Update(GameTime gameTime)
         {
-            if (volume == false)
-            {
-                MediaPlayer.Volume = 0.6f;
-                volume = true;
-            }
+            
             if (playing == false)
             {
                 MediaPlayer.Stop();

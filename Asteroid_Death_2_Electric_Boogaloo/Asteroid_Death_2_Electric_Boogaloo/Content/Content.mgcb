@@ -1240,6 +1240,7 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:hitmarker3.png
+
 #begin Left.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1282,28 +1283,6 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Alarm.ogg
-#begin hitmarker.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:hitmarker.png
-
-#begin hitmarker0.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
 
 #begin hitmarker6.png
 /importer:TextureImporter
@@ -1388,3 +1367,28 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Hit.wav
+
+#begin MainTheme.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:MainTheme.mp3
+
+#begin HighScoreTheme.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:HighScoreTheme.mp3
+
+#begin HighScore.wav
+/importer:WavImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:HighScore.wav
+
+#begin InGame.wav
+/importer:WavImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:InGame.wav
+

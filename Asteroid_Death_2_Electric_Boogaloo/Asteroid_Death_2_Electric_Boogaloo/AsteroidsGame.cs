@@ -40,6 +40,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         #endregion
 
         #region Public methods
+
         public void ChangeGameState(GameState desiredState)
         {
             _gameState = desiredState;
@@ -49,9 +50,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 if (!(component is AstroidsComponent astroidsComponent))
                     continue;
                 astroidsComponent.ChangedState(desiredState);
+                astroidsComponent.Visible = astroidsComponent.DrawableStates.HasFlag(_gameState);
+                astroidsComponent.Enabled = astroidsComponent.UpdatableStates.HasFlag(_gameState);
+            }
         }
 
-           
         public void UpdateWindowSize()
         {
             WindowWidth = Graphics.PreferredBackBufferWidth;
