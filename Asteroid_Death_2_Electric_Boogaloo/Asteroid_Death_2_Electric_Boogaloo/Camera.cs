@@ -13,7 +13,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
     public class Camera
     {
         protected float _zoom;
+
         public Matrix Transform;
+
         private Vector2 _pos;
         private float _rotation;
 
@@ -50,7 +52,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public Matrix get_transformation(GraphicsDevice graphicsDevice, int windowWidth, int windowHeight)
         {
-            Transform =       // Thanks to o KB o for this solution
+            Transform =
                 Matrix.CreateTranslation(new Vector3(-_pos.X, -_pos.Y, 0)) *
                 Matrix.CreateRotationZ(Rotation) *
                 Matrix.CreateScale(new Vector3(Zoom, Zoom, 1)) *

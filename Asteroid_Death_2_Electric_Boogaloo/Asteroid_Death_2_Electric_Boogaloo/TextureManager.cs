@@ -11,7 +11,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     class TextureManager
     {
-
         private static TextureManager instance;
 
         public Texture2D PlayerShipTexture;
@@ -40,7 +39,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         private TextureManager()
         {
-
         }
 
         public void LoadContent(ContentManager content)
@@ -82,8 +80,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
             var hitmarkerTexture2Ds = new List<Texture2D>();
             hitmarkerTexture2Ds.AddRange(GetTextures(content, "hitmarker", 9));
-            HitmarkerTextures = hitmarkerTexture2Ds.ToArray();
-            
+            HitmarkerTextures = hitmarkerTexture2Ds.ToArray(); 
             
             PlayerShootSoundEffect = content.Load<SoundEffect>("Blaster");
         }
@@ -101,7 +98,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             {
                 textures[i] = content.Load<Texture2D>(name + i);
             }
-
             return textures;
         }
     }

@@ -86,7 +86,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
             float angle =
                 (float)Math.Atan2(edge.Y, edge.X);
 
-
             sb.Draw(_t,
                 new Rectangle(// rectangle defines shape of line and position of start of line
                     (int)start.X,
@@ -99,7 +98,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
                 new Vector2(0, 0), // point in line about which to rotate
                 SpriteEffects.None,
                 0);
-
         }
     }
 }

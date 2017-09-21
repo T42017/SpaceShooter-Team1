@@ -8,7 +8,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.Devices
-
 {
     abstract class AstroidsComponent : DrawableGameComponent
     {

@@ -11,15 +11,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
 {
     public class UiLabel : BaseUiComponent
     {
-
         public UiLabel(AsteroidsGame game, Vector2 position, string text, SpriteFont font) : base(game, position, false, null, text, font)
         {
-            
         }
 
         public override void Update()
-        {
-            
+        {          
         }
 
         public override void Draw(SpriteBatch spriteBatch)

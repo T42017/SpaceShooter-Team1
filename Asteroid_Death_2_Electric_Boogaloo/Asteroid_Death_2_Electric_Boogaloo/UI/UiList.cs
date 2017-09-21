@@ -11,7 +11,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
 {
     public class UiList : BaseUiComponent
     {
-
         private List<UiLabel> _labels;
         private int _spaceBetweenLabels;
         private readonly SpriteFont _font;

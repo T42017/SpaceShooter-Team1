@@ -72,7 +72,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {
             int currentGameTimeModInterval = (int)gameTime.TotalGameTime.TotalMilliseconds % intervalInMilliseconds;
             if (currentGameTimeModInterval != 0 || GameObjects.Count(obj => obj is Meteor) >= Globals.Maxmeteors)
-
                 return;
 
             int hypothenuseSquared = (Globals.ScreenWidth * Globals.ScreenWidth) / 4 +
@@ -120,7 +119,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 if (GameObjects[i] is Enemy)
                     enemys.Add((Enemy)GameObjects[i]);
             }
-
             return enemys.ToArray();
         }
         #endregion
