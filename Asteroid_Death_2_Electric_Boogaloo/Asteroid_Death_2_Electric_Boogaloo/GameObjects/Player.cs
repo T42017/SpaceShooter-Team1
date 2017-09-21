@@ -129,6 +129,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             foreach (var powerup in Powerups)
             {
                 powerup.Timer--;
+                if (powerup is PowerupMariostar)
+                    Debug.WriteLine(powerup.Timer);
             }
             Powerups.RemoveAll(p => p.Timer <= 0);
         }
