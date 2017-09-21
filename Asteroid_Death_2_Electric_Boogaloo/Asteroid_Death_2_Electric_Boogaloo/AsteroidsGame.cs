@@ -90,6 +90,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         {      
             var form = (Form) Control.FromHandle(Window.Handle);
             form.WindowState = FormWindowState.Maximized;
+
             UpdateWindowSize();
 
             Components.Add(new MenuComponent(this));
@@ -133,7 +134,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-
+            
             _spriteBatch.Begin(SpriteSortMode.Deferred,
                 BlendState.AlphaBlend,
                 null,
@@ -161,7 +162,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 GameObjectManager.AddEnemys(AmountOfEnemys - enemys.Length);
             }
         }
-
+        
         public void ControlMaxEnemyBosses()
         {
             EnemyBoss[] bosses = GameObjectManager.GetEnemyBosses();
@@ -171,6 +172,5 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 GameObjectManager.AddEnemyBosses(AmountOfBosses - bosses.Length);
             }
         }
-
     }
 }

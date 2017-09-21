@@ -59,8 +59,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
             if (root.ChildNodes.Count > MaxPlayers * 2)
             {
-                rootChildList[MaxPlayers * 2 - 1].ParentNode.RemoveChild(rootChildList[MaxPlayers * 2 - 1]);
-                rootChildList[MaxPlayers * 2 - 2].ParentNode.RemoveChild(rootChildList[MaxPlayers * 2 - 2]);
+                rootChildList[root.ChildNodes.Count - 1].ParentNode.RemoveChild(rootChildList[root.ChildNodes.Count - 1]);
+                rootChildList[root.ChildNodes.Count - 1].ParentNode.RemoveChild(rootChildList[root.ChildNodes.Count - 1]);
             }
             xDoc.Save(FileLocation);
         }

@@ -20,6 +20,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         private Texture2D _backgroundTexture;
         private SoundEffect yes;
         private UiTextbox _textBox;
+        private UiLabel _playerScoreLabel;
 
         public DeathComponent(Game game) : base(game)
         {
@@ -35,13 +36,15 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             song = Game.Content.Load<Song>("Laugh");
             _backgroundTexture = Game.Content.Load<Texture2D>("background");
             _textBox = new UiTextbox(Game, new Vector2(), font);
+            _playerScoreLabel = new UiLabel(Game, new Vector2(0, -120), "", font);
 
-            UiComponents = new List<BaseUiComponent>();
-            UiComponents.Add(new UiLabel(Game, new Vector2(0, -60), "Enter your name", font));
+            UiComponents.Add(_playerScoreLabel);
+            UiComponents.Add(new UiLabel(Game, new Vector2(0, -70), "Enter your name", font));
             UiComponents.Add(_textBox);
             UiComponents.Add(new UiButton(Game, new Vector2(0, 60), "Done", font, delegate(object sender, EventArgs args) {
-                HighScore.SaveScore(_textBox.Text.Equals("") ? "player" : _textBox.Text, Player.score);
+                HighScore.SaveScore(_textBox.Text.Equals("") ? "player" : _textBox.Text, Player.Score);
                 Game.ChangeGameState(GameState.highscoremenu);
+                Player.Score = 0;
             }));
 
             HighlightNextComponent();
@@ -53,6 +56,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             if (newState == GameState.gameover)
             {
                 _textBox.Text = "";
+                _playerScoreLabel.Text = "Score " + Player.Score;
             }
             base.ChangedState(newState);
         }
