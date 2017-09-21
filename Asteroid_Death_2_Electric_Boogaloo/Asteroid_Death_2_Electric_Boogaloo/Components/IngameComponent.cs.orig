@@ -1,76 +1,76 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
-namespace Asteroid_Death_2_Electric_Boogaloo.Devices
+using Asteroid_Death_2_Electric_Boogaloo.Enums;
+
+namespace Asteroid_Death_2_Electric_Boogaloo.Components
 {
-    class IngameComponent : AstroidsComponent
+    public class InGameComponent : AsteroidsComponent
     {
-        private KeyboardState lastKeyboardState;
-        private bool hasaddedgameobjetcs, playing;
+        #region Private fields
+        private bool hasaddedgameobjetcs, volume;
         private SpriteFont menuFont, buttonFont;
         private Texture2D Button;
-        private AsteroidsGame pGame;
+        private AsteroidsGame _Game;
         private MouseState oldState;
+        private GamePadState lastgamePadState;
         private Song song;
+        #endregion
 
-        public IngameComponent(Game game) : base(game)
+        #region Public static properties
+        public static bool Playing { get; set; }
+        #endregion
+
+        #region Public constructors
+        public InGameComponent(Game game) : base(game)
         {
-            pGame = (AsteroidsGame)game;
-            
-           DrawableStates = GameState.ingame;
-            UpdatableStates = GameState.ingame;
-
-            playing = false;
+            _Game = (AsteroidsGame)game;
+            DrawableStates = GameState.InGame;
+            UpdatableStates = GameState.InGame;
+            volume = false;
+            Playing = false;
             MediaPlayer.IsRepeating = true;
         }
+        #endregion
 
+        #region Protected overrides
         protected override void LoadContent()
         {
-            song = Game.Content.Load<Song>("Combat");
+            song = Game.Content.Load<Song>("InGame");
             base.LoadContent();
         }
+        #endregion
 
+        #region Public overrides
         public override void Update(GameTime gameTime)
         {
-<<<<<<< HEAD
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed
-                || Keyboard.GetState().IsKeyDown(Keys.Escape) && lastKeyboardState.IsKeyUp(Keys.Escape))
+<<<<<<< HEAD:Asteroid_Death_2_Electric_Boogaloo/Asteroid_Death_2_Electric_Boogaloo/Components/InGameComponent.cs
+            if (volume == false)
             {
-                pGame.ChangeGameState(GameState.paused);
-=======
-            MediaPlayer.Volume = 0.4f;
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed ||
-                Keyboard.GetState().IsKeyDown(Keys.Escape) && lastKeyboardState.IsKeyUp(Keys.Escape))
-            { pGame.ChangeGameState(GameState.paused);
-               
->>>>>>> origin/Feature_menu
+                MediaPlayer.Volume = 0.6f;
+                volume = true;
             }
-
-            if (playing==false)
+            if (Playing == false)
+=======
+            
+            if (playing == false)
+>>>>>>> 0f1158ae13a79813160c454b8afcd4b5592348c6:Asteroid_Death_2_Electric_Boogaloo/Asteroid_Death_2_Electric_Boogaloo/Devices/IngameComponent.cs
             {
                 MediaPlayer.Stop();
-              
                 MediaPlayer.Play(song);
-                playing = true;
+
+                Playing = true;
             }
 
-            //for (int i = pGame.Components.Count - 1; i >= 0; i--)
-            //{
-            //    if (!(pGame.Components[i] is GameObject gameObject))
-            //        continue;
-            //    pGame.CheckForCollisionWith(gameObject);
-            //}
-            //pGame.GenerateRandomNewMeteor(gameTime, 5);
-            lastKeyboardState = Keyboard.GetState();
+            if (Input.Instance.ClickPause())
+            {
+                _Game.ChangeGameState(GameState.Paused);
+                volume = false;
+            }
             base.Update(gameTime);
-        }
+        } 
+        #endregion
     }
 }
