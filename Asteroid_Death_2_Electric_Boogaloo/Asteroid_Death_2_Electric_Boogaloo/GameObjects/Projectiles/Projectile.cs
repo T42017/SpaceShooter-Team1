@@ -1,27 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
     public abstract class Projectile : GameObject
     {
+        #region Public enums
         public enum Color
         {
             Red,
             Blue,
             Green
         }
+        #endregion
 
-        public int Damage;
+        #region Public properties
+        public int Damage { get; }
         public Type ParentType { get; set; }
+        #endregion
 
+        #region Protected fields
         protected Weapon.Color color;
+        #endregion
 
+        #region Protected constructors
         protected Projectile(AsteroidsGame game, Vector2 position, float rotation, Weapon.Color color, Type parenType, int damage) : base(game)
         {
             this.Position = position;
@@ -30,15 +32,23 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             MaxSpeed = 200;
             ParentType = parenType;
             Damage = damage;
-            Texture = TextureManager.Instance.LaserTextures[(int) color];
+            Texture = TextureManager.Instance.LaserTextures[(int)color];
         }
+        #endregion
 
+        #region Protected methods
         protected void DieIfOutSideMap()
         {
-          if (IsOutSideLevel(Game.Level))
+            if (IsOutSideLevel(Game.Level))
                 IsDead = true;
-        }
+        } 
+        #endregion
 
+        #region Protected abstract methods
+        protected abstract Type GetClassType(); 
+        #endregion
+
+        #region Public overrides
         public override void Update()
         {
             DieIfOutSideMap();
@@ -49,29 +59,21 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             base.Update();
         }
 
-        protected abstract Type GetClassType();
-
         public override bool CollidesWith(GameObject otherGameObject)
         {
             bool collides = base.CollidesWith(otherGameObject) && ParentType != otherGameObject.GetType() && !(otherGameObject is Projectile);
             if (collides)
             {
                 var position = new Vector2(Position.X + .25f * Width, Position.Y + .25f * Height);
-
-                if (GetClassType() == typeof(Missile))
-                {
-                    var explosion = new Explosion(Game, position);
-                    Debug.WriteLine($"{GetType().Name}: ({Position})\r\nExplosion: ({explosion.Position})");
-                    if (explosion.NoExplosionsNearby())
-                        Game.GameObjectManager.Explosions.Add(explosion);
-                }
-                else
-                {
-                    var hitmarker = new Hitmarker(Game, Position);
-                    Game.GameObjectManager.Hitmarkers.Add(hitmarker);
-                }
+                var collisionEffectType = GetClassType() == typeof(Missile)
+                    ? CollisionEffectType.Explosion
+                    : CollisionEffectType.Hitmarker;
+                var collisionEffect = new CollisionEffect(Game, position, collisionEffectType);
+                if (collisionEffect.NoCollisionEffectsNearby())
+                    Game.GameObjectManager.CollisionEffects.Add(collisionEffect);
             }
             return collides;
-        }
+        } 
+        #endregion
     }
 }

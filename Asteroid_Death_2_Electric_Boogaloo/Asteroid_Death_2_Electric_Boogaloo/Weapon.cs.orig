@@ -5,7 +5,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 {
     public class Weapon
     {
+<<<<<<< HEAD
         #region Public enums
+=======
+>>>>>>> f2b00aec59e5e4528a5ff290f2cbbf264df60519
         public enum Type
         {
             Laser,
@@ -49,7 +52,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 projectile = new Missile(_game, Position, rotation, WeaponColor, parentType);
 
             return projectile;
+<<<<<<< HEAD
         } 
         #endregion
+=======
+        }
+>>>>>>> f2b00aec59e5e4528a5ff290f2cbbf264df60519
     }
 }

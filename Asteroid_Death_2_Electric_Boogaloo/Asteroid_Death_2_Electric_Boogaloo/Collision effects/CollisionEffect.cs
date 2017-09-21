@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
-    public class Explosion : GameObject
+    public class CollisionEffect : GameObject
     {
         #region Private fields
         private readonly Texture2D[] _textures;
@@ -17,26 +17,29 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         #endregion
 
         #region Constructors
-        public Explosion(AsteroidsGame game, Vector2 position) : base(game)
+        public CollisionEffect(AsteroidsGame game, Vector2 position, CollisionEffectType collisionEffectType) : base(game)
         {
             Position = position;
             _amountOfPictures = 9;
             _timeBetweenFramesMs = 100;
             _timeLastFrame = DateTime.Now;
-            _textures = TextureManager.Instance.PixelExplosionTextures;
+            if (collisionEffectType == CollisionEffectType.Explosion)
+                _textures = TextureManager.Instance.PixelExplosionTextures;
+            else if (collisionEffectType == CollisionEffectType.Hitmarker)
+                _textures = TextureManager.Instance.HitmarkerTextures;
             Texture = _textures[_textures.Length - 1];
         }
         #endregion
 
         #region Public methods
-        public bool NoExplosionsNearby()
+        public bool NoCollisionEffectsNearby()
         {
-            return Game.GameObjectManager.Explosions.All(explosion => DistanceToSquared(explosion) > 25 * 25);
+            return Game.GameObjectManager.CollisionEffects.All(collisionEffect => DistanceToSquared(collisionEffect) > 25 * 25);
         }
         #endregion
 
         #region Public overrides
-        
+
         public override void Update()
         {
             if ((DateTime.Now - _timeLastFrame).TotalMilliseconds <= _timeBetweenFramesMs)
@@ -50,12 +53,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
             _timeLastFrame = DateTime.Now;
         }
-
-        //public override void Draw(SpriteBatch spriteBatch)
-        //{
-        //    float scale = _collidedGameObject == null ? 1f : 1.2f;
-        //    spriteBatch.Draw(Texture, Position, null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
-        //}
 
         public override bool CollidesWith(GameObject otherGameObject)
         {

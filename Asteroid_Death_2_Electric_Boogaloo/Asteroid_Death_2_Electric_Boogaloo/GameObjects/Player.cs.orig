@@ -22,7 +22,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
     {
         private KeyboardState _lastKeyboardState;
         private GamePadState _lastGamePadState;
-        private SoundEffect _pewEffect;
+        private SoundEffect _pewEffect,alarm;
+        private SoundEffectInstance alarm2;
         private DateTime _timeSenceLastShot = DateTime.Today;
         private Texture2D _lifeTexture;
         ParticleEngine particleEngine;
@@ -32,51 +33,53 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         List<Powerup> Powerups = new List<Powerup>();
 <<<<<<< HEAD
-
-
-
-        public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Blue),Globals.Health)
-        {
-            Health = 10;
-            boost = 180;
-            
-
-            ShootingSpeed = 200;
-            textures.Add(Game.Content.Load<Texture2D>("blackSmoke00"));
-            textures.Add(Game.Content.Load<Texture2D>("blackSmoke01"));
-            textures.Add(Game.Content.Load<Texture2D>("blackSmoke02"));
-            textures.Add(Game.Content.Load<Texture2D>("blackSmoke03"));
-=======
         
         public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Red))
         {
             Health = 10;
             Boost = 180;
             ShootingSpeed = 200;
->>>>>>> origin/Feature_MovementOfPlayer
+
+        public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Blue), Globals.Health)
+        {
+            boost = 180;
+         
+            ShootingSpeed = 200;
+            textures.Add(Game.Content.Load<Texture2D>("blackSmoke00"));
+            textures.Add(Game.Content.Load<Texture2D>("blackSmoke01"));
+            textures.Add(Game.Content.Load<Texture2D>("blackSmoke02"));
+            textures.Add(Game.Content.Load<Texture2D>("blackSmoke03"));
+>>>>>>> origin/Feature_menu
             Texture = TextureManager.Instance.PlayerShipTexture;
             _lifeTexture = Game.Content.Load<Texture2D>("playerLife2_red");
-            _pewEffect = Game.Content.Load<SoundEffect>("Blaster");
+            _pewEffect = Game.Content.Load<SoundEffect>("shot");
+            alarm = game.Content.Load<SoundEffect>("Alarm");
+            alarm2 = alarm.CreateInstance();
+            alarm2.IsLooped = true;
+        
             particleEngine = new ParticleEngine(textures, new Vector2(400, 240));
         }
-
-
-
+        
         public override void Update()
         {
             var gamePadState = GamePad.GetState(PlayerIndex.One);
 
             KeyboardState state = Keyboard.GetState();
-
 <<<<<<< HEAD
-            particleEngine.EmitterLocation = Position;
-            particleEngine.Update();
 
-            
-                
-            
 =======
->>>>>>> origin/Feature_MovementOfPlayer
+            if (Health <= 5) {
+                particleEngine.EmitterLocation = Position;
+            particleEngine.Update();
+                alarm2.Play();
+            }
+            else
+            {
+               alarm2.Stop(); 
+            }
+            
+           
+>>>>>>> origin/Feature_menu
             //Movement using the left, right joystick and the Dpad on the Xbox controller or the arrows or WASD on the keyboard
             if ((gamePadState.ThumbSticks.Left.Y >= 0.3f)
                 || (gamePadState.DPad.Up == ButtonState.Pressed)
@@ -107,26 +110,22 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             if ((gamePadState.Buttons.RightShoulder == ButtonState.Pressed)
                 || (state.IsKeyDown(Keys.E))
 <<<<<<< HEAD
-                && (boost > 0))
-            {
-                MaxSpeed = 50;
-                AccelerateForward(50f);
-                boost--;
-                MaxSpeed = 10; 
-            }
-
-            
-
-=======
                 && (Boost > 0))
             {
             MaxSpeed = 50;
             AccelerateForward(50f);
             Boost--;
             MaxSpeed = 10;
+=======
+                && (boost > 0))
+            {
+                MaxSpeed = 50;
+                AccelerateForward(50f);
+                boost--;
+                MaxSpeed = 10; 
+>>>>>>> origin/Feature_menu
             }
 
->>>>>>> origin/Feature_MovementOfPlayer
             Speed += new Vector2(-Speed.X * 0.015f, -Speed.Y * 0.015f);
             Move();
             
@@ -161,13 +160,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if(Health<=3)
+            if(Health<=5)
             particleEngine.Draw(spriteBatch);
 
             base.Draw(spriteBatch);
 
             //Draw player health
-            spriteBatch.DrawString(MenuComponent.menuFont, Health + " x ", Position,
+            spriteBatch.DrawString(MenuComponent.menuFont, Health + "", Position,
                 Color.OrangeRed, Rotation + MathHelper.DegreesToRadians(90), new Vector2((Globals.ScreenWidth / 2)+35, Globals.ScreenHeight / 2 + 13), 1f, SpriteEffects.None, 0);
 
             spriteBatch.Draw(_lifeTexture, Position, null, Color.White, Rotation + MathHelper.DegreesToRadians(90),
@@ -197,8 +196,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                 {
                     otherGameObject.IsDead = true;
                     //((Powerup) otherGameObject).DoEffect(this); 
+<<<<<<< HEAD
                     Powerups.Add(otherGameObject as Powerup);
                     //Debug.WriteLine("added powerup " + otherGameObject);
+=======
+                    Powerups.Add((Powerup) otherGameObject);
+>>>>>>> origin/Feature_menu
                 }
 
                 if (otherGameObject is Projectile pro)
@@ -207,11 +210,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                     pro.IsDead = true;
                 }
 
-                if (Health <= 0 || !(otherGameObject is Projectile
-                || otherGameObject is Powerup))
+                if (Health <= 0 
+                    || !(otherGameObject is Projectile
+                    || otherGameObject is Powerup))
                 {
                     IsDead = true;
                     MediaPlayer.Stop();
+                    alarm2.Stop();
                     Game.ChangeGameState(GameState.gameover);
                     IngameComponent.playing = false;
                 }

@@ -1,26 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 
 namespace Asteroid_Death_2_Electric_Boogaloo
 {
     public class HighScore
     {
+        #region Public static properties
+        public static string FileLocation { get; } = ".\\Content\\Highscore.xml";
+        public static int MaxPlayers { get; } = 10;
+        #endregion
 
-        public static string FileLocation { get; private set; } = ".\\Content\\Highscore.xml";
-        public static int MaxPlayers = 10;
-
+        #region Public static methods
         public static string[] GetHighScores()
         {
             XmlDocument xDoc = GetXmlDoc();
-
             XmlNodeList players = xDoc.GetElementsByTagName("Player");
             XmlNodeList score = xDoc.GetElementsByTagName("Score");
-            
+
             string[] strings = new string[players.Count];
 
             for (int i = 0; i < strings.Length; i++)
@@ -38,7 +35,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             XmlNode root = xDoc.GetElementsByTagName("root")[0];
             XmlNodeList rootChildList = root.ChildNodes;
             XmlNode refNode = null;
-            
+
             for (int i = 0; i < rootChildList.Count; i++)
             {
                 if (rootChildList[i].Name.Equals("Score"))
@@ -54,7 +51,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
             XmlNode playerNode = xDoc.CreateElement("Player");
             playerNode.InnerText = playerName;
-
             XmlNode scoreNode = xDoc.CreateElement("Score");
             scoreNode.InnerText = score + "";
 
@@ -66,7 +62,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 rootChildList[MaxPlayers * 2 - 1].ParentNode.RemoveChild(rootChildList[MaxPlayers * 2 - 1]);
                 rootChildList[MaxPlayers * 2 - 2].ParentNode.RemoveChild(rootChildList[MaxPlayers * 2 - 2]);
             }
-            
             xDoc.Save(FileLocation);
         }
 
@@ -75,7 +70,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             XmlDocument xDoc = new XmlDocument();
             xDoc.Load(FileLocation);
             return xDoc;
-        }
-        
+        }   
+        #endregion
     }
 }

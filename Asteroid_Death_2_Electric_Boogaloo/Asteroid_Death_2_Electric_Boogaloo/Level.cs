@@ -1,42 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Asteroid_Death_2_Electric_Boogaloo
 {
     public class Level
     {
-        private Texture2D texture;
+        #region Private fields
+        private Texture2D _texture;
         private AsteroidsGame _game;
-        
-        //Level size in pixels
-        public int SizeX, SizeY;
+        #endregion
 
+        #region Public properties
+        // Level size in pixels
+        public int SizeX { get; }
+        public int SizeY { get; }
+        #endregion
+
+        #region Public constructors
         public Level(AsteroidsGame game, int SizeX, int SizeY)
         {
             _game = game;
-            texture = TextureManager.Instance.BackGroundTexture;
-            this.SizeX = SizeX * texture.Width;
-            this.SizeY = SizeY * texture.Height;
-            this.SizeX = SizeX*texture.Width;
-            this.SizeY = SizeY*texture.Height;
+            _texture = TextureManager.Instance.BackGroundTexture;
+            this.SizeX = SizeX * _texture.Width;
+            this.SizeY = SizeY * _texture.Height;
+            this.SizeX = SizeX * _texture.Width;
+            this.SizeY = SizeY * _texture.Height;
         }
+        #endregion
 
+        #region Public methods
         public void DrawBackground(SpriteBatch spriteBatch)
         {
-            for (int x = 0; x < SizeX; x += texture.Width)
+            for (int x = 0; x < SizeX; x += _texture.Width)
             {
-                for (int y = 0; y < SizeY; y += texture.Height)
+                for (int y = 0; y < SizeY; y += _texture.Height)
                 {
-                    spriteBatch.Draw(texture, new Vector2(x, y), Color.White);
+                    spriteBatch.Draw(_texture, new Vector2(x, y), Color.White);
                 }
             }
-        }
-
+        } 
+        #endregion
     }
 }

@@ -10,8 +10,9 @@ namespace ParticleAsteroid_Death_2_Electric_Boogaloo.ParticlesEngine2D
 {
     public class ParticleEngine  
     {
-        private Random random;
         public Vector2 EmitterLocation { get; set; }
+
+        private Random random;
         private List<Particle> particles;
         private List<Texture2D> textures;
 
@@ -22,7 +23,6 @@ namespace ParticleAsteroid_Death_2_Electric_Boogaloo.ParticlesEngine2D
             this.particles = new List<Particle>();
             random = new Random();
         }
-
         
         public void Update()
         {
@@ -69,8 +69,7 @@ namespace ParticleAsteroid_Death_2_Electric_Boogaloo.ParticlesEngine2D
             for (int index = 0; index < particles.Count; index++)
             {
                 particles[index].Draw(spriteBatch);
-            }
-           
+            }        
         }
     }
 }
