@@ -71,18 +71,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         public virtual void Update()
         {
             int offset = 20;
-            //_bounds = new Rectangle(
-            //    (int) Position.X - Texture.Width / 2 + offset,
-            //    (int) Position.Y - Texture.Height / 2 + offset,
-            //    Math.Max(Texture.Width, Texture.Height) - offset,
-            //    Math.Max(Texture.Width, Texture.Height) - offset
-            //);
-
             _bounds = new Rectangle(
                 (int)Position.X - Texture.Width / 2 + offset,
                 (int)Position.Y - Texture.Height / 2 + offset,
-                Texture.Width + offset,
-                Texture.Height + offset
+                Math.Max(Texture.Width, Texture.Height) - offset,
+                Math.Max(Texture.Width, Texture.Height) - offset
             );
         }
 
