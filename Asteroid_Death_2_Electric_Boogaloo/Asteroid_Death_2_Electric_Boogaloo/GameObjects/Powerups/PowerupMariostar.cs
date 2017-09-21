@@ -3,18 +3,16 @@ using Microsoft.Xna.Framework;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups
 {
-    internal class PowerupMariostar : Powerup
+    public class PowerupMariostar : Powerup
     {
-        public PowerupMariostar(AsteroidsGame game, Vector2 position) : base(game, position, PowerupType.Mariostar, 900)
-        {
-        }
+        #region Public constructors
+        public PowerupMariostar(AsteroidsGame game, Vector2 position) : base(game, position, PowerupType.Mariostar, 900) { }
+        #endregion
 
-        public override void Remove(Player player)
-        {
-        }
+        #region Public overrides
+        public override void Remove(Player player) { }
 
-        public override void DoEffect(Player player)
-        {
-        }
+        public override void DoEffect(Player player) { } 
+        #endregion
     }
 }

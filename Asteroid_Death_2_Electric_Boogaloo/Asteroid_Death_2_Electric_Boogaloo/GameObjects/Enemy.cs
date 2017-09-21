@@ -1,15 +1,16 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+
 using Asteroid_Death_2_Electric_Boogaloo.AI;
 using Asteroid_Death_2_Electric_Boogaloo.Components;
 using Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Media;
+using Asteroid_Death_2_Electric_Boogaloo.Managers;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 {
     public class Enemy : Ship
     {
+        #region Public enums
         public enum Type
         {
             enemyRed1,
@@ -33,21 +34,29 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             enemyBlack4,
             enemyBlack5
         }
+        #endregion
 
-        public BaseAi Ai;
-
-        public Type enemyType;
+        #region Private fields
         private Texture2D _lifeTexture;
+        #endregion
 
+        #region Public properties
+        public BaseAi Ai { get; set; }
+        public Type EnemyType { get; set; }
+        #endregion
+
+        #region Public constructors
         public Enemy(AsteroidsGame game, Type enemyType) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Green), 3)
         {
-            this.enemyType = enemyType;
+            this.EnemyType = enemyType;
             Ai = new BasicEnemyAI(game, this);
             ShootingSpeed = 5000; //500;
-            Texture = TextureManager.Instance.EnemyTexures[(int) enemyType];
+            Texture = TextureManager.Instance.EnemyTexures[(int)enemyType];
             _lifeTexture = TextureManager.Instance.PlayerLifeTexture;
         }
+        #endregion
 
+        #region Public overrides
         public override void Update()
         {
             base.Update();
@@ -61,7 +70,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             spriteBatch.Draw(_lifeTexture, Position, null, Color.White, Game.GameObjectManager.Player.Rotation + MathHelper.DegreesToRadians(90),
                 new Vector2(22, 80), 1.0f, SpriteEffects.None, 0);
 
-            spriteBatch.DrawString(MenuComponent.menuFont, "" + Health, Position, Color.OrangeRed,
+            spriteBatch.DrawString(MenuComponent.MenuFont, "" + Health, Position, Color.OrangeRed,
                 Game.GameObjectManager.Player.Rotation + MathHelper.DegreesToRadians(90), new Vector2(-22, 87), 1f, SpriteEffects.None, 0);
         }
 
@@ -76,7 +85,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                     Health -= pro.Damage;
                     pro.IsDead = true;
                 }
-                
+
                 if (Health <= 0)
                 {
                     IsDead = true;
@@ -85,9 +94,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                     {
                         otherGameObject.IsDead = true;
                     }
-                }   
+                }
             }
             return collides;
-        }
+        } 
+        #endregion
     }
 }

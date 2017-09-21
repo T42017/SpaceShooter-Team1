@@ -1,4 +1,4 @@
-﻿namespace Asteroid_Death_2_Electric_Boogaloo
+﻿namespace Asteroid_Death_2_Electric_Boogaloo.Enums
 {
     public enum MeteorColour
     {

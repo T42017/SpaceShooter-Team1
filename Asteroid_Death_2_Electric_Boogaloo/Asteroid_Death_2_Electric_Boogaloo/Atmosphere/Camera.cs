@@ -1,8 +1,9 @@
-﻿using Asteroid_Death_2_Electric_Boogaloo.GameObjects;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Asteroid_Death_2_Electric_Boogaloo
+using Asteroid_Death_2_Electric_Boogaloo.GameObjects;
+
+namespace Asteroid_Death_2_Electric_Boogaloo.Atmosphere
 {
     public class Camera
     {

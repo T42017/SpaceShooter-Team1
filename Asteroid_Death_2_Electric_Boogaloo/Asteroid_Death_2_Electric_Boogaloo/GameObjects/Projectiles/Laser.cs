@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 
+using Asteroid_Death_2_Electric_Boogaloo.Managers;
+
 namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles
 {
     public class Laser : Projectile

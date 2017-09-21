@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.Particles
 {
     public class Particle
     {
+        #region Public properties
         public Texture2D Texture { get; set; }
         public Vector2 Position { get; set; }
         public Vector2 Velocity { get; set; }
@@ -18,7 +14,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Particles
         public Color Color { get; set; }
         public float Size { get; set; }
         public int TTL { get; set; }
+        #endregion
 
+        #region Public constructors
         public Particle(Texture2D texture, Vector2 position, Vector2 velocity,
             float angle, float angularVelocity, Color color, float size, int ttl)
         {
@@ -31,7 +29,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Particles
             Size = size;
             TTL = ttl;
         }
+        #endregion
 
+        #region Public methods
         public void Update()
         {
             TTL--;
@@ -46,6 +46,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Particles
 
             spriteBatch.Draw(Texture, Position, sourceRectangle, Color,
                 Angle, origin, Size, SpriteEffects.None, 0f);
-        }
+        } 
+        #endregion
     }
 }

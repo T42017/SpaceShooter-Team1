@@ -1,10 +1,13 @@
 ﻿using System.Windows.Forms;
-using Asteroid_Death_2_Electric_Boogaloo.Components;
-using Asteroid_Death_2_Electric_Boogaloo.Devices;
-using Asteroid_Death_2_Electric_Boogaloo.Factorys;
-using Asteroid_Death_2_Electric_Boogaloo.GameObjects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+
+using Asteroid_Death_2_Electric_Boogaloo.Components;
+using Asteroid_Death_2_Electric_Boogaloo.Factories;
+using Asteroid_Death_2_Electric_Boogaloo.Enums;
+using Asteroid_Death_2_Electric_Boogaloo.GameObjects;
+using Asteroid_Death_2_Electric_Boogaloo.Atmosphere;
+using Asteroid_Death_2_Electric_Boogaloo.Managers;
 
 namespace Asteroid_Death_2_Electric_Boogaloo
 {
@@ -23,11 +26,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         public GameObjectManager GameObjectManager { get; set; }
         public Level Level { get; set; }
 
-        public int AmountOfEnemies = 10;
-        public int AmountOfBosses = 0;
+        public int AmountOfEnemies { get; set; } = 10;
+        public int AmountOfBosses { get; } = 0;
         #endregion
         
-        #region Constructors
+        #region Public constructors
         public AsteroidsGame()
         {
             Graphics = new GraphicsDeviceManager(this)
@@ -47,7 +50,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
             foreach (var component in Components)
             {
-                if (!(component is AstroidsComponent astroidsComponent))
+                if (!(component is AsteroidsComponent astroidsComponent))
                     continue;
                 astroidsComponent.ChangedState(desiredState);
                 astroidsComponent.Visible = astroidsComponent.DrawableStates.HasFlag(_gameState);
@@ -63,7 +66,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
         public void Start()
         {
-            ChangeGameState(GameState.ingame);
+            ChangeGameState(GameState.InGame);
             Level = new Level(this, 20, 20);
             GameObjectManager = new GameObjectManager(this);
             GameObjectManager.AddEnemyFactory(new EnemyFactory(this));
@@ -103,7 +106,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
 
             Components.Add(new MenuComponent(this));
             Components.Add(new HighscoreMenuComponent(this));
-            Components.Add(new IngameComponent(this));
+            Components.Add(new InGameComponent(this));
             Components.Add(new PauseComponent(this));
             Components.Add(new DeathComponent(this));
             ChangeGameState(GameState.Menu);
@@ -125,7 +128,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         protected override void Update(GameTime gameTime)
         {
             Input.Instance.Update();
-            if (_gameState == GameState.ingame)
+            if (_gameState == GameState.InGame)
             {
                 GameObjectManager.RemoveDeadGameObjects();
                 GameObjectManager.RemoveDeadCollisionEffects();
@@ -151,7 +154,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo
                 null,
                 _camera.get_transformation(GraphicsDevice, WindowWidth, WindowHeight));
             
-            if (_gameState == GameState.ingame || _gameState == GameState.paused)
+            if (_gameState == GameState.InGame || _gameState == GameState.InGame)
             {
                 Level.DrawBackground(_spriteBatch);
                 GameObjectManager.DrawGameObjects(_spriteBatch);

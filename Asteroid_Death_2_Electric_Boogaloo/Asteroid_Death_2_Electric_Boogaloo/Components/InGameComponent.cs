@@ -1,43 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
-namespace Asteroid_Death_2_Electric_Boogaloo.Devices
+using Asteroid_Death_2_Electric_Boogaloo.Enums;
+
+namespace Asteroid_Death_2_Electric_Boogaloo.Components
 {
-    class IngameComponent : AstroidsComponent
+    public class InGameComponent : AsteroidsComponent
     {
-        private bool hasaddedgameobjetcs,volume;
-        public static bool playing;
+        #region Private fields
+        private bool hasaddedgameobjetcs, volume;
         private SpriteFont menuFont, buttonFont;
         private Texture2D Button;
         private AsteroidsGame _Game;
         private MouseState oldState;
         private GamePadState lastgamePadState;
         private Song song;
+        #endregion
 
-        public IngameComponent(Game game) : base(game)
+        #region Public static properties
+        public static bool Playing { get; set; }
+        #endregion
+
+        #region Public constructors
+        public InGameComponent(Game game) : base(game)
         {
-            _Game = (AsteroidsGame) game;
-            DrawableStates = GameState.ingame;
-            UpdatableStates = GameState.ingame;
+            _Game = (AsteroidsGame)game;
+            DrawableStates = GameState.InGame;
+            UpdatableStates = GameState.InGame;
             volume = false;
-            playing = false;
+            Playing = false;
             MediaPlayer.IsRepeating = true;
         }
-        
+        #endregion
+
+        #region Protected overrides
         protected override void LoadContent()
         {
             song = Game.Content.Load<Song>("Combat");
             base.LoadContent();
         }
+        #endregion
 
+        #region Public overrides
         public override void Update(GameTime gameTime)
         {
             if (volume == false)
@@ -45,20 +51,21 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
                 MediaPlayer.Volume = 0.6f;
                 volume = true;
             }
-            if (playing == false)
+            if (Playing == false)
             {
                 MediaPlayer.Stop();
                 MediaPlayer.Play(song);
 
-                playing = true;
+                Playing = true;
             }
 
             if (Input.Instance.ClickPause())
             {
-                _Game.ChangeGameState(GameState.paused);
-                volume= false;
-            }           
+                _Game.ChangeGameState(GameState.Paused);
+                volume = false;
+            }
             base.Update(gameTime);
-        }
+        } 
+        #endregion
     }
 }

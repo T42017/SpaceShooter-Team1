@@ -1,56 +1,57 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Asteroid_Death_2_Electric_Boogaloo.Enums;
 using Microsoft.Xna.Framework;
+
+using Asteroid_Death_2_Electric_Boogaloo.Enums;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups
 {
     class PowerupRandom : Powerup
     {
-        private int powerupNumber;
+        #region Private fields
+        private int _powerupNumber;
+        #endregion
 
-        public PowerupRandom(AsteroidsGame game, Vector2 position) : base(game, position, PowerupType.Random, 0)
-        {
-        }
+        #region Public constructors
+        public PowerupRandom(AsteroidsGame game, Vector2 position) : base(game, position, PowerupType.Random, 0) { }
+        #endregion
 
+        #region Public overrides
         public override void Remove(Player player)
         {
-            if(powerupNumber == 1)
+            if (_powerupNumber == 1)
                 player.Weapon = new Weapon(Game, Weapon.Type.Laser, Weapon.Color.Red);
             //else if(powerupNumber == 4)      
         }
 
         public override void DoEffect(Player player)
         {
-            switch((int)Globals.RNG.Next(Enum.GetNames(typeof(PowerupType)).Length))
+            switch ((int)Globals.RNG.Next(Enum.GetNames(typeof(PowerupType)).Length))
             {
                 case 1:
-                    powerupNumber = 1;
+                    _powerupNumber = 1;
                     player.Weapon = new Weapon(Game, Weapon.Type.Missile, Weapon.Color.Red);
                     break;
 
                 case 2:
                     player.Health = player.Health + 1;
-                    powerupNumber = 2;
+                    _powerupNumber = 2;
                     break;
 
                 case 3:
                     player.Boost = player.Boost + 360;
-                    powerupNumber = 3;
+                    _powerupNumber = 3;
                     break;
 
                 case 4:
-                    powerupNumber = 4;
+                    _powerupNumber = 4;
                     break;
 
                 case 5:
                     player.Health = player.Health / 2;
-                    powerupNumber = 5;
+                    _powerupNumber = 5;
                     break;
             }
-        }
+        } 
+        #endregion
     }
 }

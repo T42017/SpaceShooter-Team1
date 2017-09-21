@@ -1,6 +1,10 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 
+using Asteroid_Death_2_Electric_Boogaloo.Enums;
+using Asteroid_Death_2_Electric_Boogaloo.Collision_Effects;
+using Asteroid_Death_2_Electric_Boogaloo.Managers;
+
 namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles
 {
     public abstract class Projectile : GameObject
@@ -13,10 +17,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles
             Green
         }
         #endregion
-        public Type ParentType { get; set; }
 
         #region Public properties
         public int Damage { get; }
+        public Type ParentType { get; set; }
         #endregion
 
         #region Protected fields

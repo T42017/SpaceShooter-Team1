@@ -1,7 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Asteroid_Death_2_Electric_Boogaloo
+using Asteroid_Death_2_Electric_Boogaloo.Managers;
+
+namespace Asteroid_Death_2_Electric_Boogaloo.Atmosphere
 {
     public class Level
     {
@@ -17,14 +19,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         #endregion
 
         #region Public constructors
-        public Level(AsteroidsGame game, int SizeX, int SizeY)
+        public Level(AsteroidsGame game, int sizeX, int sizeY)
         {
             _game = game;
             _texture = TextureManager.Instance.BackGroundTexture;
-            this.SizeX = SizeX * _texture.Width;
-            this.SizeY = SizeY * _texture.Height;
-            this.SizeX = SizeX * _texture.Width;
-            this.SizeY = SizeY * _texture.Height;
+            SizeX = sizeX * _texture.Width;
+            SizeY = sizeY * _texture.Height;
+            SizeX = sizeX * _texture.Width;
+            SizeY = sizeY * _texture.Height;
         }
         #endregion
 

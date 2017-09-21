@@ -1,75 +1,82 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Asteroid_Death_2_Electric_Boogaloo.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace ParticleAsteroid_Death_2_Electric_Boogaloo.ParticlesEngine2D
+namespace Asteroid_Death_2_Electric_Boogaloo.Particles
 {
-    public class ParticleEngine  
+    public class ParticleEngine
     {
+        #region Private fields
+        private Random _random;
+        private List<Particle> _particles;
+        private List<Texture2D> _textures;
+        #endregion
+
+        #region Public properties
         public Vector2 EmitterLocation { get; set; }
+        #endregion
 
-        private Random random;
-        private List<Particle> particles;
-        private List<Texture2D> textures;
-
+        #region Public constructors
         public ParticleEngine(List<Texture2D> textures, Vector2 location)
         {
             EmitterLocation = location;
-            this.textures = textures;
-            this.particles = new List<Particle>();
-            random = new Random();
+            _textures = textures;
+            _particles = new List<Particle>();
+            _random = new Random();
+        } 
+        #endregion
+
+        #region Private methods
+        private Particle GenerateNewParticle()
+        {
+            Texture2D texture = _textures[_random.Next(_textures.Count)];
+            Vector2 position = EmitterLocation;
+            Vector2 velocity = new Vector2(
+                                    1f * (float)(_random.NextDouble() * 2 - 1),
+                                    1f * (float)(_random.NextDouble() * 2 - 1));
+            float angle = 0;
+            float angularVelocity = 0.1f * (float)(_random.NextDouble() * 2 - 1);
+            Color color = new Color(
+                        (float)_random.NextDouble(),
+                        (float)_random.NextDouble(),
+                        (float)_random.NextDouble());
+            float size = (float)_random.NextDouble();
+            int ttl = 20 + _random.Next(40);
+
+            return new Particle(texture, position, velocity, angle, angularVelocity, color, size, ttl);
         }
-        
+        #endregion
+
+        #region Public methods
         public void Update()
         {
             int total = 10;
 
             for (int i = 0; i < total; i++)
             {
-                particles.Add(GenerateNewParticle());
+                _particles.Add(GenerateNewParticle());
             }
 
-            for (int particle = 0; particle < particles.Count; particle++)
+            for (int particle = 0; particle < _particles.Count; particle++)
             {
-                particles[particle].Update();
-                if (particles[particle].TTL <= 0)
+                _particles[particle].Update();
+                if (_particles[particle].TTL <= 0)
                 {
-                    particles.RemoveAt(particle);
+                    _particles.RemoveAt(particle);
                     particle--;
                 }
             }
         }
 
-        private Particle GenerateNewParticle()
-        {
-            Texture2D texture = textures[random.Next(textures.Count)];
-            Vector2 position = EmitterLocation;
-            Vector2 velocity = new Vector2(
-                                    1f * (float)(random.NextDouble() * 2 - 1),
-                                    1f * (float)(random.NextDouble() * 2 - 1));
-            float angle = 0;
-            float angularVelocity = 0.1f * (float)(random.NextDouble() * 2 - 1);
-            Color color = new Color(
-                        (float)random.NextDouble(),
-                        (float)random.NextDouble(),
-                        (float)random.NextDouble());
-            float size = (float)random.NextDouble();
-            int ttl = 20 + random.Next(40);
-
-            return new Particle(texture, position, velocity, angle, angularVelocity, color, size, ttl);
-        }
-
         public void Draw(SpriteBatch spriteBatch)
         {
-            
-            for (int index = 0; index < particles.Count; index++)
+
+            for (int index = 0; index < _particles.Count; index++)
             {
-                particles[index].Draw(spriteBatch);
-            }        
-        }
+                _particles[index].Draw(spriteBatch);
+            }
+        } 
+        #endregion
     }
 }
