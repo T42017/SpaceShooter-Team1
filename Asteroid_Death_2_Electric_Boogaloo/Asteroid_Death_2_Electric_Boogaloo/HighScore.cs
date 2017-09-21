@@ -64,7 +64,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
             }
             xDoc.Save(FileLocation);
         }
+        #endregion
 
+        #region Private static methods
         private static XmlDocument GetXmlDoc()
         {
             XmlDocument xDoc = new XmlDocument();

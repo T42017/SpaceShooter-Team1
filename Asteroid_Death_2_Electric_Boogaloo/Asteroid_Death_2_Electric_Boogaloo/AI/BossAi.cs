@@ -1,25 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Asteroid_Death_2_Electric_Boogaloo.GameObjects;
 using Microsoft.Xna.Framework;
+
+using Asteroid_Death_2_Electric_Boogaloo.GameObjects;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.AI
 {
     class BossAi : BaseAi
     {
+        #region Private fields
         private EnemyBoss _boss;
         private Enemy _enemy;
         private int _maxTimeBetweenSpawnsMs = 6000;
         private DateTime _lastSpawnTime = DateTime.Today;
+        #endregion
 
+        #region Public constructors
         public BossAi(AsteroidsGame game, EnemyBoss boss) : base(game)
         {
             _boss = boss;
         }
+        #endregion
 
+        #region Public overrides
         public override void Update()
         {
             Player player = _game.GameObjectManager.Player;
@@ -38,6 +40,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.AI
                     _lastSpawnTime = DateTime.Now;
                 }
             }
-        }
+        } 
+        #endregion
     }
 }

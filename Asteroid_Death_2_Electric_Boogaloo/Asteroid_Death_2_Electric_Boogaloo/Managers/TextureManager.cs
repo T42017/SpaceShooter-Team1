@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.Managers
 {
-    class TextureManager
+    public class TextureManager
     {
         #region Private fields
         private static TextureManager _instance;
