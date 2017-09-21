@@ -128,6 +128,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                         Game.GameObjectManager.Add(meteor);
                 }
                 IsDead = true;
+                otherGameObject.IsDead = true;
             }
             return collides;
         }

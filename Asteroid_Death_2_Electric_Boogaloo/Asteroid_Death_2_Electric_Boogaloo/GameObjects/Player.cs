@@ -26,7 +26,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         private ParticleEngine particleEngine;
         private List<Texture2D> _textures = new List<Texture2D>();
         private bool _drawPlayerInRed;
-        private int _framesBetweenBlick = 50;
+        private int _framesBetweenBlick = 20;
         private int _currentFrame;
         #endregion
 
