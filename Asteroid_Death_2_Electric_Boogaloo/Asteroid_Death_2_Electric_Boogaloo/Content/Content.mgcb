@@ -1404,3 +1404,9 @@
 /processorParam:Quality=Best
 /build:AlienShot.mp3
 
+#begin StarPower.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:StarPower.mp3
+
