@@ -18,8 +18,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
     public class Player : Ship
     {
         #region Private fields
-        private SoundEffect _pewEffect, alarm;
-        private SoundEffectInstance alarm2;
+        private SoundEffect _pewEffect, alarm,starpower;
+        private SoundEffectInstance alarm2,mariostar;
         private DateTime _timeSinceLastShot = DateTime.Today;
         private Texture2D _lifeTexture;
         private ParticleEngine particleEngine;
@@ -44,8 +44,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         #region Public constructors
         public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Red), Globals.Health)
         {
-
-
+            starpower = Game.Content.Load<SoundEffect>("StarPower");
+            mariostar = starpower.CreateInstance();
+            mariostar.IsLooped = true;
             ShootingSpeed = 200;
             _textures.Add(Game.Content.Load<Texture2D>("blackSmoke00"));
             _textures.Add(Game.Content.Load<Texture2D>("blackSmoke01"));
@@ -66,11 +67,14 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         
         public override void Update()
         {
-            if (!HasMariostar)
-                _drawPlayerInRed = false;
-
+            particleEngine.EmitterLocation = Position;
+            particleEngine.Update();
+            if (!HasMariostar) { 
+                _drawPlayerInRed = false;mariostar.Stop();
+            }
             if (HasMariostar)
             {
+                mariostar.Play();
                 _currentFrame++;
                 if (_currentFrame > _framesBetweenBlick)
                 {
@@ -81,8 +85,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
             if (Health <= 5)
             {
-                particleEngine.EmitterLocation = Position;
-                particleEngine.Update();
                 alarm2.Play();
             }
 

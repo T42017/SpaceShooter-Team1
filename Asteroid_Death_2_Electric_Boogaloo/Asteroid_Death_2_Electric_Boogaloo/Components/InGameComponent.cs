@@ -44,6 +44,12 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
         #endregion
 
         #region Public overrides
+        public override void ChangedState(GameState newState)
+        {
+
+            Playing = false;
+            base.ChangedState(newState);
+        }
         public override void Update(GameTime gameTime)
         {
             

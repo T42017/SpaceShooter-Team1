@@ -58,7 +58,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
             {
                 case 0:
                     _difficulty = "Normal";
-                    _game.AmountOfEnemies = 10;
+                    _game.AmountOfEnemies =0;
                     Globals.Health = 30;
                     Globals.Maxmeteors = 100;
                     Globals.MeteorsPerSecond = 5;

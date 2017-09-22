@@ -65,6 +65,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
                 _textBox.Text = "";
                 _playerScoreLabel.Text = "Score " + Player.Score;
             }
+            playing = false;
             base.ChangedState(newState);
         }
 

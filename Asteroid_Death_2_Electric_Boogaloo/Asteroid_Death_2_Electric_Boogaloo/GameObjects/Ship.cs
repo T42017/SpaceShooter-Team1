@@ -12,6 +12,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         private bool _shootLefCannon;
         private DateTime _timeSenceLastShot = DateTime.Today;
         private SoundEffect _pewEffect;
+        private SoundEffectInstance pewffect;
         #endregion
 
         #region Protected fields
@@ -53,7 +54,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
             if (Weapon.WeaponType == Weapon.Type.Laser)
             {
-                _pewEffect.Play();
+                _pewEffect.Play(0.55f,0.0f,0.0f);
             }
             if (Weapon.WeaponType == Weapon.Type.Missile)
             {

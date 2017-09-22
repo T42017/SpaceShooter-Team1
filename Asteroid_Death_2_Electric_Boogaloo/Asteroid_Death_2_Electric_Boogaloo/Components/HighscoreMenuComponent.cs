@@ -54,6 +54,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
                 HighlightNextComponent();
                 _uiList.UpdateList(HighScore.GetHighScores());
             }
+            playing = false;
             base.ChangedState(newState);
         }
 
