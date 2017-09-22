@@ -49,8 +49,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
         }
         public override void Update(GameTime gameTime)
         {
-            if (_playing == false)
+            if (_playing == false) { 
                 MediaPlayer.Volume = 0.05f; _playing = true;
+            }
 
             if (Input.Instance.ClickPause())
             {

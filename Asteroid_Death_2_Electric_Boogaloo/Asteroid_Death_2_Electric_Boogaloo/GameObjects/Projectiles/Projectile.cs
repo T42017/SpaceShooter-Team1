@@ -21,7 +21,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles
        
         #region Private fields
         private SoundEffect explo, hit;
-        private SoundEffectInstance hit1;
         #endregion
 
         #region Protected fields
@@ -38,9 +37,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles
         {
             
             hit = Game.Content.Load<SoundEffect>("Hit");
-            hit1 = hit.CreateInstance();
-            hit1.Volume = 1.0f;
-            hit1.Pitch = 0.000001f;
             explo = Game.Content.Load<SoundEffect>("Explo");
 
             this.Position = position;
@@ -88,8 +84,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles
                 var collisionEffect = new CollisionEffect(Game, position, collisionEffectType);
                 if (collisionEffect.NoCollisionEffectsNearby())
                     Game.GameObjectManager.CollisionEffects.Add(collisionEffect);
-                    explo.Play();
-                    hit1.Play();
+                    explo.Play(0.4f,0.0f,0.0f);
+                    hit.Play(0.5f,0.0f,0.0f);
             }
             return collides;
         } 
