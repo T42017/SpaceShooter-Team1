@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
 using Asteroid_Death_2_Electric_Boogaloo.Enums;
+using Asteroid_Death_2_Electric_Boogaloo.GameObjects;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.Components
 {
@@ -46,7 +47,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
         #region Public overrides
         public override void ChangedState(GameState newState)
         {
-
             Playing = false;
             base.ChangedState(newState);
         }
@@ -55,6 +55,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
             
             if (Playing == false)
             {
+                MediaPlayer.Volume = 0.8f;
                 MediaPlayer.Stop();
                 MediaPlayer.Play(song);
 
@@ -63,6 +64,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
 
             if (Input.Instance.ClickPause())
             {
+                Player.mariostar.Stop();
+                Player.alarm2.Stop();
                 _Game.ChangeGameState(GameState.Paused);
                 volume = false;
             }

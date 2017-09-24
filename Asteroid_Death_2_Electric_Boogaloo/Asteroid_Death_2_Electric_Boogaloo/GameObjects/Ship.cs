@@ -54,7 +54,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
             if (Weapon.WeaponType == Weapon.Type.Laser)
             {
-                _pewEffect.Play(0.55f,0.0f,0.0f);
+                _pewEffect.Play(0.3f,0.0f,0.0f);
             }
             if (Weapon.WeaponType == Weapon.Type.Missile)
             {

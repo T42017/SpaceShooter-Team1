@@ -84,8 +84,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles
                 var collisionEffect = new CollisionEffect(Game, position, collisionEffectType);
                 if (collisionEffect.NoCollisionEffectsNearby())
                     Game.GameObjectManager.CollisionEffects.Add(collisionEffect);
-                    explo.Play(0.4f,0.0f,0.0f);
-                    hit.Play(0.5f,0.0f,0.0f);
+                if(collisionEffectType==CollisionEffectType.Explosion)
+                    explo.Play(0.3f,0.0f,0.0f);
+                 else
+                    hit.Play(0.35f,0.0f,0.0f);
             }
             return collides;
         } 

@@ -19,7 +19,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
     {
         #region Private fields
         private SoundEffect _pewEffect, alarm,starpower;
-        private SoundEffectInstance alarm2,mariostar;
+        public static SoundEffectInstance alarm2,mariostar;
         private DateTime _timeSinceLastShot = DateTime.Today;
         private Texture2D _lifeTexture;
         private ParticleEngine particleEngine;
@@ -70,7 +70,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             particleEngine.EmitterLocation = Position;
             particleEngine.Update();
             if (!HasMariostar) { 
-                _drawPlayerInRed = false;mariostar.Stop();
+                _drawPlayerInRed = false;
+                mariostar.Stop();
             }
             if (HasMariostar)
             {
