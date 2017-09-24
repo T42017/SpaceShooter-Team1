@@ -49,7 +49,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
             _right = _game.Content.Load<Texture2D>("Right");
             MenuFont = _game.Content.Load<SpriteFont>("GameState");
             ButtonFont = _game.Content.Load<SpriteFont>("Text");
-            _song = _game.Content.Load<Song>("Best");
+            _song = _game.Content.Load<Song>("MainTheme");
             _backGroundtexture = _game.Content.Load<Texture2D>("background");
             _difficulty = 0;
 

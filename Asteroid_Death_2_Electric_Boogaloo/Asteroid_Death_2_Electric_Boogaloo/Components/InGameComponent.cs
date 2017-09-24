@@ -39,7 +39,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
         #region Protected overrides
         protected override void LoadContent()
         {
-            song = Game.Content.Load<Song>("InGame");
+            song = Game.Content.Load<Song>("InGameTheme");
             base.LoadContent();
         }
         #endregion

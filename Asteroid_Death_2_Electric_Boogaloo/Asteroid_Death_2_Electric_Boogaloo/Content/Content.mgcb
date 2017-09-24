@@ -1422,3 +1422,21 @@
 /processorParam:Quality=Best
 /build:StarPower.mp3
 
+#begin MainTheme.wav
+/importer:WavImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:MainTheme.wav
+
+#begin RocketFire.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:RocketFire.wav
+
+#begin InGameTheme.wav
+/importer:WavImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:InGameTheme.wav
+
