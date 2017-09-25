@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Audio;
 
 using Asteroid_Death_2_Electric_Boogaloo.Enums;
 using Asteroid_Death_2_Electric_Boogaloo.Collision_Effects;
+using Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups;
 using Asteroid_Death_2_Electric_Boogaloo.Managers;
 
 namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles
@@ -74,7 +75,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles
 
         public override bool CollidesWith(GameObject otherGameObject)
         {
-            bool collides = base.CollidesWith(otherGameObject) && ParentType != otherGameObject.GetType() && !(otherGameObject is Projectile);
+            bool collides = base.CollidesWith(otherGameObject) && ParentType != otherGameObject.GetType() &&
+                !(otherGameObject is Projectile) &&
+                !(otherGameObject is Powerup) &&
+                !Game.GameObjectManager.Player.HasMariostar;
             if (collides)
             {
                 var position = new Vector2(Position.X + .25f * Width, Position.Y + .25f * Height);

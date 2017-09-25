@@ -163,11 +163,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         public override bool CollidesWith(GameObject otherGameObject)
         {
-            if (Powerups.Any(powerup => powerup.PowerupType == PowerupType.Mariostar))
-            {
-                return false;
-            }
-
             bool collides = base.CollidesWith(otherGameObject) && (otherGameObject is Meteor
             || otherGameObject is Enemy
             || otherGameObject is Powerup
@@ -175,7 +170,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
             if (collides)
             {
-                if (otherGameObject is Powerup powerup)
+                if (otherGameObject is Powerup powerup && !HasMariostar)
                 {
                     AddPowerUp(powerup);
                     otherGameObject.IsDead = true;
@@ -183,17 +178,19 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
                 if (otherGameObject is Projectile pro)
                 {
-                    Health -= pro.Damage;
+                    if (!HasMariostar)
+                        Health -= pro.Damage;
                     pro.IsDead = true;
                 }
 
                 if (Health <= 0
                     || !(otherGameObject is Projectile
-                    || otherGameObject is Powerup))
+                    || otherGameObject is Powerup) && !HasMariostar)
                 {
                     IsDead = true;
                     MediaPlayer.Stop();
                     alarm2.Stop();
+                    mariostar.Stop();
                     Game.ChangeGameState(GameState.GameOver);
                     InGameComponent.Playing = false;
                 }
