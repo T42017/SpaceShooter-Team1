@@ -1,62 +1,94 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework.Utilities;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
 
-namespace Asteroid_Death_2_Electric_Boogaloo.Devices
-{
-    class DeathComponent: AstroidsComponent
-    {
-        private Song song;
-        private bool playing;
-        private Texture2D texture,button1,button2;
-        private SpriteFont font;
-       
+using Asteroid_Death_2_Electric_Boogaloo.Enums;
+using Asteroid_Death_2_Electric_Boogaloo.GameObjects;
+using Asteroid_Death_2_Electric_Boogaloo.UI;
 
-        
+namespace Asteroid_Death_2_Electric_Boogaloo.Components
+{
+    internal class DeathComponent : AsteroidsComponent
+    {
+        #region Private fields
+<<<<<<< HEAD
+        private SpriteFont _font;
+=======
+        private SpriteFont font;
+>>>>>>> 63315b140daf0b4e9dd13662e7f0a8d29056d9ce
+        private readonly AsteroidsGame Game;
+        private bool playing;
+        private Song song;
+        private Texture2D _backgroundTexture;
+        private UiTextbox _textBox;
+        private UiLabel _playerScoreLabel;
+        #endregion
+
+        #region Public constructors
         public DeathComponent(Game game) : base(game)
         {
+            Game = (AsteroidsGame)game;
             playing = false;
-<<<<<<< HEAD
-            UpdatableStates = GameState.gameover;
-            DrawableStates = GameState.gameover;
-=======
-            UpdatableStates =GameState.gameover;
-            DrawableStates=GameState.gameover;
->>>>>>> origin/feature-enemy
+            UpdatableStates = GameState.GameOver;
+            DrawableStates = GameState.GameOver;
         }
+        #endregion
 
+        #region Protected overrides
         protected override void LoadContent()
         {
-            font = Game.Content.Load<SpriteFont>("GameState");
+            _font = Game.Content.Load<SpriteFont>("Text");
             song = Game.Content.Load<Song>("Laugh");
-            texture = Game.Content.Load<Texture2D>("background");
-            button1 = Game.Content.Load<Texture2D>("buttonBlue");
-            button2 = Game.Content.Load<Texture2D>("buttonRed");
+            _backgroundTexture = Game.Content.Load<Texture2D>("background");
+            _textBox = new UiTextbox(Game, new Vector2(), _font);
+            _playerScoreLabel = new UiLabel(Game, new Vector2(0, -120), "", _font);
+
+            UiComponents.Add(_playerScoreLabel);
+            UiComponents.Add(new UiLabel(Game, new Vector2(0, -70), "Enter your name", _font));
+            UiComponents.Add(_textBox);
+            UiComponents.Add(new UiButton(Game, new Vector2(0, 60), "Done", _font, delegate (object sender, EventArgs args)
+            {
+                HighScore.SaveScore(_textBox.Text.Equals("") ? "player" : _textBox.Text, Player.Score);
+                Game.ChangeGameState(GameState.HighscoreMenu);
+                Player.Score = 0;
+            }));
+
+            HighlightNextComponent();
             base.LoadContent();
+        }
+        #endregion
+
+        #region Public overrides
+        public override void ChangedState(GameState newState)
+        {
+            if (newState == GameState.GameOver)
+            {
+                _textBox.Text = "";
+                _playerScoreLabel.Text = "Score " + Player.Score;
+            }
+            playing = false;
+            base.ChangedState(newState);
         }
 
         public override void Update(GameTime gameTime)
         {
-
-            
-
-            if (playing==false)
+            if (playing == false)
             {
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/feature-enemy
                 MediaPlayer.Stop();
                 MediaPlayer.Play(song);
                 playing = true;
             }
 
+            if (Input.Instance.ClickUp())
+                HighlightPreviusComponent();
+
+            if (Input.Instance.ClickDown())
+                HighlightNextComponent();
+
+            if (Input.Instance.ClickSelect())
+                UiComponents[HighlightedUiComponent].ClickEvent?.Invoke(null, null);
 
             base.Update(gameTime);
         }
@@ -65,18 +97,13 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
         {
             SpriteBatch.Begin();
 
-            for (int x = 0; x < 2000; x += texture.Width)
-            {
-                for (int y = 0; y < 2000; y += texture.Height)
-                {
-                    SpriteBatch.Draw(texture, new Vector2(x, y), Color.White);
-                }
-            }
-            
-           
+            for (var x = 0; x < 2000; x += _backgroundTexture.Width)
+                for (var y = 0; y < 2000; y += _backgroundTexture.Height)
+                    SpriteBatch.Draw(_backgroundTexture, new Vector2(x, y), Color.White);
 
-            SpriteBatch.End();
             base.Draw(gameTime);
-        }
+            SpriteBatch.End();
+        } 
+        #endregion
     }
 }

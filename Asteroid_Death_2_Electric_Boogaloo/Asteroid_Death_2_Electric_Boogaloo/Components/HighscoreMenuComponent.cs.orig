@@ -1,47 +1,45 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Asteroid_Death_2_Electric_Boogaloo.UI;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
-namespace Asteroid_Death_2_Electric_Boogaloo.Devices
+using Asteroid_Death_2_Electric_Boogaloo.Enums;
+using Asteroid_Death_2_Electric_Boogaloo.UI;
+
+namespace Asteroid_Death_2_Electric_Boogaloo.Components
 {
-    class HighscoreMenuComponent : AstroidsComponent
+    public class HighscoreMenuComponent : AsteroidsComponent
     {
+        #region Private fields
         private Texture2D _backGroundtexture;
         private SpriteFont menuFont, buttonFont;
         private AsteroidsGame Game;
-        private Song song;
-
-        private int _highlightedUiComponent;
-        private List<BaseUiComponent> UiComponents;
+<<<<<<< HEAD
+        private Song _song;
+        private bool _playing;
 =======
-        private bool playing, hasloaded;
+        private Song song;
+        private bool playing;
+>>>>>>> 63315b140daf0b4e9dd13662e7f0a8d29056d9ce
         private UiList _uiList;
+        #endregion
 
+        #region Public constructors
         public HighscoreMenuComponent(Game game) : base(game)
         {
             Game = (AsteroidsGame)game;
-            DrawableStates = GameState.highscoremenu;
-            UpdatableStates = GameState.highscoremenu;
+            DrawableStates = GameState.HighscoreMenu;
+            UpdatableStates = GameState.HighscoreMenu;
             MediaPlayer.IsRepeating = true;
         }
+        #endregion
 
+        #region Protected overrides
         protected override void LoadContent()
         {
             menuFont = Game.Content.Load<SpriteFont>("GameState");
             buttonFont = Game.Content.Load<SpriteFont>("Text");
-            song = Game.Content.Load<Song>("CantinaBand");
+            _song = Game.Content.Load<Song>("HighScore");
             _backGroundtexture = Game.Content.Load<Texture2D>("background");
-
             _uiList = new UiList(Game, new Vector2(0, -300), menuFont, HighScore.GetHighScores(), 40);
             UiComponents.Add(_uiList);
             UiComponents.Add(new UiButton(Game, new Vector2(0, 140), "Play", buttonFont, (sender, args) => Game.Start()));
@@ -49,27 +47,30 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
 
             HighlightNextComponent();
             base.LoadContent();
-        }
+        } 
+        #endregion
 
+        #region Public overrides
         public override void ChangedState(GameState newState)
         {
-            if (newState == GameState.highscoremenu)
+            if (newState == GameState.HighscoreMenu)
             {
                 HighlightedUiComponent = 0;
                 HighlightNextComponent();
                 _uiList.UpdateList(HighScore.GetHighScores());
             }
+            _playing = false;
             base.ChangedState(newState);
         }
 
         public override void Update(GameTime gameTime)
         {
-            if (playing == false)
+            if (_playing == false)
             {
                 MediaPlayer.Stop();
-                MediaPlayer.Play(song);
+                MediaPlayer.Play(_song);
                 MediaPlayer.Volume = 0.4f;
-                playing = true;
+                _playing = true;
             }
 
             if (Input.Instance.ClickUp())
@@ -78,63 +79,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
             if (Input.Instance.ClickDown())
                 HighlightNextComponent();
 
-<<<<<<< HEAD
             if (Input.Instance.ClickSelect())
                 UiComponents[HighlightedUiComponent].ClickEvent?.Invoke(null, null);
-=======
-                else
-                {
-                    highlight--;
-                }
-            }
-
-            if (gamePadState.DPad.Right == ButtonState.Pressed && lastGamePadState.DPad.Right == ButtonState.Released
-                || gamePadState.ThumbSticks.Left.X >= 0.3f && !hasMovedStick
-                || keyboardstate.IsKeyDown(Keys.Right) && lastKeyboardState.IsKeyUp(Keys.Right)
-                || keyboardstate.IsKeyDown(Keys.D) && lastKeyboardState.IsKeyUp(Keys.D))
-            {
-                hasMovedStick = true;
-                if (highlight == 2)
-                {
-                }
-
-                else
-                {
-                    highlight++;
-                }
-            }
-
-            if (gamePadState.ThumbSticks.Left.X <=0.2 && gamePadState.ThumbSticks.Left.X >=-0.2)
-            {
-                hasMovedStick = false;
-            }
-            
-            if (gamePadState.Buttons.A == ButtonState.Pressed && lastGamePadState.Buttons.A ==ButtonState.Released && highlight == 0
-                || keyboardstate.IsKeyDown(Keys.Space) && lastKeyboardState.IsKeyUp(Keys.Space) && highlight==0)
-            {
-                pGame.ChangeGameState(GameState.Menu);
-                playing = false;
-            }
-
-            if (gamePadState.Buttons.A == ButtonState.Pressed && lastGamePadState.Buttons.A == ButtonState.Released && highlight == 1
-                || keyboardstate.IsKeyDown(Keys.Space) && lastKeyboardState.IsKeyUp(Keys.Space) && highlight == 1)
-            {
-               
-            }
-
-            if (gamePadState.Buttons.A == ButtonState.Pressed && lastGamePadState.Buttons.A == ButtonState.Released && highlight == 2
-                || keyboardstate.IsKeyDown(Keys.Space) && lastKeyboardState.IsKeyUp(Keys.Space) && highlight == 2)
-            {
-                pGame.Start();
-                pGame.ChangeGameState(GameState.ingame);
-                playing = false;
-            }
-
-            lastGamePadState = gamePadState;
-            lastKeyboardState = keyboardstate;
->>>>>>> feature-enemy
-            
->>>>>>> origin/Feature_MovementOfPlayer
             base.Update(gameTime);
         }
 
@@ -147,8 +93,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Devices
                 for (int y = 0; y < 2000; y += _backGroundtexture.Height)
                 {
                     SpriteBatch.Draw(_backGroundtexture, new Vector2(x, y), Color.White);
+                }
+            }
             base.Draw(gameTime);
             SpriteBatch.End();
-        }
+        } 
+        #endregion
     }
 }
