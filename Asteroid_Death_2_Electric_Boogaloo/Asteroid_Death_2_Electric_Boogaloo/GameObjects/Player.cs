@@ -18,7 +18,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
     public class Player : Ship
     {
         #region Private fields
-        private SoundEffect _pewEffect, alarm,starpower;
+        private SoundEffect _pewEffect, alarm,starpower,bossalarm;
         public static SoundEffectInstance alarm2,mariostar;
         private DateTime _timeSinceLastShot = DateTime.Today;
         private Texture2D _lifeTexture;
@@ -27,6 +27,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         private bool _drawPlayerInRed;
         private int _framesBetweenBlick = 20;
         private int _currentFrame;
+        private int _amountOfKillsToSpawnBosses = 20;
         #endregion
 
         #region Public properties
@@ -44,6 +45,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         #region Public constructors
         public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Red), Globals.Health)
         {
+            bossalarm = Game.Content.Load<SoundEffect>("bossAlarm");
             starpower = Game.Content.Load<SoundEffect>("StarPower");
             mariostar = starpower.CreateInstance();
             mariostar.IsLooped = true;
@@ -127,10 +129,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
             StayInsideLevel();
 
-            if (EnemyKills > 30)
+            if (EnemyKills > _amountOfKillsToSpawnBosses)
             {
-                EnemyKills -= 30;
+                EnemyKills -= _amountOfKillsToSpawnBosses;
                 Game.GameObjectManager.AddEnemyBosses(Globals.RNG.Next(3) + 1);
+                bossalarm.Play();
             }
 
             foreach (var powerup in Powerups)
@@ -176,7 +179,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
                     otherGameObject.IsDead = true;
                 }
 
-                if (otherGameObject is Projectile pro)
+                if (otherGameObject is Projectile pro && !pro.IsDead)
                 {
                     if (!HasMariostar)
                         Health -= pro.Damage;

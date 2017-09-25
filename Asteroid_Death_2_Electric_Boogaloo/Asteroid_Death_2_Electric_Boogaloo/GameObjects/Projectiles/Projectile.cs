@@ -78,7 +78,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles
             bool collides = base.CollidesWith(otherGameObject) && ParentType != otherGameObject.GetType() &&
                 !(otherGameObject is Projectile) &&
                 !(otherGameObject is Powerup) &&
-                !Game.GameObjectManager.Player.HasMariostar;
+                !(otherGameObject is Player player && player.HasMariostar);
             if (collides)
             {
                 var position = new Vector2(Position.X + .25f * Width, Position.Y + .25f * Height);
