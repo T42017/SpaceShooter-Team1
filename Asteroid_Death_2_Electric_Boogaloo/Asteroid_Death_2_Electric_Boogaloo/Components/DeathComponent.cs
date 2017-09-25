@@ -14,9 +14,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
     {
         #region Private fields
         private SpriteFont _font;
-        private readonly AsteroidsGame Game;
-        private bool playing;
-        private Song song;
+        private readonly AsteroidsGame _game;
+        private bool _playing;
+        private Song _song;
         private Texture2D _backgroundTexture;
         private UiTextbox _textBox;
         private UiLabel _playerScoreLabel;
@@ -25,8 +25,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
         #region Public constructors
         public DeathComponent(Game game) : base(game)
         {
-            Game = (AsteroidsGame)game;
-            playing = false;
+            _game = (AsteroidsGame)game;
+            _playing = false;
             UpdatableStates = GameState.GameOver;
             DrawableStates = GameState.GameOver;
         }
@@ -35,19 +35,19 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
         #region Protected overrides
         protected override void LoadContent()
         {
-            _font = Game.Content.Load<SpriteFont>("Text");
-            song = Game.Content.Load<Song>("Laugh");
-            _backgroundTexture = Game.Content.Load<Texture2D>("background");
-            _textBox = new UiTextbox(Game, new Vector2(), _font);
-            _playerScoreLabel = new UiLabel(Game, new Vector2(0, -120), "", _font);
+            _font = _game.Content.Load<SpriteFont>("Text");
+            _song = _game.Content.Load<Song>("Laugh");
+            _backgroundTexture = _game.Content.Load<Texture2D>("background");
+            _textBox = new UiTextbox(_game, new Vector2(), _font);
+            _playerScoreLabel = new UiLabel(_game, new Vector2(0, -120), "", _font);
 
             UiComponents.Add(_playerScoreLabel);
-            UiComponents.Add(new UiLabel(Game, new Vector2(0, -70), "Enter your name", _font));
+            UiComponents.Add(new UiLabel(_game, new Vector2(0, -70), "Enter your name", _font));
             UiComponents.Add(_textBox);
-            UiComponents.Add(new UiButton(Game, new Vector2(0, 60), "Done", _font, delegate (object sender, EventArgs args)
+            UiComponents.Add(new UiButton(_game, new Vector2(0, 60), "Done", _font, delegate (object sender, EventArgs args)
             {
                 HighScore.SaveScore(_textBox.Text.Equals("") ? "player" : _textBox.Text, Player.Score);
-                Game.ChangeGameState(GameState.HighscoreMenu);
+                _game.ChangeGameState(GameState.HighscoreMenu);
                 Player.Score = 0;
             }));
 
@@ -64,17 +64,17 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
                 _textBox.Text = "";
                 _playerScoreLabel.Text = "Score " + Player.Score;
             }
-            playing = false;
+            _playing = false;
             base.ChangedState(newState);
         }
 
         public override void Update(GameTime gameTime)
         {
-            if (playing == false)
+            if (_playing == false)
             {
                 MediaPlayer.Stop();
-                MediaPlayer.Play(song);
-                playing = true;
+                MediaPlayer.Play(_song);
+                _playing = true;
             }
 
             if (Input.Instance.ClickUp())

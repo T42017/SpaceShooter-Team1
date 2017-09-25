@@ -12,7 +12,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
         #region Private fields
         private Texture2D _backGroundtexture;
         private SpriteFont menuFont, buttonFont;
+#pragma warning disable 108,114
         private AsteroidsGame Game;
+#pragma warning restore 108,114
         private Song _song;
         private bool _playing;
         private UiList _uiList;

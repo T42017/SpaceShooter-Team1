@@ -8,7 +8,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups
     public abstract class Powerup : GameObject
     {
         #region Protected fields
+#pragma warning disable 108,114
         protected AsteroidsGame Game;
+#pragma warning restore 108,114
         #endregion
 
         #region Public properties
