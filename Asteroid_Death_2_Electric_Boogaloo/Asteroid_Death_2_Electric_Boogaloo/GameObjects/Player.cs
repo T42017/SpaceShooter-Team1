@@ -162,6 +162,10 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
             //Draw score
             spriteBatch.DrawString(MenuComponent.MenuFont, "Score: " + Score, Position,
                 Color.OrangeRed, Rotation + MathHelper.DegreesToRadians(90), new Vector2(-Globals.ScreenWidth / 2, Globals.ScreenHeight / 2 + 13), 1f, SpriteEffects.None, 0);
+
+            //Draw boost
+            spriteBatch.DrawString(MenuComponent.MenuFont, "Boost: " + Boost, Position,
+                Color.OrangeRed, Rotation + MathHelper.DegreesToRadians(90), new Vector2((Globals.ScreenWidth / 2f), Globals.ScreenHeight / 2  - 40), 1f, SpriteEffects.None, 0);
         }
 
         public override bool CollidesWith(GameObject otherGameObject)
@@ -203,6 +207,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
 
         public void AddPowerUp(Powerup powerup)
         {
+            if (powerup.IsDead) return;
             powerup.DoEffect(this);
             Powerups.Add(powerup);
         } 

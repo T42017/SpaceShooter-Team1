@@ -57,6 +57,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
             UiComponents.Add(new UiButton(_game, new Vector2(0, -150), "Play", ButtonFont, (sender, args) => _game.Start()));
             UiComponents.Add(new UiButton(_game, new Vector2(0, -90), "Highscore", ButtonFont, ButtonHghiscoreEvent));
             UiComponents.Add(new UiButton(_game, new Vector2(0, -30), "Quit", ButtonFont, (sender, args) => _game.Exit()));
+            UiComponents.Add(new UiLabel(_game, new Vector2(0, 150), "Press arrows to controll player\nPress Space to shoot\nHold E to use boost", MenuFont));
             UiComponents.Add(new UiArrow(_game, new Vector2(0, 30)));
 
             HighlightNextComponent();

@@ -146,11 +146,9 @@ namespace Asteroid_Death_2_Electric_Boogaloo
         #region Public methods
         public bool Boost()
         {
-            return _gamePadState.Buttons.RightShoulder == ButtonState.Pressed &&
-                    _lastGamePadState.Buttons.RightShoulder == ButtonState.Released
+            return _gamePadState.Buttons.RightShoulder == ButtonState.Pressed
                    ||
-                   _keyboardState.IsKeyDown(Keys.E) &&
-                   _lastKeyboardState.IsKeyUp(Keys.E);
+                   _keyboardState.IsKeyDown(Keys.E);
         }
 
         public void Update()

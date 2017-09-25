@@ -23,7 +23,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         public Weapon Weapon { get; set; }
         public int Health { get; set; }
         public int BaseHealth { get; set; }
-        public int Boost { get; set; } = 1;
+        public int Boost { get; set; }
         #endregion
 
         #region Protected constructors

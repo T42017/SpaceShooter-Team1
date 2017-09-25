@@ -7,7 +7,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups
     public class PowerupBoost : Powerup
     {
         #region Public constructors
-        public PowerupBoost(AsteroidsGame game, Vector2 position) : base(game, position, PowerupType.Boost, 900) { }
+        public PowerupBoost(AsteroidsGame game, Vector2 position) : base(game, position, PowerupType.Boost, 0) { }
         #endregion
 
         #region Public overrides
@@ -15,7 +15,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups
 
         public override void DoEffect(Player player)
         {
-            player.Boost = player.Boost + 120;
+            player.Boost = player.Boost + 60;
         } 
         #endregion
     }
