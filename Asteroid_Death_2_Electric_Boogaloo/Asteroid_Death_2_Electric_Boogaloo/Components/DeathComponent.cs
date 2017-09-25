@@ -13,7 +13,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
     internal class DeathComponent : AsteroidsComponent
     {
         #region Private fields
-        private SpriteFont font, buttonFont;
+        private SpriteFont font;
         private readonly AsteroidsGame Game;
         private bool playing;
         private Song song;

@@ -12,8 +12,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
     {
         #region Private fields
         private bool hasaddedgameobjetcs, volume;
-        private SpriteFont menuFont, buttonFont;
-        private Texture2D Button;
         private AsteroidsGame _Game;
         private MouseState oldState;
         private GamePadState lastgamePadState;

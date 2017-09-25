@@ -14,7 +14,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
         private SpriteFont menuFont, buttonFont;
         private AsteroidsGame Game;
         private Song song;
-        private bool playing, hasloaded;
+        private bool playing;
         private UiList _uiList;
         #endregion
 
