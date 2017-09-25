@@ -13,12 +13,11 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
     internal class DeathComponent : AsteroidsComponent
     {
         #region Private fields
-        private SpriteFont font, buttonFont;
+        private SpriteFont _font;
         private readonly AsteroidsGame Game;
         private bool playing;
         private Song song;
         private Texture2D _backgroundTexture;
-        private SoundEffect yes;
         private UiTextbox _textBox;
         private UiLabel _playerScoreLabel;
         #endregion
@@ -36,16 +35,16 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
         #region Protected overrides
         protected override void LoadContent()
         {
-            font = Game.Content.Load<SpriteFont>("Text");
+            _font = Game.Content.Load<SpriteFont>("Text");
             song = Game.Content.Load<Song>("Laugh");
             _backgroundTexture = Game.Content.Load<Texture2D>("background");
-            _textBox = new UiTextbox(Game, new Vector2(), font);
-            _playerScoreLabel = new UiLabel(Game, new Vector2(0, -120), "", font);
+            _textBox = new UiTextbox(Game, new Vector2(), _font);
+            _playerScoreLabel = new UiLabel(Game, new Vector2(0, -120), "", _font);
 
             UiComponents.Add(_playerScoreLabel);
-            UiComponents.Add(new UiLabel(Game, new Vector2(0, -70), "Enter your name", font));
+            UiComponents.Add(new UiLabel(Game, new Vector2(0, -70), "Enter your name", _font));
             UiComponents.Add(_textBox);
-            UiComponents.Add(new UiButton(Game, new Vector2(0, 60), "Done", font, delegate (object sender, EventArgs args)
+            UiComponents.Add(new UiButton(Game, new Vector2(0, 60), "Done", _font, delegate (object sender, EventArgs args)
             {
                 HighScore.SaveScore(_textBox.Text.Equals("") ? "player" : _textBox.Text, Player.Score);
                 Game.ChangeGameState(GameState.HighscoreMenu);

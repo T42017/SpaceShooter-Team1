@@ -11,13 +11,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
     public class InGameComponent : AsteroidsComponent
     {
         #region Private fields
-        private bool hasaddedgameobjetcs, volume;
-        private SpriteFont menuFont, buttonFont;
-        private Texture2D Button;
         private AsteroidsGame _Game;
-        private MouseState oldState;
-        private GamePadState lastgamePadState;
-        private Song song;
+        private Song _song;
         #endregion
 
         #region Public static properties
@@ -30,7 +25,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
             _Game = (AsteroidsGame)game;
             DrawableStates = GameState.InGame;
             UpdatableStates = GameState.InGame;
-            volume = false;
             Playing = false;
             MediaPlayer.IsRepeating = true;
         }
@@ -39,7 +33,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
         #region Protected overrides
         protected override void LoadContent()
         {
-            song = Game.Content.Load<Song>("InGameTheme");
+            _song = Game.Content.Load<Song>("InGameTheme");
             base.LoadContent();
         }
         #endregion
@@ -57,7 +51,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
             {
                 MediaPlayer.Volume = 0.8f;
                 MediaPlayer.Stop();
-                MediaPlayer.Play(song);
+                MediaPlayer.Play(_song);
 
                 Playing = true;
             }
@@ -67,7 +61,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
                 Player.mariostar.Stop();
                 Player.alarm2.Stop();
                 _Game.ChangeGameState(GameState.Paused);
-                volume = false;
             }
             base.Update(gameTime);
         } 

@@ -12,7 +12,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
     {
         #region Private fields
         private Texture2D _backGroundtexture, _left, _right;
-        private int _difficulty;
         private readonly AsteroidsGame _game;
         private bool _playing;
         private Song _song;
@@ -51,7 +50,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
             ButtonFont = _game.Content.Load<SpriteFont>("Text");
             _song = _game.Content.Load<Song>("MainTheme");
             _backGroundtexture = _game.Content.Load<Texture2D>("background");
-            _difficulty = 0;
 
             UiComponents.Add(new UiLabel(_game, new Vector2(0, -260), _game.Window.Title, MenuFont));
             UiComponents.Add(new UiButton(_game, new Vector2(0, -150), "Play", ButtonFont, (sender, args) => _game.Start()));

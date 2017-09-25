@@ -12,7 +12,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
         private bool _shootLefCannon;
         private DateTime _timeSenceLastShot = DateTime.Today;
         private SoundEffect _pewEffect,rocketEffect;
-        private SoundEffectInstance pewffect;
         #endregion
 
         #region Protected fields

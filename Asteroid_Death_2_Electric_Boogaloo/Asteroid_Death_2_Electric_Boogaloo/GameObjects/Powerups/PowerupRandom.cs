@@ -8,10 +8,6 @@ namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Powerups
 {
     class PowerupRandom : Powerup
     {
-        #region Private fields
-        private int _powerupNumber;
-        #endregion
-
         #region Public constructors
         public PowerupRandom(AsteroidsGame game, Vector2 position) : base(game, position, PowerupType.Random, 0) { }
         #endregion

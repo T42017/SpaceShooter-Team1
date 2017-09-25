@@ -13,8 +13,8 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
         private Texture2D _backGroundtexture;
         private SpriteFont menuFont, buttonFont;
         private AsteroidsGame Game;
-        private Song song;
-        private bool playing, hasloaded;
+        private Song _song;
+        private bool _playing;
         private UiList _uiList;
         #endregion
 
@@ -33,7 +33,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
         {
             menuFont = Game.Content.Load<SpriteFont>("GameState");
             buttonFont = Game.Content.Load<SpriteFont>("Text");
-            song = Game.Content.Load<Song>("HighScore");
+            _song = Game.Content.Load<Song>("HighScore");
             _backGroundtexture = Game.Content.Load<Texture2D>("background");
             _uiList = new UiList(Game, new Vector2(0, -300), menuFont, HighScore.GetHighScores(), 40);
             UiComponents.Add(_uiList);
@@ -54,18 +54,18 @@ namespace Asteroid_Death_2_Electric_Boogaloo.Components
                 HighlightNextComponent();
                 _uiList.UpdateList(HighScore.GetHighScores());
             }
-            playing = false;
+            _playing = false;
             base.ChangedState(newState);
         }
 
         public override void Update(GameTime gameTime)
         {
-            if (playing == false)
+            if (_playing == false)
             {
                 MediaPlayer.Stop();
-                MediaPlayer.Play(song);
+                MediaPlayer.Play(_song);
                 MediaPlayer.Volume = 0.4f;
-                playing = true;
+                _playing = true;
             }
 
             if (Input.Instance.ClickUp())
