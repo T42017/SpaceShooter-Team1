@@ -16,6 +16,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
         {
             _texture = Game.Content.Load<Texture2D>("button");
             _highlightTexture = Game.Content.Load<Texture2D>("playerLife2_red");
+            
         }
         #endregion
 
@@ -26,7 +27,7 @@ namespace Asteroid_Death_2_Electric_Boogaloo.UI
         {
             Vector2 textSize = Font.MeasureString(Text);
             spriteBatch.Draw(_texture, Position - new Vector2(_texture.Width / 2f, _texture.Height / 2f), Color.White);
-            spriteBatch.DrawString(Font, Text, Position - textSize / 2, Color.Black, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+            spriteBatch.DrawString(Font, Text, Position - textSize , Color.Black, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
 
             if (IsHighlighted)
                 spriteBatch.Draw(_highlightTexture, Position - new Vector2(_highlightTexture.Width, _highlightTexture.Height / 2f) - new Vector2(textSize.X / 2, 0), Color.White);

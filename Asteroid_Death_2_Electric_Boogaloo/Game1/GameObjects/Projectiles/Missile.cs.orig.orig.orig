@@ -1,0 +1,93 @@
+﻿using System;
+<<<<<<< HEAD
+using Microsoft.Xna.Framework;
+
+namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles
+{
+    public class Missile : Projectile
+<<<<<<< HEAD
+<<<<<<< HEAD
+    {       
+        #region Public constructors
+=======
+    {
+        #region Public constructors
+=======
+    {       
+>>>>>>> origin/Feature_MovementOfPlayer
+>>>>>>> dcaa29908a807acb08043d63be01d1e9689979a2
+        public Missile(AsteroidsGame game, Vector2 position, float rotation, Weapon.Color color, Type parenType) : base(game, position, rotation, color, parenType, 3)
+=======
+    {
+
+        public Missile(AsteroidsGame game, Vector2 position, float rotation, Weapon.Color color, Type paren) 
+            : base(game, position, rotation, color, paren, 3)
+>>>>>>> feature-enemy
+        {
+            Texture = TextureManager.Instance.MissileTextures[(int)color];
+        }
+        #endregion
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> dcaa29908a807acb08043d63be01d1e9689979a2
+        #region Protected overrides
+=======
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
+
+namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects
+{
+    public class Missile : Projectile
+    {       
+        public Missile(AsteroidsGame game, Vector2 position, float rotation, Weapon.Color color, Type parenType) : base(game, position, rotation, color, parenType, 3)
+        {
+            Texture = TextureManager.Instance.MissileTextures[(int) color];
+        }
+
+<<<<<<< HEAD
+        protected override Type GetClassType(){
+            return typeof(Missile);
+        }
+=======
+>>>>>>> Feature_Sound
+        protected override Type GetClassType()
+        {
+            return typeof(Missile);
+        }
+<<<<<<< HEAD
+        #endregion
+
+        #region Public overrides
+<<<<<<< HEAD
+=======
+>>>>>>> feature-enemy
+=======
+>>>>>>> dcaa29908a807acb08043d63be01d1e9689979a2
+=======
+
+>>>>>>> origin/Feature_MovementOfPlayer
+>>>>>>> Feature_Sound
+        public override void Update()
+        {
+            DieIfOutSideMap();
+
+            Speed = Forward() * 11;
+            AccelerateForward(9);
+            Move();
+
+            base.Update();
+<<<<<<< HEAD
+        } 
+        #endregion
+    }
+}
+=======
+        }
+    }
+}
+>>>>>>> Feature_Sound

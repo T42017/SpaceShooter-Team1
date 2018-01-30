@@ -1,0 +1,48 @@
+﻿using System;
+using Microsoft.Xna.Framework;
+
+namespace Asteroid_Death_2_Electric_Boogaloo.GameObjects.Projectiles
+{
+    public class Laser : Projectile
+    {      
+        #region Public constructors
+        public Laser(AsteroidsGame game, Vector2 position, float rotation, Weapon.Color color, Type parentType) : base(game, position, rotation, color, parentType, 1)
+        {
+            Texture = TextureManager.Instance.LaserTextures[(int)color];
+        }
+        #endregion
+
+<<<<<<< HEAD
+        #region Protected overrides
+        protected override Type GetClassType()
+        {
+            return typeof(Laser);
+        } 
+        #endregion
+
+        #region Public overrides
+=======
+           
+>>>>>>> Feature_Sound
+        public override void Update()
+        {
+            DieIfOutSideMap();
+
+            Speed = Forward() * 11;
+            AccelerateForward(9);
+            Move();
+
+            base.Update();
+<<<<<<< HEAD
+        } 
+        #endregion
+=======
+        }
+
+        protected override Type GetClassType()
+        {
+            return typeof(Laser);
+        }
+>>>>>>> Feature_Sound
+    }
+}

@@ -1,24 +1,55 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.9
+VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asteroid_Death_2_Electric_Boogaloo", "Asteroid_Death_2_Electric_Boogaloo\Asteroid_Death_2_Electric_Boogaloo.csproj", "{810069C1-F478-4B6D-BAC6-FAB43E19CB59}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2FB2A89E-D9E7-46E2-8D59-12F2AA8FB4BD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game1", "Game1\Game1.csproj", "{77D0CFD9-C26B-4D7E-9945-13FB94D37EC8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM = Debug|ARM
+		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
+		Release|ARM = Release|ARM
+		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{810069C1-F478-4B6D-BAC6-FAB43E19CB59}.Debug|ARM.ActiveCfg = Debug|x86
+		{810069C1-F478-4B6D-BAC6-FAB43E19CB59}.Debug|x64.ActiveCfg = Debug|x86
 		{810069C1-F478-4B6D-BAC6-FAB43E19CB59}.Debug|x86.ActiveCfg = Debug|x86
 		{810069C1-F478-4B6D-BAC6-FAB43E19CB59}.Debug|x86.Build.0 = Debug|x86
+		{810069C1-F478-4B6D-BAC6-FAB43E19CB59}.Release|ARM.ActiveCfg = Release|x86
+		{810069C1-F478-4B6D-BAC6-FAB43E19CB59}.Release|x64.ActiveCfg = Release|x86
 		{810069C1-F478-4B6D-BAC6-FAB43E19CB59}.Release|x86.ActiveCfg = Release|x86
 		{810069C1-F478-4B6D-BAC6-FAB43E19CB59}.Release|x86.Build.0 = Release|x86
+		{77D0CFD9-C26B-4D7E-9945-13FB94D37EC8}.Debug|ARM.ActiveCfg = Debug|ARM
+		{77D0CFD9-C26B-4D7E-9945-13FB94D37EC8}.Debug|ARM.Build.0 = Debug|ARM
+		{77D0CFD9-C26B-4D7E-9945-13FB94D37EC8}.Debug|ARM.Deploy.0 = Debug|ARM
+		{77D0CFD9-C26B-4D7E-9945-13FB94D37EC8}.Debug|x64.ActiveCfg = Debug|x64
+		{77D0CFD9-C26B-4D7E-9945-13FB94D37EC8}.Debug|x64.Build.0 = Debug|x64
+		{77D0CFD9-C26B-4D7E-9945-13FB94D37EC8}.Debug|x64.Deploy.0 = Debug|x64
+		{77D0CFD9-C26B-4D7E-9945-13FB94D37EC8}.Debug|x86.ActiveCfg = Debug|x86
+		{77D0CFD9-C26B-4D7E-9945-13FB94D37EC8}.Debug|x86.Build.0 = Debug|x86
+		{77D0CFD9-C26B-4D7E-9945-13FB94D37EC8}.Debug|x86.Deploy.0 = Debug|x86
+		{77D0CFD9-C26B-4D7E-9945-13FB94D37EC8}.Release|ARM.ActiveCfg = Release|ARM
+		{77D0CFD9-C26B-4D7E-9945-13FB94D37EC8}.Release|ARM.Build.0 = Release|ARM
+		{77D0CFD9-C26B-4D7E-9945-13FB94D37EC8}.Release|ARM.Deploy.0 = Release|ARM
+		{77D0CFD9-C26B-4D7E-9945-13FB94D37EC8}.Release|x64.ActiveCfg = Release|x64
+		{77D0CFD9-C26B-4D7E-9945-13FB94D37EC8}.Release|x64.Build.0 = Release|x64
+		{77D0CFD9-C26B-4D7E-9945-13FB94D37EC8}.Release|x64.Deploy.0 = Release|x64
+		{77D0CFD9-C26B-4D7E-9945-13FB94D37EC8}.Release|x86.ActiveCfg = Release|x86
+		{77D0CFD9-C26B-4D7E-9945-13FB94D37EC8}.Release|x86.Build.0 = Release|x86
+		{77D0CFD9-C26B-4D7E-9945-13FB94D37EC8}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {36890B5C-4FDA-42D3-A56C-5C5CE32F9BE7}
 	EndGlobalSection
 EndGlobal
