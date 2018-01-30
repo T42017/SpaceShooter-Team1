@@ -13,6 +13,7 @@ namespace Game1.Components
         private bool _playing;
         private SpriteFont _font;
         private AsteroidsGame _game;
+        private Texture2D _backGroundtexture, _left, _right;
         #endregion
 
         #region Public constructors

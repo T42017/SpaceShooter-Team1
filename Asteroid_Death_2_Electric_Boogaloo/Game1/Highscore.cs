@@ -11,13 +11,15 @@ namespace Game1
     public class HighScore
     {
         #region Public static properties
-        public static string FileLocation { get; } = "Highscore.xml";
+        public static string FileLocation { get; } = "HighScoreList.xml";
         public static int MaxPlayers { get; } = 10;
+        public static IsolatedStorageFile file = IsolatedStorageFile.GetUserStoreForApplication();
         #endregion
 
         #region Public static methods
+
         public static string[] GetHighScores()
-        {
+        {          
             XmlDocument xDoc = GetXmlDoc();
             XmlNodeList players = xDoc.GetElementsByTagName("Player");
             XmlNodeList score = xDoc.GetElementsByTagName("Score");
@@ -35,7 +37,10 @@ namespace Game1
 
         public static void SaveScore(String playerName, long score)
         {
+
+           
             XmlDocument xDoc = GetXmlDoc();
+          
             XmlNode root = xDoc.GetElementsByTagName("root")[0];
             XmlNodeList rootChildList = root.ChildNodes;
             XmlNode refNode = null;
@@ -66,15 +71,39 @@ namespace Game1
                 rootChildList[root.ChildNodes.Count - 1].ParentNode.RemoveChild(rootChildList[root.ChildNodes.Count - 1]);
                 rootChildList[root.ChildNodes.Count - 1].ParentNode.RemoveChild(rootChildList[root.ChildNodes.Count - 1]);
             }
-            xDoc.Save(new IsolatedStorageFileStream(FileLocation,FileMode.OpenOrCreate,IsolatedStorageFile.GetUserStoreForApplication()));
+            IsolatedStorageFileStream stream1 = new IsolatedStorageFileStream(FileLocation, FileMode.OpenOrCreate, file);
+            xDoc.Save(stream1);
+            stream1.Flush();
+            stream1.Dispose();
+        }
+        public static void Create(IsolatedStorageFileStream stream)
+        {
+            XmlDocument xDoc = new XmlDocument();
+            XmlNode root = xDoc.CreateElement("root");
+            XmlNode playerNode = xDoc.CreateElement("Player");
+            playerNode.InnerText = "Player";
+            XmlNode scoreNode = xDoc.CreateElement("Score");
+            scoreNode.InnerText = "0";
+            xDoc.AppendChild(root);
+            root.AppendChild(playerNode);
+            root.AppendChild(scoreNode);
+            xDoc.Save(stream);
+             stream.Flush();
+            stream.Dispose();
         }
         #endregion
 
         #region Private static methods
         private static XmlDocument GetXmlDoc()
         {
-            var xDoc = new XmlDocument();        
-            //xDoc.Load(File.OpenRead(FileLocation));
+            IsolatedStorageFileStream stream = new IsolatedStorageFileStream(FileLocation, FileMode.OpenOrCreate, file);
+            var xDoc = new XmlDocument();
+            if(!file.FileExists(FileLocation))
+                Create(stream);
+            
+            xDoc.Load(stream);
+           stream.Flush();
+            stream.Dispose();
             return xDoc;
         }   
         #endregion

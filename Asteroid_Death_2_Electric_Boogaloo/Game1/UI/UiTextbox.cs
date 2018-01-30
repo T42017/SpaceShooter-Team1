@@ -2,6 +2,7 @@
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace Game1.UI
 {
@@ -79,7 +80,7 @@ namespace Game1.UI
                 _currentFrame -= _framesBetweenBlicks;
                 _drawUnderScore = !_drawUnderScore;
             }
-
+            
             foreach (string str in Input.Instance.GetKeyboardCharacters())
             {
                 if (_text.Length < 10)

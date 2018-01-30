@@ -12,7 +12,8 @@ namespace Game1.Enums
         Paused = 8,
         GameOver= 16,
         HighscoreMenu= 32,
+        OptionMenu= 64,
 
-        All = Loading | InGame | Menu | Paused | GameOver | HighscoreMenu
+        All = Loading | InGame | Menu | Paused | GameOver | HighscoreMenu | OptionMenu
     }
 }

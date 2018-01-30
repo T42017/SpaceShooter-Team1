@@ -115,6 +115,7 @@
     <Compile Include="Components\HighscoreMenuComponent.cs" />
     <Compile Include="Components\InGameComponent.cs" />
     <Compile Include="Components\MenuComponent.cs" />
+    <Compile Include="Components\OptionMenu.cs" />
     <Compile Include="Components\PauseComponent.cs" />
     <Compile Include="Enums\CollisionEffectType.cs" />
     <Compile Include="Enums\GameState.cs" />
@@ -166,9 +167,6 @@
     <None Include="Game1_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Highscore.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Icon.ico" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />

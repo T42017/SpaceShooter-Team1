@@ -106,7 +106,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Highscore.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Icon.ico" />
   </ItemGroup>

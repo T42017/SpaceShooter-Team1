@@ -443,9 +443,6 @@
 /processorParam:Quality=Best
 /build:HighScore.wav
 
-#begin Highscore.xml
-/copy:Highscore.xml
-
 #begin HighScoreTheme.mp3
 /importer:Mp3Importer
 /processor:SongProcessor

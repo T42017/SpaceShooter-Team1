@@ -37,6 +37,7 @@ namespace Game1
                 PreferredBackBufferHeight = Globals.ScreenHeight,
                 PreferredBackBufferWidth = Globals.ScreenWidth
             };
+            Graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
             Window.Title = "Asteroid Death 2 Electric Boogaloo";
         }
