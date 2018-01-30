@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.IO.IsolatedStorage;
 using System.Text;
@@ -88,21 +89,29 @@ namespace Game1
             root.AppendChild(playerNode);
             root.AppendChild(scoreNode);
             xDoc.Save(stream);
-             stream.Flush();
-            stream.Dispose();
+            stream.Flush();
+            Debug.WriteLine("papas" +
+                            "åäfkmalsdjkgaslö,");
         }
         #endregion
 
         #region Private static methods
         private static XmlDocument GetXmlDoc()
         {
-            IsolatedStorageFileStream stream = new IsolatedStorageFileStream(FileLocation, FileMode.OpenOrCreate, file);
+            IsolatedStorageFileStream stream = null;
             var xDoc = new XmlDocument();
-            if(!file.FileExists(FileLocation))
+            if (!file.FileExists(FileLocation))
+            {
+                stream = new IsolatedStorageFileStream(FileLocation, FileMode.OpenOrCreate, file);
                 Create(stream);
+                stream.Flush();
+                stream.Dispose();
+
+            }
             
+            stream = new IsolatedStorageFileStream(FileLocation, FileMode.OpenOrCreate, file);
             xDoc.Load(stream);
-           stream.Flush();
+            stream.Flush();
             stream.Dispose();
             return xDoc;
         }   
