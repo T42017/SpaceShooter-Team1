@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Windows.UI.ViewManagement;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Game1.UI
@@ -16,7 +18,7 @@ namespace Game1.UI
         #endregion
 
         #region Public constructors
-        public UiArrow(AsteroidsGame game, Vector2 position) : base(game, position, true, null)
+        public UiArrow(AsteroidsGame game, Vector2 position, EventHandler clickEvent) : base(game, position, true, clickEvent)
         {
             _game = (AsteroidsGame)game;
             _font = _game.Content.Load<SpriteFont>("diff");
@@ -59,6 +61,10 @@ namespace Game1.UI
                     _highlight++;
                 }
             }
+                if (Input.Instance.ClickSelect())
+                {
+                    
+                }
             }
             switch (_highlight)
             {
@@ -94,17 +100,23 @@ namespace Game1.UI
                     Globals.MeteorsPerSecond = 15;
                     break;
             }
+            
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            Vector2 textSize = _font.MeasureString(_difficulty);
+           
             spriteBatch.Draw(_texture, Position - new Vector2(_texture.Width / 2f, _texture.Height / 2f), Color.White);
+            
             spriteBatch.DrawString(_font, _difficulty, Position - new Vector2((_textureLeft.Width / 2f) + 25f, (_textureLeft.Height / 2f)), Color.Black, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
             spriteBatch.Draw(_textureLeft, Position - new Vector2((_textureLeft.Width / 2f) + 120f, _textureLeft.Height / 2f), Color.White);
             spriteBatch.Draw(_textureRight, Position - new Vector2((_textureRight.Width / 2f) - 120f, _textureRight.Height / 2f), Color.White);
-            if(IsHighlighted)
-            spriteBatch.Draw(_highlightTexture,Position - new Vector2(_highlightTexture.Width, _highlightTexture.Height / 2f) - new Vector2(textSize.X / 2, 0), Color.White);
+            if (IsHighlighted)
+            {
+                Vector2 textSize = _font.MeasureString(_difficulty);
+                spriteBatch.Draw(_highlightTexture, Position - new Vector2(_highlightTexture.Width, _highlightTexture.Height / 2f) - new Vector2(textSize.X / 2, 0), Color.White);
+            }
+           
         } 
         #endregion
     }

@@ -108,6 +108,7 @@ namespace Game1
             Components.Add(new InGameComponent(this));
             Components.Add(new PauseComponent(this));
             Components.Add(new DeathComponent(this));
+            Components.Add(new OptionMenu(this));
             ChangeGameState(GameState.Menu);
 
             _camera = new Camera();

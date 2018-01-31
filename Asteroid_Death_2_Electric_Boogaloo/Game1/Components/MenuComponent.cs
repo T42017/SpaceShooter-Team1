@@ -2,6 +2,7 @@
 using Game1.Enums;
 using Game1.UI;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
 
@@ -14,6 +15,7 @@ namespace Game1.Components
         private readonly AsteroidsGame _game;
         private bool _playing;
         private Song _song;
+        private SoundEffect bep;
         #endregion
 
         #region Public static properties
@@ -24,6 +26,7 @@ namespace Game1.Components
         #region Public constructors
         public MenuComponent(AsteroidsGame game) : base(game)
         {
+            
             _game = (AsteroidsGame)game;
             DrawableStates = GameState.Menu;
             UpdatableStates = GameState.Menu;
@@ -38,11 +41,20 @@ namespace Game1.Components
             _game.ChangeGameState(GameState.HighscoreMenu);
             _playing = false;
         }
+        private void ButtonOptionEvent(object sender, EventArgs eventArgs)
+        {
+            _game.ChangeGameState(GameState.OptionMenu);
+            _playing = false;
+        }
+        private void nothing(object sender, EventArgs eventArgs)
+        { 
+        }
         #endregion
 
         #region Protected overrides
         protected override void LoadContent()
         {
+            bep = _game.Content.Load<SoundEffect>("Tyrone");
             _left = _game.Content.Load<Texture2D>("Left");
             _right = _game.Content.Load<Texture2D>("Right");
             MenuFont = _game.Content.Load<SpriteFont>("GameState");
@@ -53,9 +65,10 @@ namespace Game1.Components
             UiComponents.Add(new UiLabel(_game, new Vector2(0, -260), _game.Window.Title, MenuFont));
             UiComponents.Add(new UiButton(_game, new Vector2(0, -150), "Play", ButtonFont, (sender, args) => _game.Start()));
             UiComponents.Add(new UiButton(_game, new Vector2(0, -90), "Highscore", ButtonFont, ButtonHghiscoreEvent));
-            UiComponents.Add(new UiButton(_game, new Vector2(0, -30), "Quit", ButtonFont, (sender, args) => _game.Exit()));
-            UiComponents.Add(new UiLabel(_game, new Vector2(0, 150), "Press arrows to controll player\nPress Space to shoot\nHold E to use boost", MenuFont));
-            UiComponents.Add(new UiArrow(_game, new Vector2(0, 30)));
+            UiComponents.Add(new UiButton(_game, new Vector2(0, -30), "Options", ButtonFont, ButtonOptionEvent));
+            UiComponents.Add(new UiButton(_game, new Vector2(0, 30), "Quit", ButtonFont, (sender, args) => _game.Exit()));
+            UiComponents.Add(new UiLabel(_game, new Vector2(0, 210), "Press arrows to controll player\nPress Space to shoot\nHold E to use boost", MenuFont));
+            UiComponents.Add(new UiArrow(_game, new Vector2(0, 90), nothing));
 
             HighlightNextComponent();
             base.LoadContent();
@@ -85,8 +98,10 @@ namespace Game1.Components
             if (Input.Instance.ClickDown())
                 HighlightNextComponent();
 
-            if (Input.Instance.ClickSelect())
+            if (Input.Instance.ClickSelect())          
                 UiComponents[HighlightedUiComponent].ClickEvent.Invoke(null, null);
+            
+               
 
             base.Update(gameTime);
         }

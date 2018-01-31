@@ -33,6 +33,7 @@ namespace Game1.Components
             UpdatableStates = GameState.OptionMenu;
             _playing = false;
             MediaPlayer.IsRepeating = true;
+            int current1=0, current2=0;
         }
 
         #region Private methods
@@ -40,6 +41,11 @@ namespace Game1.Components
         {
             _game.ChangeGameState(GameState.Menu);
             _playing = false;
+        }
+       
+        private void toggleFullScreen(object sender, EventArgs eventArgs)
+        {
+           _game.Graphics.ToggleFullScreen();
         }
         #endregion
 
@@ -50,12 +56,11 @@ namespace Game1.Components
             _song = _game.Content.Load<Song>("MainTheme");
             _backGroundtexture = _game.Content.Load<Texture2D>("background");
 
-            UiComponents.Add(new UiLabel(_game, new Vector2(0, -260), _game.Window.Title, MenuFont));
-            UiComponents.Add(new UiButton(_game, new Vector2(0, -150), "Play", ButtonFont, (sender, args) => _game.Start()));
-            UiComponents.Add(new UiButton(_game, new Vector2(0, -90), "Highscore", ButtonFont, ButtonMainMenuEvent));
-            UiComponents.Add(new UiButton(_game, new Vector2(0, -30), "Quit", ButtonFont, (sender, args) => _game.Exit()));
-            UiComponents.Add(new UiLabel(_game, new Vector2(0, 150), "Press arrows to controll player\nPress Space to shoot\nHold E to use boost", MenuFont));
-            UiComponents.Add(new UiArrow(_game, new Vector2(0, 30)));
+            UiComponents.Add(new UiLabel(_game, new Vector2(0, -260), "Options", MenuFont));
+            UiComponents.Add(new UiButton(_game, new Vector2(0, -150), "Toggle Fullscreen", ButtonFont, toggleFullScreen));
+            UiComponents.Add(new UiButton(_game, new Vector2(0, -90), "MainMenu", ButtonFont, ButtonMainMenuEvent));  
+
+            HighlightNextComponent();
             base.LoadContent();
         }
 
