@@ -153,11 +153,13 @@
     <Compile Include="Particles\ParticleEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\BaseUIComponent.cs" />
+    <Compile Include="UI\MusicVolume.cs" />
     <Compile Include="UI\UiArrow.cs" />
     <Compile Include="UI\UiButton.cs" />
     <Compile Include="UI\UiLabel.cs" />
     <Compile Include="UI\UiList.cs" />
     <Compile Include="UI\UiTextbox.cs" />
+    <Compile Include="UI\VolumeArrows.cs" />
     <Compile Include="Weapon.cs" />
   </ItemGroup>
   <ItemGroup>

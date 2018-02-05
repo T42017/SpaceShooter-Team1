@@ -54,11 +54,11 @@ namespace Game1.GameObjects
 
             if (Weapon.WeaponType == Weapon.Type.Laser)
             {
-                _pewEffect.Play(0.3f,0.0f,0.0f);
+                _pewEffect.Play(0.3f * Globals.universalEffectVolume,0.0f,0.0f);
             }
             if (Weapon.WeaponType == Weapon.Type.Missile)
             {
-                rocketEffect.Play(1.0f, 0.0f, 0.0f);
+                rocketEffect.Play(1.0f * Globals.universalEffectVolume, 0.0f, 0.0f);
             }
             Vector2 shipCenterPoint = new Vector2((int)(Position.X), (int)(Position.Y));
             Vector2 shootPoint = new Vector2((int)(Position.X + Width / 2), (int)(Position.Y + (Height / 4 * (_shootLefCannon ? 1 : -1))));

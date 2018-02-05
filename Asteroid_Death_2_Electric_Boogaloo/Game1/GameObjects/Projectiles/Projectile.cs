@@ -37,7 +37,7 @@ namespace Game1.GameObjects.Projectiles
         {
             
             hit = Game.Content.Load<SoundEffect>("Scream");
-            explo = Game.Content.Load<SoundEffect>("Scream");
+            explo = Game.Content.Load<SoundEffect>("Explo");
 
             this.Position = position;
             this.Rotation = rotation;
@@ -88,9 +88,9 @@ namespace Game1.GameObjects.Projectiles
                 if (collisionEffect.NoCollisionEffectsNearby())
                     Game.GameObjectManager.CollisionEffects.Add(collisionEffect);
                 if(collisionEffectType==CollisionEffectType.Explosion)
-                    explo.Play(0.3f,0.0f,0.0f);
+                    explo.Play(0.3f*Globals.universalEffectVolume,0.0f,0.0f);
                  else
-                    hit.Play(0.35f,0.0f,0.0f);
+                    hit.Play(0.35f*Globals.universalEffectVolume,0.0f,0.0f);
             }
             return collides;
         } 

@@ -65,7 +65,7 @@ namespace Game1.Components
             {
                 MediaPlayer.Stop();
                 MediaPlayer.Play(_song);
-                MediaPlayer.Volume = 0.4f;
+                MediaPlayer.Volume = Globals.universalMusicVolume;
                 _playing = true;
             }
 

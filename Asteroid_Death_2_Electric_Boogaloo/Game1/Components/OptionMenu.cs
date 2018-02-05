@@ -16,7 +16,6 @@ namespace Game1.Components
         #region Private fields
         private Song _song;
         private bool _playing;
-        private SpriteFont _font;
         private AsteroidsGame _game;
         private Texture2D _backGroundtexture;
         #endregion
@@ -28,12 +27,12 @@ namespace Game1.Components
 
         public OptionMenu(Game game) : base(game)
         {
+            
             _game = (AsteroidsGame)game;
             DrawableStates = GameState.OptionMenu;
             UpdatableStates = GameState.OptionMenu;
             _playing = false;
             MediaPlayer.IsRepeating = true;
-            int current1=0, current2=0;
         }
 
         #region Private methods
@@ -47,18 +46,27 @@ namespace Game1.Components
         {
            _game.Graphics.ToggleFullScreen();
         }
+        private void DoNothing(object sender, EventArgs eventArgs)
+        {
+            
+        }
         #endregion
 
         protected override void LoadContent()
         {
+            SpriteFont minifont=_game.Content.Load<SpriteFont>("Small");
             MenuFont = _game.Content.Load<SpriteFont>("GameState");
             ButtonFont = _game.Content.Load<SpriteFont>("Text");
-            _song = _game.Content.Load<Song>("MainTheme");
+            _song = _game.Content.Load<Song>("OptionMusic");
             _backGroundtexture = _game.Content.Load<Texture2D>("background");
 
             UiComponents.Add(new UiLabel(_game, new Vector2(0, -260), "Options", MenuFont));
-            UiComponents.Add(new UiButton(_game, new Vector2(0, -150), "Toggle Fullscreen", ButtonFont, toggleFullScreen));
-            UiComponents.Add(new UiButton(_game, new Vector2(0, -90), "MainMenu", ButtonFont, ButtonMainMenuEvent));  
+            UiComponents.Add(new UiButton(_game, new Vector2(0, -150), "Toggle Fullscreen", minifont, toggleFullScreen));
+            UiComponents.Add(new UiButton(_game, new Vector2(0, -90), "MainMenu", ButtonFont, ButtonMainMenuEvent));
+            UiComponents.Add(new VolumeArrows(_game, new Vector2(0, -30), true, DoNothing, ButtonFont));
+            UiComponents.Add(new MusicVolume(_game, new Vector2(0, 30), true, DoNothing, ButtonFont));
+            UiComponents.Add(new UiLabel(_game, new Vector2(-300, -30), "Soundeffects volume", ButtonFont));
+            UiComponents.Add(new UiLabel(_game, new Vector2(-250, 30), "Music Volume", ButtonFont));
 
             HighlightNextComponent();
             base.LoadContent();
@@ -66,7 +74,7 @@ namespace Game1.Components
 
         public override void Update(GameTime gameTime)
         {
-            
+            MediaPlayer.Volume = Globals.universalMusicVolume;
             if (_playing == false)
             {
                 MediaPlayer.Stop();

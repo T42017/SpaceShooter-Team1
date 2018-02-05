@@ -563,6 +563,12 @@
 /processorParam:TextureFormat=Color
 /build:hitmarker8.png
 
+#begin Hitting.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Hitting.mp3
+
 #begin InGame.wav
 /importer:WavImporter
 /processor:SongProcessor
@@ -1055,6 +1061,12 @@
 /processorParam:TextureFormat=Color
 /build:numeralX.png
 
+#begin OptionMusic.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:OptionMusic.mp3
+
 #begin pixelExplosion0.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1427,11 +1439,24 @@
 /processorParam:Quality=Best
 /build:Shot.wav
 
+#begin Small.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Small.spritefont
+
 #begin StarPower.mp3
 /importer:Mp3Importer
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:StarPower.mp3
+
+#begin StarPowerUpNew.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:StarPowerUpNew.wav
 
 #begin Text.spritefont
 /importer:FontDescriptionImporter

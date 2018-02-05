@@ -44,7 +44,7 @@ namespace Game1.GameObjects
         public Player(AsteroidsGame game) : base(game, new Weapon(game, Weapon.Type.Laser, Weapon.Color.Red), Globals.Health)
         {
             bossalarm = Game.Content.Load<SoundEffect>("bossAlarm");
-            starpower = Game.Content.Load<SoundEffect>("StarPower");
+            starpower = Game.Content.Load<SoundEffect>("StarPowerUpNew");
             mariostar = starpower.CreateInstance();
             mariostar.IsLooped = true;
             ShootingSpeed = 200;
@@ -75,6 +75,7 @@ namespace Game1.GameObjects
             }
             if (HasMariostar)
             {
+                mariostar.Volume = Globals.universalEffectVolume;
                 mariostar.Play();
                 _currentFrame++;
                 if (_currentFrame > _framesBetweenBlick)
@@ -86,6 +87,7 @@ namespace Game1.GameObjects
 
             if (Health <= 5)
             {
+                alarm2.Volume = Globals.universalEffectVolume;
                 alarm2.Play();
             }
 
