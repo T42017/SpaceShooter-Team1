@@ -75,7 +75,7 @@ namespace Game1.GameObjects
             }
             if (HasMariostar)
             {
-                mariostar.Volume = Globals.universalEffectVolume;
+                mariostar.Volume = Globals._universalEffectVolume;
                 mariostar.Play();
                 _currentFrame++;
                 if (_currentFrame > _framesBetweenBlick)
@@ -87,7 +87,7 @@ namespace Game1.GameObjects
 
             if (Health <= 5)
             {
-                alarm2.Volume = Globals.universalEffectVolume;
+                alarm2.Volume = Globals._universalEffectVolume;
                 alarm2.Play();
             }
 

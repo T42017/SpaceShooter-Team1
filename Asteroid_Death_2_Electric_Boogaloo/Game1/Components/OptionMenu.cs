@@ -74,7 +74,7 @@ namespace Game1.Components
 
         public override void Update(GameTime gameTime)
         {
-            MediaPlayer.Volume = Globals.universalMusicVolume;
+            MediaPlayer.Volume = Globals._universalMusicVolume;
             if (_playing == false)
             {
                 MediaPlayer.Stop();

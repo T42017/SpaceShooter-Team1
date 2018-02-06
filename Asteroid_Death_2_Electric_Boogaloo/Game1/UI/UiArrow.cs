@@ -70,34 +70,34 @@ namespace Game1.UI
             {
                 case 0:
                     _difficulty = "Normal";
-                    _game.AmountOfEnemies = 10;
+                    _game.AmountOfEnemies = 5;
                     Globals.Health = 30;
-                    Globals.Maxmeteors = 100;
-                    Globals.MeteorsPerSecond = 5;
+                    Globals.Maxmeteors = 40;
+                    Globals.MeteorsPerSecond = 10;
                     break;
 
                 case 1:
                     _difficulty = "Overkill";
-                    _game.AmountOfEnemies = 15;
+                    _game.AmountOfEnemies = 10;
                     Globals.Health = 25;
-                    Globals.Maxmeteors = 100;
+                    Globals.Maxmeteors =45;
                     Globals.MeteorsPerSecond = 10;
                     break;
 
                 case 2:
                     _difficulty = "Insane";
-                    _game.AmountOfEnemies = 20;
+                    _game.AmountOfEnemies = 15;
                     Globals.Health = 20;
-                    Globals.Maxmeteors = 200;
-                    Globals.MeteorsPerSecond = 15;
+                    Globals.Maxmeteors = 50;
+                    Globals.MeteorsPerSecond = 10;
                     break;
 
                 case 3:
                     _difficulty = "GodTier";
                     _game.AmountOfEnemies = 30;
                     Globals.Health = 15;
-                    Globals.Maxmeteors = 300;
-                    Globals.MeteorsPerSecond = 15;
+                    Globals.Maxmeteors = 55;
+                    Globals.MeteorsPerSecond = 10;
                     break;
             }
             

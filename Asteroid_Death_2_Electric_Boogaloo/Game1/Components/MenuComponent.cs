@@ -21,6 +21,7 @@ namespace Game1.Components
         #region Public static properties
         public static SpriteFont MenuFont { get; set; }
         public static SpriteFont ButtonFont { get; set; }
+        public static SpriteFont CreditFont { get; set; }
         #endregion
 
         #region Public constructors
@@ -60,6 +61,7 @@ namespace Game1.Components
             MenuFont = _game.Content.Load<SpriteFont>("GameState");
             ButtonFont = _game.Content.Load<SpriteFont>("Text");
             _song = _game.Content.Load<Song>("MainTheme");
+            CreditFont= Game.Content.Load<SpriteFont>("Credit");
             _backGroundtexture = _game.Content.Load<Texture2D>("background");
 
             UiComponents.Add(new UiLabel(_game, new Vector2(0, -260), _game.Window.Title, MenuFont));
@@ -69,6 +71,12 @@ namespace Game1.Components
             UiComponents.Add(new UiButton(_game, new Vector2(0, 30), "Quit", ButtonFont, (sender, args) => _game.Exit()));
             UiComponents.Add(new UiLabel(_game, new Vector2(0, 210), "Press arrows to controll player\nPress Space to shoot\nHold E to use boost", MenuFont));
             UiComponents.Add(new UiArrow(_game, new Vector2(0, 90), nothing));
+            UiComponents.Add(new UiLabel(_game,new Vector2(0-80+Globals.ScreenWidth / 2 ,320), "Developers :",CreditFont));
+            UiComponents.Add(new UiLabel(_game, new Vector2(0 + (Globals.ScreenWidth / 2) - 80, 340), "Johan Wikström", CreditFont));
+            UiComponents.Add(new UiLabel(_game, new Vector2(0 + (Globals.ScreenWidth / 2) - 80, 360), "Simon Svensson", CreditFont));
+            UiComponents.Add(new UiLabel(_game, new Vector2(0 + (Globals.ScreenWidth / 2) - 80, 380), "Marcus Linné", CreditFont));
+            UiComponents.Add(new UiLabel(_game, new Vector2(0 + (Globals.ScreenWidth / 2) - 80, 400), "Pontus Laos", CreditFont));
+            UiComponents.Add(new UiLabel(_game, new Vector2(0 + (Globals.ScreenWidth / 2) - 80, 420), "Lukas Agetorp", CreditFont));
 
             HighlightNextComponent();
             base.LoadContent();
@@ -88,7 +96,7 @@ namespace Game1.Components
             {
                 MediaPlayer.Stop();
                 MediaPlayer.Play(_song);
-                MediaPlayer.Volume = Globals.universalMusicVolume;
+                MediaPlayer.Volume = Globals._universalMusicVolume;
                 _playing = true;
             }
 

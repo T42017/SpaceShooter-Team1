@@ -13,8 +13,8 @@ namespace Game1
         public static int Maxmeteors { get; set; } = 100;
         public static int MeteorsPerSecond { get; set; } = 10;
         public static Vector2 HalfScreenSize => new Vector2(ScreenWidth / 2f, ScreenHeight / 2f);
-        public static float universalMusicVolume { get; set; } = 1f;
-        public static float universalEffectVolume { get; set; } = 1f;
+        public static float _universalMusicVolume { get; set; } = 1f;
+        public static float _universalEffectVolume { get; set; } = 1f;
 
         #endregion
     }

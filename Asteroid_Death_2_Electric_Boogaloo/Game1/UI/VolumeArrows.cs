@@ -64,90 +64,90 @@ namespace Game1.UI
             {
                 case 0:
                     _EffectVoume = "0%";
-                    Globals.universalEffectVolume = 0;
+                    Globals._universalEffectVolume = 0;
                     break;
 
                 case 1:
                     _EffectVoume = "5%";
-                    Globals.universalEffectVolume = 0.05f;
+                    Globals._universalEffectVolume = 0.05f;
                     break;
 
                 case 2:
                     _EffectVoume = "10%";
-                    Globals.universalEffectVolume = 0.1f;
+                    Globals._universalEffectVolume = 0.1f;
                     break;
 
                 case 4:
                     _EffectVoume = "15%";
-                    Globals.universalEffectVolume = 0.15f;
+                    Globals._universalEffectVolume = 0.15f;
                     break;
                 case 5:
                     _EffectVoume = "20%";
-                    Globals.universalEffectVolume = 0.2f;
+                    Globals._universalEffectVolume = 0.2f;
                     break;
                 case 6:
                     _EffectVoume = "25%";
-                    Globals.universalEffectVolume = 0.25f;
+                    Globals._universalEffectVolume = 0.25f;
                     break;
                 case 7:
                     _EffectVoume = "30%";
-                    Globals.universalEffectVolume = 0.3f;
+                    Globals._universalEffectVolume = 0.3f;
                     break;
                 case 8:
                     _EffectVoume = "35%";
-                    Globals.universalEffectVolume = 0.35f;
+                    Globals._universalEffectVolume = 0.35f;
                     break;
                 case 9:
                     _EffectVoume = "40%";
-                    Globals.universalEffectVolume = 0.4f;
+                    Globals._universalEffectVolume = 0.4f;
                     break;
                 case 10:
                     _EffectVoume = "45%";
-                    Globals.universalEffectVolume = 0.45f;
+                    Globals._universalEffectVolume = 0.45f;
                     break;
                 case 11:
                     _EffectVoume = "50%";
-                    Globals.universalEffectVolume = 0.5f;
+                    Globals._universalEffectVolume = 0.5f;
                     break;
                 case 12:
                     _EffectVoume = "55%";
-                    Globals.universalEffectVolume = 0.55f;
+                    Globals._universalEffectVolume = 0.55f;
                     break;
                 case 13:
                     _EffectVoume = "60%";
-                    Globals.universalEffectVolume = 0.6f;
+                    Globals._universalEffectVolume = 0.6f;
                     break;
                 case 14:
                     _EffectVoume = "65%";
-                    Globals.universalEffectVolume = 0.55f;
+                    Globals._universalEffectVolume = 0.55f;
                     break;
                 case 15:
                     _EffectVoume = "70%";
-                    Globals.universalEffectVolume = 0.7f;
+                    Globals._universalEffectVolume = 0.7f;
                     break;
                 case 16:
                     _EffectVoume = "75%";
-                    Globals.universalEffectVolume = 0.75f;
+                    Globals._universalEffectVolume = 0.75f;
                     break;
                 case 17:
                     _EffectVoume = "80%";
-                    Globals.universalEffectVolume = 0.8f;
+                    Globals._universalEffectVolume = 0.8f;
                     break;
                 case 18:
                     _EffectVoume = "85%";
-                    Globals.universalEffectVolume = 0.85f;
+                    Globals._universalEffectVolume = 0.85f;
                     break;
                 case 19:
                     _EffectVoume = "90%";
-                    Globals.universalEffectVolume = 0.9f;
+                    Globals._universalEffectVolume = 0.9f;
                     break;
                 case 20:
                     _EffectVoume = "95%";
-                    Globals.universalEffectVolume = 0.95f;
+                    Globals._universalEffectVolume = 0.95f;
                     break;
                 case 21:
                     _EffectVoume = "100%";
-                    Globals.universalEffectVolume = 1f;
+                    Globals._universalEffectVolume = 1f;
                     break;
             }
         }

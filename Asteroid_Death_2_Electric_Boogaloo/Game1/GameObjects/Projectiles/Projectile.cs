@@ -36,7 +36,7 @@ namespace Game1.GameObjects.Projectiles
         protected Projectile(AsteroidsGame game, Vector2 position, float rotation, Weapon.Color color, Type parenType, int damage) : base(game)
         {
             
-            hit = Game.Content.Load<SoundEffect>("Scream");
+            hit = Game.Content.Load<SoundEffect>("Hitting");
             explo = Game.Content.Load<SoundEffect>("Explo");
 
             this.Position = position;
@@ -88,9 +88,9 @@ namespace Game1.GameObjects.Projectiles
                 if (collisionEffect.NoCollisionEffectsNearby())
                     Game.GameObjectManager.CollisionEffects.Add(collisionEffect);
                 if(collisionEffectType==CollisionEffectType.Explosion)
-                    explo.Play(0.3f*Globals.universalEffectVolume,0.0f,0.0f);
+                    explo.Play(0.3f*Globals._universalEffectVolume,0.0f,0.0f);
                  else
-                    hit.Play(0.35f*Globals.universalEffectVolume,0.0f,0.0f);
+                    hit.Play(0.35f*Globals._universalEffectVolume,0.0f,0.0f);
             }
             return collides;
         } 

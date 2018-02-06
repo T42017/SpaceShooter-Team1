@@ -184,12 +184,22 @@ namespace Game1.Managers
         #region Public updating methods
         public void UpdateGameObjects()
         {
+            
             for (int i = 0; i < _gameObjects.Count; i++)
             {
                 var gameObject = _gameObjects[i];
                 gameObject.Update();
-                CheckForCollisionWith(gameObject);
+                if (gameObject.Position.X <= (Player.Position.X + 900) &&
+                    gameObject.Position.X >= (Player.Position.X - 900) &&
+                    gameObject.Position.Y <= (Player.Position.Y + 900) &&
+                    gameObject.Position.Y >= (Player.Position.Y- 900))
+                {
+                    CheckForCollisionWith(gameObject);
+                }          
             }
+            var gameobejt = Player;
+            CheckForCollisionWith(gameobejt);
+            
         }
 
         public void UpdateCollisionEffects()
