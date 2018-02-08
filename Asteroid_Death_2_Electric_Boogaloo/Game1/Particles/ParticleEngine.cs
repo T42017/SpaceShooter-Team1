@@ -51,7 +51,7 @@ namespace Game1.Particles
         #region Public methods
         public void Update()
         {
-            int total = 100;
+            int total = 35;
 
             for (int i = 0; i < total; i++)
             {
